@@ -28,7 +28,7 @@ class Command extends Commands {
 					.setTitle(`❌ **ERROR**`)
 					.setDescription(
 						`Invalid permissions\n` +
-														`\`MANAGE_ROLES\``
+						`\`MANAGE_ROLES\``
 					)
 					.setColor(0xFF0000)
 					.setFooter(client.botName)
@@ -87,7 +87,7 @@ class Command extends Commands {
 				.setTitle(`❌ **ERROR**`)
 				.setDescription(
 					`Invalid arguments\n` +
-										`Try \`h!change #FFFFFF\``
+					`Try \`h!change #FFFFFF\``
 				)
 				.setColor(0xFF0000)
 				.setFooter(client.botName)
