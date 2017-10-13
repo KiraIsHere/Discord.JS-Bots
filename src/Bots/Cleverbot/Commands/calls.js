@@ -17,11 +17,7 @@ class Command extends Commands {
 
 	run(client, message) {
 		client.database.find({}).then(data => {
-			client.send(message,
-				`${data[0].USED_API_CALLS} / ${data[1].TOTAL_API_CALLS}\n` +
-				`Please donate to increase our calls, All donations go twords buying more!\n` +
-				`<htps://paypal.me/hydarbolt>`
-			);
+			client.send(message, `${data[0].USED_API_CALLS} / ${data[1].TOTAL_API_CALLS}\n`);
 		});
 	}
 }
