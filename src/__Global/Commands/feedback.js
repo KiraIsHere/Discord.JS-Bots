@@ -7,8 +7,8 @@ class Command extends Commands {
 		super(client, {
 			enabled: true,
 			show: true,
-			cooldown: false,
-			cooldownTime: 3,
+			cooldown: true,
+			cooldownTime: 600,
 			name: parse(__filename).base.replace(`.js`, ``),
 			description: `Submits feedback ideas to be voted on`,
 			usage: `Feedback [Idea]`,
@@ -29,6 +29,7 @@ class Command extends Commands {
 			await m.react(`👍`);
 			await m.react(`👎`);
 		});
+
 
 		client.send(message,
 			`Thank you for your feedback!\n` +
