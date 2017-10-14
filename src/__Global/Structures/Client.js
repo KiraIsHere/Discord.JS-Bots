@@ -14,6 +14,7 @@ class CustomClient extends Client {
 		this.database = new Database;
 		this.cooldown = [];
 		this.blacklist = [];
+		this.whitelist = [];
 		this.ownerIDs = [`358558305997684739`];
 	}
 
