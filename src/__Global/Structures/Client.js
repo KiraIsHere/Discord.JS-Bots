@@ -3,6 +3,7 @@ const { Client, MessageEmbed, Collection } = require(`discord.js`);
 const { readdirSync, statSync } = require(`fs`);
 const { sep, resolve } = require(`path`);
 const { inspect } = require(`util`);
+const moment = require(`moment`);
 
 class CustomClient extends Client {
 	constructor(options) {
@@ -50,22 +51,47 @@ class CustomClient extends Client {
 	// End Console
 
 	// Cooldown (add|remove|check)
-	addCooldown(userID, commandName, time) {
-		this.cooldown.push(userID + commandName);
+	addCooldown(userID, commandName, time, date) {
+		this.cooldown.push({ ID: userID, COMMAND: commandName, TIME: time, DATE: date });
 		this.removeCooldown(userID, commandName, time);
 	}
 
 	removeCooldown(userID, commandName, time) {
-		let index = this.cooldown.indexOf(userID + commandName);
-		if (index > -1) {
-			setTimeout(() => {
-				this.cooldown = this.cooldown.splice(index, 0);
-			}, time * 1000);
+		let index = null;
+		for (let i = 0; i < this.cooldown.length; i++) {
+			if (this.cooldown[i].ID === userID && this.cooldown[i].COMMAND === commandName) {
+				index = i;
+				break;
+			}
 		}
+
+		setTimeout(() => {
+			this.cooldown = this.cooldown.splice(index, 0);
+		}, time * 1000);
 	}
 
 	checkCooldown(userID, commandName) {
-		return this.cooldown.indexOf(userID + commandName) > -1;
+		let found = false;
+		for (let i = 0; i < this.cooldown.length; i++) {
+			if (this.cooldown[i].ID === userID && this.cooldown[i].COMMAND === commandName) {
+				found = true;
+				break;
+			}
+		}
+		return found;
+	}
+
+	checkCooldownTime(userID, commandName) {
+		let date = new Date;
+		let time = null;
+		for (let i = 0; i < this.cooldown.length; i++) {
+			if (this.cooldown[i].ID === userID && this.cooldown[i].COMMAND === commandName) {
+				date = this.cooldown[i].DATE;
+				time = this.cooldown[i].TIME;
+				break;
+			}
+		}
+		return (moment(date).add(time, `seconds`) - new Date).toString().charAt(0);
 	}
 	// End Cooldown
 
