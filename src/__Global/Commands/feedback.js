@@ -1,4 +1,4 @@
-const Commands = require(`../../../__Global/Structures/Commands`);
+const Commands = require(`../Structures/Commands`);
 const { MessageEmbed } = require(`discord.js`);
 const { parse } = require(`path`);
 
