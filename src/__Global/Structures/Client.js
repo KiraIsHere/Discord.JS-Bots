@@ -13,6 +13,7 @@ class CustomClient extends Client {
 		this.commands = new Collection();
 		this.database = new Database;
 		this.cooldown = [];
+		this.blacklist = [];
 		this.ownerIDs = [`358558305997684739`];
 	}
 

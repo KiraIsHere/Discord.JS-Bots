@@ -5,6 +5,7 @@ class Event extends Events {
 		if (message.author.bot) return;
 		if (!client.user.bot && !client.ownerIDs.includes(message.author.id)) return;
 		if (message.content.toLowerCase().indexOf(client.botPrefix) !== 0) return;
+		if (client.blacklist.includes(message.author.id)) return;
 
 		const args = message.content.split(/\s+/g);
 		const commandName = args.shift().slice(client.botPrefix.length).toLowerCase();

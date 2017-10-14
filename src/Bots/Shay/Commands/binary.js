@@ -42,6 +42,10 @@ class Command extends Commands {
 			case `decode`:
 				output = binToAscii(args.join(` `));
 				break;
+
+			default:
+				output = `Sorry, you didn't enter a valid option, encode or decode`;
+				break;
 		}
 
 		client.send(message, output, { code: `` });

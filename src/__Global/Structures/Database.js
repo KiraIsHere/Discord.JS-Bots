@@ -9,12 +9,9 @@ class Database {
 		return new Promise((resolve, reject) => {
 			connect(this.url, (error, db) => {
 				if (error) return reject(error);
-				console.log(`Connected successfully to server`);
-
 				var collection = db.collection(`documents`);
 				collection.insertMany(objects, (error, result) => {
 					if (error) return reject(error);
-					console.log(`Inserted document(s) into the collection`);
 					resolve(result);
 				});
 			});
@@ -25,29 +22,22 @@ class Database {
 		return new Promise((resolve, reject) => {
 			connect(this.url, (error, db) => {
 				if (error) return reject(error);
-				console.log(`Connected successfully to server`);
-
 				var collection = db.collection(`documents`);
 				collection.find(object).toArray((error, result) => {
 					if (error) return reject(error);
-					console.log(`Found the following records`);
-					console.log(result);
 					resolve(result);
 				});
 			});
 		});
 	}
 
-	update(object, object2) {
+	update(oldObject, newObject) {
 		return new Promise((resolve, reject) => {
 			connect(this.url, (error, db) => {
 				if (error) return reject(error);
-				console.log(`Connected successfully to server`);
-
 				var collection = db.collection(`documents`);
-				collection.updateOne(object, { $set: object2 }, (error, result) => {
+				collection.updateOne(oldObject, { $set: newObject }, (error, result) => {
 					if (error) return reject(error);
-					console.log(`Updated the document`);
 					resolve(result);
 				});
 			});
@@ -58,12 +48,9 @@ class Database {
 		return new Promise((resolve, reject) => {
 			connect(this.url, (error, db) => {
 				if (error) return reject(error);
-				console.log(`Connected successfully to server`);
-
 				var collection = db.collection(`documents`);
 				collection.deleteOne(object, (error, result) => {
 					if (error) return reject(error);
-					console.log(`Removed the document with the field a equal to 3`);
 					resolve(result);
 				});
 			});
