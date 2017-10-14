@@ -91,7 +91,7 @@ class CustomClient extends Client {
 				break;
 			}
 		}
-		return (moment(date).add(time, `seconds`) - new Date).toString().charAt(0);
+		return (moment(date).add(time, `seconds`) - new Date).toString().slice(0, -3);
 	}
 	// End Cooldown
 
