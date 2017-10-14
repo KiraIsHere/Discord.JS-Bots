@@ -20,7 +20,7 @@ class CustomClient extends Client {
 	}
 
 	//
-	// Console (log|warn|error)
+	// Console (console|log|warn|error)
 	//
 	console(input, type) {
 		const embed = new MessageEmbed()
@@ -50,7 +50,7 @@ class CustomClient extends Client {
 	}
 	// End Console
 
-	// Cooldown (add|remove|check)
+	// Cooldown (addCooldown|removeCooldown|checkCooldown|checkCooldownTime)
 	addCooldown(userID, commandName, time, date) {
 		this.cooldown.push({ ID: userID, COMMAND: commandName, TIME: time, DATE: date });
 		this.removeCooldown(userID, commandName, time);
