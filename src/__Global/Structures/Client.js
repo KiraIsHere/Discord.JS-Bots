@@ -20,7 +20,7 @@ class CustomClient extends Client {
 	}
 
 	//
-	// Console (console|log|warn|error)
+	// Console (console|log|debug|error|warn)
 	//
 	console(input, type) {
 		const embed = new MessageEmbed()
@@ -37,16 +37,22 @@ class CustomClient extends Client {
 		this.console(input, `Log`);
 	}
 
-	warn(input) {
+	debug(input) {
 		console.warn(input);
 		if (process.env.LOCAL) return;
-		this.console(input, `Warn`);
+		this.console(input, `Debug`);
 	}
 
 	error(input) {
 		console.error(input);
 		if (process.env.LOCAL) return;
 		this.console(input, `Error`);
+	}
+
+	warn(input) {
+		console.warn(input);
+		if (process.env.LOCAL) return;
+		this.console(input, `Warn`);
 	}
 	// End Console
 
