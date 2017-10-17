@@ -1,8 +1,8 @@
-const Database = require(`./Database`);
 const { Client, MessageEmbed, Collection } = require(`discord.js`);
 const { readdirSync, statSync } = require(`fs`);
 const { sep, resolve } = require(`path`);
 const { inspect } = require(`util`);
+const Database = require(`./Database`);
 const moment = require(`moment`);
 
 class CustomClient extends Client {
