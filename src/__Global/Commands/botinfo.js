@@ -33,15 +33,15 @@ class Command extends Commands {
 				.setAuthor(`GitHub Repo`, `https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png`)
 				.setTitle(homepage)
 
-				.addField(`Node (NPM) Versions`, `${process.version} (${String(execSync(`npm -v`)).replace(`\n`, ``)})`, true)
-				.addField(`Discord.JS Version`, version, true)
-				.addField(`OS Type (Release)`, `${type} v${release}`, true)
+				.addField(`Node (NPM)`, `${process.version} (${String(execSync(`npm -v`)).replace(`\n`, ``)})`, true)
+				.addField(`Discord.JS`, version, true)
+				.addField(`OS Type`, `${type} v${release}`, true)
 
-				.addField(`OS Uptime`, `${client.formatTime(uptime)}`, true)
-				.addField(`OS CPU Usage`, `${await cpuLoad()}% used`, true)
-				.addField(`OS RAM Usage`, `${await memoryUsage()}${process.env.LOCAL ? `% used of 8GB` : `% used of 512MB`}`, true)
+				.addField(`System Uptime`, `${client.formatTime(uptime)}`, true)
+				.addField(`System CPU Usage`, `${await cpuLoad()}% used`, true)
+				.addField(`System RAM Usage`, `${await memoryUsage()}% used of ${process.env.LOCAL ? `8GB` : `512MB`}`, true)
 
-				.addField(`Bot Uptime`, client.formatTime(process.uptime()), true)
+				.addField(`${client.botName} Uptime`, client.formatTime(process.uptime()), true)
 				.addField(`Heartbeat Ping`, `${Math.round(client.ping)}ms`, true)
 				.addField(`Message Ping`, `${Math.round(sent.createdTimestamp - message.createdTimestamp)}ms`, true)
 
