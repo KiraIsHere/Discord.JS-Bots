@@ -2,9 +2,9 @@ const Commands = require(`../Structures/Commands`);
 const { MessageEmbed, version } = require(`discord.js`);
 const { cpuLoad, memoryUsage } = require(`os-toolbox`);
 const { homepage } = require(`../../../package.json`);
-const { exec } = require(`child_process`);
+const { execSync } = require(`child_process`);
 const { parse } = require(`path`);
-const getos = require(`getos`);
+const { type, release, uptime } = require(`os`);
 
 class Command extends Commands {
 	constructor(client) {
@@ -29,34 +29,21 @@ class Command extends Commands {
 				memberCount += guild.memberCount;
 			});
 
-			let os = `Unknown`;
-			await getos((error, response) => {
-				if (error) return client.error(error);
-				os = response.os;
-			});
-
-			let npmVersion = `Unknown`;
-			await exec(`npm -v`, (error, stdout, stderr) => {
-				if (error) return client.error(error);
-				if (stderr) return client.error(stderr);
-				npmVersion = stdout;
-			});
-
 			const embed = new MessageEmbed()
 				.setAuthor(`GitHub Repo`, `https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png`)
 				.setTitle(homepage)
 
-				.addField(`Node Version`, process.version, true)
-				.addField(`NPM Version`, npmVersion, true)
+				.addField(`Node (NPM) Versions`, `${process.version} (${String(execSync(`npm -v`)).replace(`\n`, ``)})`, true)
 				.addField(`Discord.JS Version`, version, true)
+				.addField(`OS Type (Release)`, `${type} v${release}`, true)
 
-				.addField(`OS Type`, os.replace(`win32`, `Windows`).replace(`linux`, `Linux`), true)
-				.addField(`OS CPU`, `${await cpuLoad()}% used`, true)
-				.addField(`OS RAM`, process.env.LOCAL !== undefined ? `${await memoryUsage()}% used of 8GB` : `${await memoryUsage()}% used of 512MB`, true)
+				.addField(`OS Uptime`, `${client.formatTime(uptime)}`, true)
+				.addField(`OS CPU Usage`, `${await cpuLoad()}% used`, true)
+				.addField(`OS RAM Usage`, `${await memoryUsage()}${process.env.LOCAL ? `% used of 8GB` : `% used of 512MB`}`, true)
 
+				.addField(`Bot Uptime`, client.formatTime(process.uptime()), true)
 				.addField(`Heartbeat Ping`, `${Math.round(client.ping)}ms`, true)
 				.addField(`Message Ping`, `${Math.round(sent.createdTimestamp - message.createdTimestamp)}ms`, true)
-				.addField(`Process Uptime`, client.formatTime(process.uptime()), true)
 
 				.addField(`Guilds`, client.guilds.size, true)
 				.addField(`Channels`, client.formatNumbers(client.channels.size), true)
