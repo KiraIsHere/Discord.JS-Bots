@@ -11,7 +11,7 @@ function isDirectory(source) {
 }
 
 function start(input) {
-	const proc = spawn(`node`, [`../../__Global/Main.js`], { cwd: input });
+	const proc = spawn(`node`, [[`--expose-gc`], `../../__Global/Main.js`], { cwd: input });
 
 	proc.stdout.on(`data`, data => {
 		console.log(String(data));
