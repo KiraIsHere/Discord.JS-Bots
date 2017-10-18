@@ -37,7 +37,7 @@ class Command extends Commands {
 				.addField(`Discord.JS`, version, true)
 				.addField(`OS Type`, `${type} v${release}`, true)
 
-				.addField(`System Uptime`, `${client.formatTime(uptime)}`, true)
+				.addField(`System Uptime`, client.formatTime(process.env.LOCAL ? uptime : uptime / 1000), true)
 				.addField(`System CPU Usage`, `${await cpuLoad()}% used`, true)
 				.addField(`System RAM Usage`, `${await memoryUsage()}% used of ${process.env.LOCAL ? `8GB` : `512MB`}`, true)
 
