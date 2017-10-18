@@ -21,9 +21,9 @@ class Command extends Commands {
 		if (args.join(` `).length > 1000) return client.send(message, `Message too long, 1000 Characters or less`);
 
 		const embed = new MessageEmbed()
-			.setAuthor(message.author.username, message.author.displayAvatarURL())
+			.setAuthor(`${message.author.username} (${message.author.id})`, message.author.displayAvatarURL())
 			.setDescription(args.join(` `))
-			.setFooter(`Vote on the suggestion`);
+			.setFooter(`From ${message.channel.name} In ${message.guild.name} (${message.guild.id})`);
 
 		client.channels.get(`368572194667888646`).send({ embed }).then(async m => {
 			await m.react(`👍`);
