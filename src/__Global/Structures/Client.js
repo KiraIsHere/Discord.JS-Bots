@@ -174,7 +174,7 @@ class CustomClient extends Client {
 	}
 
 	defaultChannel(guild) {
-		guild.channels
+		return guild.channels
 			.filter(c => c.type === `text` &&
 					c.permissionsFor(guild.me).has(`SEND_MESSAGES`))
 			.sort()
