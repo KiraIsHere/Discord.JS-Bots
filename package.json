@@ -29,12 +29,17 @@
   "maintainers": [
     {
       "name": "Shayne Hartford (ShayBox)",
-      "email": "ShayneEHartford@Gmail.Com",
-      "url": "https://shaybox.com/"
-    },
+      "email": "ShayneEHartford@Gmail.Com"
+    }
+  ],
+  "contributors": [
     {
       "name": "Yukine",
       "url": "http://yukine.ga/"
+    },
+    {
+      "name": "EPICZEUS",
+      "url": "http://lemonparty.org/"
     }
   ],
   "repository": {
