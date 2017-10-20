@@ -24,7 +24,7 @@ class Command extends Commands {
 				`\n` +
 				`[Use ${client.botPrefix}help <commandname> for details]\n` +
 				`\n` +
-				`${client.commands.map(c => c.show ? `${client.botPrefix}${c.name}${` `.repeat(longest - c.name.length)} :: ${c.description}\n` : null).join(``)}`;
+				`${client.commands.sort().map(c => c.show ? `${client.botPrefix}${c.name}${` `.repeat(longest - c.name.length)} :: ${c.description}\n` : null).join(``)}`;
 			client.send(message, content, { code: `asciidoc` });
 		} else {
 			let command = args[0];
