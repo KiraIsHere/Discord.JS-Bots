@@ -25,7 +25,7 @@ class Command extends Commands {
 			.setDescription(args.join(` `))
 			.setFooter(`From ${message.channel.name} In ${message.guild.name} (${message.guild.id})`);
 
-		client.channels.get(`368572194667888646`).send({ embed }).then(async m => {
+		client.channels.get(this.channelList.FEEDBACK).send({ embed }).then(async m => {
 			await m.react(`👍`);
 			await m.react(`👎`);
 		});

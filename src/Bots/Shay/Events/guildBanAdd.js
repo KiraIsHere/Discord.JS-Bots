@@ -11,7 +11,7 @@ class Event extends Events {
 			.setColor(0x00FF00)
 			.setFooter(`Banned`)
 			.setTimestamp();
-		client.channels.get(`363701182822350859`).send({ embed });
+		client.channels.get(this.channelList.MOD_LOG).send({ embed });
 	}
 }
 

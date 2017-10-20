@@ -17,6 +17,13 @@ class CustomClient extends Client {
 		this.blacklist = [];
 		this.whitelist = [];
 		this.ownerIDs = [`358558305997684739`];
+		this.channelList = {
+			CONSOLE: 361533828520476684,
+			FEEDBACK: 368572194667888646,
+			GUILD_LOG: 363003869288202242,
+			MOD_LOG: 363701182822350859,
+			MEMBER_LOG: 361540602858569728
+		};
 	}
 
 	//
@@ -28,7 +35,7 @@ class CustomClient extends Client {
 			.setColor(0x00FF00)
 			.setFooter(`${type} | ${this.botName}`)
 			.setTimestamp();
-		this.channels.get(`361533828520476684`).send({ embed });
+		this.channels.get(this.channelList.CONSOLE).send({ embed });
 	}
 
 	log(input) {

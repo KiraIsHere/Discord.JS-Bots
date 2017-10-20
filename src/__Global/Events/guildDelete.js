@@ -14,7 +14,7 @@ class Event extends Events {
 			.setColor(0x00FF00)
 			.setFooter(`Left`)
 			.setTimestamp();
-		client.channels.get(`363003869288202242`).send({ embed });
+		client.channels.get(this.channelList.GUILD_LOG).send({ embed });
 	}
 }
 
