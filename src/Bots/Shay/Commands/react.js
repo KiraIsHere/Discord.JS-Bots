@@ -1,5 +1,5 @@
 const Commands = require(`../../../__Global/Structures/Commands`);
-const { parse } = require(`path`);
+const { basename } = require(`path`);
 
 class Command extends Commands {
 	constructor(client) {
@@ -8,7 +8,7 @@ class Command extends Commands {
 			show: true,
 			cooldown: false,
 			cooldownTime: 3,
-			name: parse(__filename).base.replace(`.js`, ``),
+			name: basename(__filename, `.js`),
 			description: `Reacts to a message with emojis`,
 			usage: `React [Text] (MessageID) (ChannelID)`,
 			aliases: [`r`]

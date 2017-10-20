@@ -1,5 +1,5 @@
 const Commands = require(`../../../__Global/Structures/Commands`);
-const { parse } = require(`path`);
+const { basename } = require(`path`);
 const googl = require(`goo.gl`);
 googl.setKey(process.env.GOOGLE_URL_API);
 
@@ -10,7 +10,7 @@ class Command extends Commands {
 			show: true,
 			cooldown: false,
 			cooldownTime: 3,
-			name: parse(__filename).base.replace(`.js`, ``),
+			name: basename(__filename, `.js`),
 			description: `Shortens the URL`,
 			usage: `Short [URL]`,
 			aliases: []

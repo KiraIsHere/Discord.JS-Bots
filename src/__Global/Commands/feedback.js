@@ -1,6 +1,6 @@
 const Commands = require(`../Structures/Commands`);
 const { MessageEmbed } = require(`discord.js`);
-const { parse } = require(`path`);
+const { basename } = require(`path`);
 
 class Command extends Commands {
 	constructor(client) {
@@ -9,7 +9,7 @@ class Command extends Commands {
 			show: true,
 			cooldown: true,
 			cooldownTime: 600,
-			name: parse(__filename).base.replace(`.js`, ``),
+			name: basename(__filename, `.js`),
 			description: `Submits feedback ideas to be voted on`,
 			usage: `Feedback [Idea]`,
 			aliases: [`idea`]

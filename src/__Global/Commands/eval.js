@@ -1,6 +1,6 @@
 const Commands = require(`../Structures/Commands`);
 const { MessageEmbed } = require(`discord.js`);
-const { parse } = require(`path`);
+const { basename } = require(`path`);
 const PastebinAPI = require(`pastebin-js`);
 const pastebin = new PastebinAPI(process.env.PASTEBIN_API);
 
@@ -11,7 +11,7 @@ class Command extends Commands {
 			show: false,
 			cooldown: false,
 			cooldownTime: 3,
-			name: parse(__filename).base.replace(`.js`, ``),
+			name: basename(__filename, `.js`),
 			description: `Evaluates javascript code`,
 			usage: `Eval [Code]`,
 			aliases: []

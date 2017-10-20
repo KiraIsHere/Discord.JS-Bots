@@ -3,7 +3,7 @@ const { MessageEmbed, version } = require(`discord.js`);
 const { cpuLoad, memoryUsage } = require(`os-toolbox`);
 const { homepage } = require(`../../../package.json`);
 const { execSync } = require(`child_process`);
-const { parse } = require(`path`);
+const { basename } = require(`path`);
 const { type, release, uptime } = require(`os`);
 
 class Command extends Commands {
@@ -13,7 +13,7 @@ class Command extends Commands {
 			show: true,
 			cooldown: true,
 			cooldownTime: 30,
-			name: parse(__filename).base.replace(`.js`, ``),
+			name: basename(__filename, `.js`),
 			description: `Shows bot & OS info`,
 			usage: `BotInfo`,
 			aliases: [`bot`]

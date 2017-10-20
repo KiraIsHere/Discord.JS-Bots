@@ -1,5 +1,5 @@
 const Commands = require(`../Structures/Commands`);
-const { parse } = require(`path`);
+const { basename } = require(`path`);
 
 class Command extends Commands {
 	constructor(client) {
@@ -8,7 +8,7 @@ class Command extends Commands {
 			show: false,
 			cooldown: false,
 			cooldownTime: 3,
-			name: parse(__filename).base.replace(`.js`, ``),
+			name: basename(__filename, `.js`),
 			description: `Adds, Removes, Lists and Checks the blacklist for a User ID`,
 			usage: `Blacklist [Add/Remove/List/Check] (UserID)`,
 			aliases: []

