@@ -32,7 +32,7 @@ class CustomClient extends Client {
 	console(input, type) {
 		const embed = new MessageEmbed()
 			.setDescription(input)
-			.setColor(0x00FF00)
+			.setColor(type === `Log` ? 0x00FF00 : 0xFF0000)
 			.setFooter(`${type} | ${this.botName}`)
 			.setTimestamp();
 		this.channels.get(this.channelList.CONSOLE).send({ embed });
