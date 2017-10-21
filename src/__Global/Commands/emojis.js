@@ -5,7 +5,7 @@ class Command extends Commands {
 	constructor(client) {
 		super(client, {
 			enabled: true,
-			show: false,
+			show: true,
 			cooldown: false,
 			cooldownTime: 3,
 			name: basename(__filename, `.js`),
@@ -16,7 +16,7 @@ class Command extends Commands {
 	}
 
 	run(client, message) {
-		client.send(message, `${client.emojis.map(c => c.toString()).join(` | `)}`);
+		client.send(message, client.emojis.map(c => c.toString()).join(` | `), { split: true });
 	}
 }
 
