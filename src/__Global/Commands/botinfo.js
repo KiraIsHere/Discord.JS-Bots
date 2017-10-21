@@ -13,6 +13,8 @@ class Command extends Commands {
 			show: true,
 			cooldown: true,
 			cooldownTime: 30,
+			limit: false,
+			limitAmount: 3,
 			name: basename(__filename, `.js`),
 			description: `Shows bot & OS info`,
 			usage: `BotInfo`,

@@ -16,9 +16,9 @@ class CustomClient extends Client {
 		this.database = new Database;
 		this.cooldown = [];
 		this.blacklist = [];
-		this.inMemBlacklist = [];
 		this.whitelist = [];
-		this.ownerIDs = [`358558305997684739`, `189696688657530880`];
+		this.inMemBlacklist = [];
+		this.ownerIDs = [`358558305997684739`];
 		this.channelList = {
 			CONSOLE: `361533828520476684`,
 			FEEDBACK: `368572194667888646`,

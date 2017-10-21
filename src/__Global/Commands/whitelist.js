@@ -8,6 +8,8 @@ class Command extends Commands {
 			show: false,
 			cooldown: false,
 			cooldownTime: 3,
+			limit: false,
+			limitAmount: 3,
 			name: basename(__filename, `.js`),
 			description: `Adds, Removes, Lists and Checks the whitelist for a User ID`,
 			usage: `Whitelist [Add/Remove/List/Check] (UserID)`,

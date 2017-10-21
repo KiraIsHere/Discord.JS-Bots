@@ -9,6 +9,8 @@ class Command extends Commands {
 			show: true,
 			cooldown: false,
 			cooldownTime: 3,
+			limit: false,
+			limitAmount: 3,
 			name: basename(__filename, `.js`),
 			description: `Gives bot invite link`,
 			usage: `Invite`,

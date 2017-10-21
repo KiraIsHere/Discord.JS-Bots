@@ -7,11 +7,12 @@ class Commands {
 		this.show = info.show;
 		this.cooldown = info.cooldown;
 		this.cooldownTime = info.cooldownTime;
+		this.limit = info.limit;
+		this.limitAmount = info.limitAmount;
 		this.name = info.name;
 		this.description = info.description;
 		this.usage = info.usage;
 		this.aliases = info.aliases;
-		this.limit = info.limit;
 	}
 }
 

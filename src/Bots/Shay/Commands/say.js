@@ -8,6 +8,8 @@ class Command extends Commands {
 			show: true,
 			cooldown: false,
 			cooldownTime: 3,
+			limit: false,
+			limitAmount: 3,
 			name: basename(__filename, `.js`),
 			description: `Converts text into emojis`,
 			usage: `Say [Text]`,

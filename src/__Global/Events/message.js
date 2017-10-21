@@ -22,29 +22,29 @@ class Event extends Events {
 		if (!client.whitelist.indexOf(message.author.id) > -1 && client.checkCooldown(message.author.id, commandName)) return client.send(message, `Cooldown, Please wait ${client.checkCooldownTime(message.author.id, commandName)} seconds from the last use.`);
 		if (command.cooldown) client.addCooldown(message.author.id, commandName, command.cooldownTime, new Date);
 		if (message.author === client.user) client.addCooldown(message.author.id, commandName, 1, new Date);
-
-		const userLimits = client.limits.get(message.author.id);
-		if (userLimits) {
-			if (userLimits[command.name]) {
-				if (userLimits[command.name] > command.limit) {
-					message.reply('You have been temporarily blacklisted due to overusing this command!');
-					return client.inMemBlacklist.push(message.author.id);
+		if (command.limit) {
+			const userLimits = client.limits.get(message.author.id);
+			if (userLimits) {
+				if (userLimits[command.name]) {
+					if (userLimits[command.name] >= command.limitAmount) {
+						client.inMemBlacklist.push(message.author.id);
+						return client.send(message, `You have been temporarily blacklisted due to overusing this command!`);
+					} else {
+						userLimits[command.name]++;
+						setTimeout(() => {
+							const userLimitsUpdated = client.limits.get(message.author.id);
+							userLimitsUpdated[command.name]--;
+							client.limits.set(message.author.id, userLimitsUpdated);
+						}, 3600000);
+					}
 				} else {
-					userLimits[command.name]++;
-					setTimeout(() => {
-						const userLimitsUpdated = client.limits.get(message.author.id);
-						userLimitsUpdated[command.name]--;
-						client.limits.set(message.author.id, userLimitsUpdated);
-					}, 3600000);
+					userLimits[command.name] = 1;
 				}
+			} else {
+				client.limits.set(message.author.id, { [command.name]: 1 });
 			}
-			else {
-				userLimits[command.name] = 1;
-			}
-			client.limits.set(message.author.id, userLimits);
-		} else {
-			client.limits.set(message.author.id, { [command.name]: 1 });
 		}
+
 		command.run(client, message, args);
 	}
 }

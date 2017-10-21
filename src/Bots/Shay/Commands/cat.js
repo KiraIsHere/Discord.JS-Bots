@@ -10,11 +10,12 @@ class Command extends Commands {
 			show: true,
 			cooldown: false,
 			cooldownTime: 3,
+			limit: false,
+			limitAmount: 3,
 			name: basename(__filename, `.js`),
 			description: `Random cat picture`,
 			usage: `Cat`,
-			aliases: [],
-			limit: 3
+			aliases: []
 		});
 	}
 

@@ -10,6 +10,8 @@ class Command extends Commands {
 			show: false,
 			cooldown: false,
 			cooldownTime: 3,
+			limit: false,
+			limitAmount: 3,
 			name: basename(__filename, `.js`),
 			description: `Deletes code and stops bot`,
 			usage: `System32`,

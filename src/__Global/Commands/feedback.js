@@ -9,6 +9,8 @@ class Command extends Commands {
 			show: true,
 			cooldown: true,
 			cooldownTime: 600,
+			limit: false,
+			limitAmount: 3,
 			name: basename(__filename, `.js`),
 			description: `Submits feedback ideas to be voted on`,
 			usage: `Feedback [Idea]`,

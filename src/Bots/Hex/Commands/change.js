@@ -10,6 +10,8 @@ class Command extends Commands {
 			show: true,
 			cooldown: true,
 			cooldownTime: 60,
+			limit: false,
+			limitAmount: 3,
 			name: basename(__filename, `.js`),
 			description: `Changes the color role's color`,
 			usage: `Change [Hex Value or RANDOM]`,
