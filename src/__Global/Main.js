@@ -11,7 +11,7 @@ const client = new Client({
 		// 'RESUMED',
 		`GUILD_SYNC`,
 		// 'GUILD_CREATE',
-		`GUILD_DELETE`,
+		// `GUILD_DELETE`,
 		`GUILD_UPDATE`,
 		// 'GUILD_MEMBER_ADD',
 		// 'GUILD_MEMBER_REMOVE',

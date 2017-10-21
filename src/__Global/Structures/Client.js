@@ -93,13 +93,13 @@ class CustomClient extends Client {
 	//
 	// Misc (send|missingArgs|clean|formatTime|formatNumbers|defaultChannel)
 	//
-	send(message, content, options) {
+	send(message, ...content) {
 		return new Promise(async resolve => {
 			if (this.user.bot) {
-				resolve(await message.channel.send(content, options));
+				resolve(await message.channel.send(...content));
 			} else {
 				setTimeout(async () => {
-					resolve(await message.edit(content, options));
+					resolve(await message.edit(...content));
 				}, 500);
 			}
 		});
