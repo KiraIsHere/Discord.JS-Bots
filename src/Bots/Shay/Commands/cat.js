@@ -13,7 +13,8 @@ class Command extends Commands {
 			name: basename(__filename, `.js`),
 			description: `Random cat picture`,
 			usage: `Cat`,
-			aliases: []
+			aliases: [],
+			limit: 3
 		});
 	}
 
