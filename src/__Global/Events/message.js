@@ -28,6 +28,7 @@ class Event extends Events {
 				if (userLimits[command.name]) {
 					if (userLimits[command.name] >= command.limitAmount) {
 						client.inMemBlacklist.push(message.author.id);
+						client.log(`${message.author.username} (${message.author.id}) has been blocked from ${command.name} for using it ${command.limitAmount} in less than an hour`);
 						return client.send(message, `You have been temporarily blacklisted due to overusing this command!`);
 					} else {
 						userLimits[command.name]++;
