@@ -18,11 +18,11 @@ class CustomClient extends Client {
 		this.whitelist = [];
 		this.ownerIDs = [`358558305997684739`];
 		this.channelList = {
-			CONSOLE: 361533828520476684,
-			FEEDBACK: 368572194667888646,
-			GUILD_LOG: 363003869288202242,
-			MOD_LOG: 363701182822350859,
-			MEMBER_LOG: 361540602858569728
+			CONSOLE: `361533828520476684`,
+			FEEDBACK: `368572194667888646`,
+			GUILD_LOG: `363003869288202242`,
+			MOD_LOG: `363701182822350859`,
+			MEMBER_LOG: `361540602858569728`
 		};
 	}
 
@@ -93,13 +93,13 @@ class CustomClient extends Client {
 	//
 	// Misc (send|missingArgs|clean|formatTime|formatNumbers|defaultChannel)
 	//
-	send(message, ...content) {
+	send(message, content, options) {
 		return new Promise(async resolve => {
 			if (this.user.bot) {
-				resolve(await message.channel.send(...content));
+				resolve(await message.channel.send(content, options));
 			} else {
 				setTimeout(async () => {
-					resolve(await message.edit(...content));
+					resolve(await message.edit(content, options));
 				}, 500);
 			}
 		});
