@@ -11,6 +11,7 @@ class Commands {
 		this.description = info.description;
 		this.usage = info.usage;
 		this.aliases = info.aliases;
+		this.limit = info.limit;
 	}
 }
 

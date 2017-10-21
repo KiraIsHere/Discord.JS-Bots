@@ -4,7 +4,7 @@ class Event extends Events {
 	run(client, message) {
 		if (message.author.bot) return;
 		if (!client.user.bot && !client.ownerIDs.includes(message.author.id)) return;
-		if (client.blacklist.includes(message.author.id)) return;
+		if (client.blacklist.includes(message.author.id) || client.inMemBlacklist.includes(message.author.id)) return;
 
 		const args = message.content.split(/\s+/g);
 		let commandName = null;
@@ -23,6 +23,23 @@ class Event extends Events {
 		if (command.cooldown) client.addCooldown(message.author.id, commandName, command.cooldownTime, new Date);
 		if (message.author === client.user) client.addCooldown(message.author.id, commandName, 1, new Date);
 
+		const userLimits = client.limits.get(message.author.id);
+		if (userLimits) {
+			if (userLimits[command.name]) {
+				if (userLimits[command.name] > command.limit) {
+					message.reply('You have been temporarily blacklisted due to overusing this command!');
+					return client.inMemBlacklist.push(message.author.id);
+				} else {
+					userLimits[command.name]++;
+				}
+			}
+			else {
+				userLimits[command.name] = 1;
+			}
+			client.limits.set(message.author.id, userLimits);
+		} else {
+			client.limits.set(message.author.id, { [command.name]: 1 });
+		}
 		command.run(client, message, args);
 	}
 }
