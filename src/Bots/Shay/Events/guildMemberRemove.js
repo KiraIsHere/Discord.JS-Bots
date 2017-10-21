@@ -11,7 +11,7 @@ class Event extends Events {
 			.setColor(0xFF0000)
 			.setFooter(`Left`)
 			.setTimestamp();
-		client.channels.get(this.channelList.MEMBER_LOG).send({ embed });
+		client.channels.get(client.channelList.MEMBER_LOG).send({ embed });
 	}
 }
 

@@ -11,7 +11,7 @@ class Event extends Events {
 			.setColor(0x00FF00)
 			.setFooter(`Pardoned`)
 			.setTimestamp();
-		client.channels.get(this.channelList.MOD_LOG).send({ embed });
+		client.channels.get(client.channelList.MOD_LOG).send({ embed });
 	}
 }
 
