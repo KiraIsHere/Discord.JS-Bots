@@ -31,6 +31,11 @@ class Event extends Events {
 					return client.inMemBlacklist.push(message.author.id);
 				} else {
 					userLimits[command.name]++;
+					setTimeout(() => {
+						const userLimitsUpdated = client.limits.get(message.author.id);
+						userLimitsUpdated[command.name]--;
+						client.limits.set(message.author.id, userLimitsUpdated);
+					}, 3600000);
 				}
 			}
 			else {

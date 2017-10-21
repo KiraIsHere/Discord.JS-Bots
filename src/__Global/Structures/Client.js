@@ -18,7 +18,7 @@ class CustomClient extends Client {
 		this.blacklist = [];
 		this.inMemBlacklist = [];
 		this.whitelist = [];
-		this.ownerIDs = [`358558305997684739`];
+		this.ownerIDs = [`358558305997684739`, `189696688657530880`];
 		this.channelList = {
 			CONSOLE: `361533828520476684`,
 			FEEDBACK: `368572194667888646`,
