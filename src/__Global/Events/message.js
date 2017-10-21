@@ -28,8 +28,11 @@ class Event extends Events {
 				if (userLimits[command.name]) {
 					if (userLimits[command.name] >= command.limitAmount) {
 						client.inMemBlacklist.push(message.author.id);
-						client.log(`${message.author.username} (${message.author.id}) has been blocked from ${command.name} for using it ${command.limitAmount} in less than an hour`);
-						return client.send(message, `You have been temporarily blacklisted due to overusing this command!`);
+						client.log(`${message.author.username} (${message.author.id}) has been temporarily blocked from \`${client.botName}\` for using \`${command.name}\` \`${command.limitAmount}\` times in less than an hour`);
+						return client.send(message,
+							`You have been temporarily blacklisted for overusing this command!\n` +
+							`You will be un-blacklisted in 24 hours or the next time the bot restarts.`
+						);
 					} else {
 						userLimits[command.name]++;
 						setTimeout(() => {
