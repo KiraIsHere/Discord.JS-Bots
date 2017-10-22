@@ -11,7 +11,7 @@ class Event extends Events {
 
 		const embed = new MessageEmbed()
 			.setAuthor(guild.name, guild.iconURL())
-			.setColor(0x00FF00)
+			.setColor(0xFF0000)
 			.setFooter(`Left`)
 			.setTimestamp();
 		client.channels.get(client.channelList.GUILD_LOG).send({ embed });
