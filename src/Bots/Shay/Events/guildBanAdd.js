@@ -8,7 +8,7 @@ class Event extends Events {
 
 		const embed = new MessageEmbed()
 			.setAuthor(user.username, user.displayAvatarURL())
-			.setColor(0x00FF00)
+			.setColor(0xFF0000)
 			.setFooter(`Banned`)
 			.setTimestamp();
 		client.channels.get(client.channelList.MOD_LOG).send({ embed });
