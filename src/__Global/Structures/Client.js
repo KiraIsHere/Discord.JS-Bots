@@ -12,7 +12,7 @@ class CustomClient extends Client {
 		this.botPrefix = `${this.botName.toLowerCase().charAt(0)}!`;
 		this.aliases = new Collection();
 		this.commands = new Collection();
-		this.limits = new Collection();
+		this.commandUsage = new Collection();
 		this.database = new Database;
 		this.cooldown = [];
 		this.blacklist = [];

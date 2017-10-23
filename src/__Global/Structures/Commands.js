@@ -6,9 +6,11 @@ class Commands {
 		this.enabled = info.enabled;
 		this.show = info.show;
 		this.cooldown = info.cooldown;
+		this.cooldownAmount = info.cooldownAmount;
 		this.cooldownTime = info.cooldownTime;
 		this.limit = info.limit;
 		this.limitAmount = info.limitAmount;
+		this.limitTime = info.limitTime;
 		this.name = info.name;
 		this.description = info.description;
 		this.usage = info.usage;
