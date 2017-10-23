@@ -2,9 +2,9 @@ const Events = require(`../Structures/Events`);
 
 class Event extends Events {
 	run(client, message) {
-		if (message.author.bot) return;
-		if (!client.user.bot && !client.ownerIDs.includes(message.author.id)) return;
-		if (client.blacklist.includes(message.author.id)) return;
+		if (message.author.bot) return false;
+		if (!client.user.bot && !client.ownerIDs.includes(message.author.id)) return false;
+		if (client.blacklist.includes(message.author.id)) return false;
 
 		const args = message.content.split(/\s+/g);
 
@@ -17,11 +17,14 @@ class Event extends Events {
 
 		const command = client.commands.get(commandName) || client.commands.get(client.aliases.get(commandName));
 
-		if (!command || !command.enabled) return;
+		if (!command || !command.enabled) return false;
 		if (client.whitelist.indexOf(message.author.id) > -1) {
 			// Can't just if (!) because it doesn't work that way
 		} else {
-			if (client.checkCooldown(message.author.id, commandName)) client.send(message, `Cooldown, Please wait ${client.formatTime(client.checkCooldownTime(message.author.id, commandName), true)}`);
+			if (client.checkCooldown(message.author.id, commandName)) {
+				client.send(message, `Cooldown, Please wait ${client.formatTime(client.checkCooldownTime(message.author.id, commandName), true)}`);
+				return false;
+			}
 
 			if (command.run(client, message, args)) {
 				if (command.cooldown) {
@@ -76,6 +79,7 @@ class Event extends Events {
 				if (message.author === client.user) client.addCooldown(message.author.id, commandName, 1, new Date);
 			}
 		}
+		return true;
 	}
 }
 

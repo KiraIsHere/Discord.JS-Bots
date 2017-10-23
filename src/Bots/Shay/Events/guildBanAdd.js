@@ -3,8 +3,8 @@ const { MessageEmbed } = require(`discord.js`);
 
 class Event extends Events {
 	run(client, guild, user) {
-		if (process.env.LOCAL) return;
-		if (guild.id !== `361532026354139156`) return;
+		if (process.env.LOCAL) return false;
+		if (guild.id !== `361532026354139156`) return false;
 
 		const embed = new MessageEmbed()
 			.setAuthor(user.username, user.displayAvatarURL())
@@ -12,6 +12,7 @@ class Event extends Events {
 			.setFooter(`Banned`)
 			.setTimestamp();
 		client.channels.get(client.channelList.MOD_LOG).send({ embed });
+		return true;
 	}
 }
 

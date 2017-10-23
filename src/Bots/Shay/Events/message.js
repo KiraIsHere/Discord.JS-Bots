@@ -2,7 +2,7 @@ const Events = require(`../../../__Global/Structures/Events`);
 
 class Event extends Events {
 	run(client, message) {
-		if (process.env.LOCAL) return;
+		if (process.env.LOCAL) return false;
 
 		if (message.channel.name === `bots`) {
 			if (message.content.startsWith(`-`)) message.delete({ timeout: 500 });
@@ -21,6 +21,7 @@ class Event extends Events {
 				message.delete({ timeout: 500 });
 			}
 		}
+		return true;
 	}
 }
 

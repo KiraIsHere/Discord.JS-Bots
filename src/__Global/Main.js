@@ -49,7 +49,7 @@ const client = new Client({
 readdir(join(__dirname, `./Commands/`), (error, files) => {
 	if (error) throw error;
 	files.forEach(file => {
-		if (file.split(`.`).slice(-1)[0] !== `js`) return;
+		if (file.split(`.`).slice(-1)[0] !== `js`) return false;
 		const Name = file.split(`.`)[0];
 		const CommandClass = require(`./Commands/${file}`);
 		const Command = new CommandClass(client);
@@ -57,6 +57,7 @@ readdir(join(__dirname, `./Commands/`), (error, files) => {
 		Command.aliases.forEach(alias => {
 			client.aliases.set(alias, Name);
 		});
+		return true;
 	});
 });
 
@@ -64,7 +65,7 @@ readdir(join(__dirname, `./Commands/`), (error, files) => {
 readdir(join(`.`, `./Commands/`), (error, files) => {
 	if (error) throw error;
 	files.forEach(file => {
-		if (file.split(`.`).slice(-1)[0] !== `js`) return;
+		if (file.split(`.`).slice(-1)[0] !== `js`) return false;
 		const Name = file.split(`.`)[0];
 		const CommandClass = require(join(resolve(`.`), `/Commands/${file}`));
 		const Command = new CommandClass(client);
@@ -72,6 +73,7 @@ readdir(join(`.`, `./Commands/`), (error, files) => {
 		Command.aliases.forEach(alias => {
 			client.aliases.set(alias, Name);
 		});
+		return true;
 	});
 });
 

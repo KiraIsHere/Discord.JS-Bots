@@ -3,8 +3,8 @@ const { MessageEmbed } = require(`discord.js`);
 
 class Event extends Events {
 	run(client, member) {
-		if (process.env.LOCAL) return;
-		if (member.guild.id !== `361532026354139156`) return;
+		if (process.env.LOCAL) return false;
+		if (member.guild.id !== `361532026354139156`) return false;
 
 		const embed = new MessageEmbed()
 			.setAuthor(member.user.username, member.user.displayAvatarURL())
@@ -12,6 +12,7 @@ class Event extends Events {
 			.setFooter(`Joined`)
 			.setTimestamp();
 		client.channels.get(client.channelList.MEMBER_LOG).send({ embed });
+		return true;
 	}
 }
 

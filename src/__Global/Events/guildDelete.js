@@ -4,7 +4,7 @@ const { MessageEmbed } = require(`discord.js`);
 
 class Event extends Events {
 	run(client, guild) {
-		if (process.env.LOCAL) return;
+		if (process.env.LOCAL) return false;
 
 		// post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
 		// 	.send({ server_count: client.guilds.size	}); // eslint-disable-line camelcase
@@ -15,6 +15,7 @@ class Event extends Events {
 			.setFooter(`Left`)
 			.setTimestamp();
 		client.channels.get(client.channelList.GUILD_LOG).send({ embed });
+		return true;
 	}
 }
 

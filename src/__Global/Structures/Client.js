@@ -41,20 +41,23 @@ class CustomClient extends Client {
 
 	log(input) {
 		console.log(input);
-		if (process.env.LOCAL) return;
+		if (process.env.LOCAL) return false;
 		this.console(input, `Log`);
+		return true;
 	}
 
 	error(input) {
 		console.error(input);
-		if (process.env.LOCAL) return;
+		if (process.env.LOCAL) return false;
 		this.console(input, `Error`);
+		return true;
 	}
 
 	warn(input) {
 		console.warn(input);
-		if (process.env.LOCAL) return;
+		if (process.env.LOCAL) return false;
 		this.console(input, `Warn`);
+		return true;
 	}
 	// End Console
 
