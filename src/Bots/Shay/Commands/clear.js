@@ -25,6 +25,7 @@ class Command extends Commands {
 		if (args[0] < 1 || args[0 > 100]) return client.send(message, `Number between 1 and 100`, { code: `` });
 
 		message.channel.bulkDelete(args[0]);
+		return true;
 	}
 }
 

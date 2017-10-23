@@ -29,6 +29,7 @@ class Command extends Commands {
 			message.member.addRole(NSFW);
 			client.send(message, `Successfully Enabled NSFW Channels`);
 		}
+		return true;
 	}
 }
 

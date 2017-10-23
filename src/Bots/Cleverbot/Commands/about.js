@@ -21,7 +21,7 @@ class Command extends Commands {
 	}
 
 	run(client, message) {
-		if (message.channel.name.includes(`cleverbot`)) return;
+		if (message.channel.name.includes(`cleverbot`)) return undefined;
 		const embed = new MessageEmbed()
 			.setTitle(`About`)
 			.setDescription(
@@ -35,6 +35,7 @@ class Command extends Commands {
 			.setFooter(client.botName)
 			.setTimestamp();
 		client.send(message, { embed });
+		return true;
 	}
 }
 

@@ -40,6 +40,7 @@ class Command extends Commands {
 				.replace(`.`, ``)
 			);
 		}, 500);
+		return true;
 	}
 }
 

@@ -29,6 +29,7 @@ class Command extends Commands {
 				.setColor(parseInt(args.join(` `).replace(`#`, ``), 16));
 			client.send(message, { embed });
 		}
+		return true;
 	}
 }
 

@@ -23,7 +23,7 @@ class Command extends Commands {
 	run(client, message, args) {
 		if (args.length < 1) return client.missingArgs(message, this.usage);
 
-		if (!message.guild.roles.find(`name`, args.join(` `))) return;
+		if (!message.guild.roles.find(`name`, args.join(` `))) return undefined;
 
 		let role = message.guild.roles.find(`name`, args.join(` `));
 		let permissions = role.permissions.serialize();
@@ -48,6 +48,7 @@ class Command extends Commands {
 			.setTimestamp();
 
 		client.send(message, { embed });
+		return true;
 	}
 }
 

@@ -34,6 +34,7 @@ class Command extends Commands {
 				.setTimestamp();
 			client.send(message, { embed });
 		}).catch(() => client.send(message, `Invalid name, Please input valid name`, { code: `` }));
+		return true;
 	}
 }
 

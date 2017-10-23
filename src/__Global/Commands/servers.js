@@ -28,6 +28,7 @@ class Command extends Commands {
 		});
 
 		client.send(message, servers.sort().join(``), { code: `` });
+		return true;
 	}
 }
 

@@ -39,6 +39,7 @@ class Command extends Commands {
 			`Thank you for your feedback!\n` +
 			`Please note: If you requested anything stupid or spam this, you will be blacklisted from using the bot.`
 		);
+		return true;
 	}
 }
 

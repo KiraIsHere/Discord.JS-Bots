@@ -32,6 +32,7 @@ class Command extends Commands {
 				.setTimestamp();
 			sent.edit({ embed });
 		});
+		return true;
 	}
 }
 

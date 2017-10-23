@@ -71,6 +71,7 @@ class Command extends Commands {
 			}
 		}
 		client.send(message, { embed });
+		return true;
 	}
 }
 

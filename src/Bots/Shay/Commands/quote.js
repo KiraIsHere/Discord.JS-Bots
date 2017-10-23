@@ -35,6 +35,7 @@ class Command extends Commands {
 				.setTimestamp();
 			client.send(message, { embed });
 		});
+		return true;
 	}
 }
 

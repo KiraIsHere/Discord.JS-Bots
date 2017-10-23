@@ -89,7 +89,9 @@ class Command extends Commands {
 			}
 
 			client.send(message, { embed });
+			return undefined;
 		});
+		return true;
 	}
 }
 

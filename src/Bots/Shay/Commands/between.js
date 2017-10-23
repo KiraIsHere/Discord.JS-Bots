@@ -23,6 +23,7 @@ class Command extends Commands {
 		if (args.length < 2) return client.missingArgs(message, this.usage);
 
 		client.send(message, Math.round((Math.random() * args[1]) + args[0]), { code: `` });
+		return true;
 	}
 }
 

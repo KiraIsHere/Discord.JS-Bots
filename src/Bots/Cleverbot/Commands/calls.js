@@ -23,6 +23,7 @@ class Command extends Commands {
 		client.database.find({}).then(data => {
 			client.send(message, `${data[0].USED_API_CALLS} / ${data[0].TOTAL_API_CALLS}\n`);
 		});
+		return true;
 	}
 }
 

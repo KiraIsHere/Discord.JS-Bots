@@ -22,7 +22,7 @@ class Command extends Commands {
 	}
 
 	run(client, message, args) {
-		if (args.length < 1) args.push(randomColor());
+		if (args.length < 1) return client.missingArgs(message, this.usage);
 		if (args[0].toLowerCase().includes(`random`)) args[0] = randomColor();
 
 		if (/^#[0-9A-F]{6}$/i.test(args[0]) || /^[0-9A-F]{6}$/i.test(args[0])) {
@@ -37,7 +37,7 @@ class Command extends Commands {
 					.setColor(0xFF0000)
 					.setFooter(client.botName)
 					.setTimestamp();
-				return;
+				return undefined;
 			}
 
 			let roleName = `USER-${message.author.id}`;
@@ -64,7 +64,7 @@ class Command extends Commands {
 						.setColor(0xFF0000)
 						.setFooter(client.botName)
 						.setTimestamp();
-					return;
+					return undefined;
 				} catch (error) {
 					embed
 						.setTitle(`❌ **ERROR**`)
@@ -72,7 +72,7 @@ class Command extends Commands {
 						.setColor(0xFF0000)
 						.setFooter(client.botName)
 						.setTimestamp();
-					return;
+					return undefined;
 				}
 			} else {
 				message.member.colorRole.edit({
@@ -98,6 +98,7 @@ class Command extends Commands {
 				.setTimestamp();
 			client.send(message, { embed });
 		}
+		return true;
 	}
 }
 

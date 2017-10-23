@@ -27,6 +27,7 @@ class Command extends Commands {
 				.setImage(data.body.file);
 			client.send(message, { embed });
 		});
+		return true;
 	}
 }
 

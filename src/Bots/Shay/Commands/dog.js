@@ -27,6 +27,7 @@ class Command extends Commands {
 				.setImage(`http://random.dog/${data.text}`);
 			client.send(message, { embed });
 		});
+		return true;
 	}
 }
 

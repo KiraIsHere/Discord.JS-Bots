@@ -53,6 +53,7 @@ class Command extends Commands {
 		}
 
 		client.send(message, output, { code: `` });
+		return true;
 	}
 }
 

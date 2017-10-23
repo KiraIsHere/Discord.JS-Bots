@@ -56,6 +56,7 @@ class Command extends Commands {
 		}
 
 		client.send(message, output);
+		return true;
 	}
 
 	removeFromArray(array, item) {

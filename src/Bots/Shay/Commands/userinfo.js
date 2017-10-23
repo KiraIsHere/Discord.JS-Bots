@@ -45,6 +45,7 @@ class Command extends Commands {
 			.setFooter(client.botName)
 			.setTimestamp();
 		client.send(message, { embed });
+		return true;
 	}
 
 	resolveStatus(user) {

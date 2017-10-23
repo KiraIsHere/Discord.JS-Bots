@@ -29,6 +29,7 @@ class Command extends Commands {
 								`\`If you would like more support join my discord\` https://discord.io/shaybox`
 			);
 		client.send(message, { embed });
+		return true;
 	}
 }
 

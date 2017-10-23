@@ -27,7 +27,9 @@ class Command extends Commands {
 			if (error) return client.send(message, error, { code: `` });
 
 			client.send(message, response, { code: `` });
+			return true;
 		});
+		return true;
 	}
 }
 

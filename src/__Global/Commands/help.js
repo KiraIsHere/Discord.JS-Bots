@@ -41,6 +41,7 @@ class Command extends Commands {
 				client.send(message, content, { code: `asciidoc` });
 			}
 		}
+		return true;
 	}
 }
 

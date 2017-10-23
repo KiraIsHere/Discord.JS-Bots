@@ -30,7 +30,9 @@ class Command extends Commands {
 			if (randomMember.user.bot) return pickMember();
 
 			client.send(message, randomMember.user.username);
+			return true;
 		}
+		return true;
 	}
 }
 

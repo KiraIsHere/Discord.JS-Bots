@@ -22,6 +22,7 @@ class Command extends Commands {
 	run(client, message, args) {
 		if (args.length < 1) return client.missingArgs(message, this.usage);
 		// Code
+		return true;
 	}
 }
 

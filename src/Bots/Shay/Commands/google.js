@@ -23,6 +23,7 @@ class Command extends Commands {
 		if (args.length < 1) return client.missingArgs(message, this.usage);
 
 		client.send(message, `<http://lmgtfy.com/?q=${args.join(`+`)}>`);
+		return true;
 	}
 }
 

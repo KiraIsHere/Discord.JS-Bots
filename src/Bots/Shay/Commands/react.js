@@ -28,6 +28,7 @@ class Command extends Commands {
 		for (let char of args.join(` `)) {
 			if (emojis[char]) await message.react(emojis[char]); // eslint-disable-line no-await-in-loop
 		}
+		return true;
 	}
 }
 

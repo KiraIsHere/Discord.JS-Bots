@@ -27,6 +27,7 @@ class Command extends Commands {
 		googl.shorten(args[0]).then(url => {
 			client.send(message, url);
 		});
+		return true;
 	}
 }
 

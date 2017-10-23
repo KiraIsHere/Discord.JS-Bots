@@ -35,6 +35,7 @@ class Command extends Commands {
 				.setColor(0x00FFFF);
 		}
 		client.send(message, { embed });
+		return true;
 	}
 }
 

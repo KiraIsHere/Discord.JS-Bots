@@ -79,15 +79,19 @@ class CustomClient extends Client {
 	}
 
 	checkCooldown(userID, commandName) {
+		let returnValue = false;
 		for (let i = 0; i < this.cooldown.length; i++) {
-			if (this.cooldown[i].ID === userID && this.cooldown[i].COMMAND === commandName) return true;
+			if (this.cooldown[i].ID === userID && this.cooldown[i].COMMAND === commandName) returnValue = true;
 		}
+		return returnValue;
 	}
 
 	checkCooldownTime(userID, commandName) {
+		let returnValue = false;
 		for (let i = 0; i < this.cooldown.length; i++) {
-			if (this.cooldown[i].ID === userID && this.cooldown[i].COMMAND === commandName) return (moment(this.cooldown[i].DATE).add(this.cooldown[i].TIME, `seconds`) - new Date).toString().slice(0, -3);
+			if (this.cooldown[i].ID === userID && this.cooldown[i].COMMAND === commandName) returnValue = (moment(this.cooldown[i].DATE).add(this.cooldown[i].TIME, `seconds`) - new Date).toString().slice(0, -3);
 		}
+		return returnValue;
 	}
 	// End Cooldown
 

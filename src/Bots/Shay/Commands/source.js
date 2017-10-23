@@ -22,6 +22,7 @@ class Command extends Commands {
 
 	run(client, message) {
 		client.send(message, `<${homepage}>`);
+		return true;
 	}
 }
 
