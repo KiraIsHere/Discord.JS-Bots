@@ -2,7 +2,7 @@ const Events = require(`../../../__Global/Structures/Events`);
 
 class Event extends Events {
 	async run(client, guild) {
-		if (guild.id === `110373943822540800`) return undefined;
+		if (guild.id === `110373943822540800`) return false;
 
 		if (guild.memberCound < 200) await guild.members.fetch();
 

@@ -23,7 +23,7 @@ class Command extends Commands {
 
 	async run(client, message) {
 		if (!client.ownerIDs.includes(message.author.id)) return client.send(message, `Sorry, you do not have permission for this command`);
-		if (process.env.LOCAL) return undefined;
+		if (process.env.LOCAL) return false;
 
 		const embed = new MessageEmbed()
 			.setAuthor(`${message.author.username} (${message.author.id})`, message.author.displayAvatarURL())

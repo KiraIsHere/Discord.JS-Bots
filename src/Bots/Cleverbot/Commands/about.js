@@ -21,7 +21,7 @@ class Command extends Commands {
 	}
 
 	run(client, message) {
-		if (message.channel.name.includes(`cleverbot`)) return undefined;
+		if (message.channel.name.includes(`cleverbot`)) return false;
 		const embed = new MessageEmbed()
 			.setTitle(`About`)
 			.setDescription(

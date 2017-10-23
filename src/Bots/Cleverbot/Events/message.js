@@ -5,9 +5,9 @@ cleverbot.configure({ botapi: process.env.CLEVERBOT_API });
 
 class Event extends Events {
 	run(client, message) {
-		if (!message.channel.name.includes(`cleverbot`)) return undefined;
-		if (message.author.bot) return undefined;
-		if (!message.content.match(/[A-Z0-9]/i)) return undefined;
+		if (!message.channel.name.includes(`cleverbot`)) return false;
+		if (message.author.bot) return false;
+		if (!message.content.match(/[A-Z0-9]/i)) return false;
 		if (client.checkCooldown(message.author.id)) return client.send(message, `Cooldown, please wait!`).then(m => m.delete({ timeout: 1000 }));
 		client.addCooldown(message.author.id, `2`);
 

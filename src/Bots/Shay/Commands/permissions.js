@@ -23,7 +23,7 @@ class Command extends Commands {
 	run(client, message, args) {
 		if (args.length < 1) return client.missingArgs(message, this.usage);
 
-		if (!message.guild.roles.find(`name`, args.join(` `))) return undefined;
+		if (!message.guild.roles.find(`name`, args.join(` `))) return false;
 
 		let role = message.guild.roles.find(`name`, args.join(` `));
 		let permissions = role.permissions.serialize();

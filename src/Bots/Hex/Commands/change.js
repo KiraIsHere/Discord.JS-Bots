@@ -37,7 +37,7 @@ class Command extends Commands {
 					.setColor(0xFF0000)
 					.setFooter(client.botName)
 					.setTimestamp();
-				return undefined;
+				return false;
 			}
 
 			let roleName = `USER-${message.author.id}`;
@@ -64,7 +64,7 @@ class Command extends Commands {
 						.setColor(0xFF0000)
 						.setFooter(client.botName)
 						.setTimestamp();
-					return undefined;
+					return false;
 				} catch (error) {
 					embed
 						.setTitle(`❌ **ERROR**`)
@@ -72,7 +72,7 @@ class Command extends Commands {
 						.setColor(0xFF0000)
 						.setFooter(client.botName)
 						.setTimestamp();
-					return undefined;
+					return false;
 				}
 			} else {
 				message.member.colorRole.edit({
