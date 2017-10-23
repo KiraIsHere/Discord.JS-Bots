@@ -22,7 +22,7 @@ class Command extends Commands {
 
 	run(client, message, args) {
 		if (args.length < 1) return client.missingArgs(message, this.usage);
-		if (args.join(` `).length > 1000) return client.send(message, `Message too long, 1000 Characters or less`);
+		if (args.join(` `).length > 1000) return client.send(message, `Message too long, 1000 characters or less`);
 
 		const embed = new MessageEmbed()
 			.setAuthor(`${message.author.username} (${message.author.id})`, message.author.displayAvatarURL())

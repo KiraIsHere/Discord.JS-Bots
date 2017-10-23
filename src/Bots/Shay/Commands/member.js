@@ -20,19 +20,15 @@ class Command extends Commands {
 	}
 
 	run(client, message) {
-		let randomMember = null;
-
-		pickMember();
-
-		function pickMember() {
-			randomMember = message.guild.members.random();
-
-			if (randomMember.user.bot) return pickMember();
-
-			client.send(message, randomMember.user.username);
-			return true;
-		}
+		client.send(message, this.pickMember(message).user.username);
 		return true;
+	}
+
+	pickMember(message) {
+		let member;
+		member = message.guild.members.random();
+		if (member.user.bot) return this.pickMember();
+		return member;
 	}
 }
 

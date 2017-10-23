@@ -24,9 +24,9 @@ class Command extends Commands {
 		const embed = new MessageEmbed()
 			.setTitle(`Thank you for inviting me to your server!`)
 			.setDescription(`` +
-								`**Note:**\n` +
-								`\`You must set the color of every role to "Default" for me to work!\`\n` +
-								`\`If you would like more support join my discord\` https://discord.io/shaybox`
+				`**Note:**\n` +
+				`\`You must set the color of every role to "Default" for me to work!\`\n` +
+				`\`If you would like more support join my discord\` https://discord.io/shaybox`
 			);
 		client.send(message, { embed });
 		return true;

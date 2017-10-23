@@ -22,9 +22,8 @@ class Command extends Commands {
 	run(client, message, args) {
 		if (args.length < 2) return client.missingArgs(message, this.usage);
 
-		let action = args.shift();
-		let output = null;
-
+		const action = args.shift();
+		let output;
 		switch (action.toLowerCase()) {
 			case `encode`:
 				output = Buffer.from(args.join(` `)).toString(`base64`);

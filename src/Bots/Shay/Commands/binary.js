@@ -22,29 +22,15 @@ class Command extends Commands {
 	run(client, message, args) {
 		if (args.length < 2) return client.missingArgs(message, this.usage);
 
-		let action = args.shift();
-		let output = null;
-
-		function asciiToBin(input) {
-			let pad = `00000000`;
-
-			return input.replace(/./g, c => {
-				let bin = c.charCodeAt(0).toString(2);
-				return pad.substring(bin.length) + bin;
-			});
-		}
-
-		function binToAscii(input) {
-			return input.replace(/[01]{8}/g, value => String.fromCharCode(parseInt(value, 2)));
-		}
-
+		const action = args.shift();
+		let output;
 		switch (action.toLowerCase()) {
 			case `encode`:
-				output = asciiToBin(args.join(` `));
+				output = this.asciiToBin(args.join(` `));
 				break;
 
 			case `decode`:
-				output = binToAscii(args.join(` `));
+				output = this.binToAscii(args.join(` `));
 				break;
 
 			default:
@@ -54,6 +40,19 @@ class Command extends Commands {
 
 		client.send(message, output, { code: `` });
 		return true;
+	}
+
+	asciiToBin(input) {
+		let pad = `00000000`;
+
+		return input.replace(/./g, c => {
+			let bin = c.charCodeAt(0).toString(2);
+			return pad.substring(bin.length) + bin;
+		});
+	}
+
+	binToAscii(input) {
+		return input.replace(/[01]{8}/g, value => String.fromCharCode(parseInt(value, 2)));
 	}
 }
 

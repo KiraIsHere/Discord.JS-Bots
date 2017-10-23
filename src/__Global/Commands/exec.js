@@ -25,7 +25,7 @@ class Command extends Commands {
 
 	run(client, message, args) {
 		if (!client.ownerIDs.includes(message.author.id)) return client.send(message, `Sorry, you do not have permission for this command`);
-		if (args.length < 1) return client.missingArgs(message, this.usage);
+		if (args.length < 1) return client.missingArgs(message, client.usage);
 
 		let embed = new MessageEmbed()
 			.setFooter(client.botName)
@@ -37,8 +37,8 @@ class Command extends Commands {
 			pastebin.createPaste(args.join(` `), `Input`, null, 1, `1D`).then(data => {
 				embed.addField(`❌ Error`, `Input was too long, ${data}`);
 			}).fail(error => {
-				this.error(error);
-				this.send(message, `Pastebin Upload`);
+				client.error(error);
+				client.send(message, `Pastebin Upload`);
 			});
 		}
 
@@ -52,8 +52,8 @@ class Command extends Commands {
 					pastebin.createPaste(stderr, `Error`, null, 1, `1D`).then(data => {
 						embed.addField(`❌ Error`, `Error was too long, ${data}`);
 					}).fail(error => {
-						this.error(error);
-						this.send(message, `Pastebin Upload`);
+						client.error(error);
+						client.send(message, `Pastebin Upload`);
 					});
 				}
 				return client.send(message, { embed });
@@ -68,8 +68,8 @@ class Command extends Commands {
 					pastebin.createPaste(error, `Error`, null, 1, `1D`).then(data => {
 						embed.addField(`❌ Error`, `Error was too long, ${data}`);
 					}).fail(error => {
-						this.error(error);
-						this.send(message, `Pastebin Upload`);
+						client.error(error);
+						client.send(message, `Pastebin Upload`);
 					});
 				}
 				return client.send(message, { embed });
@@ -83,13 +83,12 @@ class Command extends Commands {
 				pastebin.createPaste(stdout, `Output`, null, 1, `1D`).then(data => {
 					embed.addField(`❌ Error`, `Output was too long, ${data}`);
 				}).fail(error => {
-					this.error(error);
-					this.send(message, `Pastebin Upload`);
+					client.error(error);
+					client.send(message, `Pastebin Upload`);
 				});
 			}
 
-			client.send(message, { embed });
-			return false;
+			return client.send(message, { embed });
 		});
 		return true;
 	}

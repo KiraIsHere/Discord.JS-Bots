@@ -24,7 +24,6 @@ class Command extends Commands {
 		let role = message.member.roles.find(`name`, `USER-${message.member.id}`);
 
 		let embed = new MessageEmbed();
-
 		if (role) {
 			role.delete();
 
@@ -40,6 +39,7 @@ class Command extends Commands {
 				.setColor(0xFF0000)
 				.setFooter(client.botName)
 				.setTimestamp();
+			return false;
 		}
 		client.send(message, { embed });
 		return true;

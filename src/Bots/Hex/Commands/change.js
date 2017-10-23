@@ -25,8 +25,8 @@ class Command extends Commands {
 		if (args.length < 1) return client.missingArgs(message, this.usage);
 		if (args[0].toLowerCase().includes(`random`)) args[0] = randomColor();
 
+		let embed = new MessageEmbed();
 		if (/^#[0-9A-F]{6}$/i.test(args[0]) || /^[0-9A-F]{6}$/i.test(args[0])) {
-			let embed = new MessageEmbed();
 			if (!message.guild.me.hasPermission([`MANAGE_ROLES`])) {
 				embed
 					.setTitle(`❌ **ERROR**`)
@@ -85,9 +85,8 @@ class Command extends Commands {
 				.setColor(roleColor)
 				.setFooter(client.botName)
 				.setTimestamp();
-			client.send(message, { embed });
 		} else {
-			const embed = new MessageEmbed()
+			embed
 				.setTitle(`❌ **ERROR**`)
 				.setDescription(
 					`Invalid arguments\n` +
@@ -96,8 +95,9 @@ class Command extends Commands {
 				.setColor(0xFF0000)
 				.setFooter(client.botName)
 				.setTimestamp();
-			client.send(message, { embed });
+			return false;
 		}
+		client.send(message, { embed });
 		return true;
 	}
 }

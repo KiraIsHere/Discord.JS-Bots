@@ -26,8 +26,7 @@ class Command extends Commands {
 		asciify(args.join(` `), `standard`, (error, response) => {
 			if (error) return client.send(message, error, { code: `` });
 
-			client.send(message, response, { code: `` });
-			return true;
+			return client.send(message, response, { code: `` });
 		});
 		return true;
 	}

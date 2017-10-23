@@ -25,8 +25,7 @@ class Command extends Commands {
 			if (args.length < 1) return client.missingArgs(message, this.usage);
 		} else if (args.length < 2) { return client.missingArgs(message, this.usage); }
 
-		let output = null;
-
+		let output;
 		switch (args[0]) {
 			case `add`:
 				this.addToArray(client.blacklist, args[1]);
