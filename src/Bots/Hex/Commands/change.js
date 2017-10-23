@@ -12,7 +12,7 @@ class Command extends Commands {
 			cooldownAmount: 3,
 			cooldownTime: 30,
 			limit: true,
-			limitAmount: 5,
+			limitAmount: 30,
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			description: `Changes the color role's color`,
