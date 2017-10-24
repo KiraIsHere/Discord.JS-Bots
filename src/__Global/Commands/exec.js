@@ -38,7 +38,7 @@ class Command extends Commands {
 				embed.addField(`❌ Error`, `Input was too long, ${data}`);
 			}).fail(error => {
 				client.error(error);
-				client.send(message, `Pastebin Upload`);
+				embed.addField(`❌ Error`, `Pastebin upload error, ${error}`);
 			});
 		}
 
@@ -53,7 +53,7 @@ class Command extends Commands {
 						embed.addField(`❌ Error`, `Error was too long, ${data}`);
 					}).fail(error => {
 						client.error(error);
-						client.send(message, `Pastebin Upload`);
+						embed.addField(`❌ Error`, `Pastebin upload error, ${error}`);
 					});
 				}
 				return client.send(message, { embed });
@@ -69,7 +69,7 @@ class Command extends Commands {
 						embed.addField(`❌ Error`, `Error was too long, ${data}`);
 					}).fail(error => {
 						client.error(error);
-						client.send(message, `Pastebin Upload`);
+						embed.addField(`❌ Error`, `Pastebin upload error, ${error}`);
 					});
 				}
 				return client.send(message, { embed });
@@ -78,13 +78,13 @@ class Command extends Commands {
 			embed.setColor(0x00FF00);
 
 			if (stdout.length < 1024) {
-				embed.addField(`📤 Output`, `\`\`\`\bashn${stdout}\n\`\`\``);
+				embed.addField(`📤 Output`, `\`\`\`bash\n${stdout}\n\`\`\``);
 			} else {
 				pastebin.createPaste(stdout, `Output`, null, 1, `1D`).then(data => {
 					embed.addField(`❌ Error`, `Output was too long, ${data}`);
 				}).fail(error => {
 					client.error(error);
-					client.send(message, `Pastebin Upload`);
+					embed.addField(`❌ Error`, `Pastebin upload error, ${error}`);
 				});
 			}
 

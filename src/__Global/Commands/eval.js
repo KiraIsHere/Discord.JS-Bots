@@ -53,7 +53,7 @@ class Command extends Commands {
 					embed.addField(`❌ Error`, `Output was too long, ${data}`);
 				}).fail(error => {
 					client.error(error);
-					client.send(message, `Pastebin Upload`);
+					embed.addField(`❌ Error`, `Pastebin upload error, ${error}`);
 				});
 			}
 		} catch (error) {
@@ -66,7 +66,7 @@ class Command extends Commands {
 					embed.addField(`❌ Error`, `Error was too long, ${data}`);
 				}).fail(error => {
 					client.error(error);
-					client.send(message, `Pastebin Upload`);
+					embed.addField(`❌ Error`, `Pastebin upload error, ${error}`);
 				});
 			}
 		}
