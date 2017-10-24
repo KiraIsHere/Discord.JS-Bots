@@ -16,7 +16,7 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			description: `Changes the color role's color`,
-			usage: `Change [Hex Value or RANDOM]`,
+			usage: `[Hex Value or RANDOM]`,
 			aliases: [`hex`, `color`, `colour`]
 		});
 	}

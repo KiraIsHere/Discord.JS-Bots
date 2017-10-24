@@ -14,7 +14,7 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			description: `Picks a random guild member`,
-			usage: `Member`,
+			usage: ``,
 			aliases: []
 		});
 	}

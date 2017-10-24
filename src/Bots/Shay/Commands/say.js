@@ -14,7 +14,7 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			description: `Converts text into emojis`,
-			usage: `Say [Text]`,
+			usage: `[Text]`,
 			aliases: []
 		});
 	}

@@ -15,7 +15,7 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			description: `Deletes color role`,
-			usage: `Remove`,
+			usage: ``,
 			aliases: []
 		});
 	}

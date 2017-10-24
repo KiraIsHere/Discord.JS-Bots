@@ -14,7 +14,7 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			description: `Clears 1-100 messages`,
-			usage: `Clear [1-100]`,
+			usage: `[1-100]`,
 			aliases: [`prune`, `purge`]
 		});
 	}

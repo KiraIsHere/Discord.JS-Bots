@@ -14,7 +14,7 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			description: `Runs process.exit()`,
-			usage: `Exit`,
+			usage: ``,
 			aliases: [`process.exit()`, `exit`, `restart`]
 		});
 	}

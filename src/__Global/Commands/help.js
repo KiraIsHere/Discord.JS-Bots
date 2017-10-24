@@ -14,7 +14,7 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			description: `Displays all the commands`,
-			usage: `Help (Command)`,
+			usage: `(Command)`,
 			aliases: [`?`]
 		});
 	}
@@ -37,7 +37,7 @@ class Command extends Commands {
 				const content =
 					`= ${command.name} = \n` +
 					`${command.description}\n` +
-					`usage::${command.usage}`;
+					`usage::${command.name.charAt(0).toUpperCase() + command.name.slice(1)} ${command.usage}`;
 				client.send(message, content, { code: `asciidoc` });
 			}
 		}

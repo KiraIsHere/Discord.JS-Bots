@@ -16,7 +16,7 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			description: `Shortens the URL`,
-			usage: `Short [URL]`,
+			usage: `[URL]`,
 			aliases: []
 		});
 	}

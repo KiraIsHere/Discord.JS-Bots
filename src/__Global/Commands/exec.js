@@ -18,7 +18,7 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			description: `Executes bash/batch commands`,
-			usage: `Exec [Command]`,
+			usage: `[Command]`,
 			aliases: []
 		});
 	}

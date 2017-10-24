@@ -15,7 +15,7 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			description: `Responds message and heartbeat ping`,
-			usage: `Ping`,
+			usage: ``,
 			aliases: []
 		});
 	}

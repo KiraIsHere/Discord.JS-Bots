@@ -15,7 +15,7 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			description: `Converts the text to an ascii`,
-			usage: `Ascii [Text]`,
+			usage: `[Text]`,
 			aliases: []
 		});
 	}

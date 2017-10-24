@@ -15,7 +15,7 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			description: `Submits feedback ideas to be voted on`,
-			usage: `Feedback [Idea]`,
+			usage: `[Idea]`,
 			aliases: [`idea`]
 		});
 	}

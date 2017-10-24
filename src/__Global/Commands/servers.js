@@ -14,7 +14,7 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			description: `Lists all servers`,
-			usage: `Servers`,
+			usage: ``,
 			aliases: [`guilds`]
 		});
 	}

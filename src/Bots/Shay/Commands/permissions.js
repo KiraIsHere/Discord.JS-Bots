@@ -15,7 +15,7 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			description: `Shows role permissions`,
-			usage: `Permissions [Role Name]`,
+			usage: `[Role Name]`,
 			aliases: [`perms`]
 		});
 	}

@@ -14,7 +14,7 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			description: `Converts the text into a lmgtfu URL`,
-			usage: `Google [Text]`,
+			usage: `[Text]`,
 			aliases: [`lmgtfu`]
 		});
 	}

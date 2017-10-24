@@ -14,7 +14,7 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			description: `Reacts to a message with emojis`,
-			usage: `React [Text] (MessageID) (ChannelID)`,
+			usage: `[Text] (MessageID) (ChannelID)`,
 			aliases: [`r`]
 		});
 	}

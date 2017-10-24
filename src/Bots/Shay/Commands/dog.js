@@ -16,7 +16,7 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			description: `Random dog picture`,
-			usage: `Dog`,
+			usage: ``,
 			aliases: []
 		});
 	}

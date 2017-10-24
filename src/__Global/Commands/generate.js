@@ -14,7 +14,7 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			description: `Generates an invite to the guild`,
-			usage: `Generate [GuildID]`,
+			usage: `[GuildID]`,
 			aliases: []
 		});
 	}

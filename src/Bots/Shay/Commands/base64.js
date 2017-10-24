@@ -14,7 +14,7 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			description: `Encodes or Decodes base64`,
-			usage: `Base64 [Encode/Decode] [Text/Base64]`,
+			usage: `[Encode/Decode] [Text/Base64]`,
 			aliases: [`b64`, `64`]
 		});
 	}

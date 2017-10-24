@@ -15,7 +15,7 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			description: `Shows the hex value in an embed`,
-			usage: `Hex [Hex Value]`,
+			usage: `[Hex Value]`,
 			aliases: [`color`, `colour`]
 		});
 	}

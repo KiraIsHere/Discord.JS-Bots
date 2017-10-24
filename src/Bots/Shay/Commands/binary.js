@@ -14,7 +14,7 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			description: `Encodes/Decodes binary`,
-			usage: `Binary [Encode/Decode] [Text/Binary]`,
+			usage: `[Encode/Decode] [Text/Binary]`,
 			aliases: [`b`]
 		});
 	}

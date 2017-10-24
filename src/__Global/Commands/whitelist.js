@@ -14,7 +14,7 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			description: `Adds, Removes, Lists and Checks the whitelist for a User ID`,
-			usage: `Whitelist [Add/Remove/List/Check] (UserID)`,
+			usage: `[Add/Remove/List/Check] (UserID)`,
 			aliases: []
 		});
 	}

@@ -16,7 +16,7 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			description: `Evaluates javascript code`,
-			usage: `Eval [Code]`,
+			usage: `[Code]`,
 			aliases: []
 		});
 	}

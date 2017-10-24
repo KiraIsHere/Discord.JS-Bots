@@ -15,7 +15,7 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			description: `Quotes a message`,
-			usage: `Quote [MessageID] [ChannelID]`,
+			usage: `[MessageID] [ChannelID]`,
 			aliases: [`q`]
 		});
 	}

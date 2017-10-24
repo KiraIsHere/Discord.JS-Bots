@@ -19,7 +19,7 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			description: `Shows bot & OS info`,
-			usage: `BotInfo`,
+			usage: ``,
 			aliases: [`bot`]
 		});
 	}

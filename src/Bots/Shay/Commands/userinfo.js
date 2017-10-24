@@ -15,7 +15,7 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			description: `Shows guild information on the mentioned user`,
-			usage: `UserInfo [Mention/ID]`,
+			usage: `[Mention/ID]`,
 			aliases: [`user`]
 		});
 	}

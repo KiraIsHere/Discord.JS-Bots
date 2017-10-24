@@ -15,7 +15,7 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			description: `Gives the server's ip address`,
-			usage: `IP`,
+			usage: ``,
 			aliases: []
 		});
 	}
