@@ -2,9 +2,7 @@
   "extends": "aqua",
   "rules": {
     "capitalized-comments": ["off"],
-    "complexity": ["off"],
     "id-length": ["off"],
-    "max-depth": ["off"],
     "max-len": ["off"],
     "newline-per-chained-call": ["off"],
     "no-console": ["off"],

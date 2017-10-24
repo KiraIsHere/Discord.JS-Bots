@@ -1,3 +1,5 @@
+/* eslint complexity: off */
+/* eslint max-depth: off */
 const Events = require(`../Structures/Events`);
 
 class Event extends Events {
