@@ -1,5 +1,4 @@
 const Commands = require(`../../../__Global/Structures/Commands`);
-const { MessageEmbed } = require(`discord.js`);
 const { get } = require(`snekfetch`);
 const { basename } = require(`path`);
 
@@ -23,9 +22,7 @@ class Command extends Commands {
 
 	run(client, message) {
 		get(`http://random.cat/meow`).then(data => {
-			const embed = new MessageEmbed()
-				.setImage(data.body.file);
-			client.send(message, { embed });
+			client.send(message, { files: [data.body.file] });
 		});
 		return true;
 	}
