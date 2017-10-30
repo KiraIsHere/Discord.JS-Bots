@@ -22,18 +22,13 @@ class Command extends Commands {
 
 	run(client, message) {
 		let embed = new MessageEmbed()
+			.setURL(`https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=8`)
+			.setFooter(`Note: I may be a private bot`)
 			.setColor(0x00FFFF);
 
 		if (client.user.bot) {
 			embed
 				.setTitle(`Invite Link`);
-			if (client.user.id === `361796552165031936`) {
-				embed.setURL(`https://bots.discord.pw/bots/${client.user.id}`);
-			} else {
-				embed
-					.setURL(`https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=8`)
-					.setFooter(`Note: I may be a private bot`);
-			}
 		} else {
 			embed
 				.setTitle(`I'm a user account, I can't be invited`);
