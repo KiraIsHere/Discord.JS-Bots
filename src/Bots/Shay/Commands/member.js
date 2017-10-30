@@ -25,8 +25,7 @@ class Command extends Commands {
 	}
 
 	pickMember(message) {
-		let member;
-		member = message.guild.members.random();
+		const member = message.guild.members.random();
 		if (member.user.bot) return this.pickMember();
 		return member;
 	}

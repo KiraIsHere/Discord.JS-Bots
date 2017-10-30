@@ -123,21 +123,21 @@ class CustomClient extends Client {
 	}
 
 	clean(text) {
-		let SECRET = `[SECRET!]`;
+		const SECRET = `[SECRET!]`;
 		if (typeof text !== `string`) { text = inspect(text, { depth: 0 }); }
 		text = text
 			.replace(/`/g, `\`${String.fromCharCode(8203)}`)
 			.replace(/@/g, `@${String.fromCharCode(8203)}`);
 
 		// API Keys
-		for (let env in process.env) {
+		for (const env in process.env) {
 			if (env.includes(`_API`)) {
 				text = text.replace(process.env[env], SECRET);
 			}
 		}
 
 		// Webhooks
-		for (let env in process.env) {
+		for (const env in process.env) {
 			if (env.includes(`WEBHOOK_`)) {
 				text = text.replace(process.env[env], SECRET);
 			}
@@ -156,12 +156,12 @@ class CustomClient extends Client {
 	}
 
 	formatTime(input, toggle) {
-		let days = Math.floor(input / 86400);
-		let hours = Math.floor((input % 86400) / 3600);
-		let minutes = Math.floor(((input % 86400) % 3600) / 60);
-		let seconds = Math.floor(((input % 86400) % 3600) % 60);
+		const days = Math.floor(input / 86400);
+		const hours = Math.floor((input % 86400) / 3600);
+		const minutes = Math.floor(((input % 86400) % 3600) / 60);
+		const seconds = Math.floor(((input % 86400) % 3600) % 60);
 
-		let output = [];
+		const output = [];
 
 		let dayStr = `d`;
 		let hourStr = `h`;

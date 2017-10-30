@@ -23,9 +23,9 @@ class Command extends Commands {
 		if (args.length < 1) return client.missingArgs(message, this.usage);
 		if (!message.guild.me.hasPermission(`ADD_REACTIONS`) || !message.member.hasPermission(`ADD_REACTIONS`)) return client.errorEmbed(message, null, `Missing Permissions`);
 
-		let emojis = { a: `🇦`, b: `🇧`, c: `🇨`, d: `🇩`, e: `🇪`, f: `🇫`, g: `🇬`, h: `🇭`, i: `🇮`, j: `🇯`, k: `🇰`, l: `🇱`, m: `🇲`, n: `🇳`, o: `🇴`, p: `🇵`, q: `🇶`, r: `🇷`, s: `🇸`, t: `🇹`, u: `🇺`, v: `🇻`, w: `🇼`, x: `🇽`, y: `🇾`, z: `🇿` };
+		const emojis = { a: `🇦`, b: `🇧`, c: `🇨`, d: `🇩`, e: `🇪`, f: `🇫`, g: `🇬`, h: `🇭`, i: `🇮`, j: `🇯`, k: `🇰`, l: `🇱`, m: `🇲`, n: `🇳`, o: `🇴`, p: `🇵`, q: `🇶`, r: `🇷`, s: `🇸`, t: `🇹`, u: `🇺`, v: `🇻`, w: `🇼`, x: `🇽`, y: `🇾`, z: `🇿` };
 
-		for (let char of args.join(` `)) {
+		for (const char of args.join(` `)) {
 			if (emojis[char]) await message.react(emojis[char]); // eslint-disable-line no-await-in-loop
 		}
 		return true;

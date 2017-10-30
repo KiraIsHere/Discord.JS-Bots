@@ -25,8 +25,8 @@ class Command extends Commands {
 
 		if (!message.guild.roles.find(`name`, args.join(` `))) return false;
 
-		let role = message.guild.roles.find(`name`, args.join(` `));
-		let permissions = role.permissions.serialize();
+		const role = message.guild.roles.find(`name`, args.join(` `));
+		const permissions = role.permissions.serialize();
 
 		let longestString = 0;
 		for (var key in permissions) {

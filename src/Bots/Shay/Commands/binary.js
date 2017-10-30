@@ -43,10 +43,10 @@ class Command extends Commands {
 	}
 
 	asciiToBin(input) {
-		let pad = `00000000`;
+		const pad = `00000000`;
 
 		return input.replace(/./g, c => {
-			let bin = c.charCodeAt(0).toString(2);
+			const bin = c.charCodeAt(0).toString(2);
 			return pad.substring(bin.length) + bin;
 		});
 	}

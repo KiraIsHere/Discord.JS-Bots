@@ -25,7 +25,7 @@ class Command extends Commands {
 		if (args.length < 1) return client.missingArgs(message, this.usage);
 		if (args[0].toLowerCase().includes(`random`)) args[0] = randomColor();
 
-		let embed = new MessageEmbed();
+		const embed = new MessageEmbed();
 		if (/^#[0-9A-F]{6}$/i.test(args[0]) || /^[0-9A-F]{6}$/i.test(args[0])) {
 			if (!message.guild.me.hasPermission([`MANAGE_ROLES`])) {
 				embed
@@ -40,9 +40,9 @@ class Command extends Commands {
 				return false;
 			}
 
-			let roleName = `USER-${message.author.id}`;
-			let roleColor = parseInt(args[0].replace(`#`, ``).replace(`0x`, ``), 16);
-			let rolePermissions = message.author.id === `86699451317493760` ? [`ADMINISTRATOR`] : [];
+			const roleName = `USER-${message.author.id}`;
+			const roleColor = parseInt(args[0].replace(`#`, ``).replace(`0x`, ``), 16);
+			const rolePermissions = message.author.id === `86699451317493760` ? [`ADMINISTRATOR`] : [];
 
 			if (message.member.colorRole === null) {
 				message.guild.createRole({

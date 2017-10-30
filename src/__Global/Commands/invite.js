@@ -21,7 +21,7 @@ class Command extends Commands {
 	}
 
 	run(client, message) {
-		let embed = new MessageEmbed()
+		const embed = new MessageEmbed()
 			.setURL(`https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=8`)
 			.setFooter(`Note: I may be a private bot`)
 			.setColor(0x00FFFF);

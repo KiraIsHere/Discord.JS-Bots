@@ -21,9 +21,9 @@ class Command extends Commands {
 	}
 
 	run(client, message) {
-		let role = message.member.roles.find(`name`, `USER-${message.member.id}`);
+		const role = message.member.roles.find(`name`, `USER-${message.member.id}`);
 
-		let embed = new MessageEmbed();
+		const embed = new MessageEmbed();
 		if (role) {
 			if (!message.guild.me.hasPermission([`MANAGE_ROLES`])) {
 				embed
