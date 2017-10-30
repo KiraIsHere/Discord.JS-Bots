@@ -8,9 +8,10 @@ class Event extends Events {
 		// 	.set(`Authorization`, process.env.DISCORDBOTS_ORG_API)
 		// 	.send({ server_count: client.guilds.size }); // eslint-disable-line camelcase
 
-		// post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
-		// 	.set(`Authorization`, process.env.DISCORDBOTS_PW_API)
-		// 	.send({ server_count: client.guilds.size	}); // eslint-disable-line camelcase
+		post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
+			.set(`Authorization`, process.env.DISCORDBOTS_PW_API)
+			.send({ server_count: client.guilds.size	}) // eslint-disable-line camelcase
+			.end();
 		return true;
 	}
 }
