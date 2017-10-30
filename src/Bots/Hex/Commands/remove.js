@@ -25,6 +25,19 @@ class Command extends Commands {
 
 		let embed = new MessageEmbed();
 		if (role) {
+			if (!message.guild.me.hasPermission([`MANAGE_ROLES`])) {
+				embed
+					.setTitle(`❌ **ERROR**`)
+					.setDescription(
+						`Invalid permissions\n` +
+						`\`MANAGE_ROLES\``
+					)
+					.setColor(0xFF0000)
+					.setFooter(client.botName)
+					.setTimestamp();
+				return false;
+			}
+
 			role.delete();
 
 			embed
