@@ -1,9 +1,7 @@
 const Commands = require(`../Structures/Commands`);
-const { MessageEmbed } = require(`discord.js`);
 const { exec } = require(`child_process`);
 const { basename } = require(`path`);
-const PastebinAPI = require(`pastebin-js`);
-const pastebin = new PastebinAPI(process.env.PASTEBIN_API);
+const { post } = require(`snekfetch`);
 
 class Command extends Commands {
 	constructor(client) {
@@ -45,10 +43,13 @@ class Command extends Commands {
 		if (input.length < 1024) {
 			return `${type === `Input` ? `📥` : type === `Output` ? `📤` : `❌`} ${type}\n\`\`\`js\n${input}\n\`\`\`\n`;
 		} else {
-			pastebin.createPaste(input, type, null, 1, `1D`).then(data => `❌ Error\nOutput was too long, ${data}`).fail(error => {
-				console.error(error);
-				return `❌ Error\nPastebin upload error, ${error}`;
-			});
+			post(`https://developer.github.com/v3/gists/`)
+				.set(`Authorization`, process.env.GITHUB_API)
+				.send({
+					description: `EXEC Output`,
+					public: true,
+					files: { "EXEC.md": { content: `\`\`\`js\n${input}\n\`\`\`` } }
+				});
 		}
 		console.error(input);
 		return `Error, failed to create paste`;
