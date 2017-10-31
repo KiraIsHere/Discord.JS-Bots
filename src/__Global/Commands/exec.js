@@ -43,16 +43,12 @@ class Command extends Commands {
 		if (input.length < 1024) {
 			return `${type === `Input` ? `📥` : type === `Output` ? `📤` : `❌`} ${type}\n\`\`\`js\n${input}\n\`\`\`\n`;
 		} else {
-			post(`https://developer.github.com/v3/gists/`)
-				.set(`Authorization`, process.env.GITHUB_API)
-				.send({
-					description: `EXEC Output`,
-					public: true,
-					files: { "EXEC.md": { content: `\`\`\`js\n${input}\n\`\`\`` } }
-				});
+			post(`https://www.hastebin.com/documents`)
+				.send(input)
+				.then(data => `https://www.hastebin.com/${data.body.key}.js`);
 		}
 		console.error(input);
-		return `Error, failed to create paste`;
+		return `Error, failed to create paste, Logged to console`;
 	}
 }
 
