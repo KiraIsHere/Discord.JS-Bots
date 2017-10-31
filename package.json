@@ -4,7 +4,7 @@
   "description": "Discord.JS Bots",
   "engines": {
     "node": "latest",
-    "npm": "5.2.0"
+    "npm": "latest"
   },
   "dependencies": {
     "asciify": "^1.3.5",
