@@ -21,34 +21,40 @@ class Command extends Commands {
 		});
 	}
 
-	run(client, message, args) {
+	async run(client, message, args) {
 		if (!client.ownerIDs.includes(message.author.id)) return client.send(message, `Sorry, you do not have permission for this command`);
 		if (args.length < 1) return client.missingArgs(message, client.usage);
 
-		let content = this.addToContent(client, args.join(` `), `Input`);
-		exec(args.join(` `), { cwd: `../../` }, (error, stdout, stderr) => {
+		let content = await this.addToContent(client, args.join(` `), `Input`);
+		exec(args.join(` `), { cwd: `../../` }, async (error, stdout, stderr) => {
 			if (stderr) {
-				content += this.addToContent(client, stderr, `Error`);
+				content += await this.addToContent(client, stderr, `Error`);
 			} else if (error) {
-				content += this.addToContent(client, error, `Error`);
+				content += await this.addToContent(client, error, `Error`);
 			} else {
-				content += this.addToContent(client, stdout, `Output`);
+				content += await this.addToContent(client, stdout, `Output`);
 			}
 			client.send(message, content);
 		});
 		return true;
 	}
 
-	addToContent(client, input, type) {
+	async addToContent(client, input, type) {
+		let returnValue;
 		if (input.length < 1024) {
 			return `${type === `Input` ? `📥` : type === `Output` ? `📤` : `❌`} ${type}\n\`\`\`js\n${input}\n\`\`\`\n`;
 		} else {
-			post(`https://www.hastebin.com/documents`)
+			await post(`https://www.hastebin.com/documents`)
 				.send(input)
-				.then(data => `https://www.hastebin.com/${data.body.key}.js`);
+				.then(data => {
+					returnValue = `${type === `Input` ? `📥` : type === `Output` ? `📤` : `❌`} ${type}\nhttps://www.hastebin.com/${data.body.key}.js`;
+				})
+				.catch(error => {
+					console.error(error);
+					returnValue = `${type === `Input` ? `📥` : type === `Output` ? `📤` : `❌`} ${type}\n\`\`\`js\n${error}\n\`\`\`\n`;
+				});
 		}
-		console.error(input);
-		return `Error, failed to create paste, Logged to console`;
+		return returnValue;
 	}
 }
 
