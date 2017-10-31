@@ -1,6 +1,7 @@
 const Commands = require(`../Structures/Commands`);
 const { basename } = require(`path`);
 const { post } = require(`snekfetch`);
+const { inspect } = require(`util`);
 
 class Command extends Commands {
 	constructor(client) {
@@ -26,9 +27,11 @@ class Command extends Commands {
 
 		let content = await this.addToContent(client, args.join(` `), `Input`);
 		try {
-			const evaled = client.clean(eval(args.join(` `)));
+			let evaled = eval(args.join(` `));
+			if (evaled instanceof Promise) evaled = await evaled;
+			evaled = inspect(evaled, { depth: 0 });
 
-			content += await this.addToContent(client, evaled, `Output`);
+			content += await this.addToContent(client, client.clean(evaled), `Output`);
 		} catch (error) {
 			content += await this.addToContent(client, error, `Error`);
 		}
@@ -38,12 +41,13 @@ class Command extends Commands {
 
 	async addToContent(client, input, type) {
 		let returnValue;
-		if (input.length < 1024) {
+		if (String(input).length < 1024) {
 			return `${type === `Input` ? `📥` : type === `Output` ? `📤` : `❌`} ${type}\n\`\`\`js\n${input}\n\`\`\`\n`;
 		} else {
 			await post(`https://www.hastebin.com/documents`)
-				.send(input)
+				.send(String(input))
 				.then(data => {
+					console.log(data);
 					returnValue = `${type === `Input` ? `📥` : type === `Output` ? `📤` : `❌`} ${type}\nhttps://www.hastebin.com/${data.body.key}.js`;
 				})
 				.catch(error => {
