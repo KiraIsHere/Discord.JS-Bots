@@ -41,8 +41,12 @@ class Command extends Commands {
 		if (input.length < 1024) {
 			return `${type === `Input` ? `📥` : type === `Output` ? `📤` : `❌`} ${type}\n\`\`\`js\n${input}\n\`\`\`\n`;
 		} else {
-			pastebin.createPaste(input, type, null, 1, `1D`).then(data => `❌ Error\nOutput was too long, ${data}`).fail(error => `❌ Error\nPastebin upload error, ${error}`);
+			pastebin.createPaste(input, type, null, 1, `1D`).then(data => `❌ Error\nOutput was too long, ${data}`).fail(error => {
+				console.error(error);
+				return `❌ Error\nPastebin upload error, ${error}`;
+			});
 		}
+		console.error(input);
 		return `Error, failed to create paste`;
 	}
 }
