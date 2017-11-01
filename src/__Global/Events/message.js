@@ -19,6 +19,7 @@ class Event extends Events {
 		const command = client.commands.get(commandName) || client.commands.get(client.aliases.get(commandName));
 
 		if (!command || !command.enabled) return false;
+		if (message.guild.id === `361532026354139156` && !message.channel.name.includes(`bot`)) return false;
 		if (client.whitelist.indexOf(message.author.id) > -1) {
 			// Can't just if (!) because it doesn't work that way
 		} else if (client.checkCooldown(message.author.id, commandName)) {
