@@ -2,7 +2,8 @@ const Commands = require(`../../../__Global/Structures/Commands`);
 const eslintConfig = require(`../../../../.eslintrc-default.json`);
 const { stripIndents } = require(`common-tags`);
 const { basename } = require(`path`);
-const { linter } = require(`eslint`);
+const { Linter } = require(`eslint`);
+const linter = new Linter();
 
 class Command extends Commands {
 	constructor(client) {
@@ -22,12 +23,16 @@ class Command extends Commands {
 		});
 	}
 
-	async run(client, message, args, code, pattern) {
+	async run(client, message, args, code, pattern, updated) {
 		if (!code) {
 			if (pattern) return false;
 			return message.reply(`Invalid message!`);
 		}
 		const errors = linter.verify(code.code, eslintConfig);
+		if (pattern && updated) {
+			if (message.reactions.has(`❌`) && message.reactions.get(`❌`).users.has(this.client.user.id)) await message.reactions.get(`❌`).remove();
+			if (message.reactions.has(`✅`) && message.reactions.get(`✅`).users.has(this.client.user.id)) await message.reactions.get(`✅`).remove();
+		}
 		if (!errors.length) {
 			if (pattern) {
 				await message.react(`✅`);
