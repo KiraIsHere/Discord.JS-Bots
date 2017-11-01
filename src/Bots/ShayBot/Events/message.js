@@ -3,6 +3,7 @@ const Events = require(`../../../__Global/Structures/Events`);
 class Event extends Events {
 	run(client, message) {
 		const codeblock = /(`{3})(js|javascript)?\n([\s\S]*)\1/i;
+		if (message.channel.type !== `text` || message.author.bot) return false;
 		if (!codeblock.test(message.content)) return false;
 		if (!message.channel.permissionsFor(client.user).has([`ADD_REACTIONS`, `READ_MESSAGE_HISTORY`])) return false;
 		const parsed = codeblock.exec(message.content);
