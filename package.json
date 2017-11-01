@@ -11,6 +11,7 @@
     "cleverbot-node": "^0.3.11",
     "common-tags": "^1.4.0",
     "discord.js": "github:hydrabolt/discord.js",
+    "eslint": "^4.10.0",
     "getos": "^3.1.0",
     "goo.gl": "^0.1.4",
     "mojang": "^0.4.1",
