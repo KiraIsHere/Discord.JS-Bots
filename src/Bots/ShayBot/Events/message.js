@@ -5,7 +5,7 @@ class Event extends Events {
 		if (process.env.LOCAL) return false;
 
 		if (message.channel.name === `bots`) {
-			if (message.content.startsWith(`-`)) message.delete({ timeout: 500 });
+			if (message.content.startsWith(`-`)) message.delete({ timeout: 1000 * 300 }).catch(() => null);
 			if (message.author.id === `234395307759108106`) message.delete({ timeout: 1000 * 300 }).catch(() => null);
 		}
 
