@@ -10,6 +10,7 @@ class CustomClient extends Client {
 		super(options);
 		this.botName = resolve(`.`).split(sep).slice(-1).toString();
 		this.botPrefix = `${this.botName.toLowerCase().charAt(0)}!`;
+		this.codeblock = /(`{3})(js|javascript)?\n([\s\S]*)\1/i;
 		this.aliases = new Collection();
 		this.commands = new Collection();
 		this.commandUsage = new Collection();
