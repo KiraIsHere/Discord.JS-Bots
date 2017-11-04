@@ -1,5 +1,7 @@
 const Commands = require(`../../../../__Global/Structures/Commands`);
 const { basename } = require(`path`);
+const googl = require(`goo.gl`);
+googl.setKey(process.env.GOOGLE_URL_API);
 
 class Command extends Commands {
 	constructor(client) {
@@ -14,15 +16,18 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			group: basename(__dirname, `.js`),
-			description: ``,
-			usage: `[Required] (Optional)`,
+			description: `Shortens the URL`,
+			usage: `[URL]`,
 			aliases: []
 		});
 	}
 
 	run(client, message, args) {
 		if (args.length < 1) return client.missingArgs(message, this.usage);
-		// Code
+
+		googl.shorten(args[0]).then(url => {
+			client.send(message, url);
+		});
 		return true;
 	}
 }

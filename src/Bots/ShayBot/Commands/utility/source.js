@@ -1,4 +1,5 @@
 const Commands = require(`../../../../__Global/Structures/Commands`);
+const { homepage } = require(`../../../../../package.json`);
 const { basename } = require(`path`);
 
 class Command extends Commands {
@@ -14,15 +15,14 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			group: basename(__dirname, `.js`),
-			description: ``,
-			usage: `[Required] (Optional)`,
-			aliases: []
+			description: `Shows GitHub Repo URL`,
+			usage: ``,
+			aliases: [`repo`, `github`]
 		});
 	}
 
-	run(client, message, args) {
-		if (args.length < 1) return client.missingArgs(message, this.usage);
-		// Code
+	run(client, message) {
+		client.send(message, `<${homepage}>`);
 		return true;
 	}
 }

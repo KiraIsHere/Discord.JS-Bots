@@ -1,6 +1,6 @@
 const Client = require(`../__Global/Structures/Client`);
-const { join, resolve } = require(`path`);
-const { readdir } = require(`fs`);
+const Util = require(`../__Global/Structures/Util`);
+const Loader = new Util;
 
 const client = new Client({
 	messageCacheMaxSize: 100,
@@ -45,59 +45,12 @@ const client = new Client({
 	]
 });
 
-// Global Commands
-readdir(join(__dirname, `./Commands/`), (error, files) => {
-	if (error) throw error;
-	files.forEach(file => {
-		if (file.split(`.`).slice(-1)[0] !== `js`) return false;
-		const Name = file.split(`.`)[0];
-		const CommandClass = require(`./Commands/${file}`);
-		const Command = new CommandClass(client);
-		client.commands.set(Name, Command);
-		Command.aliases.forEach(alias => {
-			client.aliases.set(alias, Name);
-		});
-		return true;
-	});
-});
-
-// Local Commands
-readdir(join(`.`, `./Commands/`), (error, files) => {
-	if (error) throw error;
-	files.forEach(file => {
-		if (file.split(`.`).slice(-1)[0] !== `js`) return false;
-		const Name = file.split(`.`)[0];
-		const CommandClass = require(join(resolve(`.`), `/Commands/${file}`));
-		const Command = new CommandClass(client);
-		client.commands.set(Name, Command);
-		Command.aliases.forEach(alias => {
-			client.aliases.set(alias, Name);
-		});
-		return true;
-	});
-});
-
-// Global Events
-readdir(join(__dirname, `./Events/`), (error, files) => {
-	if (error) throw error;
-	files.forEach(file => {
-		const Name = file.split(`.`)[0];
-		const EventClass = require(`./Events/${file}`);
-		const Event = new EventClass(client);
-		client.on(Name, (...args) => Event.run(client, ...args));
-	});
-});
-
-// Local Events
-readdir(join(`.`, `./Events/`), (error, files) => {
-	if (error) throw error;
-	files.forEach(file => {
-		const Name = file.split(`.`)[0];
-		const EventClass = require(join(resolve(`.`), `/Events/${file}`));
-		const Event = new EventClass(client);
-		client.on(Name, (...args) => Event.run(client, ...args));
-	});
-});
+Loader.init(client)
+	.then(() => {
+		client.login(process.env[client.botName])
+			.catch(error => { throw error; });
+	})
+	.catch(error => { throw error; });
 
 process.on(`uncaughtException`, error => {
 	client.error(error.stack.replace(new RegExp(`${__dirname}/`, `g`), `./`));
@@ -107,5 +60,3 @@ process.on(`uncaughtException`, error => {
 process.on(`unhandledRejection`, error => {
 	client.error(error.stack.replace(new RegExp(`${__dirname}/`, `g`), `./`));
 });
-
-client.login(process.env[client.botName]);

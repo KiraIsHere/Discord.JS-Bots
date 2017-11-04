@@ -14,15 +14,16 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			group: basename(__dirname, `.js`),
-			description: ``,
-			usage: `[Required] (Optional)`,
-			aliases: []
+			description: `Converts the text into a lmgtfu URL`,
+			usage: `[Text]`,
+			aliases: [`lmgtfu`]
 		});
 	}
 
 	run(client, message, args) {
 		if (args.length < 1) return client.missingArgs(message, this.usage);
-		// Code
+
+		client.send(message, `<http://lmgtfy.com/?q=${args.join(`+`)}>`);
 		return true;
 	}
 }

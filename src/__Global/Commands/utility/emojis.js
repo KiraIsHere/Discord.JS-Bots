@@ -1,4 +1,4 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
+const Commands = require(`../../Structures/Commands`);
 const { basename } = require(`path`);
 
 class Command extends Commands {
@@ -14,15 +14,14 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			group: basename(__dirname, `.js`),
-			description: ``,
-			usage: `[Required] (Optional)`,
-			aliases: []
+			description: `Lists all emojis`,
+			usage: ``,
+			aliases: [`emotes`]
 		});
 	}
 
-	run(client, message, args) {
-		if (args.length < 1) return client.missingArgs(message, this.usage);
-		// Code
+	run(client, message) {
+		client.send(message, client.emojis.map(c => c.toString()).join(` `), { split: { char: ` ` } });
 		return true;
 	}
 }

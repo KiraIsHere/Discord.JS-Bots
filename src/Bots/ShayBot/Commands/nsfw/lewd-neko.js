@@ -1,4 +1,5 @@
 const Commands = require(`../../../../__Global/Structures/Commands`);
+const { get } = require(`snekfetch`);
 const { basename } = require(`path`);
 
 class Command extends Commands {
@@ -14,15 +15,17 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			group: basename(__dirname, `.js`),
-			description: ``,
-			usage: `[Required] (Optional)`,
+			description: `Random lewd neko picture`,
+			usage: ``,
 			aliases: []
 		});
 	}
 
-	run(client, message, args) {
-		if (args.length < 1) return client.missingArgs(message, this.usage);
-		// Code
+	run(client, message) {
+		if (!message.channel.nsfw) return client.send(message, `Must use in a NSFW channel`);
+		get(`http://nekos.life/api/lewd/neko`).then(data => {
+			client.send(message, { files: [data.body.neko] });
+		});
 		return true;
 	}
 }

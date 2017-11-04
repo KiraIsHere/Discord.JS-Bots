@@ -1,4 +1,5 @@
 const Commands = require(`../../../../__Global/Structures/Commands`);
+const { MessageEmbed } = require(`discord.js`);
 const { basename } = require(`path`);
 
 class Command extends Commands {
@@ -14,15 +15,21 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			group: basename(__dirname, `.js`),
-			description: ``,
-			usage: `[Required] (Optional)`,
+			description: `Shows support message`,
+			usage: ``,
 			aliases: []
 		});
 	}
 
-	run(client, message, args) {
-		if (args.length < 1) return client.missingArgs(message, this.usage);
-		// Code
+	run(client, message) {
+		const embed = new MessageEmbed()
+			.setTitle(`Thank you for inviting me to your server!`)
+			.setDescription(`` +
+				`**Note:**\n` +
+				`\`You must set the color of every role to "Default" for me to work!\`\n` +
+				`\`If you would like more support join my discord\` https://discord.io/shaybox`
+			);
+		client.send(message, { embed });
 		return true;
 	}
 }

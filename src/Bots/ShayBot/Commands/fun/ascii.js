@@ -1,4 +1,5 @@
 const Commands = require(`../../../../__Global/Structures/Commands`);
+const asciify = require(`asciify`);
 const { basename } = require(`path`);
 
 class Command extends Commands {
@@ -14,15 +15,20 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			group: basename(__dirname, `.js`),
-			description: ``,
-			usage: `[Required] (Optional)`,
+			description: `Converts the text to an ascii`,
+			usage: `[Text]`,
 			aliases: []
 		});
 	}
 
 	run(client, message, args) {
 		if (args.length < 1) return client.missingArgs(message, this.usage);
-		// Code
+
+		asciify(args.join(` `), `standard`, (error, response) => {
+			if (error) return client.send(message, error, { code: `` });
+
+			return client.send(message, response, { code: `` });
+		});
 		return true;
 	}
 }

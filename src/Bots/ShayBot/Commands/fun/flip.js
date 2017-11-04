@@ -14,15 +14,14 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			group: basename(__dirname, `.js`),
-			description: ``,
-			usage: `[Required] (Optional)`,
-			aliases: []
+			description: `Flip a coin`,
+			usage: ``,
+			aliases: [`coin`]
 		});
 	}
 
-	run(client, message, args) {
-		if (args.length < 1) return client.missingArgs(message, this.usage);
-		// Code
+	run(client, message) {
+		client.send(message, Math.random() < 0.5 ? `Tails` : `Heads`);
 		return true;
 	}
 }

@@ -14,15 +14,18 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			group: basename(__dirname, `.js`),
-			description: ``,
-			usage: `[Required] (Optional)`,
-			aliases: []
+			description: `Clears 1-100 messages`,
+			usage: `[1-100]`,
+			aliases: [`prune`, `purge`]
 		});
 	}
 
 	run(client, message, args) {
 		if (args.length < 1) return client.missingArgs(message, this.usage);
-		// Code
+		if (!message.guild.me.hasPermission(`MANAGE_MESSAGES`) || !message.member.hasPermission(`MANAGE_MESSAGES`)) return client.send(message, `Missing Permissions "MANAGE_MESSAGES"`, { code: `` });
+		if (args[0] < 1 || args[0 > 100]) return client.send(message, `Number between 1 and 100`, { code: `` });
+
+		message.channel.bulkDelete(args[0]);
 		return true;
 	}
 }

@@ -14,15 +14,15 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			group: basename(__dirname, `.js`),
-			description: ``,
-			usage: `[Required] (Optional)`,
-			aliases: []
+			description: `Roll the dice`,
+			usage: ``,
+			aliases: [`dice`]
 		});
 	}
 
 	run(client, message, args) {
-		if (args.length < 1) return client.missingArgs(message, this.usage);
-		// Code
+		if (!args) return client.send(message, `You didn't specify how many sides`);
+		client.send(message, Math.floor(Math.random() * parseInt(args[0])));
 		return true;
 	}
 }

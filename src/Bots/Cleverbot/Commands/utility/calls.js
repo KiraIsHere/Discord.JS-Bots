@@ -14,15 +14,16 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			group: basename(__dirname, `.js`),
-			description: ``,
-			usage: `[Required] (Optional)`,
+			description: `Lists Used API Calls vs Total API Calls`,
+			usage: ``,
 			aliases: []
 		});
 	}
 
-	run(client, message, args) {
-		if (args.length < 1) return client.missingArgs(message, this.usage);
-		// Code
+	run(client, message) {
+		client.database.find({}).then(data => {
+			client.send(message, `${data[0].USED_API_CALLS} / ${data[0].TOTAL_API_CALLS}\n`);
+		});
 		return true;
 	}
 }

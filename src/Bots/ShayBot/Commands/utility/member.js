@@ -14,16 +14,21 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			group: basename(__dirname, `.js`),
-			description: ``,
-			usage: `[Required] (Optional)`,
+			description: `Picks a random guild member`,
+			usage: ``,
 			aliases: []
 		});
 	}
 
-	run(client, message, args) {
-		if (args.length < 1) return client.missingArgs(message, this.usage);
-		// Code
+	run(client, message) {
+		client.send(message, this.pickMember(message).user.username);
 		return true;
+	}
+
+	pickMember(message) {
+		const member = message.guild.members.random();
+		if (member.user.bot) return this.pickMember();
+		return member;
 	}
 }
 

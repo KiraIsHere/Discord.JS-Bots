@@ -11,6 +11,7 @@ class Commands {
 		this.limitAmount = info.limitAmount;
 		this.limitTime = info.limitTime;
 		this.name = info.name;
+		this.group = info.group;
 		this.description = info.description;
 		this.usage = info.usage;
 		this.aliases = info.aliases;

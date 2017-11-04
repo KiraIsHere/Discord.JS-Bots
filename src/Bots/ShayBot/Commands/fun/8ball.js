@@ -15,14 +15,29 @@ class Command extends Commands {
 			name: basename(__filename, `.js`),
 			group: basename(__dirname, `.js`),
 			description: ``,
-			usage: `[Required] (Optional)`,
+			usage: `Ask the 8 ball a question`,
 			aliases: []
 		});
 	}
 
-	run(client, message, args) {
-		if (args.length < 1) return client.missingArgs(message, this.usage);
-		// Code
+	run(client, message) {
+		const responses = [
+			`Nope`,
+			`I don't know, m8`,
+			`Hell naw`,
+			`Most likely`,
+			`Without a doubt!`,
+			`Yes, definitely!`,
+			`Most likely!`,
+			`Doubtful...`,
+			`YES YES YES!`,
+			`In your dreams!`,
+			`You already know the answer to that...`,
+			`Oh god, no.`,
+			`If that's what you want...`
+		];
+
+		client.send(message, responses[Math.floor(Math.random() * responses.length)]);
 		return true;
 	}
 }

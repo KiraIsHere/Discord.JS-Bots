@@ -1,5 +1,6 @@
 const Commands = require(`../../../../__Global/Structures/Commands`);
 const { basename } = require(`path`);
+const { get } = require(`snekfetch`);
 
 class Command extends Commands {
 	constructor(client) {
@@ -14,15 +15,16 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			group: basename(__dirname, `.js`),
-			description: ``,
-			usage: `[Required] (Optional)`,
+			description: `Gives the server's ip address`,
+			usage: ``,
 			aliases: []
 		});
 	}
 
-	run(client, message, args) {
-		if (args.length < 1) return client.missingArgs(message, this.usage);
-		// Code
+	run(client, message) {
+		if (process.env.LOCAL_TESTING) return false;
+
+		get(`https://api.ipify.org/`).then(data => client.send(message, data.text));
 		return true;
 	}
 }

@@ -14,15 +14,22 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			group: basename(__dirname, `.js`),
-			description: ``,
-			usage: `[Required] (Optional)`,
+			description: `Toggles the NSFW channels`,
+			usage: ``,
 			aliases: []
 		});
 	}
 
-	run(client, message, args) {
-		if (args.length < 1) return client.missingArgs(message, this.usage);
-		// Code
+	run(client, message) {
+		const NSFW = message.guild.roles.find(`name`, `NSFW`);
+
+		if (message.member.roles.has(NSFW.id)) {
+			message.member.removeRole(NSFW);
+			client.send(message, `Successfully Shown NSFW Channels`);
+		} else {
+			message.member.addRole(NSFW);
+			client.send(message, `Successfully Hidden NSFW Channels`);
+		}
 		return true;
 	}
 }
