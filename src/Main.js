@@ -24,6 +24,6 @@ function start(input) {
 	proc.on(`close`, () => {
 		setTimeout(() => {
 			start(input);
-		}, 1000 * 5);
+		}, 1000 * 30);
 	});
 }

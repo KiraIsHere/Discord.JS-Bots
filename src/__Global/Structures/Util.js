@@ -1,7 +1,6 @@
 const { readdir } = require(`fs`);
 const { walk } = require(`file`);
-const { join } = require(`path`);
-const path = require(`path`);
+const { join, resolve } = require(`path`);
 
 class Util {
 	async init(client) {
@@ -12,18 +11,17 @@ class Util {
 	}
 
 	localCommands(client) {
-		return new Promise((resolve, reject) => {
+		return new Promise((res, rej) => {
 			walk(join(`.`, `./Commands/`), (error, dirPath, dirs) => {
-				if (error) reject(error);
+				if (error) rej(error);
 				dirs.forEach(dir => {
 					readdir(dir, (error, files) => {
-						if (error) reject(error);
+						if (error) rej(error);
 						files.forEach(file => {
 							if (file.split(`.`).slice(-1)[0] !== `js`) return false;
 							const Name = file.split(`.`)[0];
-							const Folders = dir.replace(`/`, `\\`).split(`\\`);
-							const Group = Folders[Folders.length - 1];
-							const CommandClass = require(join(path.resolve(`.`), `/Commands/${Group}/${file}`));
+							const Group = dir.replace(dirPath, ``);
+							const CommandClass = require(join(resolve(`.`), `/Commands/${Group}/${file}`));
 							const Command = new CommandClass(client);
 							client.commands.set(Name, Command);
 							Command.aliases.forEach(alias => { // eslint-disable-line max-nested-callbacks
@@ -33,25 +31,22 @@ class Util {
 						});
 					});
 				});
-				resolve();
+				res();
 			});
 		});
 	}
 
 	globalCommands(client) {
-		return new Promise((resolve, reject) => {
+		return new Promise((res, rej) => {
 			walk(join(__dirname, `../Commands/`), (error, dirPath, dirs) => {
-				if (error) reject(error);
+				if (error) rej(error);
 				dirs.forEach(dir => {
 					readdir(dir, (error, files) => {
-						if (error) reject(error);
+						if (error) rej(error);
 						files.forEach(file => {
 							if (file.split(`.`).slice(-1)[0] !== `js`) return false;
 							const Name = file.split(`.`)[0];
-							const Folders = dir.replace(`/`, `\\`).split(`\\`);
-							console.log(Folders);
-							const Group = Folders[Folders.length - 1];
-							console.log(Group);
+							const Group = dir.replace(dirPath, ``);
 							const CommandClass = require(join(__dirname, `../Commands/${Group}/${file}`));
 							const Command = new CommandClass(client);
 							client.commands.set(Name, Command);
@@ -62,49 +57,47 @@ class Util {
 						});
 					});
 				});
-				resolve();
+				res();
 			});
 		});
 	}
 
 	localEvents(client) {
-		return new Promise((resolve, reject) => {
+		return new Promise((res, rej) => {
 			walk(join(`.`, `./Events/`), (error, dirPath, dirs) => {
-				if (error) reject(error);
+				if (error) rej(error);
 				dirs.forEach(dir => {
 					readdir(dir, (error, files) => {
-						if (error) reject(error);
+						if (error) rej(error);
 						files.forEach(file => {
 							const Name = file.split(`.`)[0];
-							const EventClass = require(join(path.resolve(`.`), `/Events/${file}`));
+							const EventClass = require(join(resolve(`.`), `/Events/${file}`));
 							const Event = new EventClass(client);
 							client.on(Name, (...args) => Event.run(client, ...args)); // eslint-disable-line max-nested-callbacks
-							return true;
 						});
 					});
 				});
-				resolve();
+				res();
 			});
 		});
 	}
 
 	globalEvents(client) {
-		return new Promise((resolve, reject) => {
+		return new Promise((res, rej) => {
 			walk(join(__dirname, `../Events/`), (error, dirPath, dirs) => {
-				if (error) reject(error);
+				if (error) rej(error);
 				dirs.forEach(dir => {
 					readdir(dir, (error, files) => {
-						if (error) reject(error);
+						if (error) rej(error);
 						files.forEach(file => {
 							const Name = file.split(`.`)[0];
 							const EventClass = require(join(__dirname, `../Events/${file}`));
 							const Event = new EventClass(client);
 							client.on(Name, (...args) => Event.run(client, ...args)); // eslint-disable-line max-nested-callbacks
-							return true;
 						});
 					});
 				});
-				resolve();
+				res();
 			});
 		});
 	}
