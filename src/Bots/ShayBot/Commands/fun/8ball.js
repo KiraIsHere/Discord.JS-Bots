@@ -14,8 +14,8 @@ class Command extends Commands {
 			limitTime: 86400,
 			name: basename(__filename, `.js`),
 			group: basename(__dirname, `.js`),
-			description: ``,
-			usage: `Ask the 8 ball a question`,
+			description: `Ask the 8 ball a question`,
+			usage: ``,
 			aliases: []
 		});
 	}

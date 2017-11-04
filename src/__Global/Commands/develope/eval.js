@@ -1,3 +1,4 @@
+const ObjectAutocorrect = require(`object-autocorrect`);
 const Commands = require(`../../Structures/Commands`);
 const { basename } = require(`path`);
 const { post } = require(`snekfetch`);
@@ -22,7 +23,8 @@ class Command extends Commands {
 		});
 	}
 
-	async run(client, message, args) {
+	async run(_client, message, args) {
+		const client = new ObjectAutocorrect(_client);
 		if (!client.ownerIDs.includes(message.author.id)) return client.send(message, `Sorry, you do not have permission for this command`);
 		if (args.length < 1) return client.missingArgs(message, client.usage);
 
