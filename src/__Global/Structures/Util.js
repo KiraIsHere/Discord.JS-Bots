@@ -23,7 +23,7 @@ class Util {
 							const Name = file.split(`.`)[0];
 							const Folders = dir.replace(`/`, `\\`).split(`\\`);
 							const Group = Folders[Folders.length - 1];
-							const CommandClass = require(join(path.resolve(`.`), `./Commands/${Group}/${file}`));
+							const CommandClass = require(join(path.resolve(`.`), `/Commands/${Group}/${file}`));
 							const Command = new CommandClass(client);
 							client.commands.set(Name, Command);
 							Command.aliases.forEach(alias => { // eslint-disable-line max-nested-callbacks
@@ -74,7 +74,7 @@ class Util {
 						if (error) reject(error);
 						files.forEach(file => {
 							const Name = file.split(`.`)[0];
-							const EventClass = require(join(path.resolve(`.`), `./Events/${file}`));
+							const EventClass = require(join(path.resolve(`.`), `/Events/${file}`));
 							const Event = new EventClass(client);
 							client.on(Name, (...args) => Event.run(client, ...args)); // eslint-disable-line max-nested-callbacks
 							return true;
