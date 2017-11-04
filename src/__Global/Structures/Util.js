@@ -64,41 +64,31 @@ class Util {
 
 	localEvents(client) {
 		return new Promise((res, rej) => {
-			walk(join(`.`, `./Events/`), (error, dirPath, dirs) => {
+			readdir(join(`.`, `./Events/`), (error, files) => {
 				if (error) rej(error);
-				dirs.forEach(dir => {
-					readdir(dir, (error, files) => {
-						if (error) rej(error);
-						files.forEach(file => {
-							const Name = file.split(`.`)[0];
-							const EventClass = require(join(resolve(`.`), `/Events/${file}`));
-							const Event = new EventClass(client);
-							client.on(Name, (...args) => Event.run(client, ...args)); // eslint-disable-line max-nested-callbacks
-						});
-					});
+				files.forEach(file => {
+					const Name = file.split(`.`)[0];
+					const EventClass = require(join(resolve(`.`), `/Events/${file}`));
+					const Event = new EventClass(client);
+					client.on(Name, (...args) => Event.run(client, ...args));
 				});
-				res();
 			});
+			res();
 		});
 	}
 
 	globalEvents(client) {
 		return new Promise((res, rej) => {
-			walk(join(__dirname, `../Events/`), (error, dirPath, dirs) => {
+			readdir(join(__dirname, `../Events/`), (error, files) => {
 				if (error) rej(error);
-				dirs.forEach(dir => {
-					readdir(dir, (error, files) => {
-						if (error) rej(error);
-						files.forEach(file => {
-							const Name = file.split(`.`)[0];
-							const EventClass = require(join(__dirname, `../Events/${file}`));
-							const Event = new EventClass(client);
-							client.on(Name, (...args) => Event.run(client, ...args)); // eslint-disable-line max-nested-callbacks
-						});
-					});
+				files.forEach(file => {
+					const Name = file.split(`.`)[0];
+					const EventClass = require(join(__dirname, `../Events/${file}`));
+					const Event = new EventClass(client);
+					client.on(Name, (...args) => Event.run(client, ...args));
 				});
-				res();
 			});
+			res();
 		});
 	}
 }
