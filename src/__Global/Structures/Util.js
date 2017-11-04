@@ -48,7 +48,7 @@ class Util {
 						files.forEach(file => {
 							if (file.split(`.`).slice(-1)[0] !== `js`) return false;
 							const Name = file.split(`.`)[0];
-							const Folders = dir.split(`\\`);
+							const Folders = dir.replace(`/`, `\\`).split(`\\`);
 							const Group = Folders[Folders.length - 1];
 							const CommandClass = require(join(__dirname, `../Commands/${Group}/${file}`));
 							const Command = new CommandClass(client);
