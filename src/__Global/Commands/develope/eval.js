@@ -29,8 +29,16 @@ class Command extends Commands {
 		if (args.length < 1) return client.missingArgs(message, client.usage);
 
 		let content = await this.addToContent(client, args.join(` `), `Input`);
-		try {
-			let evaled = eval(args.join(` `));
+		await Promise.all([
+			new Promise((resolve, reject) => {
+				try {
+					resolve(eval(args.join(` `)));
+				} catch (error) {
+					reject(error);
+				}
+			})
+		]).then(async response => {
+			let evaled = response[0];
 			if (evaled instanceof Promise) evaled = await evaled;
 			try {
 				evaled = inspect(evaled, { depth: 0 });
@@ -39,9 +47,9 @@ class Command extends Commands {
 			}
 
 			content += await this.addToContent(client, client.clean(evaled), `Output`);
-		} catch (error) {
+		}).catch(async error => {
 			content += await this.addToContent(client, error, `Error`);
-		}
+		});
 		client.send(message, content);
 		return true;
 	}
