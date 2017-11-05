@@ -66,14 +66,16 @@ class Command extends Commands {
 	}
 
 	check(client, message, updated) {
-		if (message.channel.type !== `text` || message.author.bot) return;
-		if (!message.channel.permissionsFor(message.client.user).has([`ADD_REACTIONS`, `READ_MESSAGE_HISTORY`])) return;
+		if (message.channel.type !== `text` || message.author.bot) return false;
+		if (!this.codeblock.test(message.content)) return false;
+		if (!message.channel.permissionsFor(message.client.user).has([`ADD_REACTIONS`, `READ_MESSAGE_HISTORY`])) return false;
 		const parsed = this.codeblock.exec(message.content);
 		const code = {
 			code: parsed[2],
 			lang: parsed[1]
 		};
 		this.run(client, message, code, true, updated);
+		return true;
 	}
 }
 
