@@ -2,6 +2,8 @@ const Events = require(`../../../__Global/Structures/Events`);
 
 class Event extends Events {
 	run(client, message) {
+		client.commands.get(`lint`).check(client, message, false);
+
 		if (process.env.LOCAL) return false;
 
 		if (message.channel.name === `bots`) {
@@ -18,16 +20,6 @@ class Event extends Events {
 				message.member.kick();
 			}
 		}
-
-		if (message.channel.type !== `text` || message.author.bot) return false;
-		if (!client.codeblock.test(message.content)) return false;
-		if (!message.channel.permissionsFor(client.user).has([`ADD_REACTIONS`, `READ_MESSAGE_HISTORY`])) return false;
-		const parsed = client.codeblock.exec(message.content);
-		const code = {
-			code: parsed[3].trim(),
-			lang: parsed[2]
-		};
-		client.commands.get(`lint`).run(client, message, undefined, code, true);
 		return true;
 	}
 }
