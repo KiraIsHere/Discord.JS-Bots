@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Discord.JS Bots",
   "engines": {
-    "node": "latest",
+    "node": "8.9.0",
     "npm": "latest"
   },
   "dependencies": {
