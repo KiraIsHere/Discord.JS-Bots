@@ -32,7 +32,11 @@ class Command extends Commands {
 		try {
 			let evaled = eval(args.join(` `));
 			if (evaled instanceof Promise) evaled = await evaled;
-			evaled = inspect(evaled, { depth: 0 });
+			try {
+				evaled = inspect(evaled, { depth: 0 });
+			} catch (error) {
+				evaled = evaled.toString();
+			}
 
 			content += await this.addToContent(client, client.clean(evaled), `Output`);
 		} catch (error) {
