@@ -31,7 +31,7 @@ class Command extends Commands {
 		let content = await this.addToContent(client, args.join(` `), `Input`);
 		try {
 			let evaled = eval(args.join(` `));
-			// if (evaled instanceof Function) evaled = evaled.getTarget() || evaled;
+			if (evaled.getTarget instanceof Function) evaled = evaled.getTarget();
 			if (evaled instanceof Promise) evaled = await evaled;
 			if (evaled instanceof Object) evaled = inspect(evaled, { depth: 0 });
 
