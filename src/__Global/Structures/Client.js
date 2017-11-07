@@ -1,4 +1,5 @@
 const { Client, MessageEmbed, Collection } = require(`discord.js`);
+const { readdirSync, statSync } = require(`fs`);
 const { sep, resolve } = require(`path`);
 const { inspect } = require(`util`);
 const Database = require(`./Database`);
@@ -128,9 +129,21 @@ class CustomClient extends Client {
 			.replace(/`/g, `\`${String.fromCharCode(8203)}`)
 			.replace(/@/g, `@${String.fromCharCode(8203)}`);
 
-		Object.keys(process.env).forEach(item => {
-			text = text.replace(process.env[item], SECRET);
+		// Webhooks & API Keys
+		for (const env in process.env) {
+			if (env.includes(`WEBHOOK_`)) text = text.replace(process.env[env], SECRET);
+			if (env.includes(`_API`)) text = text.replace(process.env[env], SECRET);
+		}
+
+		// Tokens
+		isDirectory(resolve(`../../Bots`)).forEach(dir => {
+			text = text.replace(process.env[dir], SECRET);
 		});
+
+		function isDirectory(source) {
+			return readdirSync(source).filter(name => statSync(`${source}/${name}`).isDirectory());
+		}
+
 		return text;
 	}
 
