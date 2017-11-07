@@ -129,29 +129,9 @@ class CustomClient extends Client {
 			.replace(/`/g, `\`${String.fromCharCode(8203)}`)
 			.replace(/@/g, `@${String.fromCharCode(8203)}`);
 
-		// API Keys
-		for (const env in process.env) {
-			if (env.includes(`_API`)) {
-				text = text.replace(process.env[env], SECRET);
-			}
-		}
-
-		// Webhooks
-		for (const env in process.env) {
-			if (env.includes(`WEBHOOK_`)) {
-				text = text.replace(process.env[env], SECRET);
-			}
-		}
-
-		// Tokens
-		isDirectory(resolve(`../../Bots`)).forEach(dir => {
-			text = text.replace(process.env[dir], SECRET);
+		Object.keys(process.env).forEach(item => {
+			text = text.replace(process.env[item], SECRET);
 		});
-
-		function isDirectory(source) {
-			return readdirSync(source).filter(name => statSync(`${source}/${name}`).isDirectory());
-		}
-
 		return text;
 	}
 
