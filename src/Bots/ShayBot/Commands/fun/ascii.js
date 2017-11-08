@@ -22,11 +22,12 @@ class Command extends Commands {
 	}
 
 	run(client, message, args) {
-		if (args.length < 1) throw new Error(this.usage);
+		if (args.length < 1) return client.missingArgs(message, this);
 
 		asciify(args.join(` `), `standard`, (error, response) => {
-			if (error) throw new Error(error);
+			if (error) return client.send(message, error, { code: `` });
 			client.send(message, response, { code: `` });
+			return true;
 		});
 		return true;
 	}

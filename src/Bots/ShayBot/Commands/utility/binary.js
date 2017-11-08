@@ -21,7 +21,7 @@ class Command extends Commands {
 	}
 
 	run(client, message, args) {
-		if (args.length < 2) throw new Error(this.usage);
+		if (args.length < 2) return client.missingArgs(message, this);
 
 		const action = args.shift();
 		let output;

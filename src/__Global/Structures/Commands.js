@@ -1,6 +1,6 @@
 class Commands {
 	constructor(client, info) {
-		if (!client) throw new Error(`A client must be specified.`);
+		if (!client) return new Error(`A client must be specified.`);
 		this.client = client;
 		this.enabled = info.enabled;
 		this.show = info.show;

@@ -21,7 +21,7 @@ class Command extends Commands {
 	}
 
 	run(client, message) {
-		if (!client.ownerIDs.includes(message.author.id)) throw new Error(`Sorry, you do not have permission for this command`);
+		if (!client.ownerIDs.includes(message.author.id)) return client.send(message, `Sorry, you do not have permission for this command`);
 		process.exit();
 		return true;
 	}

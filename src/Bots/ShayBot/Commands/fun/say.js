@@ -21,7 +21,7 @@ class Command extends Commands {
 	}
 
 	run(client, message, args) {
-		if (args.length < 1) throw new Error(this.usage);
+		if (args.length < 1) return client.missingArgs(message, this);
 
 		const numbers = [`zero`, `one`, `two`, `three`, `four`, `five`, `six`, `seven`, `eight`, `nine`];
 

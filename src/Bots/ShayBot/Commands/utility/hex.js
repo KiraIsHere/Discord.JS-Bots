@@ -22,7 +22,7 @@ class Command extends Commands {
 	}
 
 	run(client, message, args) {
-		if (args.length < 1) throw new Error(this.usage);
+		if (args.length < 1) return client.missingArgs(message, this);
 
 		if (/[0-9A-F]{6}/i.test(args)) {
 			const embed = new MessageEmbed()

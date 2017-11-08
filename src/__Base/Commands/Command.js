@@ -21,7 +21,7 @@ class Command extends Commands {
 	}
 
 	run(client, message, args) {
-		if (args.length < 1) throw new Error(this.usage);
+		if (args.length < 1) return client.missingArgs(message, this);
 		// Code
 		return true;
 	}

@@ -22,7 +22,7 @@ class Command extends Commands {
 	}
 
 	run(client, message, args) {
-		if (args.length < 1) throw new Error(this.usage);
+		if (args.length < 1) return client.missingArgs(message, this);
 
 		const messageID = args[0];
 		const channelID = args[1] ? args[1] : message.channel.id;

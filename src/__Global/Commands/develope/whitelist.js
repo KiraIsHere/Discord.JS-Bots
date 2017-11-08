@@ -21,10 +21,10 @@ class Command extends Commands {
 	}
 
 	async run(client, message, args) {
-		if (!client.ownerIDs.includes(message.author.id)) throw new Error(`Sorry, you do not have permission for this command`);
+		if (!client.ownerIDs.includes(message.author.id)) return client.send(message, `Sorry, you do not have permission for this command`);
 		if (args[0] === `list`) {
-			if (args.length < 1) throw new Error(this.usage);
-		} else if (args.length < 2) { throw new Error(this.usage); }
+			if (args.length < 1) return client.missingArgs(message, this);
+		} else if (args.length < 2) { return client.missingArgs(message, this); }
 
 		let output;
 		switch (args[0]) {

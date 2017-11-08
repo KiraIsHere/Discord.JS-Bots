@@ -22,7 +22,7 @@ class Command extends Commands {
 	}
 
 	run(client, message) {
-		if (!message.channel.nsfw) throw new Error(`Must use in a NSFW channel`);
+		if (!message.channel.nsfw) return client.send(message, `Must use in a NSFW channel`);
 		get(`http://api.oboobs.ru/boobs/0/1/random`).then(data => client.send(message, { files: [`http://media.oboobs.ru/${data.body[0].preview}`] }));
 		return true;
 	}

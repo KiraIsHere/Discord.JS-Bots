@@ -112,10 +112,10 @@ class CustomClient extends Client {
 		});
 	}
 
-	missingArgs(message, usage) {
+	missingArgs(message, command) {
 		const embed = new MessageEmbed()
 			.setTitle(`Command Usage`)
-			.setDescription(`\`\`\`\n${usage}\n\`\`\``)
+			.setDescription(`\`\`\`\n${command.name} ${command.usage}\n\`\`\``)
 			.setColor(0xFF7900)
 			.setFooter(this.botName)
 			.setTimestamp();

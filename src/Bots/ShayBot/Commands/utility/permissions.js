@@ -22,7 +22,7 @@ class Command extends Commands {
 	}
 
 	run(client, message, args) {
-		if (args.length < 1) throw new Error(this.usage);
+		if (args.length < 1) return client.missingArgs(message, this);
 
 		if (!message.guild.roles.find(`name`, args.join(` `))) return false;
 

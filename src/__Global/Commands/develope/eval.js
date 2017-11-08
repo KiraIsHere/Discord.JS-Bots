@@ -27,12 +27,13 @@ class Command extends Commands {
 	async run(client, message, args) {
 		if (!client.ownerIDs.includes(message.author.id)) {
 			if (client.user.id === `361541917672210433` && client.whitelist.includes(message.author.id)) {
+				if (args.length < 1) return client.missingArgs(message, this);
 				await this.eval(client, message, args, new VM().run(args.join(` `)));
 			} else {
-				throw new Error(`Sorry, you do not have permission for this command`);
+				return client.send(message, `Sorry, you do not have permission for this command`);
 			}
 		} else {
-			if (args.length < 1) throw new Error(this.usage);
+			if (args.length < 1) return client.missingArgs(message, this);
 			await this.eval(new ObjectAutocorrect(client), message, args, eval(args.join(` `)));
 		}
 		return true;
@@ -42,7 +43,7 @@ class Command extends Commands {
 		let content = await this.addToContent(client, args.join(` `), `Input`);
 		try {
 			if (evaled instanceof Promise) evaled = await evaled;
-			if (evaled instanceof Object || evaled instanceof Function) evaled = inspect(evaled, { showHidden: true, showProxy: true, depth: 100 });
+			if (evaled instanceof Object || evaled instanceof Function) evaled = inspect(evaled, { showHidden: true, showProxy: true, depth: 0 });
 
 			content += await this.addToContent(client, client.clean(evaled), `Output`);
 		} catch (error) {

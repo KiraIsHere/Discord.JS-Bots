@@ -28,7 +28,7 @@ class Command extends Commands {
 	async run(client, message, code, pattern, updated) {
 		if (!code) {
 			if (pattern) return false;
-			throw new Error(`Invalid message!`);
+			return client.send(message, `Invalid message!`);
 		}
 		const errors = linter.verify(code.code, config);
 		if (pattern && updated) {

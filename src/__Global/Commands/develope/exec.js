@@ -23,8 +23,8 @@ class Command extends Commands {
 	}
 
 	async run(client, message, args) {
-		if (!client.ownerIDs.includes(message.author.id)) throw new Error(`Sorry, you do not have permission for this command`);
-		if (args.length < 1) throw new Error(this.usage);
+		if (!client.ownerIDs.includes(message.author.id)) return client.send(message, `Sorry, you do not have permission for this command`);
+		if (args.length < 1) return client.missingArgs(message, this);
 
 		let content = await this.addToContent(client, args.join(` `), `Input`);
 		exec(args.join(` `), { cwd: `../../` }, async (error, stdout, stderr) => {
