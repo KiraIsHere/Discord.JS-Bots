@@ -22,7 +22,8 @@
     "os-toolbox": "^0.2.7",
     "pastebin-js": "^0.4.0",
     "randomcolor": "^0.5.3",
-    "uws": "^8.14.1"
+    "uws": "^8.14.1",
+    "vm2": "^3.5.2"
   },
   "devDependencies": {
     "eslint": "^4.10.0",

@@ -3,6 +3,7 @@ const Commands = require(`../../Structures/Commands`);
 const { basename } = require(`path`);
 const { post } = require(`snekfetch`);
 const { inspect } = require(`util`);
+const { VM } = require(`vm2`);
 
 class Command extends Commands {
 	constructor(client) {
@@ -23,14 +24,23 @@ class Command extends Commands {
 		});
 	}
 
-	async run(_client, message, args) {
-		const client = new ObjectAutocorrect(_client);
-		if (!client.ownerIDs.includes(message.author.id)) return client.send(message, `Sorry, you do not have permission for this command`);
-		if (args.length < 1) return client.missingArgs(message, client.usage);
+	async run(client, message, args) {
+		if (!client.ownerIDs.includes(message.author.id)) {
+			if (client.user.id === `361541917672210433` && client.whitelist.includes(message.author.id)) {
+				await this.eval(client, message, args, new VM().run(args.join(` `)));
+			} else {
+				return client.send(message, `Sorry, you do not have permission for this command`);
+			}
+		} else {
+			if (args.length < 1) return client.missingArgs(message, client.usage);
+			await this.eval(new ObjectAutocorrect(client), message, args, eval(args.join(` `)));
+		}
+		return true;
+	}
 
+	async eval(client, message, args, evaled) {
 		let content = await this.addToContent(client, args.join(` `), `Input`);
 		try {
-			let evaled = eval(args.join(` `));
 			if (evaled instanceof Promise) evaled = await evaled;
 			if (evaled instanceof Object || evaled instanceof Function) evaled = inspect(evaled, { showHidden: true, showProxy: true, depth: 100 });
 
@@ -39,7 +49,6 @@ class Command extends Commands {
 			content += await this.addToContent(client, error, `Error`);
 		}
 		client.send(message, content);
-		return true;
 	}
 
 	async addToContent(client, input, type) {
