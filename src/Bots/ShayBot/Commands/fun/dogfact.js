@@ -22,9 +22,7 @@ class Command extends Commands {
 	}
 
 	run(client, message) {
-		get(`https://dog-api.kinduff.com/api/facts`).then(data => {
-			client.send(message, data.body.facts[0]);
-		});
+		get(`https://dog-api.kinduff.com/api/facts`).then(data => client.send(message, data.body.facts[0]));
 		return true;
 	}
 }

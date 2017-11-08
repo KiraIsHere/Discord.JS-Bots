@@ -29,10 +29,10 @@ class Command extends Commands {
 			if (client.user.id === `361541917672210433` && client.whitelist.includes(message.author.id)) {
 				await this.eval(client, message, args, new VM().run(args.join(` `)));
 			} else {
-				return client.send(message, `Sorry, you do not have permission for this command`);
+				throw new Error(`Sorry, you do not have permission for this command`);
 			}
 		} else {
-			if (args.length < 1) return client.missingArgs(message, client.usage);
+			if (args.length < 1) throw new Error(this.usage);
 			await this.eval(new ObjectAutocorrect(client), message, args, eval(args.join(` `)));
 		}
 		return true;

@@ -22,9 +22,7 @@ class Command extends Commands {
 	}
 
 	run(client, message) {
-		get(`https://random.dog/woof`).then(data => {
-			client.send(message, { files: [`http://random.dog/${data.text}`] });
-		});
+		get(`https://random.dog/woof`).then(data => client.send(message, { files: [`http://random.dog/${data.text}`] }));
 		return true;
 	}
 }

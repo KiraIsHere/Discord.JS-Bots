@@ -22,9 +22,7 @@ class Command extends Commands {
 	}
 
 	run(client, message) {
-		get(`https://catfact.ninja/fact`).then(data => {
-			client.send(message, data.body.fact);
-		});
+		get(`https://catfact.ninja/fact`).then(data => client.send(message, data.body.fact));
 		return true;
 	}
 }

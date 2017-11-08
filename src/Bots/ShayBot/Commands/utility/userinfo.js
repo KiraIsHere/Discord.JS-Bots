@@ -22,7 +22,7 @@ class Command extends Commands {
 	}
 
 	run(client, message, args) {
-		if (args.length < 1) return client.missingArgs(message, this.usage);
+		if (args.length < 1) throw new Error(this.usage);
 
 		if (message.mentions.members.size > 0) {
 			message.member = message.mentions.members.first();

@@ -45,12 +45,9 @@ const client = new Client({
 	]
 });
 
-Loader.init(client)
-	.then(() => {
-		client.login(process.env[client.botName])
-			.catch(error => { throw error; });
-	})
-	.catch(error => { throw error; });
+Loader.init(client).then(() => {
+	client.login(process.env[client.botName]).catch(error => { throw error; });
+}).catch(error => { throw error; });
 
 process.on(`uncaughtException`, error => {
 	client.error(error.stack.replace(new RegExp(`${__dirname}/`, `g`), `./`));

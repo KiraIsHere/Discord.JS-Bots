@@ -21,9 +21,9 @@ class Command extends Commands {
 	}
 
 	run(client, message, args) {
-		if (args.length < 1) return client.missingArgs(message, this.usage);
-		if (!message.guild.me.hasPermission(`MANAGE_MESSAGES`) || !message.member.hasPermission(`MANAGE_MESSAGES`)) return client.send(message, `Missing Permissions "MANAGE_MESSAGES"`, { code: `` });
-		if (args[0] < 1 || args[0 > 100]) return client.send(message, `Number between 1 and 100`, { code: `` });
+		if (args.length < 1) throw new Error(this.usage);
+		if (!message.guild.me.hasPermission(`MANAGE_MESSAGES`) || !message.member.hasPermission(`MANAGE_MESSAGES`)) throw new Error(`Missing Permissions "MANAGE_MESSAGES"`);
+		if (args[0] < 1 || args[0 > 100]) throw new Error(`Number between 1 and 100`);
 
 		message.channel.bulkDelete(args[0]);
 		return true;

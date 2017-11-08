@@ -28,7 +28,7 @@ class Command extends Commands {
 	async run(client, message, code, pattern, updated) {
 		if (!code) {
 			if (pattern) return false;
-			return client.send(message, `Invalid message!`);
+			throw new Error(`Invalid message!`);
 		}
 		const errors = linter.verify(code.code, config);
 		if (pattern && updated) {
@@ -42,9 +42,10 @@ class Command extends Commands {
 		if (!errors.length) {
 			if (pattern) {
 				await message.react(`✅`);
-				return false;
+				return true;
 			}
-			return client.send(message, `✅`);
+			client.send(message, `✅`);
+			return true;
 		}
 		let errorMap = errors.map(err => `\`[${err.line}:${err.column}] ${err.message}\``);
 		if (errorMap.length > 10) {

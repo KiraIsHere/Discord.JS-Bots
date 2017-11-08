@@ -26,7 +26,11 @@ class Event extends Events {
 			return client.send(message, `Cooldown, Please wait ${client.formatTime(client.checkCooldownTime(message.author.id, commandName), true)}`);
 		}
 
-		if (!command.run(client, message, args)) return false;
+		try {
+			if (!command.run(client, message, args)) return false;
+		} catch (error) {
+			client.send(message, error, { code: `` });
+		}
 
 		if (command.cooldown) {
 			const userLimits = client.commandUsage.get(message.author.id);

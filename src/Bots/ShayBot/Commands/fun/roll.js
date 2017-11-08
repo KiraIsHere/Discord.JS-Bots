@@ -21,7 +21,7 @@ class Command extends Commands {
 	}
 
 	run(client, message, args) {
-		if (!args) return client.send(message, `You didn't specify how many sides`);
+		if (!args) throw new Error(`You didn't specify how many sides`);
 		client.send(message, Math.floor(Math.random() * parseInt(args[0])));
 		return true;
 	}

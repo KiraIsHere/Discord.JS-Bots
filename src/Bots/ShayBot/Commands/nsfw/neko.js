@@ -22,9 +22,7 @@ class Command extends Commands {
 	}
 
 	run(client, message) {
-		get(`http://nekos.life/api/neko`).then(data => {
-			client.send(message, { files: [data.body.neko] });
-		});
+		get(`http://nekos.life/api/neko`).then(data => client.send(message, { files: [data.body.neko] }));
 		return true;
 	}
 }
