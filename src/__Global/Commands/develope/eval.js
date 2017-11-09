@@ -25,14 +25,14 @@ class Command extends Commands {
 	}
 
 	async run(_client, _message, args) {
+		const client = new ObjectAutocorrect(_client);
+		const message = new ObjectAutocorrect(_message);
 		if (client.ownerIDs.includes(message.author.id) || client.whitelist.includes(message.author.id)) {
 			if (args.length < 1) return client.missingArgs(message, this);
 			let content = await this.addToContent(client, args.join(` `), `Input`);
 			try {
 				let evaled;
-				const client = new ObjectAutocorrect(_client);
-				const message = new ObjectAutocorrect(_message);
-				
+
 				if (client.ownerIDs.includes(message.author.id)) {
 					evaled = eval(args.join(` `));
 				} else if ((client.user.id === `361541917672210433` || client.user.id === `361542082080407553`) && client.whitelist.includes(message.author.id)) {
@@ -40,8 +40,8 @@ class Command extends Commands {
 				} else {
 					client.send(message, `Sorry, you do not have permission for this command`);
 				}
-				
-				if (typeof evaled.getTarget === 'function') evaled = evaled.getTarget();
+
+				if (typeof evaled.getTarget === `function`) evaled = evaled.getTarget();
 
 				if (evaled instanceof Promise) evaled = await evaled;
 				if (evaled instanceof Object || evaled instanceof Function) evaled = inspect(evaled, { showHidden: true, showProxy: true, depth: 0 });
