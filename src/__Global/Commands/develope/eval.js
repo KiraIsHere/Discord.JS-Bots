@@ -24,16 +24,14 @@ class Command extends Commands {
 		});
 	}
 
-	async run(client, message, args) {
+	async run(_client, _message, args) {
 		if (client.ownerIDs.includes(message.author.id) || client.whitelist.includes(message.author.id)) {
 			if (args.length < 1) return client.missingArgs(message, this);
 			let content = await this.addToContent(client, args.join(` `), `Input`);
 			try {
 				let evaled;
-				const _client = client;
-				const _message = message;
-				client = new ObjectAutocorrect(client);
-				message = new ObjectAutocorrect(message);
+				const client = new ObjectAutocorrect(_client);
+				const message = new ObjectAutocorrect(_message);
 				
 				if (client.ownerIDs.includes(message.author.id)) {
 					evaled = eval(args.join(` `));
