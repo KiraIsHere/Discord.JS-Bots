@@ -25,31 +25,32 @@ class Command extends Commands {
 	}
 
 	async run(client, message, args) {
-		if (!client.ownerIDs.includes(message.author.id)) {
-			if (client.user.id === `361541917672210433` && client.whitelist.includes(message.author.id)) {
-				if (args.length < 1) return client.missingArgs(message, this);
-				await this.eval(client, message, args, new VM().run(args.join(` `)));
-			} else {
-				return client.send(message, `Sorry, you do not have permission for this command`);
-			}
-		} else {
+		if (client.ownerIDs.includes(message.author.id) || client.whitelist.includes(message.author.id)) {
 			if (args.length < 1) return client.missingArgs(message, this);
-			await this.eval(new ObjectAutocorrect(client), message, args, eval(args.join(` `)));
+			let content = await this.addToContent(client, args.join(` `), `Input`);
+			try {
+				let evaled;
+				if (client.ownerIDs.includes(message.author.id)) {
+					evaled = eval(args.join(` `));
+				} else if ((client.user.id === `361541917672210433` || client.user.id === `361542082080407553`) && client.whitelist.includes(message.author.id)) {
+					evaled = new VM().run(args.join(` `));
+				} else {
+					client.send(message, `Sorry, you do not have permission for this command`);
+				}
+
+				if (evaled instanceof Promise) evaled = await evaled;
+				if (evaled instanceof Object || evaled instanceof Function) evaled = inspect(evaled, { showHidden: true, showProxy: true, depth: 0 });
+
+				content += await this.addToContent(client, client.clean(evaled), `Output`);
+			} catch (error) {
+				console.log(`1`);
+				content += await this.addToContent(client, error, `Error`);
+			}
+			client.send(message, content);
+		} else {
+			client.send(message, `Sorry, you do not have permission for this command`);
 		}
 		return true;
-	}
-
-	async eval(client, message, args, evaled) {
-		let content = await this.addToContent(client, args.join(` `), `Input`);
-		try {
-			if (evaled instanceof Promise) evaled = await evaled;
-			if (evaled instanceof Object || evaled instanceof Function) evaled = inspect(evaled, { showHidden: true, showProxy: true, depth: 0 });
-
-			content += await this.addToContent(client, client.clean(evaled), `Output`);
-		} catch (error) {
-			content += await this.addToContent(client, error, `Error`);
-		}
-		client.send(message, content);
 	}
 
 	async addToContent(client, input, type) {

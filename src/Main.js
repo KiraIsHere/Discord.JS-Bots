@@ -24,6 +24,6 @@ function start(input) {
 	proc.on(`close`, () => {
 		setTimeout(() => {
 			start(input);
-		}, 1000 * 30);
+		}, process.env.LOCAL ? 1000 : 1000 * 30);
 	});
 }
