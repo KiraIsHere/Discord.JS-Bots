@@ -41,8 +41,6 @@ class Command extends Commands {
 					client.send(message, `Sorry, you do not have permission for this command`);
 				}
 
-				if (typeof evaled.getTarget === `function`) evaled = evaled.getTarget();
-
 				if (evaled instanceof Promise) evaled = await evaled;
 				if (evaled instanceof Object || evaled instanceof Function) evaled = inspect(evaled, { showHidden: true, showProxy: true, depth: 0 });
 
