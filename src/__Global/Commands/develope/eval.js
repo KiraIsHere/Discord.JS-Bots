@@ -42,7 +42,7 @@ class Command extends Commands {
 				}
 
 				if (evaled instanceof Promise) evaled = await evaled;
-				if (evaled instanceof Object || evaled instanceof Function) evaled = inspect(evaled, { showHidden: true, showProxy: true, depth: 0 });
+				if (evaled instanceof Object || evaled instanceof Function) evaled = inspect(evaled, { showHidden: true, showProxy: true, depth: evaled instanceof Proxy ? 3 : 0 });
 
 				content += await this.addToContent(client, client.clean(evaled), `Output`);
 			} catch (error) {
