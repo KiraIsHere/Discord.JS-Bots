@@ -20,7 +20,6 @@
     "mongodb": "^2.2.33",
     "object-autocorrect": "^1.0.2",
     "os-toolbox": "^0.2.7",
-    "pastebin-js": "^0.4.0",
     "randomcolor": "^0.5.3",
     "uws": "^8.14.1",
     "vm2": "^3.5.2"
