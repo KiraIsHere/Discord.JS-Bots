@@ -23,8 +23,7 @@ class Command extends Commands {
 	run(client, message) {
 		if (!client.ownerIDs.includes(message.author.id)) return client.send(message, `Sorry, you do not have permission for this command`);
 
-		const guildNames = Array.from(client.guilds.keys());
-		const longest = guildNames.reduce((long, str) => Math.max(long, str.length), 0);
+		const longest = client.guilds.map(g => g.name).reduce((long, str) => Math.max(long, str.length), 0);
 		client.send(message, client.guilds.sort().map(g => `${g.name}${` `.repeat(longest - g.name.length)} (${g.memberCount})`).join(`\n`), { code: `` });
 		return true;
 	}
