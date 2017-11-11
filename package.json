@@ -18,7 +18,6 @@
     "mojang": "^0.4.1",
     "moment": "^2.19.1",
     "mongodb": "^2.2.33",
-    "object-autocorrect": "^1.0.2",
     "os-toolbox": "^0.2.7",
     "randomcolor": "^0.5.3",
     "uws": "^8.14.1",

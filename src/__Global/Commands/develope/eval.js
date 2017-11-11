@@ -1,4 +1,3 @@
-const ObjectAutocorrect = require(`object-autocorrect`);
 const Commands = require(`../../Structures/Commands`);
 const { basename } = require(`path`);
 const { post } = require(`snekfetch`);
@@ -24,9 +23,7 @@ class Command extends Commands {
 		});
 	}
 
-	async run(_client, _message, args) {
-		const client = new ObjectAutocorrect(_client);
-		const message = new ObjectAutocorrect(_message);
+	async run(client, message, args) {
 		if (client.ownerIDs.includes(message.author.id) || client.whitelist.includes(message.author.id)) {
 			if (args.length < 1) return client.missingArgs(message, this);
 			let content = await this.addToContent(client, args.join(` `), `Input`);
@@ -42,7 +39,7 @@ class Command extends Commands {
 				}
 
 				if (evaled instanceof Promise) evaled = await evaled;
-				if (evaled instanceof Object || evaled instanceof Function) evaled = inspect(evaled, { showHidden: true, showProxy: true, depth: evaled instanceof Proxy ? 3 : 0 });
+				if (evaled instanceof Object || evaled instanceof Function) evaled = inspect(evaled, { showHidden: true, showProxy: true, depth: 0 });
 
 				content += await this.addToContent(client, client.clean(evaled), `Output`);
 			} catch (error) {
