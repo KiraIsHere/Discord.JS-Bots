@@ -24,7 +24,7 @@ class Command extends Commands {
 		if (!client.ownerIDs.includes(message.author.id)) return client.send(message, `Sorry, you do not have permission for this command`);
 
 		const longest = client.guilds.map(g => client.clean(g.name)).reduce((long, str) => Math.max(long, str.length), 0);
-		client.send(message, client.clean(client.guilds.sort().map(g => `${g.name}${` `.repeat(longest - g.name.length)} (${g.memberCount})`)).join(`\n`), { code: ``, split: true });
+		client.send(message, client.clean(client.guilds.sort().map(g => `${g.name}${` `.repeat(longest - g.name.length)} (${g.memberCount})`).join(`\n`)), { code: ``, split: true });
 		return true;
 	}
 }
