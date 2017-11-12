@@ -63,6 +63,7 @@ class Command extends Commands {
 						.setColor(0xFF0000)
 						.setFooter(client.botName)
 						.setTimestamp();
+					return false;
 				}).catch(() => {
 					embed
 						.setTitle(`❌ **ERROR**`)
@@ -70,6 +71,7 @@ class Command extends Commands {
 						.setColor(0xFF0000)
 						.setFooter(client.botName)
 						.setTimestamp();
+					return false;
 				});
 			} else {
 				message.member.colorRole.edit({
