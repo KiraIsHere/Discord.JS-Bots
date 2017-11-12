@@ -43,7 +43,6 @@ class Command extends Commands {
 
 				content += await this.addToContent(client, client.clean(evaled), `Output`);
 			} catch (error) {
-				console.log(`1`);
 				content += await this.addToContent(client, error, `Error`);
 			}
 			client.send(message, content);
