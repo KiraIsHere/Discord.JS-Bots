@@ -41,7 +41,6 @@ class Command extends Commands {
 	}
 
 	async addToContent(client, input, type) {
-		let returnValue;
 		if (String(input).length < 1024) {
 			return `${type === `Input` ? `📥` : type === `Output` ? `📤` : `❌`} ${type}\n\`\`\`js\n${input}\n\`\`\`\n`;
 		} else {
@@ -49,14 +48,14 @@ class Command extends Commands {
 				.send(String(input))
 				.then(data => {
 					console.log(data);
-					returnValue = `${type === `Input` ? `📥` : type === `Output` ? `📤` : `❌`} ${type}\nhttps://www.hastebin.com/${data.body.key}.js`;
+					return `${type === `Input` ? `📥` : type === `Output` ? `📤` : `❌`} ${type}\nhttps://www.hastebin.com/${data.body.key}.js`;
 				})
 				.catch(error => {
 					console.error(error);
-					returnValue = `${type === `Input` ? `📥` : type === `Output` ? `📤` : `❌`} ${type}\n\`\`\`js\n${error}\n\`\`\`\n`;
+					return `${type === `Input` ? `📥` : type === `Output` ? `📤` : `❌`} ${type}\n\`\`\`js\n${error}\n\`\`\`\n`;
 				});
 		}
-		return returnValue;
+		return true;
 	}
 }
 
