@@ -16,7 +16,7 @@ class Event extends Events {
 			commandName = args.shift().slice(`${client.botName.toLowerCase()}!`.length).toLowerCase();
 		}
 
-		const command = client.commands.get(commandName) || client.commands.get(client.aliases.get(commandName));
+		const command = client.cmds.commands.get(commandName) || client.cmds.commands.get(client.cmds.aliases.get(commandName));
 
 		if (!command || !command.enabled) return false;
 		if (message.guild.id === `361532026354139156` && !message.channel.name.includes(`bot`)) return false;
@@ -33,7 +33,7 @@ class Event extends Events {
 		}
 
 		if (command.cooldown) {
-			const userLimits = client.commandUsage.get(message.author.id);
+			const userLimits = client.cmds.usages.get(message.author.id);
 			if (userLimits) {
 				if (userLimits[command.name]) {
 					if (userLimits[command.name] >= command.cooldownAmount) {
@@ -41,21 +41,21 @@ class Event extends Events {
 					} else {
 						userLimits[command.name]++;
 						setTimeout(() => {
-							const userLimitsUpdated = client.commandUsage.get(message.author.id);
+							const userLimitsUpdated = client.cmds.usages.get(message.author.id);
 							userLimitsUpdated[command.name]--;
-							client.commandUsage.set(message.author.id, userLimitsUpdated);
+							client.cmds.usages.set(message.author.id, userLimitsUpdated);
 						}, command.cooldownTime * 1000);
 					}
 				} else {
 					userLimits[command.name] = 1;
 				}
 			} else {
-				client.commandUsage.set(message.author.id, { [command.name]: 1 });
+				client.cmds.usages.set(message.author.id, { [command.name]: 1 });
 			}
 		}
 
 		if (command.limit) {
-			const userLimits = client.commandUsage.get(message.author.id);
+			const userLimits = client.cmds.usages.get(message.author.id);
 			if (userLimits) {
 				if (userLimits[command.name]) {
 					if (userLimits[command.name] >= command.limitAmount) {
@@ -68,16 +68,16 @@ class Event extends Events {
 					} else {
 						userLimits[command.name]++;
 						setTimeout(() => {
-							const userLimitsUpdated = client.commandUsage.get(message.author.id);
+							const userLimitsUpdated = client.cmds.usages.get(message.author.id);
 							userLimitsUpdated[command.name]--;
-							client.commandUsage.set(message.author.id, userLimitsUpdated);
+							client.cmds.usages.set(message.author.id, userLimitsUpdated);
 						}, command.limitTime * 1000);
 					}
 				} else {
 					userLimits[command.name] = 1;
 				}
 			} else {
-				client.commandUsage.set(message.author.id, { [command.name]: 1 });
+				client.cmds.usages.set(message.author.id, { [command.name]: 1 });
 			}
 		}
 

@@ -23,9 +23,9 @@ class Util {
 							const Group = dir.replace(dirPath, ``);
 							const CommandClass = require(join(resolve(`.`), `/Commands/${Group}/${file}`));
 							const Command = new CommandClass(client);
-							client.commands.set(Name, Command);
+							client.cmds.commands.set(Name, Command);
 							Command.aliases.forEach(alias => { // eslint-disable-line max-nested-callbacks
-								client.aliases.set(alias, Name);
+								client.cmds.aliases.set(alias, Name);
 							});
 							return true;
 						});
@@ -49,9 +49,9 @@ class Util {
 							const Group = dir.replace(dirPath, ``);
 							const CommandClass = require(join(__dirname, `../Commands/${Group}/${file}`));
 							const Command = new CommandClass(client);
-							client.commands.set(Name, Command);
+							client.cmds.commands.set(Name, Command);
 							Command.aliases.forEach(alias => { // eslint-disable-line max-nested-callbacks
-								client.aliases.set(alias, Name);
+								client.cmds.aliases.set(alias, Name);
 							});
 							return true;
 						});

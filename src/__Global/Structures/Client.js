@@ -10,9 +10,11 @@ class CustomClient extends Client {
 		super(options);
 		this.botName = resolve(`.`).split(sep).slice(-1).toString();
 		this.botPrefix = `${this.botName.toLowerCase().charAt(0)}!`;
-		this.aliases = new Collection();
-		this.commands = new Collection();
-		this.commandUsage = new Collection();
+		this.cmds = {
+			aliases: new Collection(),
+			commands: new Collection(),
+			usages: new Collection()
+		};
 		this.database = new Database;
 		this.cooldown = [];
 		this.blacklist = [];

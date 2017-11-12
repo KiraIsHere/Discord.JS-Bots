@@ -2,7 +2,7 @@ const Events = require(`../../../__Global/Structures/Events`);
 
 class Event extends Events {
 	run(client, message) {
-		client.commands.get(`lint`).check(client, message, false);
+		client.cmds.commands.get(`lint`).check(client, message, false);
 
 		if (process.env.LOCAL) return false;
 

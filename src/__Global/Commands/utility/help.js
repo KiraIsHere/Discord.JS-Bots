@@ -21,27 +21,21 @@ class Command extends Commands {
 	}
 
 	run(client, message, args) {
+		let content;
 		if (args.length < 1) {
-			const commandNames = Array.from(client.commands.keys());
-			const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
-			const content =
-				`= Command List =\n` +
-				`\n` +
-				`[Use ${client.botPrefix}help <commandname> for details]\n` +
-				`\n` +
-				`${client.commands.sort().map(c => c.show ? `${c.name}${` `.repeat(longest - c.name.length)} :: ${c.description}\n` : null).join(``)}`;
-			client.send(message, content, { code: `asciidoc` });
+			const longest = Array.from(client.cmds.commands.keys()).reduce((long, str) => Math.max(long, str.length), 0);
+			content = `${client.cmds.commands.sort().map(c => c.show ? `${c.name}${` `.repeat(longest - c.name.length)} :: ${c.description}\n` : null).join(``)}`;
 		} else {
 			let command = args[0];
-			if (client.commands.has(command)) {
-				command = client.commands.get(command);
-				const content =
+			if (client.cmds.commands.has(command)) {
+				command = client.cmds.commands.get(command);
+				content =
 					`= ${command.name} = \n` +
 					`${command.description}\n` +
 					`usage::${command.name.charAt(0).toUpperCase() + command.name.slice(1)} ${command.usage}`;
-				client.send(message, content, { code: `asciidoc` });
 			}
 		}
+		client.send(message, content, { code: `asciidoc` });
 		return true;
 	}
 }
