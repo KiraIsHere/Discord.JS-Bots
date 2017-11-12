@@ -56,25 +56,21 @@ class Command extends Commands {
 					message.member.addRole(role);
 				});
 			} else if (message.member.colorRole.name !== roleName) {
-				try {
-					message.member.colorRole.edit({ color: `DEFAULT` });
-
+				message.member.colorRole.edit({ color: `DEFAULT` }).then(() => {
 					embed
 						.setTitle(`❌ **ERROR**`)
 						.setDescription(`The role \`${message.member.colorRole.name}\` wasn't set to "Default" or "000000", I fixed it for you, Please try that command again.`)
 						.setColor(0xFF0000)
 						.setFooter(client.botName)
 						.setTimestamp();
-					return false;
-				} catch (error) {
+				}).catch(() => {
 					embed
 						.setTitle(`❌ **ERROR**`)
 						.setDescription(`Please set the color of the \`${message.member.colorRole.name}\` role to "Default" or "000000"`)
 						.setColor(0xFF0000)
 						.setFooter(client.botName)
 						.setTimestamp();
-					return false;
-				}
+				});
 			} else {
 				message.member.colorRole.edit({
 					color: roleColor,
