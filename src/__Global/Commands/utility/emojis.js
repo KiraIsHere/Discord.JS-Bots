@@ -21,7 +21,7 @@ class Command extends Commands {
 	}
 
 	run(client, message) {
-		client.send(message, client.emojis.map(c => c.toString()).join(` `), { split: { char: ` ` } });
+		client.send(message, client.emojis.map(e => e).join(` `), { split: { char: ` ` } });
 		return true;
 	}
 }
