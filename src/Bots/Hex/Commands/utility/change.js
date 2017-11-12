@@ -57,17 +57,12 @@ class Command extends Commands {
 				});
 			} else if (message.member.colorRole.name !== roleName) {
 				message.member.colorRole.edit({ color: `DEFAULT` }).then(() => {
-					embed
-						.setTitle(`❌ **ERROR**`)
-						.setDescription(`The role \`${message.member.colorRole.name}\` wasn't set to "Default" or "000000", I fixed it for you, Please try that command again.`)
-						.setColor(0xFF0000)
-						.setFooter(client.botName)
-						.setTimestamp();
+					this.run(client, message, args);
 					return false;
-				}).catch(() => {
+				}).catch(error => {
 					embed
 						.setTitle(`❌ **ERROR**`)
-						.setDescription(`Please set the color of the \`${message.member.colorRole.name}\` role to "Default" or "000000"`)
+						.setDescription(`\`\`\`\n${error}\n\`\`\``)
 						.setColor(0xFF0000)
 						.setFooter(client.botName)
 						.setTimestamp();
@@ -77,6 +72,14 @@ class Command extends Commands {
 				message.member.colorRole.edit({
 					color: roleColor,
 					permissions: rolePermissions
+				}).catch(error => {
+					embed
+						.setTitle(`❌ **ERROR**`)
+						.setDescription(`\`\`\`\n${error}\n\`\`\``)
+						.setColor(0xFF0000)
+						.setFooter(client.botName)
+						.setTimestamp();
+					return false;
 				});
 			}
 			embed
