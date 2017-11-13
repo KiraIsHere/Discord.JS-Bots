@@ -46,13 +46,17 @@ class Command extends Commands {
 				.addField(`System CPU Usage`, `${await cpuLoad()}% used`, true)
 				.addField(`System RAM Usage`, `${await memoryUsage()}% used of ${process.env.LOCAL ? `8GB` : `512MB`}`, true)
 
-				.addField(`${client.botName} Uptime`, client.formatTime(process.uptime()), true)
+				.addField(`Bot Uptime`, client.formatTime(process.uptime()), true)
 				.addField(`Heartbeat Ping`, `${Math.round(client.ping)}ms`, true)
 				.addField(`Message Ping`, `${Math.round(sent.createdTimestamp - message.createdTimestamp)}ms`, true)
 
 				.addField(`Guilds`, client.guilds.size, true)
-				.addField(`Channels`, client.formatNumbers(client.channels.size), true)
 				.addField(`Members`, client.formatNumbers(memberCount), true)
+				.addField(`Emojis`, client.formatNumbers(memberCount), true)
+
+				.addField(`Text`, client.formatNumbers(client.channels.filter(channel => channel.type === `text`).size), true)
+				.addField(`Voice`, client.formatNumbers(client.channels.filter(channel => channel.type === `voice`).size), true)
+				.addField(`Categories`, client.formatNumbers(client.channels.filter(channel => channel.type === `category`).size), true)
 
 				.setColor(0x00FF00)
 				.setFooter(client.botName)
