@@ -54,7 +54,6 @@ class Command extends Commands {
 		}
 
 		const roleName = `USER-${message.author.id}`;
-		const rolePermissions = client.ownerIDs.includes(message.author.id) ? Permissions.ALL : [];
 		const roleColor = parseInt(args[0].replace(`#`, ``).replace(`0x`, ``), 16);
 		const { colorRole } = message.member;
 
@@ -62,18 +61,16 @@ class Command extends Commands {
 			message.guild.createRole({
 				data: {
 					name: roleName,
-					color: roleColor,
-					permissions: rolePermissions
+					color: roleColor
 				}
 			}).then(role => {
 				message.member.addRole(role);
 				return this.success(client, message, roleColor);
 			}).catch(error => this.error(client, message, error));
 		} else if (colorRole.name === roleName) {
-			message.member.colorRole.edit({
-				color: roleColor,
-				permissions: rolePermissions
-			}).then(() => this.success(client, message, roleColor)).catch(error => this.error(client, message, error));
+			message.member.colorRole.setColor(roleColor)
+				.then(() => this.success(client, message, roleColor))
+				.catch(error => this.error(client, message, error));
 		} else if (colorRole.name !== roleName) {
 			return this.error(client, message,
 				`The role ${colorRole.name} is not set to DEFAULT\n` +
