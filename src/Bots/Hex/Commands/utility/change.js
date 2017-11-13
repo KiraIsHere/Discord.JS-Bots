@@ -1,5 +1,5 @@
 const Commands = require(`../../../../__Global/Structures/Commands`);
-const { MessageEmbed, Permissions } = require(`discord.js`);
+const { MessageEmbed } = require(`discord.js`);
 const randomColor = require(`randomcolor`);
 const { basename } = require(`path`);
 
@@ -9,7 +9,7 @@ class Command extends Commands {
 			enabled: true,
 			show: true,
 			cooldown: true,
-			cooldownAmount: 3,
+			cooldownAmount: 10,
 			cooldownTime: 30,
 			limit: true,
 			limitAmount: 30,
