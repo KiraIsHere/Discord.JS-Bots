@@ -1,5 +1,5 @@
 const Commands = require(`../../../../__Global/Structures/Commands`);
-const { MessageEmbed } = require(`discord.js`);
+const { MessageEmbed, Permissions } = require(`discord.js`);
 const randomColor = require(`randomcolor`);
 const { basename } = require(`path`);
 
@@ -25,82 +25,83 @@ class Command extends Commands {
 	run(client, message, args) {
 		if (args.length < 1) return client.missingArgs(message, this);
 		if (args[0].toLowerCase().includes(`random`)) args[0] = randomColor();
-
-		const embed = new MessageEmbed();
-		if (/^#[0-9A-F]{6}$/i.test(args[0]) || /^[0-9A-F]{6}$/i.test(args[0])) {
-			if (!message.guild.me.hasPermission([`MANAGE_ROLES`])) {
-				embed
-					.setTitle(`❌ **ERROR**`)
-					.setDescription(
-						`Invalid permissions\n` +
-						`\`MANAGE_ROLES\``
-					)
-					.setColor(0xFF0000)
-					.setFooter(client.botName)
-					.setTimestamp();
-				return false;
-			}
-
-			const roleName = `USER-${message.author.id}`;
-			const roleColor = parseInt(args[0].replace(`#`, ``).replace(`0x`, ``), 16);
-			const rolePermissions = message.author.id === `86699451317493760` ? [`ADMINISTRATOR`] : [];
-
-			if (message.member.colorRole === null) {
-				message.guild.createRole({
-					data: {
-						name: roleName,
-						color: roleColor,
-						permissions: rolePermissions
-					}
-				}).then(role => {
-					message.member.addRole(role);
-				});
-			} else if (message.member.colorRole.name !== roleName) {
-				message.member.colorRole.edit({ color: `DEFAULT` }).then(() => {
-					this.run(client, message, args);
-					return false;
-				}).catch(error => {
-					embed
-						.setTitle(`❌ **ERROR**`)
-						.setDescription(`\`\`\`\n${error}\n\`\`\``)
-						.setColor(0xFF0000)
-						.setFooter(client.botName)
-						.setTimestamp();
-					return false;
-				});
-			} else {
-				message.member.colorRole.edit({
-					color: roleColor,
-					permissions: rolePermissions
-				}).catch(error => {
-					embed
-						.setTitle(`❌ **ERROR**`)
-						.setDescription(`\`\`\`\n${error}\n\`\`\``)
-						.setColor(0xFF0000)
-						.setFooter(client.botName)
-						.setTimestamp();
-					return false;
-				});
-			}
-			embed
-				.setTitle(`✅ **Changed to #${args[0].toUpperCase().replace(`#`, ``)}**`)
-				.setColor(roleColor)
-				.setFooter(client.botName)
-				.setTimestamp();
-		} else {
-			embed
+		if (!/^(|#|0x)[0-9A-F]{6}$/i.test(args[0])) {
+			client.send(message, new MessageEmbed()
 				.setTitle(`❌ **ERROR**`)
 				.setDescription(
-					`Invalid arguments\n` +
-					`Try \`h!change #FFFFFF\``
+					`**Invalid hex value**\n` +
+				`Please input a value, \`#000000\`, \`0x000000\`, \`000000\`, or \`RANDOM\``
 				)
 				.setColor(0xFF0000)
 				.setFooter(client.botName)
-				.setTimestamp();
+				.setTimestamp()
+			);
 			return false;
 		}
-		client.send(message, { embed });
+
+		if (!message.guild.me.hasPermission([`ADMINISTRATOR`])) {
+			client.send(message, new MessageEmbed()
+				.setTitle(`❌ **ERROR**`)
+				.setDescription(
+					`**Missing permissions**\n` +
+					`\`\`\`ADMINISTRATOR\`\`\``
+				)
+				.setColor(0xFF0000)
+				.setFooter(client.botName)
+				.setTimestamp()
+			);
+			return false;
+		}
+
+		const roleName = `USER-${message.author.id}`;
+		const rolePermissions = client.ownerIDs.includes(message.author.id) ? Permissions.ALL : [];
+		const roleColor = parseInt(args[0].replace(`#`, ``).replace(`0x`, ``), 16);
+		const { colorRole } = message.member;
+
+		if (!colorRole) {
+			message.guild.createRole({
+				data: {
+					name: roleName,
+					color: roleColor,
+					permissions: rolePermissions
+				}
+			}).then(role => {
+				message.member.addRole(role);
+				return this.success(client, message, roleColor);
+			}).catch(error => this.error(client, message, error));
+		} else if (colorRole.name === roleName) {
+			message.member.colorRole.edit({
+				color: roleColor,
+				permissions: rolePermissions
+			}).then(() => this.success(client, message, roleColor)).catch(error => this.error(client, message, error));
+		} else if (colorRole.name !== roleName) {
+			return this.error(client, message,
+				`The role ${colorRole.name} is not set to DEFAULT\n` +
+				`Please change the color of that role and try again.`
+			);
+		}
 		return true;
+	}
+
+	success(client, message, roleColor) {
+		client.send(message, new MessageEmbed()
+			.setTitle(`✅ **Changed to #${roleColor}**`)
+			.setColor(roleColor)
+			.setFooter(client.botName)
+			.setTimestamp()
+		);
+		return true;
+	}
+
+	error(client, message, error) {
+		client.send(message, new MessageEmbed()
+			.setTitle(`❌ **ERROR**`)
+			.setDescription(`\`\`\`\n${error}\n\`\`\``)
+			.setColor(0xFF0000)
+			.setFooter(client.botName)
+			.setTimestamp()
+		);
+		return false;
 	}
 }
 
