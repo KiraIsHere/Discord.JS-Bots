@@ -39,12 +39,12 @@ class Command extends Commands {
 			return false;
 		}
 
-		if (!message.guild.me.hasPermission([`ADMINISTRATOR`])) {
+		if (!message.guild.me.hasPermission([`MANAGE_ROLES`])) {
 			client.send(message, new MessageEmbed()
 				.setTitle(`❌ **ERROR**`)
 				.setDescription(
 					`**Missing permissions**\n` +
-					`\`\`\`ADMINISTRATOR\`\`\``
+					`\`\`\`MANAGE_ROLES\`\`\``
 				)
 				.setColor(0xFF0000)
 				.setFooter(client.botName)
