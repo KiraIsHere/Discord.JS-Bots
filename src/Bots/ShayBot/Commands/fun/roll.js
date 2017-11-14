@@ -22,6 +22,7 @@ class Command extends Commands {
 
 	run(client, message, args) {
 		if (args.length < 1) return client.send(message, `You didn't specify how many sides`);
+		if (args[0].match(/[A-Z]/ig)) return client.send(message, `Please use numbers like 6`);
 		client.send(message, Math.floor(Math.random() * parseInt(args[0])));
 		return true;
 	}
