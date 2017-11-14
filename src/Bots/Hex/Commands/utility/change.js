@@ -64,7 +64,7 @@ class Command extends Commands {
 					color: roleColor
 				}
 			}).then(role => {
-				message.member.addRole(role);
+				message.member.addRole(role).catch(error => this.error(client, message, error));
 				return this.success(client, message, roleColor);
 			}).catch(error => this.error(client, message, error));
 		} else if (colorRole.name === roleName) {
