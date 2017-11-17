@@ -26,11 +26,9 @@ class Command extends Commands {
 		const embed = new MessageEmbed()
 			.setTitle(`About`)
 			.setDescription(
-				`Hello, I am Cleverbot!\n` +
+				`Hello, I am Assistant Bot!\n` +
 				`I was created by **Shayne Hartford (ShayBox)**.\n` +
-				`To use me, create a text channel with "cleverbot" in the name and start talking 😄\n` +
-				`Please donate to increase our calls, All donations go twords buying more!\n` +
-				`<htps://paypal.me/hydarbolt>`
+				`To use me, create a voice channel with "assistant" in the name and say "okay google" 😄\n`
 			)
 			.setColor(0x00FF00)
 			.setFooter(client.botName)
