@@ -34,6 +34,9 @@ class Command extends Commands {
 				memberCount += guild.memberCount;
 			});
 
+			const usedMemory = await memoryUsage();
+			const maxMemory = process.env.LOCAL ? 8096 : 512;
+
 			const embed = new MessageEmbed()
 				.setAuthor(`GitHub Repo`, `https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png`)
 				.setTitle(homepage)
@@ -43,8 +46,8 @@ class Command extends Commands {
 				.addField(`OS Type`, `${type} v${release}`, true)
 
 				.addField(`System Uptime`, client.formatTime(process.env.LOCAL ? uptime : process.uptime()), true)
-				.addField(`System CPU Usage`, `${await cpuLoad()}% used`, true)
-				.addField(`System RAM Usage`, `${await memoryUsage()}% used of ${process.env.LOCAL ? `8GB` : `512MB`}`, true)
+				.addField(`System CPU Usage`, `${await cpuLoad()}%`, true)
+				.addField(`System RAM Usage`, `${usedMemory}% (${Math.round((usedMemory / 100) * maxMemory)} MB / ${process.env.LOCAL ? `8 GB` : `512 MB`})`, true)
 
 				.addField(`Bot Uptime`, client.formatTime(process.uptime()), true)
 				.addField(`Heartbeat Ping`, `${Math.round(client.ping)}ms`, true)

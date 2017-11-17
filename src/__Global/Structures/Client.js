@@ -100,7 +100,7 @@ class CustomClient extends Client {
 	// End Cooldown
 
 	//
-	// Misc (send|missingArgs|clean|formatTime|formatNumbers|defaultChannel)
+	// Misc (send|missingArgs|clean|formatTime|formatNumbers|formatBytes|defaultChannel)
 	//
 	send(message, ...content) {
 		return new Promise(async resolve => {
@@ -179,6 +179,13 @@ class CustomClient extends Client {
 
 	formatNumbers(input) {
 		return input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, `,`);
+	}
+
+	formatBytes(input) {
+		var sizes = [`Bytes`, `KB`, `MB`, `GB`, `TB`];
+		if (input === 0) return `0 Bytes`;
+		var i = parseInt(Math.floor(Math.log(input) / Math.log(1024)));
+		return `${Math.round(input / Math.pow(1024, i), 2)} ${sizes[i]}`;
 	}
 
 	defaultChannel(guild) {
