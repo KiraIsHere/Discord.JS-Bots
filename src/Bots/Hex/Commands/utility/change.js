@@ -30,7 +30,7 @@ class Command extends Commands {
 				.setTitle(`❌ **ERROR**`)
 				.setDescription(
 					`**Invalid hex value**\n` +
-				`Please input a value, \`#000000\`, \`0x000000\`, \`000000\`, or \`RANDOM\``
+					`Please input a value, \`#000000\`, \`0x000000\`, \`000000\`, or \`RANDOM\``
 				)
 				.setColor(0xFF0000)
 				.setFooter(client.botName)

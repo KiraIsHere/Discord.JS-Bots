@@ -28,13 +28,13 @@ class Command extends Commands {
 		const channelID = args[1] ? args[1] : message.channel.id;
 
 		client.channels.get(channelID).messages.fetch(messageID).then(quote => {
-			const embed = new MessageEmbed()
+			client.send(message, new MessageEmbed()
 				.setAuthor(quote.author.username, quote.author.displayAvatarURL())
 				.addField(`Message: `, quote.content)
 				.setColor(0x00FF00)
 				.setFooter(client.botName)
-				.setTimestamp();
-			client.send(message, { embed });
+				.setTimestamp()
+			);
 		});
 		return true;
 	}

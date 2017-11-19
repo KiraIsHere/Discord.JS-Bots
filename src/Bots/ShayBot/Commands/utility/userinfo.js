@@ -30,7 +30,7 @@ class Command extends Commands {
 			message.member = message.guild.members.get(args[0]);
 		}
 
-		const embed = new MessageEmbed()
+		client.send(message, new MessageEmbed()
 			.addField(`User Name`, message.member.user.username, true)
 			.addField(`Guild Nickname`, message.member.nickname ? message.member.nickname : `None`, true)
 
@@ -44,8 +44,8 @@ class Command extends Commands {
 			.setThumbnail(message.member.user.displayAvatarURL())
 			.setColor(0x00FF00)
 			.setFooter(client.botName)
-			.setTimestamp();
-		client.send(message, { embed });
+			.setTimestamp()
+		);
 		return true;
 	}
 

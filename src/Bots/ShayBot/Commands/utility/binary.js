@@ -38,7 +38,6 @@ class Command extends Commands {
 				output = `Sorry, you didn't enter a valid option, encode or decode`;
 				break;
 		}
-
 		client.send(message, output, { code: `` });
 		return true;
 	}

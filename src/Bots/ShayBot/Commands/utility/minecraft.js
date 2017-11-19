@@ -27,14 +27,14 @@ class Command extends Commands {
 		if (args[0] < 3 || args[0] > 32) return client.send(message, `Please input valid name`);
 
 		username(args[0]).then(data => {
-			const embed = new MessageEmbed()
+			client.send(message, new MessageEmbed()
 				.setAuthor(`${data.name} (UUID: ${data.id})`, `https://visage.surgeplay.com/face/${data.id}`)
 				.setImage(`https://visage.surgeplay.com/full/512/${data.id}`)
 				.setColor(0x00FF00)
 				.setFooter(client.botName)
-				.setTimestamp();
-			client.send(message, { embed });
-		}).catch(() => new Error(`Invalid name, Please input valid name`));
+				.setTimestamp()
+			);
+		}).catch(() => client.send(message, `Invalid name, Please input valid name`));
 		return true;
 	}
 }

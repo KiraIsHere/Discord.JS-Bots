@@ -22,19 +22,12 @@ class Command extends Commands {
 	}
 
 	run(client, message) {
-		const embed = new MessageEmbed()
+		client.send(message, new MessageEmbed()
+			.setTitle(client.user.bot ? `Invite Link` : `I'm a user account, I can't be invited`)
 			.setURL(`https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=8`)
 			.setFooter(`Note: I may be a private bot`)
-			.setColor(0x00FFFF);
-
-		if (client.user.bot) {
-			embed
-				.setTitle(`Invite Link`);
-		} else {
-			embed
-				.setTitle(`I'm a user account, I can't be invited`);
-		}
-		client.send(message, { embed });
+			.setColor(0x00FFFF)
+		);
 		return true;
 	}
 }

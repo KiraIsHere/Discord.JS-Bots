@@ -21,8 +21,8 @@ class Command extends Commands {
 		});
 	}
 
-	run(client, message) {
-		get(`https://catfact.ninja/fact`).then(data => client.send(message, data.body.fact));
+	async run(client, message) {
+		client.send(message, await get(`https://catfact.ninja/fact`).body.fact);
 		return true;
 	}
 }

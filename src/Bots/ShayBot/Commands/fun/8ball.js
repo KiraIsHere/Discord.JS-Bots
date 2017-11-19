@@ -21,6 +21,8 @@ class Command extends Commands {
 	}
 
 	run(client, message, args) {
+		if (args.length < 1) return client.send(message, `Please input a question`);
+
 		const responses = [
 			`Nope`,
 			`I don't know, m8`,
@@ -37,7 +39,6 @@ class Command extends Commands {
 			`If that's what you want...`
 		];
 
-		if (args.length < 1) return client.send(message, `Please input a question`);
 		client.send(message, responses[Math.floor(Math.random() * responses.length)]);
 		return true;
 	}

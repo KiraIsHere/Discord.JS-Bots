@@ -24,38 +24,46 @@ class Command extends Commands {
 	run(client, message) {
 		const role = message.member.roles.find(`name`, `USER-${message.member.id}`);
 
-		const embed = new MessageEmbed();
-		if (role) {
-			if (!message.guild.me.hasPermission([`MANAGE_ROLES`])) {
-				embed
-					.setTitle(`❌ **ERROR**`)
-					.setDescription(
-						`Invalid permissions\n` +
-						`\`MANAGE_ROLES\``
-					)
-					.setColor(0xFF0000)
-					.setFooter(client.botName)
-					.setTimestamp();
-				return false;
-			}
-
-			role.delete();
-
-			embed
-				.setTitle(`✅ **Removed ${role.hexColor.toUpperCase().replace(`#`, ``)}**`)
-				.setColor(role.color)
-				.setFooter(client.botName)
-				.setTimestamp();
-		} else {
-			embed
+		if (!role) {
+			client.send(message, new MessageEmbed()
 				.setTitle(`❌ **ERROR**`)
 				.setDescription(`You dont have one!`)
 				.setColor(0xFF0000)
 				.setFooter(client.botName)
-				.setTimestamp();
+				.setTimestamp()
+			);
+		}
+		if (!message.guild.me.hasPermission([`MANAGE_ROLES`])) {
+			client.send(message, new MessageEmbed()
+				.setTitle(`❌ **ERROR**`)
+				.setDescription(
+					`Invalid permissions\n` +
+						`\`MANAGE_ROLES\``
+				)
+				.setColor(0xFF0000)
+				.setFooter(client.botName)
+				.setTimestamp()
+			);
 			return false;
 		}
-		client.send(message, { embed });
+
+		role.delete().then(role => {
+			client.send(message, new MessageEmbed()
+				.setTitle(`✅ **Removed ${role.hexColor.toUpperCase().replace(`#`, ``)}**`)
+				.setColor(role.color)
+				.setFooter(client.botName)
+				.setTimestamp()
+			);
+		}).catch(error => {
+			client.send(message, new MessageEmbed()
+				.setTitle(`❌ **ERROR**`)
+				.setDescription(`\`\`\`\n${error}\n\`\`\``)
+				.setColor(0xFF0000)
+				.setFooter(client.botName)
+				.setTimestamp()
+			);
+			return false;
+		});
 		return true;
 	}
 }

@@ -32,12 +32,12 @@ class CustomClient extends Client {
 	// Console (console|log|error|warn)
 	//
 	console(input, type) {
-		const embed = new MessageEmbed()
+		this.channels.get(this.channelList.CONSOLE).send(new MessageEmbed()
 			.setDescription(input)
 			.setColor(type === `Log` ? 0x00FF00 : 0xFF0000)
 			.setFooter(`${type} | ${this.botName}`)
-			.setTimestamp();
-		this.channels.get(this.channelList.CONSOLE).send({ embed });
+			.setTimestamp()
+		);
 	}
 
 	log(input) {
@@ -103,25 +103,25 @@ class CustomClient extends Client {
 	// Misc (send|missingArgs|clean|formatTime|formatNumbers|formatBytes|defaultChannel)
 	//
 	send(message, ...content) {
-		return new Promise(async resolve => {
+		return new Promise((resolve, reject) => {
 			if (this.user.bot) {
-				resolve(await message.channel.send(...content));
+				message.channel.send(...content).then(message => resolve(message)).catch(error => reject(error));
 			} else {
-				setTimeout(async () => {
-					resolve(await message.edit(...content));
+				setTimeout(() => {
+					message.edit(...content).then(message => resolve(message)).catch(error => reject(error));
 				}, 500);
 			}
 		});
 	}
 
 	missingArgs(message, command) {
-		const embed = new MessageEmbed()
+		this.send(message, new MessageEmbed()
 			.setTitle(`Command Usage`)
 			.setDescription(`\`\`\`\n${command.name} ${command.usage}\n\`\`\``)
 			.setColor(0xFF7900)
 			.setFooter(this.botName)
-			.setTimestamp();
-		this.send(message, { embed });
+			.setTimestamp()
+		);
 	}
 
 	clean(text) {

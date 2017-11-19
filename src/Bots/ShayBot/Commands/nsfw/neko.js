@@ -21,8 +21,8 @@ class Command extends Commands {
 		});
 	}
 
-	run(client, message) {
-		get(`http://nekos.life/api/neko`).then(data => client.send(message, { files: [data.body.neko] }));
+	async run(client, message) {
+		client.send(message, { files: [await get(`http://nekos.life/api/neko`).body.neko] });
 		return true;
 	}
 }

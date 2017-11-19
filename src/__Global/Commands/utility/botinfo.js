@@ -37,7 +37,7 @@ class Command extends Commands {
 			const usedMemory = await memoryUsage();
 			const maxMemory = process.env.LOCAL ? 8096 : 512;
 
-			const embed = new MessageEmbed()
+			sent.edit(new MessageEmbed()
 				.setAuthor(`GitHub Repo`, `https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png`)
 				.setTitle(homepage)
 
@@ -63,8 +63,8 @@ class Command extends Commands {
 
 				.setColor(0x00FF00)
 				.setFooter(client.botName)
-				.setTimestamp();
-			sent.edit({ embed });
+				.setTimestamp()
+			);
 		});
 		return true;
 	}

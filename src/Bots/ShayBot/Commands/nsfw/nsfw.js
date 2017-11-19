@@ -24,11 +24,13 @@ class Command extends Commands {
 		const NSFW = message.guild.roles.find(`name`, `NSFW`);
 
 		if (message.member.roles.has(NSFW.id)) {
-			message.member.removeRole(NSFW);
-			client.send(message, `Successfully Hidden NSFW Channels`);
+			message.member.removeRole(NSFW)
+				.then(() => client.send(message, `Successfully Hidden NSFW Channels`))
+				.catch(error => client.send(message, error, { codeblock: `` }));
 		} else {
-			message.member.addRole(NSFW);
-			client.send(message, `Successfully Shown NSFW Channels`);
+			message.member.addRole(NSFW)
+				.then(() => client.send(message, `Successfully Shown NSFW Channels`))
+				.catch(error => client.send(message, error, { codeblock: `` }));
 		}
 		return true;
 	}

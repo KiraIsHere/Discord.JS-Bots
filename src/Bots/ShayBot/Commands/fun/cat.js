@@ -21,8 +21,8 @@ class Command extends Commands {
 		});
 	}
 
-	run(client, message) {
-		get(`http://random.cat/meow`).then(data => client.send(message, { files: [data.body.file] }));
+	async run(client, message) {
+		client.send(message, { files: [await get(`http://random.cat/meow`).body.file] });
 		return true;
 	}
 }

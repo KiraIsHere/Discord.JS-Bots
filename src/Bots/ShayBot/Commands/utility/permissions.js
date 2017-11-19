@@ -24,9 +24,8 @@ class Command extends Commands {
 	run(client, message, args) {
 		if (args.length < 1) return client.missingArgs(message, this);
 
-		if (!message.guild.roles.find(`name`, args.join(` `))) return false;
-
 		const role = message.guild.roles.find(`name`, args.join(` `));
+		if (!role) return false;
 		const permissions = role.permissions.serialize();
 
 		let longestString = 0;
@@ -41,14 +40,13 @@ class Command extends Commands {
 			content += `${` `.repeat(longestString - key.length)}${key} ${permissions[key]}\n`;
 		});
 
-		const embed = new MessageEmbed()
+		client.send(message, new MessageEmbed()
 			.setTitle(role.name)
 			.setDescription(`\`\`\`${content}\`\`\``)
 			.setColor(role.color)
 			.setFooter(client.botName)
-			.setTimestamp();
-
-		client.send(message, { embed });
+			.setTimestamp()
+		);
 		return true;
 	}
 }

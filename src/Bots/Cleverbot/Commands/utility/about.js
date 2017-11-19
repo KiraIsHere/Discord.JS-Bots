@@ -23,7 +23,7 @@ class Command extends Commands {
 
 	run(client, message) {
 		if (message.channel.name.includes(`cleverbot`)) return false;
-		const embed = new MessageEmbed()
+		client.send(message, new MessageEmbed()
 			.setTitle(`About`)
 			.setDescription(
 				`Hello, I am Cleverbot!\n` +
@@ -34,8 +34,8 @@ class Command extends Commands {
 			)
 			.setColor(0x00FF00)
 			.setFooter(client.botName)
-			.setTimestamp();
-		client.send(message, { embed });
+			.setTimestamp()
+		);
 		return true;
 	}
 }

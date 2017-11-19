@@ -22,12 +22,10 @@ class Command extends Commands {
 		});
 	}
 
-	run(client, message, args) {
+	async run(client, message, args) {
 		if (args.length < 1) return client.missingArgs(message, this);
 
-		googl.shorten(args[0]).then(url => {
-			client.send(message, url);
-		});
+		client.send(message, await googl.shorten(args[0]));
 		return true;
 	}
 }

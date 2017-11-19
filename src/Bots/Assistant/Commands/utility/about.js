@@ -23,17 +23,18 @@ class Command extends Commands {
 
 	run(client, message) {
 		if (message.channel.name.includes(`cleverbot`)) return false;
-		const embed = new MessageEmbed()
-			.setTitle(`About`)
-			.setDescription(
-				`Hello, I am Assistant Bot!\n` +
-				`I was created by **Shayne Hartford (ShayBox)**.\n` +
-				`To use me, create a voice channel with "assistant" in the name and say "okay google" 😄\n`
-			)
-			.setColor(0x00FF00)
-			.setFooter(client.botName)
-			.setTimestamp();
-		client.send(message, { embed });
+		client.send(message,
+			new MessageEmbed()
+				.setTitle(`About`)
+				.setDescription(
+					`Hello, I am Assistant Bot!\n` +
+					`I was created by **Shayne Hartford (ShayBox)**.\n` +
+					`To use me, create a voice channel with "assistant" in the name and say "okay google" 😄\n`
+				)
+				.setColor(0x00FF00)
+				.setFooter(client.botName)
+				.setTimestamp()
+		);
 		return true;
 	}
 }

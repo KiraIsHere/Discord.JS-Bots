@@ -25,10 +25,10 @@ class Command extends Commands {
 		if (args.length < 1) return client.missingArgs(message, this);
 
 		if (/[0-9A-F]{6}/i.test(args)) {
-			const embed = new MessageEmbed()
+			client.send(message, new MessageEmbed()
 				.setTitle(`#${args.join(` `).replace(`#`, ``)}`)
-				.setColor(parseInt(args.join(` `).replace(`#`, ``), 16));
-			client.send(message, { embed });
+				.setColor(parseInt(args.join(` `).replace(`#`, ``), 16))
+			);
 		}
 		return true;
 	}

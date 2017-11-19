@@ -21,8 +21,8 @@ class Command extends Commands {
 		});
 	}
 
-	run(client, message) {
-		get(`https://random.dog/woof`).then(data => client.send(message, { files: [`http://random.dog/${data.text}`] }));
+	async run(client, message) {
+		client.send(message, { files: [`http://random.dog/${await get(`https://random.dog/woof`).text}`] });
 		return true;
 	}
 }

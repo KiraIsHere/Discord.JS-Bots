@@ -24,7 +24,7 @@ class Command extends Commands {
 	async run(client, message) {
 		await message.guild.members.fetch();
 
-		const embed = new MessageEmbed()
+		client.send(message, new MessageEmbed()
 			.setAuthor(`Owner: ${message.guild.owner.user.username} (ID: ${message.guild.owner.user.id})`, message.guild.owner.user.displayAvatarURL())
 
 			.addField(`Guild Name`, message.guild.name, true)
@@ -49,8 +49,8 @@ class Command extends Commands {
 
 			.setColor(0x00FF00)
 			.setFooter(client.botName)
-			.setTimestamp();
-		client.send(message, { embed });
+			.setTimestamp()
+		);
 		return true;
 	}
 

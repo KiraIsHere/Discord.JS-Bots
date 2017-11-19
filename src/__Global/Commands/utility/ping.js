@@ -25,13 +25,13 @@ class Command extends Commands {
 		if (!client.user.bot) message.delete({ timeout: 500 });
 
 		message.channel.send(`Loading...`).then(sent => {
-			const embed = new MessageEmbed()
+			sent.edit(new MessageEmbed()
 				.addField(`Heartbeat`, `${Math.round(client.ping)}ms`, true)
 				.addField(`Message`, `${Math.round(sent.createdTimestamp - message.createdTimestamp)}ms`, true)
 				.setColor(0x00FFFF)
 				.setFooter(client.botName)
-				.setTimestamp();
-			sent.edit({ embed });
+				.setTimestamp()
+			);
 		});
 		return true;
 	}

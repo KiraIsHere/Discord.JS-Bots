@@ -41,7 +41,7 @@ class Event extends Events {
 
 			// Audio Data (bytes)
 			assistant.on(`audio-data`, data => {
-				// connection.playStream(data);
+				connection.playFile(data);
 			});
 
 			//  Reponse Text (string)
@@ -56,7 +56,7 @@ class Event extends Events {
 
 			//  Conversation State (bytes)
 			assistant.on(`state`, state => {
-				console.log(`State: ${state}`);
+				console.log(`State: ${Buffer.from(state).toString(`ascii`)}`);
 			});
 
 			//  Microphone Mode (int)
@@ -77,8 +77,8 @@ class Event extends Events {
 
 			// Assistant is ready to accept audio data. NOTE: .once() is used.
 			assistant.once(`ready`, wstream => {
+				wstream.pipe(stream);
 				console.log(`Start`);
-				stream.pipe(wstream);
 			});
 
 			// Current conversation is over.
@@ -92,12 +92,13 @@ class Event extends Events {
 				// Setup follow-on 'ready' and 'end' event handler to change audio source
 				// if desired (or if you used .once()).
 				assistant.once(`ready`, wstream => {
-					stream.pipe(wstream);
+					wstream.pipe(stream);
+					console.log(`Follow On Started`);
 				});
 
 				// Handle follow-on conversation end.
 				assistant.once(`end`, () => {
-					stream.end();
+					console.log(`Follow On Ended`);
 				});
 
 				// Don't forget to call .converse() to resume conversation
