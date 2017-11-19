@@ -1,7 +1,7 @@
 {
 	"messageCacheMaxSize": 100,
-	"messageCacheLifetime": 600,
-	"messageSweepInterval": 10,
+	"messageCacheLifetime": 300,
+	"messageSweepInterval": 60,
 	"disabledEvents": [
 		"CHANNEL_CREATE",
 		"CHANNEL_DELETE",
