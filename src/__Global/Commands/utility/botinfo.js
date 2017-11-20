@@ -37,34 +37,34 @@ class Command extends Commands {
 				memberCount += guild.memberCount;
 			});
 
-			sent.edit(new MessageEmbed()
-				.setAuthor(`GitHub Repo`, `https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png`)
-				.setTitle(homepage)
+			sent.edit(
+				`= STATISTICS =\n` +
 
-				.addField(`Node (NPM)`, `${process.version} (${String(execSync(`npm -v`)).replace(`\n`, ``)})`, true)
-				.addField(`Discord.JS`, version, true)
-				.addField(`OS Type`, `${type} v${release}`, true)
+				`\nVersions\n` +
+				`• Discord.js       :: ${version}\n` +
+				`• Node             :: ${process.version}\n` +
+				`• NPM              :: ${String(execSync(`npm -v`)).replace(`\n`, ``)}\n` +
 
-				.addField(`System Uptime`, client.formatTime(process.env.LOCAL ? uptime : process.uptime()), true)
-				.addField(`System CPU Usage`, `${await cpuLoad()}%`, true)
-				.addField(`System RAM Usage`, `${usedMemory}% (${Math.round((usedMemory / 100) * maxMemory)} MB / ${process.env.LOCAL ? `8 GB` : `512 MB`})`, true)
+				`\nSystem\n` +
+				`• Uptime           :: ${client.formatTime(uptime)}\n` +
+				`• OS Type          :: ${String(type).replace(`_`, ` `)} v${release}\n` +
+				`• System CPU Usage :: ${await cpuLoad()}%\n` +
+				`• System RAM Usage :: ${usedMemory}% (${Math.round((usedMemory / 100) * maxMemory)} MB / ${process.env.LOCAL ? `8 GB` : `512 MB`})\n` +
 
-				.addField(`Heartbeat Ping`, `${Math.round(client.ping)}ms`, true)
-				.addField(`Message Ping`, `${Math.round(sent.createdTimestamp - message.createdTimestamp)}ms`, true)
-				.addField(`Bot RAM Usage`, `${Math.round((process.memoryUsage().heapUsed / 1024 / 1024 * 100) / 100)} MB`, true)
+				`\nBot\n` +
+				`• Uptime           :: ${client.formatTime(process.uptime())}\n` +
+				`• Heartbeat Ping   :: ${Math.round(client.ping)}ms\n` +
+				`• Message Ping     :: ${Math.round(sent.createdTimestamp - message.createdTimestamp)}ms\n` +
+				`• Bot RAM Usage    :: ${Math.round((process.memoryUsage().heapUsed / 1024 / 1024 * 100) / 100)} MB\n` +
 
-				.addField(`Guilds`, client.guilds.size, true)
-				.addField(`Members`, client.formatNumbers(memberCount), true)
-				.addField(`Emojis`, client.formatNumbers(memberCount), true)
-
-				.addField(`Text`, client.formatNumbers(client.channels.filter(channel => channel.type === `text`).size), true)
-				.addField(`Voice`, client.formatNumbers(client.channels.filter(channel => channel.type === `voice`).size), true)
-				.addField(`Categories`, client.formatNumbers(client.channels.filter(channel => channel.type === `category`).size), true)
-
-				.setColor(0x00FF00)
-				.setFooter(client.botName)
-				.setTimestamp()
-			);
+				`\nBot Stats\n` +
+				`• Guilds           :: ${client.formatNumbers(client.guilds.size)}\n` +
+				`• Members          :: ${client.formatNumbers(memberCount)}\n` +
+				`• Emojis           :: ${client.formatNumbers(client.emojis.size)}\n` +
+				`• Categories       :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `category`).size)}\n` +
+				`• Text Channels    :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `text`).size)}\n` +
+				`• Voice Channels   :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `voice`).size)}\n`,
+				{ code: `asciidoc` });
 		});
 		return true;
 	}
