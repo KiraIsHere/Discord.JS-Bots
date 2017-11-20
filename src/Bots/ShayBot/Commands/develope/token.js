@@ -31,8 +31,8 @@ class Command extends Commands {
 			.then(data => {
 				client.send(message,
 					`Successfully logged in as ${data.USERNAME}\n` +
-					`You have just saved theese guilds:\n` +
-					`\`\`\`\n${data.GUILDS.map(guild => guild.name)}\n\`\`\``
+					`You have just saved \`${data.GUILDS.size}\` guilds:\n` +
+					`\`\`\`\n${data.GUILDS.map(guild => `${guild.name}\n`)}\n\`\`\``
 				);
 			}).catch(error => {
 				client.send(message, error, { code: `` });
