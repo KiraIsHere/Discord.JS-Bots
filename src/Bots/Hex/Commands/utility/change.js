@@ -38,13 +38,12 @@ class Command extends Commands {
 			);
 			return false;
 		}
-
 		if (!message.guild.me.hasPermission([`MANAGE_ROLES`])) {
 			client.send(message, new MessageEmbed()
 				.setTitle(`❌ **ERROR**`)
 				.setDescription(
 					`**Missing permissions**\n` +
-					`\`\`\`MANAGE_ROLES\`\`\``
+					`\`\`\`\nMANAGE_ROLES\n\`\`\``
 				)
 				.setColor(0xFF0000)
 				.setFooter(client.botName)
@@ -56,6 +55,21 @@ class Command extends Commands {
 		const roleName = `USER-${message.author.id}`;
 		const roleColor = parseInt(args[0].replace(`#`, ``).replace(`0x`, ``), 16);
 		const { colorRole } = message.member;
+
+		if (colorRole.position > message.guild.me.highestRole.position) {
+			client.send(message, new MessageEmbed()
+				.setTitle(`❌ **ERROR**`)
+				.setDescription(
+					`Invalid permissions\n` +
+					`Cannot edit role \`\`\`\n${colorRole.name}\n\`\`\`\n` +
+					`Please move the role below Hex's role.`
+				)
+				.setColor(0xFF0000)
+				.setFooter(client.botName)
+				.setTimestamp()
+			);
+			return false;
+		}
 
 		if (!colorRole) {
 			message.guild.createRole({
