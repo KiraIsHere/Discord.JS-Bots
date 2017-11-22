@@ -25,7 +25,7 @@ class Command extends Commands {
 	}
 
 	run(client, message) {
-		if (message.guild.id === `361532026354139156`) return client.send(message, `Check #statistics`);
+		if (message.guild.id === `361532026354139156`) return client.send(message, `Check <#382723103345606656>`);
 
 		if (!client.user.bot) message.delete({ timeout: 500 });
 		this.send(client, message);
@@ -59,7 +59,7 @@ class Command extends Commands {
 				`\nBot\n` +
 				`• Uptime           :: ${client.formatTime(process.uptime())}\n` +
 				`• Heartbeat Ping   :: ${Math.round(client.ping)}ms\n` +
-				`• Message Ping     :: ${Math.round(message.author === client.user ? message.editedTimestamp - sent.editedTimestamp : message.createdTimestamp - sent.createdTimestamp)}ms\n` +
+				`${message.author !== client.user ? `• Message Ping     :: ${Math.round(message.createdTimestamp - sent.createdTimestamp)}ms\n` : `\n`}` +
 				`• Bot RAM Usage    :: ${Math.round((process.memoryUsage().heapUsed / 1024 / 1024 * 100) / 100)} MB\n` +
 
 				`\nBot Stats\n` +

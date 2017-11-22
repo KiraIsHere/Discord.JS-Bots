@@ -19,9 +19,9 @@ class Event extends Events {
 			channel.messages.fetch().then(messages => {
 				messages.forEach(message => {
 					if (message.author !== client.user) return false;
-					setTimeout(() => {
+					setInterval(() => {
 						client.cmds.commands.get(`botinfo`).send(client, message);
-					}, 1000);
+					}, 1000 * 60 * 10);
 					return true;
 				});
 			});
