@@ -8,29 +8,26 @@ const moment = require(`moment`);
 class CustomClient extends Client {
 	constructor(options) {
 		super(options);
+		this.blacklist = [];
 		this.botName = resolve(`.`).split(sep).slice(-1).toString();
 		this.botPrefix = `${this.botName.toLowerCase().charAt(0)}!`;
-		this.cmds = {
-			aliases: new Collection(),
-			commands: new Collection(),
-			usages: new Collection()
-		};
-		this.database = new Database;
-		this.cooldown = [];
-		this.blacklist = [];
-		this.whitelist = [];
-		this.ownerIDs = [`358558305997684739`];
 		this.channelList = {
 			CONSOLE: `361533828520476684`,
 			FEEDBACK: `368572194667888646`,
 			GUILD_LOG: `363003869288202242`,
 			MEMBER_LOG: `361540602858569728`
 		};
+		this.cmds = {
+			aliases: new Collection(),
+			commands: new Collection(),
+			usages: new Collection()
+		};
+		this.cooldown = [];
+		this.database = new Database;
+		this.ownerIDs = [`358558305997684739`];
+		this.whitelist = [];
 	}
 
-	//
-	// Console (console|log|error|warn)
-	//
 	console(input, type) {
 		this.channels.get(this.channelList.CONSOLE).send(new MessageEmbed()
 			.setDescription(input)
@@ -60,9 +57,7 @@ class CustomClient extends Client {
 		this.console(input, `Warn`);
 		return true;
 	}
-	// End Console
 
-	// Cooldown (addCooldown|removeCooldown|checkCooldown|checkCooldownTime)
 	addCooldown(userID, commandName, time, date) {
 		this.cooldown.push({ ID: userID, COMMAND: commandName, TIME: time, DATE: date });
 		this.removeCooldown(userID, commandName, time);
@@ -97,11 +92,6 @@ class CustomClient extends Client {
 		}
 		return returnValue;
 	}
-	// End Cooldown
-
-	//
-	// Misc (send|missingArgs|clean|formatTime|formatNumbers|formatBytes|defaultChannel)
-	//
 	send(message, ...content) {
 		return new Promise((resolve, reject) => {
 			if (this.user.bot) {
@@ -131,13 +121,11 @@ class CustomClient extends Client {
 			.replace(/`/g, `\`${String.fromCharCode(8203)}`)
 			.replace(/@/g, `@${String.fromCharCode(8203)}`);
 
-		// Webhooks & API Keys
 		for (const env in process.env) {
 			if (env.includes(`WEBHOOK_`)) text = text.replace(process.env[env], SECRET);
 			if (env.includes(`_API`)) text = text.replace(process.env[env], SECRET);
 		}
 
-		// Tokens
 		isDirectory(resolve(`../../Bots`)).forEach(dir => {
 			text = text.replace(process.env[dir], SECRET);
 		});
@@ -195,7 +183,6 @@ class CustomClient extends Client {
 			.sort()
 			.first();
 	}
-	// End Misc
 }
 
 module.exports = CustomClient;

@@ -1,15 +1,15 @@
 {
   "extends": "aqua",
   "rules": {
-    "capitalized-comments": ["off"],
-    "id-length": ["off"],
-    "max-len": ["off"],
-    "newline-per-chained-call": ["off"],
-    "no-console": ["off"],
-    "no-process-env": ["off"],
-    "no-shadow": ["off"],
+    "capitalized-comments": "off",
+    "id-length": "off",
+    "max-len": "off",
+    "newline-per-chained-call": "off",
+    "no-console": "off",
+    "no-process-env": "off",
+    "no-shadow": "off",
     "operator-linebreak": ["error", "after"],
-    "prefer-const": ["error"],
+    "prefer-const": "error",
     "quotes": ["error", "backtick"]
   }
 }
