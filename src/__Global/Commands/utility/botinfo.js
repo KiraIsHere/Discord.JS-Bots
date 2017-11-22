@@ -32,18 +32,20 @@ class Command extends Commands {
 		return true;
 	}
 
-	send(client, message) {
-		client.send(message, `Loading...`).then(async sent => {
-			const usedMemory = await memoryUsage();
-			const maxMemory = process.env.LOCAL ? 8096 : 512;
+	async send(client, message) {
+		let msg = message;
+		if (message.author !== client.user) msg = await client.send(message, `Loading...`);
 
-			let memberCount = 0;
-			client.guilds.forEach(guild => {
-				memberCount += guild.memberCount;
-			});
+		const usedMemory = await memoryUsage();
+		const maxMemory = process.env.LOCAL ? 8096 : 512;
 
-			sent.edit(
-				`= STATISTICS =\n` +
+		let memberCount = 0;
+		client.guilds.forEach(guild => {
+			memberCount += guild.memberCount;
+		});
+
+		msg.edit(
+			`= STATISTICS =\n` +
 
 				`\nVersions\n` +
 				`• Discord.js       :: ${version}\n` +
@@ -59,7 +61,7 @@ class Command extends Commands {
 				`\nBot\n` +
 				`• Uptime           :: ${client.formatTime(process.uptime())}\n` +
 				`• Heartbeat Ping   :: ${Math.round(client.ping)}ms\n` +
-				`${message.author !== client.user ? `• Message Ping     :: ${Math.round(message.createdTimestamp - sent.createdTimestamp)}ms\n` : `\n`}` +
+				`${message.author !== client.user ? `• Message Ping     :: ${Math.round(message.createdTimestamp - msg.createdTimestamp)}ms\n` : `\n`}` +
 				`• Bot RAM Usage    :: ${Math.round((process.memoryUsage().heapUsed / 1024 / 1024 * 100) / 100)} MB\n` +
 
 				`\nBot Stats\n` +
@@ -69,8 +71,7 @@ class Command extends Commands {
 				`• Categories       :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `category`).size)}\n` +
 				`• Text Channels    :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `text`).size)}\n` +
 				`• Voice Channels   :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `voice`).size)}\n`,
-				{ code: `asciidoc` });
-		});
+			{ code: `asciidoc` });
 	}
 }
 
