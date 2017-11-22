@@ -21,21 +21,42 @@ class Command extends Commands {
 	}
 
 	run(client, message, args) {
-		let content;
-		if (args.length < 1) {
-			const longest = Array.from(client.cmds.commands.keys()).reduce((long, str) => Math.max(long, str.length), 0);
-			content = `${client.cmds.commands.sort().map(c => c.show ? `${c.name}${` `.repeat(longest - c.name.length)} :: ${c.description}\n` : null).join(``)}`;
-		} else {
-			let command = args[0];
-			if (client.cmds.commands.has(command)) {
-				command = client.cmds.commands.get(command);
-				content =
-					`= ${command.name} = \n` +
-					`${command.description}\n` +
-					`usage::${command.name.charAt(0).toUpperCase() + command.name.slice(1)} ${command.usage}`;
+		if (args[0]) {
+			if (args[0] === `command`) {
+				if (!client.cmds.commands.has(args[1])) return false;
+
+				const command = client.cmds.commands.get(args[1]);
+				message.channel.send(`= ${command.name} = \ndescription :: ${command.description}\nusage       :: ${command.usage}`, {
+					code: `asciidoc`,
+					split: { prepend: `\`\`\`asciidoc\n`, append: `\`\`\`` }
+				});
+				return true;
+			}
+
+			const groupCommands = client.cmds.commands.filter(c => c.group === args[0]);
+			if (groupCommands.size === 0) return false;
+			const commandNames = groupCommands.keyArray();
+			const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
+
+			message.channel.send(`= Command List =\n\n[Use ${client.botPrefix}help command [commandname] for details]\n\n${groupCommands.map(c => `${c.name}${` `.repeat(longest - c.name.length)} :: ${c.description}`).join(`\n`)}`, {
+				code: `asciidoc`,
+				split: { prepend: `\`\`\`asciidoc\n`, append: `\`\`\`` }
+			});
+
+			return true;
+		}
+
+		const groups = [];
+		for (const command of client.cmds.commands.values()) {
+			if (!groups.includes(command.group)) {
+				groups.push(command.group);
 			}
 		}
-		client.send(message, content, { code: `asciidoc` });
+
+		message.channel.send(`= Group List =\n\n[Use ${client.botPrefix}help [groupname] for details]\n\n${groups.join(`\n`)}`, {
+			code: `asciidoc`,
+			split: { prepend: `\`\`\`asciidoc\n`, append: `\`\`\`` }
+		});
 		return true;
 	}
 }
