@@ -26,8 +26,8 @@ class Command extends Commands {
 		post(`https://tvde1-api.herokuapp.com/api/other/screenshot`, { headers: { Authorization: process.env.TVDE_API } })
 			.send({ args: { url: args[0] } })
 			.then(data => {
-				if (data.success) return client.send(message, { files: [Buffer.from(data.body.result.image, `base64`)] });
-				client.send(message, data.message);
+				if (data.body.success) return client.send(message, { files: [Buffer.from(data.body.result.image, `base64`)] });
+				client.send(message, data.body.message, { code: `` });
 				return true;
 			})
 			.catch(error => client.send(message, error, { code: `` }));
