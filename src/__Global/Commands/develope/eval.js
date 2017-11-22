@@ -26,7 +26,7 @@ class Command extends Commands {
 	async run(client, message, args) {
 		if (client.ownerIDs.includes(message.author.id) || client.whitelist.includes(message.author.id)) {
 			if (args.length < 1) return client.missingArgs(message, this);
-			let content = await this.addToContent(client, args.join(` `), `Input`);
+			let content = await this.addToContent(args.join(` `), `Input`);
 			try {
 				let evaled;
 
@@ -41,9 +41,9 @@ class Command extends Commands {
 				if (evaled instanceof Promise) evaled = await evaled;
 				if (evaled instanceof Object || evaled instanceof Function) evaled = inspect(evaled, { showHidden: true, showProxy: true, depth: 0 });
 
-				content += await this.addToContent(client, client.clean(evaled), `Output`);
+				content += await this.addToContent(client.clean(evaled), `Output`);
 			} catch (error) {
-				content += await this.addToContent(client, error, `Error`);
+				content += await this.addToContent(error, `Error`);
 			}
 			client.send(message, content);
 		} else {
@@ -52,22 +52,18 @@ class Command extends Commands {
 		return true;
 	}
 
-	async addToContent(client, input, type) {
+	async addToContent(input, type) {
+		return `${type === `Input` ? `📥` : type === `Output` ? `📤` : `❌`} ${type}\n${await this.checkSize(input)}`;
+	}
+
+	checkSize(input) {
 		if (String(input).length < 1024) {
-			return `${type === `Input` ? `📥` : type === `Output` ? `📤` : `❌`} ${type}\n\`\`\`js\n${input}\n\`\`\`\n`;
+			return `\`\`\`js\n${input}\n\`\`\`\n`;
 		} else {
-			await post(`https://www.hastebin.com/documents`)
-				.send(String(input))
-				.then(data => {
-					console.log(data);
-					return `${type === `Input` ? `📥` : type === `Output` ? `📤` : `❌`} ${type}\nhttps://www.hastebin.com/${data.body.key}.js`;
-				})
-				.catch(error => {
-					console.error(error);
-					return `${type === `Input` ? `📥` : type === `Output` ? `📤` : `❌`} ${type}\n\`\`\`js\n${error}\n\`\`\`\n`;
-				});
+			return post(`https://www.hastebin.com/documents`).send(String(input))
+				.then(data => `https://www.hastebin.com/${data.body.key}.js`)
+				.catch(error => `\`\`\`bash\n${error}\n\`\`\`\n`);
 		}
-		return true;
 	}
 }
 

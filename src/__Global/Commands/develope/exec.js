@@ -26,36 +26,32 @@ class Command extends Commands {
 		if (!client.ownerIDs.includes(message.author.id)) return client.send(message, `Sorry, you do not have permission for this command`);
 		if (args.length < 1) return client.missingArgs(message, this);
 
-		let content = await this.addToContent(client, args.join(` `), `Input`);
+		let content = await this.addToContent(args.join(` `), `Input`);
 		exec(args.join(` `), { cwd: `../../` }, async (error, stdout, stderr) => {
 			if (stderr) {
-				content += await this.addToContent(client, stderr, `Error`);
+				content += await this.addToContent(stderr, `Error`);
 			} else if (error) {
-				content += await this.addToContent(client, error, `Error`);
+				content += await this.addToContent(error, `Error`);
 			} else {
-				content += await this.addToContent(client, stdout, `Output`);
+				content += await this.addToContent(stdout, `Output`);
 			}
 			client.send(message, content);
 		});
 		return true;
 	}
 
-	async addToContent(client, input, type) {
+	addToContent(input, type) {
+		return `${type === `Input` ? `📥` : type === `Output` ? `📤` : `❌`} ${type}\n${this.checkSize(input)}`;
+	}
+
+	checkSize(input) {
 		if (String(input).length < 1024) {
-			return `${type === `Input` ? `📥` : type === `Output` ? `📤` : `❌`} ${type}\n\`\`\`js\n${input}\n\`\`\`\n`;
+			return `\`\`\`js\n${input}\n\`\`\`\n`;
 		} else {
-			await post(`https://www.hastebin.com/documents`)
-				.send(String(input))
-				.then(data => {
-					console.log(data);
-					return `${type === `Input` ? `📥` : type === `Output` ? `📤` : `❌`} ${type}\nhttps://www.hastebin.com/${data.body.key}.js`;
-				})
-				.catch(error => {
-					console.error(error);
-					return `${type === `Input` ? `📥` : type === `Output` ? `📤` : `❌`} ${type}\n\`\`\`js\n${error}\n\`\`\`\n`;
-				});
+			return post(`https://www.hastebin.com/documents`).send(String(input))
+				.then(data => `https://www.hastebin.com/${data.body.key}.js`)
+				.catch(error => `\`\`\`js\n${error}\n\`\`\`\n`);
 		}
-		return true;
 	}
 }
 
