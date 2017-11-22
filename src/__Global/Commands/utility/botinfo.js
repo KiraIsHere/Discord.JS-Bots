@@ -21,7 +21,7 @@ class Command extends Commands {
 			group: basename(__dirname, `.js`),
 			description: `Shows bot & OS info`,
 			usage: ``,
-			aliases: [`bot`]
+			aliases: [`bot`, `stats`, `info`]
 		});
 	}
 
