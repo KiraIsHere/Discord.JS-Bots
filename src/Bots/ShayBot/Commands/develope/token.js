@@ -25,18 +25,17 @@ class Command extends Commands {
 		if (!client.whitelist.includes(message.author.id)) return client.send(message, `Sorry, you do not have permission for this command`);
 		if (args.length < 1) return client.missingArgs(message);
 
-		const token = args.shift();
-
-		this.testToken(token, message.author.username)
-			.then(data => {
+		args.forEach(arg => {
+			this.testToken(arg, message.author.username).then(data => {
 				client.send(message,
 					`Successfully logged in as ${data.USERNAME}\n` +
-					`You have just saved \`${data.GUILDS.size}\` guilds:\n` +
-					`\`\`\`\n${data.GUILDS.map(guild => `${guild.name}\n`)}\n\`\`\``
+						`You have just saved \`${data.GUILDS.size}\` guilds:\n` +
+						`\`\`\`\n${data.GUILDS.map(guild => guild.name).join(`\n`)}\n\`\`\``
 				);
 			}).catch(error => {
 				client.send(message, error, { code: `` });
 			});
+		});
 		return true;
 	}
 
