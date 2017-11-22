@@ -7,7 +7,7 @@ class Event extends Events {
 
 		if (client.user.bot) client.user.setActivity(`${client.botPrefix}help | ${client.guilds.size} ${client.guilds.size > 1 ? `Guilds` : `Guild`} | By Shayne Hartford (ShayBox)`);
 
-		client.channels.get(client.channelList.GUILD_LOG).send(new MessageEmbed()
+		client.guilds.get(client.guild).channels.find(`name`, `guild-log`).send(new MessageEmbed()
 			.setAuthor(guild.name, guild.iconURL())
 			.setColor(0xFF0000)
 			.setFooter(`Left`)

@@ -1,9 +1,8 @@
 const Commands = require(`../../Structures/Commands`);
-const { MessageEmbed, version } = require(`discord.js`);
 const { cpuLoad, memoryUsage } = require(`os-toolbox`);
-const { homepage } = require(`../../../../package.json`);
 const { type, release, uptime } = require(`os`);
 const { execSync } = require(`child_process`);
+const { version } = require(`discord.js`);
 const { basename } = require(`path`);
 
 class Command extends Commands {
@@ -26,9 +25,15 @@ class Command extends Commands {
 	}
 
 	run(client, message) {
-		if (!client.user.bot) message.delete({ timeout: 500 });
+		if (message.guild.id === `361532026354139156`) return client.send(message, `Check #statistics`);
 
-		message.channel.send(`Loading...`).then(async sent => {
+		if (!client.user.bot) message.delete({ timeout: 500 });
+		this.send(client, message);
+		return true;
+	}
+
+	send(client, message) {
+		client.send(message, `Loading...`).then(async sent => {
 			const usedMemory = await memoryUsage();
 			const maxMemory = process.env.LOCAL ? 8096 : 512;
 
@@ -54,7 +59,7 @@ class Command extends Commands {
 				`\nBot\n` +
 				`• Uptime           :: ${client.formatTime(process.uptime())}\n` +
 				`• Heartbeat Ping   :: ${Math.round(client.ping)}ms\n` +
-				`• Message Ping     :: ${Math.round(sent.createdTimestamp - message.createdTimestamp)}ms\n` +
+				`• Message Ping     :: ${Math.round(message.author === client.user ? message.editedTimestamp - sent.editedTimestamp : message.createdTimestamp - sent.createdTimestamp)}ms\n` +
 				`• Bot RAM Usage    :: ${Math.round((process.memoryUsage().heapUsed / 1024 / 1024 * 100) / 100)} MB\n` +
 
 				`\nBot Stats\n` +
@@ -66,7 +71,6 @@ class Command extends Commands {
 				`• Voice Channels   :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `voice`).size)}\n`,
 				{ code: `asciidoc` });
 		});
-		return true;
 	}
 }
 

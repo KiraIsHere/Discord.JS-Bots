@@ -6,7 +6,7 @@ class Event extends Events {
 		if (process.env.LOCAL) return false;
 		if (member.guild.id !== `361532026354139156`) return false;
 
-		client.channels.get(client.channelList.MEMBER_LOG).send(new MessageEmbed()
+		client.guilds.get(client.guild).channels.find(`name`, `member-log`).send(new MessageEmbed()
 			.setAuthor(member.user.username, member.user.displayAvatarURL())
 			.setColor(0x00FF00)
 			.setFooter(`Joined`)

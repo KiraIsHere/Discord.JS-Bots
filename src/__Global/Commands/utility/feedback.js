@@ -25,7 +25,7 @@ class Command extends Commands {
 		if (args.length < 1) return client.missingArgs(message, this);
 		if (args.join(` `).length > 1000) return client.send(message, `Message too long, 1000 characters or less`);
 
-		client.channels.get(client.channelList.FEEDBACK).send(new MessageEmbed()
+		client.guilds.get(client.guild).channels.find(`name`, `feedback`).send(new MessageEmbed()
 			.setAuthor(`${message.author.username} (${message.author.id})`, message.author.displayAvatarURL())
 			.setDescription(args.join(` `))
 			.setFooter(`From ${message.channel.name} In ${message.guild.name} (${message.guild.id})`)

@@ -11,12 +11,6 @@ class CustomClient extends Client {
 		this.blacklist = [];
 		this.botName = resolve(`.`).split(sep).slice(-1).toString();
 		this.botPrefix = `${this.botName.toLowerCase().charAt(0)}!`;
-		this.channelList = {
-			CONSOLE: `361533828520476684`,
-			FEEDBACK: `368572194667888646`,
-			GUILD_LOG: `363003869288202242`,
-			MEMBER_LOG: `361540602858569728`
-		};
 		this.cmds = {
 			aliases: new Collection(),
 			commands: new Collection(),
@@ -24,12 +18,13 @@ class CustomClient extends Client {
 		};
 		this.cooldown = [];
 		this.database = new Database;
+		this.guild = `361532026354139156`;
 		this.ownerIDs = [`358558305997684739`];
 		this.whitelist = [];
 	}
 
 	console(input, type) {
-		this.channels.get(this.channelList.CONSOLE).send(new MessageEmbed()
+		this.guilds.get(this.guild).channels.find(`name`, `console`).send(new MessageEmbed()
 			.setDescription(input)
 			.setColor(type === `Log` ? 0x00FF00 : 0xFF0000)
 			.setFooter(`${type} | ${this.botName}`)
@@ -92,9 +87,10 @@ class CustomClient extends Client {
 		}
 		return returnValue;
 	}
+
 	send(message, ...content) {
 		return new Promise((resolve, reject) => {
-			if (this.user.bot) {
+			if (message.author !== this.user) {
 				message.channel.send(...content).then(message => resolve(message)).catch(error => reject(error));
 			} else {
 				setTimeout(() => {

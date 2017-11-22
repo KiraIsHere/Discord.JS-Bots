@@ -14,6 +14,19 @@ class Event extends Events {
 			client.whitelist = data[0].WHITELISTED_USERS;
 		});
 
+		setTimeout(() => {
+			const channel = client.guilds.get(client.guild).channels.find(`name`, `statistics`);
+			channel.messages.fetch().then(messages => {
+				messages.forEach(message => {
+					if (message.author !== client.user) return false;
+					setTimeout(() => {
+						client.cmds.commands.get(`botinfo`).send(client, message);
+					}, 1000);
+					return true;
+				});
+			});
+		}, 1000 * 5);
+
 		if (global.gc) {
 			setInterval(() => {
 				global.gc();
