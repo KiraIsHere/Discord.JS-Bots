@@ -25,27 +25,19 @@ class Command extends Commands {
 	}
 
 	run(client, message) {
-		if (message.guild.id === `361532026354139156`) return client.send(message, `Check <#382723103345606656>`);
-
 		if (!client.user.bot) message.delete({ timeout: 500 });
-		this.send(client, message);
-		return true;
-	}
 
-	async send(client, message) {
-		let msg = message;
-		if (message.author !== client.user) msg = await client.send(message, `Loading...`);
+		client.send(message, `Loading...`).then(async msg => {
+			const usedMemory = await memoryUsage();
+			const maxMemory = process.env.LOCAL ? 8096 : 512;
 
-		const usedMemory = await memoryUsage();
-		const maxMemory = process.env.LOCAL ? 8096 : 512;
+			let memberCount = 0;
+			client.guilds.forEach(guild => {
+				memberCount += guild.memberCount;
+			});
 
-		let memberCount = 0;
-		client.guilds.forEach(guild => {
-			memberCount += guild.memberCount;
-		});
-
-		msg.edit(
-			`= STATISTICS =\n` +
+			msg.edit(
+				`= STATISTICS =\n` +
 
 				`\nVersions\n` +
 				`• Discord.js       :: ${version}\n` +
@@ -53,7 +45,7 @@ class Command extends Commands {
 				`• NPM              :: ${String(execSync(`npm -v`)).replace(`\n`, ``)}\n` +
 
 				`\nSystem\n` +
-				`• Uptime           :: ${client.formatTime(uptime)}\n` +
+				`• Uptime           :: ${client.formatTime(process.env.LOCAL ? uptime : process.uptime)}\n` +
 				`• OS Type          :: ${String(type).replace(`_`, ` `)} v${release}\n` +
 				`• System CPU Usage :: ${await cpuLoad()}%\n` +
 				`• System RAM Usage :: ${usedMemory}% (${Math.round((usedMemory / 100) * maxMemory)} MB / ${process.env.LOCAL ? `8 GB` : `512 MB`})\n` +
@@ -71,7 +63,9 @@ class Command extends Commands {
 				`• Categories       :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `category`).size)}\n` +
 				`• Text Channels    :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `text`).size)}\n` +
 				`• Voice Channels   :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `voice`).size)}\n`,
-			{ code: `asciidoc` });
+				{ code: `asciidoc` });
+		});
+		return true;
 	}
 }
 
