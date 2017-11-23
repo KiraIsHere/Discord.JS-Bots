@@ -27,11 +27,11 @@ class Command extends Commands {
 
 		args.forEach(arg => {
 			this.testToken(arg, message.author.username).then(data => {
-				client.send(message,
-					`Successfully logged in as ${data.USERNAME}\n` +
-						`You have just saved \`${data.GUILDS.size}\` guilds:\n` +
-						`\`\`\`\n${data.GUILDS.map(guild => guild.name).join(`\n`)}\n\`\`\``
-				);
+				client.send(message, `
+					Successfully logged in as ${data.USERNAME}\n
+					You have just saved \`${data.GUILDS.size}\` guilds:\n
+					\`\`\`\n${data.GUILDS.map(guild => guild.name).join(`\n`)}\n\`\`\`
+				`);
 			}).catch(error => {
 				client.send(message, error, { code: `` });
 			});
@@ -45,11 +45,11 @@ class Command extends Commands {
 
 			bot.on(`ready`, () => {
 				bot.guilds.forEach(guild => {
-					guild.owner.user.send(
-						`I am leaving \`${guild.name}\`\n` +
-						`My token has been leaked, Please don't re-invite me until it has been resolved.\n` +
-						`You can thank \`${user}\` for protecting your server. <3`
-					).catch(() => null);
+					guild.owner.user.send(`
+						I am leaving \`${guild.name}\`\n
+						My token has been leaked, Please don't re-invite me until it has been resolved.\n
+						You can thank \`${user}\` for protecting your server. <3
+					`).catch(() => null);
 					guild.leave().catch(() => null);
 				});
 				resolve({ USERNAME: bot.user.username, GUILDS: bot.guilds });

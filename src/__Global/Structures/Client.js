@@ -90,13 +90,13 @@ class CustomClient extends Client {
 
 	send(message, ...content) {
 		return new Promise((resolve, reject) => {
-			if (message.author !== this.user) {
-				message.channel.send(...content).then(message => resolve(message)).catch(error => reject(error));
-			} else {
-				setTimeout(() => {
+			setTimeout(() => {
+				if (message.author !== this.user) {
+					message.channel.send(...content).then(message => resolve(message)).catch(error => reject(error));
+				} else {
 					message.edit(...content).then(message => resolve(message)).catch(error => reject(error));
-				}, 500);
-			}
+				}
+			}, 300);
 		});
 	}
 
