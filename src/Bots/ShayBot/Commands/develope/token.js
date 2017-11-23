@@ -17,7 +17,7 @@ class Command extends Commands {
 			group: basename(__dirname, `.js`),
 			description: `Tests tokens`,
 			usage: `[Token]`,
-			aliases: []
+			aliases: [`tokens`]
 		});
 	}
 
