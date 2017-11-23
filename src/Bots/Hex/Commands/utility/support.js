@@ -24,11 +24,11 @@ class Command extends Commands {
 	run(client, message) {
 		client.send(message, new MessageEmbed()
 			.setTitle(`Thank you for inviting me to your server!`)
-			.setDescription(`
-				**Note:**\n
-				\`You must set the color of every role to "Default" for me to work!\`\n
-				\`If you would like more support join my discord\` https://discord.io/shaybox
-			`)
+			.setDescription(`` +
+				`**Note:**\n` +
+				`\`You must set the color of every role to "Default" for me to work!\`\n` +
+				`\`If you would like more support join my discord\` https://discord.io/shaybox`
+			)
 		);
 		return true;
 	}

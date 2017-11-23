@@ -34,10 +34,10 @@ class Command extends Commands {
 			await m.react(`👎`);
 		});
 
-		client.send(message, `
-			Thank you for your feedback!\n
-			Please note: If you requested anything stupid or spam this, you will be blacklisted from using the bot.
-		`);
+		client.send(message,
+			`Thank you for your feedback!\n` +
+			`Please note: If you requested anything stupid or spam this, you will be blacklisted from using the bot.`
+		);
 		return true;
 	}
 }

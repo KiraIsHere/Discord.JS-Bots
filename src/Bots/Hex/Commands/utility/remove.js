@@ -36,10 +36,10 @@ class Command extends Commands {
 		if (!message.guild.me.hasPermission([`MANAGE_ROLES`])) {
 			client.send(message, new MessageEmbed()
 				.setTitle(`❌ **ERROR**`)
-				.setDescription(`
-					Invalid permissions\n
-					\`\`\`\nMANAGE_ROLES\n\`\`\`
-				`)
+				.setDescription(
+					`Invalid permissions\n` +
+					`\`\`\`\nMANAGE_ROLES\n\`\`\``
+				)
 				.setColor(0xFF0000)
 				.setFooter(client.botName)
 				.setTimestamp()
@@ -49,10 +49,10 @@ class Command extends Commands {
 		if (role.position > message.guild.me.highestRole.position) {
 			client.send(message, new MessageEmbed()
 				.setTitle(`❌ **ERROR**`)
-				.setDescription(`
-					Invalid permissions\n
-					Cannot delete role \`\`\`\n${role.name}\n\`\`\`
-				`)
+				.setDescription(
+					`Invalid permissions\n` +
+					`Cannot delete role \`\`\`\n${role.name}\n\`\`\``
+				)
 				.setColor(0xFF0000)
 				.setFooter(client.botName)
 				.setTimestamp()

@@ -63,8 +63,12 @@ class Command extends Commands {
 				`• Categories       :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `category`).size)}\n` +
 				`• Text Channels    :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `text`).size)}\n` +
 				`• Voice Channels   :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `voice`).size)}\n`,
+<<<<<<< HEAD
 				{ code: `asciidoc` }
 			);
+=======
+				{ code: `asciidoc` });
+>>>>>>> parent of dd3dd37... Fixed string addition
 		});
 		return true;
 	}

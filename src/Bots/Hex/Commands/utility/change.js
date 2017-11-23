@@ -28,10 +28,10 @@ class Command extends Commands {
 		if (!/^(|#|0x)[0-9A-F]{6}$/i.test(args[0])) {
 			client.send(message, new MessageEmbed()
 				.setTitle(`❌ **ERROR**`)
-				.setDescription(`
-					**Invalid hex value**\n
-					Please input a value, \`#000000\`, \`0x000000\`, \`000000\`, or \`RANDOM\`
-				`)
+				.setDescription(
+					`**Invalid hex value**\n` +
+					`Please input a value, \`#000000\`, \`0x000000\`, \`000000\`, or \`RANDOM\``
+				)
 				.setColor(0xFF0000)
 				.setFooter(client.botName)
 				.setTimestamp()
@@ -41,10 +41,10 @@ class Command extends Commands {
 		if (!message.guild.me.hasPermission([`MANAGE_ROLES`])) {
 			client.send(message, new MessageEmbed()
 				.setTitle(`❌ **ERROR**`)
-				.setDescription(`
-					**Missing permissions**\n
-					\`\`\`\nMANAGE_ROLES\n\`\`\`
-				`)
+				.setDescription(
+					`**Missing permissions**\n` +
+					`\`\`\`\nMANAGE_ROLES\n\`\`\``
+				)
 				.setColor(0xFF0000)
 				.setFooter(client.botName)
 				.setTimestamp()
@@ -59,11 +59,11 @@ class Command extends Commands {
 		if (colorRole.position > message.guild.me.highestRole.position) {
 			client.send(message, new MessageEmbed()
 				.setTitle(`❌ **ERROR**`)
-				.setDescription(`
-					Invalid permissions\n
-					Cannot edit role \`\`\`\n${colorRole.name}\n\`\`\`\n
-					Please move the role below Hex's role.
-				`)
+				.setDescription(
+					`Invalid permissions\n` +
+					`Cannot edit role \`\`\`\n${colorRole.name}\n\`\`\`\n` +
+					`Please move the role below Hex's role.`
+				)
 				.setColor(0xFF0000)
 				.setFooter(client.botName)
 				.setTimestamp()
@@ -86,10 +86,10 @@ class Command extends Commands {
 				.then(() => this.success(client, message, roleColor))
 				.catch(error => this.error(client, message, error));
 		} else if (colorRole.name !== roleName) {
-			return this.error(client, message, `
-				The role ${colorRole.name} is not set to DEFAULT\n
-				Please change the color of that role and try again.
-			`);
+			return this.error(client, message,
+				`The role ${colorRole.name} is not set to DEFAULT\n` +
+				`Please change the color of that role and try again.`
+			);
 		}
 		return true;
 	}
