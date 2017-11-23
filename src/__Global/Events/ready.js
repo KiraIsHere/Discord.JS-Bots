@@ -45,7 +45,7 @@ class Event extends Events {
 					`• NPM              :: ${String(execSync(`npm -v`)).replace(`\n`, ``)}\n` +
 
 					`\nSystem\n` +
-					`• Uptime           :: ${client.formatTime(process.env.LOCAL ? uptime : process.uptime)}\n` +
+					`• Uptime           :: ${client.formatTime(process.env.LOCAL ? uptime : process.uptime())}\n` +
 					`• OS Type          :: ${String(type).replace(`_`, ` `)} v${release}\n` +
 					`• System CPU Usage :: ${await cpuLoad()}%\n` +
 					`• System RAM Usage :: ${usedMemory}% (${Math.round((usedMemory / 100) * maxMemory)} MB / ${process.env.LOCAL ? `8 GB` : `512 MB`})\n`,
