@@ -29,7 +29,7 @@ class Event extends Events {
 		if (client.user.id !== `361541917672210433`) return true;
 
 		const channel = client.guilds.get(client.guild).channels.find(`name`, `statistics`);
-		channel.messages.fetch().then(messages => messages.delete());
+		channel.messages.fetch().then(messages => messages.map(message => message.delete()));
 		channel.send(`Starting...`).then(message => {
 			edit();
 			async function edit() {
