@@ -22,7 +22,11 @@ class Command extends Commands {
 
 	run(client, message) {
 		client.guilds.get(`382223688118042625`).channels.first().createInvite().then(invite => {
-			client.send(message, invite.url);
+			client.send(message,
+				`If you would like to join the TestServer, heres the link ${invite.url}\n` +
+				`This server has no rules besides don't ping people for no reason.\n` +
+				`Change any setting, invite any bot, anything.`
+			);
 		});
 		return true;
 	}
