@@ -37,20 +37,20 @@ class Event extends Events {
 					const usedMemory = await memoryUsage();
 					const maxMemory = process.env.LOCAL ? 8096 : 512;
 
-					message.edit(`
-						= STATISTICS =\n
+					message.edit(
+						`= STATISTICS =\n` +
 
-						\nVersions\n
-						 Discord.js       :: ${version}\n
-						 Node             :: ${process.version}\n
-						 NPM              :: ${String(execSync(`npm -v`)).replace(`\n`, ``)}\n
+								`\nVersions\n` +
+								`• Discord.js       :: ${version}\n` +
+								`• Node             :: ${process.version}\n` +
+								`• NPM              :: ${String(execSync(`npm -v`)).replace(`\n`, ``)}\n` +
 
-						\nSystem\n
-						 Uptime           :: ${client.formatTime(process.env.LOCAL ? uptime : process.uptime)}\n
-						 OS Type          :: ${String(type).replace(`_`, ` `)} v${release}\n
-						 System CPU Usage :: ${await cpuLoad()}%\n
-						 System RAM Usage :: ${usedMemory}% (${Math.round((usedMemory / 100) * maxMemory)} MB / ${process.env.LOCAL ? `8 GB` : `512 MB`})\n
-						 `, { code: `asciidoc` }
+								`\nSystem\n` +
+								`• Uptime           :: ${client.formatTime(process.env.LOCAL ? uptime : process.uptime)}\n` +
+								`• OS Type          :: ${String(type).replace(`_`, ` `)} v${release}\n` +
+								`• System CPU Usage :: ${await cpuLoad()}%\n` +
+								`• System RAM Usage :: ${usedMemory}% (${Math.round((usedMemory / 100) * maxMemory)} MB / ${process.env.LOCAL ? `8 GB` : `512 MB`})\n`,
+						{ code: `asciidoc` }
 					);
 
 					setTimeout(() => edit(), 1000 * 60 * 10);
