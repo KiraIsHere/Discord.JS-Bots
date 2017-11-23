@@ -32,7 +32,8 @@ class Event extends Events {
 		channel.messages.fetch().then(messages => {
 			messages.delete();
 			channel.send(`Starting...`).then(message => {
-				function edit() {
+				edit();
+				async function edit() {
 					const usedMemory = await memoryUsage();
 					const maxMemory = process.env.LOCAL ? 8096 : 512;
 
@@ -52,7 +53,7 @@ class Event extends Events {
 						 `, { code: `asciidoc` }
 					);
 
-					setTimeout(() => edit(), 1000 * 60 * 10)
+					setTimeout(() => edit(), 1000 * 60 * 10);
 				}
 				return true;
 			});
