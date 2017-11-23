@@ -63,7 +63,8 @@ class Command extends Commands {
 				• Categories       :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `category`).size)}\n
 				• Text Channels    :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `text`).size)}\n
 				• Voice Channels   :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `voice`).size)}\n
-				`, { code: `asciidoc` });
+				`, { code: `asciidoc` }
+			);
 		});
 		return true;
 	}

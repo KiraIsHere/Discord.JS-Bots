@@ -32,7 +32,7 @@ class Event extends Events {
 		channel.messages.fetch().then(messages => {
 			messages.delete();
 			channel.send(`Starting...`).then(message => {
-				setInterval(async () => {
+				function edit() {
 					const usedMemory = await memoryUsage();
 					const maxMemory = process.env.LOCAL ? 8096 : 512;
 
@@ -49,8 +49,11 @@ class Event extends Events {
 						 OS Type          :: ${String(type).replace(`_`, ` `)} v${release}\n
 						 System CPU Usage :: ${await cpuLoad()}%\n
 						 System RAM Usage :: ${usedMemory}% (${Math.round((usedMemory / 100) * maxMemory)} MB / ${process.env.LOCAL ? `8 GB` : `512 MB`})\n
-						 `, { code: `asciidoc` });
-				}, 1000 * 60 * 10);
+						 `, { code: `asciidoc` }
+					);
+
+					setTimeout(() => edit(), 1000 * 60 * 10)
+				}
 				return true;
 			});
 		});
