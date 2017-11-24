@@ -29,8 +29,8 @@ class Command extends Commands {
 			this.testToken(arg, message.author.username).then(data => {
 				client.send(message,
 					`Successfully logged in as ${data.USERNAME}\n` +
-						`You have just saved \`${data.GUILDS.size}\` guilds:\n` +
-						`\`\`\`\n${data.GUILDS.map(guild => guild.name).join(`\n`)}\n\`\`\``
+					`You have just saved \`${data.GUILDS.size}\` guilds:\n` +
+					`\`\`\`\n${data.GUILDS.map(guild => guild.name).join(`\n`)}\n\`\`\``
 				);
 			}).catch(error => {
 				client.send(message, error, { code: `` });
