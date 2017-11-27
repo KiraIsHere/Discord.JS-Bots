@@ -104,7 +104,10 @@ class CustomClient extends Client {
 	}
 
 	missingArgs(message, command) {
-		this.send(message, `Command Usage\n\`\`\`\n${command.name} ${command.usage}\n\`\`\``);
+		this.send(message,
+			`❌ Invalid Arguments\n` +
+			`\`\`\`\n${command.name.charAt(0).toUpperCase() + command.name.slice(1)} ${command.usage}\n\`\`\``
+		);
 	}
 
 	clean(text) {
