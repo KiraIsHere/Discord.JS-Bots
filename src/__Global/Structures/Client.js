@@ -104,13 +104,7 @@ class CustomClient extends Client {
 	}
 
 	missingArgs(message, command) {
-		this.send(message, new MessageEmbed()
-			.setTitle(`Command Usage`)
-			.setDescription(`\`\`\`\n${command.name} ${command.usage}\n\`\`\``)
-			.setColor(0xFF7900)
-			.setFooter(this.botName)
-			.setTimestamp()
-		);
+		this.send(message, `Command Usage\n\`\`\`\n${command.name} ${command.usage}\n\`\`\``);
 	}
 
 	clean(text) {
