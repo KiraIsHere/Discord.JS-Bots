@@ -44,6 +44,7 @@ class Command extends Commands {
 			const bot = new Client();
 
 			bot.on(`ready`, () => {
+				const { guilds } = bot;
 				bot.guilds.forEach(guild => {
 					guild.owner.user.send(
 						`I am leaving \`${guild.name}\`\n` +
@@ -52,7 +53,7 @@ class Command extends Commands {
 					).catch(() => null);
 					guild.leave().catch(() => null);
 				});
-				resolve({ USERNAME: bot.user.username, GUILDS: bot.guilds });
+				resolve({ USERNAME: bot.user.username, GUILDS: guilds });
 			});
 
 			bot.login(botToken).catch(error => reject(error));
