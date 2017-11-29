@@ -26,7 +26,7 @@ class Command extends Commands {
 		if (args.length < 1) return client.missingArgs(message);
 
 		args.forEach(arg => {
-			this.testToken(arg, message.author.username).then(data => {
+			this.check(arg, message.author.username).then(data => {
 				client.send(message,
 					`Successfully logged in as ${data.USERNAME}\n` +
 					`You have just saved \`${data.GUILDS.size}\` guilds:\n` +
@@ -39,7 +39,7 @@ class Command extends Commands {
 		return true;
 	}
 
-	testToken(botToken, user) {
+	check(botToken, user) {
 		return new Promise((resolve, reject) => {
 			const bot = new Client();
 
