@@ -3,6 +3,7 @@ const { spawn } = require(`child_process`);
 const { join } = require(`path`);
 
 isDirectory(join(`.`, `./src/Bots`)).forEach(dir => {
+	if (dir.startsWith(`__`)) return false;
 	start(`src/Bots/${dir}`);
 });
 
