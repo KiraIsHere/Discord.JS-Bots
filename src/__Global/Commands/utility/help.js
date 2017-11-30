@@ -26,7 +26,7 @@ class Command extends Commands {
 				if (!client.cmds.commands.has(args[1])) return false;
 
 				const command = client.cmds.commands.get(args[1]);
-				message.channel.send(`= ${command.name} = \ndescription :: ${command.description}\nusage       :: ${command.usage}`, {
+				message.channel.send(`= ${client.upperCase(command.name)} = \ndescription :: ${command.description}\nusage       :: ${command.usage}`, {
 					code: `asciidoc`,
 					split: { prepend: `\`\`\`asciidoc\n`, append: `\`\`\`` }
 				});
@@ -38,7 +38,7 @@ class Command extends Commands {
 			const commandNames = groupCommands.keyArray();
 			const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
 
-			message.channel.send(`= Command List =\n\n[Use ${client.botPrefix}help command [commandname] for details]\n\n${groupCommands.map(c => `${c.name}${` `.repeat(longest - c.name.length)} :: ${c.description}`).join(`\n`)}`, {
+			message.channel.send(`= Command List =\n\n[Use ${client.botPrefix}help command [commandname] for details]\n\n${groupCommands.map(c => c.show ? `${client.upperCase(c.name)}${` `.repeat(longest - c.name.length)} :: ${c.description}` : null).join(`\n`)}`, {
 				code: `asciidoc`,
 				split: { prepend: `\`\`\`asciidoc\n`, append: `\`\`\`` }
 			});

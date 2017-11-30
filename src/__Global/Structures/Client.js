@@ -106,31 +106,35 @@ class CustomClient extends Client {
 	missingArgs(message, command) {
 		this.send(message,
 			`❌ Invalid Arguments\n` +
-			`\`\`\`\n${command.name.charAt(0).toUpperCase() + command.name.slice(1)} ${command.usage}\n\`\`\``
+			`\`\`\`\n${this.upperCase(command.name)} ${command.usage}\n\`\`\``
 		);
 	}
 
-	clean(text) {
+	upperCase(input) {
+		return input.charAt(0).toUpperCase() + input.slice(1);
+	}
+
+	clean(input) {
 		const SECRET = `[SECRET!]`;
-		if (typeof text !== `string`) { text = inspect(text, { depth: 0 }); }
-		text = text
+		if (typeof input !== `string`) { input = inspect(input, { depth: 0 }); }
+		input = input
 			.replace(/`/g, `\`${String.fromCharCode(8203)}`)
 			.replace(/@/g, `@${String.fromCharCode(8203)}`);
 
 		for (const env in process.env) {
-			if (env.includes(`WEBHOOK_`)) text = text.replace(process.env[env], SECRET);
-			if (env.includes(`_API`)) text = text.replace(process.env[env], SECRET);
+			if (env.includes(`WEBHOOK_`)) input = input.replace(process.env[env], SECRET);
+			if (env.includes(`_API`)) input = input.replace(process.env[env], SECRET);
 		}
 
 		isDirectory(resolve(`../../Bots`)).forEach(dir => {
-			text = text.replace(process.env[dir], SECRET);
+			input = input.replace(process.env[dir], SECRET);
 		});
 
 		function isDirectory(source) {
 			return readdirSync(source).filter(name => statSync(`${source}/${name}`).isDirectory());
 		}
 
-		return text;
+		return input;
 	}
 
 	formatTime(input, toggle) {
