@@ -48,9 +48,8 @@ class Command extends Commands {
 
 		const groups = [];
 		for (const command of client.cmds.commands.values()) {
-			if (!command.group.startsWith(`_`)) break;
-			if (!groups.includes(command.group)) break;
-			groups.push(command.group);
+			if (command.group.startsWith(`_`)) break;
+			if (!groups.includes(command.group)) groups.push(command.group);
 		}
 
 		message.channel.send(`= Group List =\n\n[Use ${client.botPrefix}help [groupname] for details]\n\n${groups.join(`\n`)}`, {
