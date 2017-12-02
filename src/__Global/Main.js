@@ -1,12 +1,12 @@
 const Client = require(`./Structures/Client`);
-const Util = require(`./Structures/Util`);
+const Loader = require(`./Structures/Loader`);
 const { resolve, join } = require(`path`);
 const Options = require(join(resolve(`.`), `./Options`));
 
 const client = new Client(Options);
-const Loader = new Util;
+const loader = new Loader;
 
-Loader.init(client).then(() => {
+loader.init(client).then(() => {
 	client.login(process.env[client.botName]).catch(error => { throw error; });
 }).catch(error => { throw error; });
 
