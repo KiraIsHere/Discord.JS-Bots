@@ -1,6 +1,5 @@
 const Commands = require(`../../Structures/Commands`);
 const { exec } = require(`child_process`);
-const { basename } = require(`path`);
 const { post } = require(`snekfetch`);
 
 class Command extends Commands {
@@ -14,8 +13,6 @@ class Command extends Commands {
 			limit: false,
 			limitAmount: 3,
 			limitTime: 86400,
-			name: basename(__filename, `.js`),
-			group: basename(__dirname, `.js`),
 			description: `Executes bash/batch commands`,
 			usage: `[Command]`,
 			aliases: []

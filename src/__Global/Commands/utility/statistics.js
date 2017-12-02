@@ -3,7 +3,6 @@ const { cpuLoad, memoryUsage } = require(`os-toolbox`);
 const { type, release, uptime } = require(`os`);
 const { execSync } = require(`child_process`);
 const { version } = require(`discord.js`);
-const { basename } = require(`path`);
 
 class Command extends Commands {
 	constructor(client) {
@@ -16,8 +15,6 @@ class Command extends Commands {
 			limit: false,
 			limitAmount: 3,
 			limitTime: 86400,
-			name: basename(__filename, `.js`),
-			group: basename(__dirname, `.js`),
 			description: `Shows bot & OS info`,
 			usage: ``,
 			aliases: [`bot`, `stats`, `info`]

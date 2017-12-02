@@ -1,7 +1,6 @@
 const Commands = require(`../../../../__Global/Structures/Commands`);
 const config = require(`../../../../../.eslintrc-default.json`);
 const { stripIndents } = require(`common-tags`);
-const { basename } = require(`path`);
 const { Linter } = require(`eslint`);
 const linter = new Linter();
 
@@ -16,8 +15,6 @@ class Command extends Commands {
 			limit: false,
 			limitAmount: 3,
 			limitTime: 86400,
-			name: basename(__filename, `.js`),
-			group: basename(__dirname, `.js`),
 			description: `Lint the codeblock in a message`,
 			usage: `[Message ID]`,
 			aliases: []

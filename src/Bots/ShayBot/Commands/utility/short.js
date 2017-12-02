@@ -1,5 +1,4 @@
 const Commands = require(`../../../../__Global/Structures/Commands`);
-const { basename } = require(`path`);
 const googl = require(`goo.gl`);
 googl.setKey(process.env.GOOGLE_URL_API);
 
@@ -14,8 +13,6 @@ class Command extends Commands {
 			limit: false,
 			limitAmount: 3,
 			limitTime: 86400,
-			name: basename(__filename, `.js`),
-			group: basename(__dirname, `.js`),
 			description: `Shortens the URL`,
 			usage: `[URL]`,
 			aliases: []

@@ -18,6 +18,7 @@ class CustomClient extends Client {
 		};
 		this.cooldown = [];
 		this.database = new Database;
+		this.groups = [];
 		this.ownerIDs = [`358558305997684739`];
 		this.servers = {
 			MAIN: `361532026354139156`,

@@ -1,7 +1,6 @@
 const Commands = require(`../../../../__Global/Structures/Commands`);
 const { MessageEmbed } = require(`discord.js`);
 const randomColor = require(`randomcolor`);
-const { basename } = require(`path`);
 
 class Command extends Commands {
 	constructor(client) {
@@ -14,8 +13,6 @@ class Command extends Commands {
 			limit: true,
 			limitAmount: 30,
 			limitTime: 86400,
-			name: basename(__filename, `.js`),
-			group: basename(__dirname, `.js`),
 			description: `Changes the color role's color`,
 			usage: `[Hex Value or RANDOM]`,
 			aliases: [`hex`, `color`, `colour`]

@@ -1,6 +1,5 @@
 const Commands = require(`../../../../__Global/Structures/Commands`);
 const asciify = require(`asciify`);
-const { basename } = require(`path`);
 
 class Command extends Commands {
 	constructor(client) {
@@ -13,8 +12,6 @@ class Command extends Commands {
 			limit: false,
 			limitAmount: 3,
 			limitTime: 86400,
-			name: basename(__filename, `.js`),
-			group: basename(__dirname, `.js`),
 			description: `Converts the text to an ascii`,
 			usage: `[Font] [Text]`,
 			aliases: []

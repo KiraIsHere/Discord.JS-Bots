@@ -1,5 +1,4 @@
 const Commands = require(`../../Structures/Commands`);
-const { basename } = require(`path`);
 
 class Command extends Commands {
 	constructor(client) {
@@ -12,8 +11,6 @@ class Command extends Commands {
 			limit: false,
 			limitAmount: 3,
 			limitTime: 86400,
-			name: basename(__filename, `.js`),
-			group: basename(__dirname, `.js`),
 			description: `Displays all the commands`,
 			usage: `(Command)`,
 			aliases: [`?`]
@@ -26,19 +23,19 @@ class Command extends Commands {
 				if (!client.cmds.commands.has(args[1])) return false;
 
 				const command = client.cmds.commands.get(args[1]);
-				message.channel.send(`= ${client.upperCase(command.name)} = \ndescription :: ${command.description}\nusage       :: ${command.usage}`, {
+				message.channel.send(`= ${client.upperCase(command.name)} = \ndescription :: ${command.description}\nusage       :: ${client.upperCase(command.name)} ${command.usage}`, {
 					code: `asciidoc`,
 					split: { prepend: `\`\`\`asciidoc\n`, append: `\`\`\`` }
 				});
 				return true;
 			}
 
-			const groupCommands = client.cmds.commands.filter(c => c.group === args[0]);
+			const groupCommands = client.cmds.commands.filter(c => c.group === args[0] && c.show === true).sort();
 			if (groupCommands.size === 0) return false;
 			const commandNames = groupCommands.keyArray();
 			const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
 
-			message.channel.send(`= Command List =\n\n[Use ${client.botPrefix}help command [commandname] for details]\n\n${groupCommands.map(c => c.show ? `${client.upperCase(c.name)}${` `.repeat(longest - c.name.length)} :: ${c.description}` : null).join(`\n`)}`, {
+			message.channel.send(`= Command List =\n\n[Use ${client.botPrefix}help command [commandname] for details]\n\n${groupCommands.map(c => `${client.upperCase(c.name)}${` `.repeat(longest - c.name.length)} :: ${c.description}`).join(`\n`)}`, {
 				code: `asciidoc`,
 				split: { prepend: `\`\`\`asciidoc\n`, append: `\`\`\`` }
 			});
@@ -46,13 +43,7 @@ class Command extends Commands {
 			return true;
 		}
 
-		const groups = [];
-		for (const command of client.cmds.commands.values()) {
-			if (command.group.startsWith(`_`)) break;
-			if (!groups.includes(command.group)) groups.push(command.group);
-		}
-
-		message.channel.send(`= Group List =\n\n[Use ${client.botPrefix}help [groupname] for details]\n\n${groups.join(`\n`)}`, {
+		message.channel.send(`= Group List =\n\n[Use ${client.botPrefix}help [groupname] for details]\n\n${client.groups.join(`\n`)}`, {
 			code: `asciidoc`,
 			split: { prepend: `\`\`\`asciidoc\n`, append: `\`\`\`` }
 		});

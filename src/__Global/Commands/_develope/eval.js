@@ -1,5 +1,4 @@
 const Commands = require(`../../Structures/Commands`);
-const { basename } = require(`path`);
 const { post } = require(`snekfetch`);
 const { inspect } = require(`util`);
 const { VM } = require(`vm2`);
@@ -15,8 +14,6 @@ class Command extends Commands {
 			limit: false,
 			limitAmount: 3,
 			limitTime: 86400,
-			name: basename(__filename, `.js`),
-			group: basename(__dirname, `.js`),
 			description: `Evaluates javascript code`,
 			usage: `[Code]`,
 			aliases: []
