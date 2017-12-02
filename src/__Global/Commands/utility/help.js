@@ -23,7 +23,7 @@ class Command extends Commands {
 				if (!client.cmds.commands.has(args[1])) return false;
 
 				const command = client.cmds.commands.get(args[1]);
-				message.channel.send(`= ${client.upperCase(command.name)} = \ndescription :: ${command.description}\nusage       :: ${client.botPrefix}!${client.upperCase(command.name)} ${command.usage}`, {
+				message.channel.send(`= ${client.upperCase(command.name)} = \ndescription :: ${command.description}\nusage       :: ${client.botPrefix}${client.upperCase(command.name)} ${command.usage}`, {
 					code: `asciidoc`,
 					split: { prepend: `\`\`\`asciidoc\n`, append: `\`\`\`` }
 				});
