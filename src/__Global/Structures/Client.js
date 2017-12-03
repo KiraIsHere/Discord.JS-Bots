@@ -128,7 +128,9 @@ class CustomClient extends Client {
 		}
 
 		isDirectory(resolve(`../../Bots`)).forEach(dir => {
+			if (dir.startsWith(`_`)) return false;
 			input = input.replace(process.env[dir], SECRET);
+			return true;
 		});
 
 		function isDirectory(source) {
