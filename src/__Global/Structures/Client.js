@@ -104,10 +104,10 @@ class CustomClient extends Client {
 		});
 	}
 
-	missingArgs(message, command) {
+	missingArgs(message, command, customMessage) {
 		this.send(message,
 			`❌ Invalid Arguments\n` +
-			`\`\`\`\n${this.upperCase(command.name)} ${command.usage}\n\`\`\``
+			`\`\`\`\n${this.upperCase(command.name)} ${customMessage ? customMessage : command.usage}\n\`\`\``
 		);
 	}
 
