@@ -19,7 +19,7 @@ class Command extends Commands {
 
 	run(client, message, args) {
 		const pages = this.split(client.emojis.map(e => e).join(` `), 2000);
-		console.log(pages.length);
+
 		if (pages.length < 2) return client.send(message, pages[0]);
 		if (args.length < 1 || Number.isInteger(args[0]) || args[0] < 1 || args[0] > pages.length) return client.missingArgs(message, this, `[1-${pages.length}]`);
 		client.send(message, pages[args[0] - 1]);
