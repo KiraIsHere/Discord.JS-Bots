@@ -5,20 +5,20 @@ class Database {
 		this.url = process.env.MONGODB_URI;
 	}
 
-	insert(objects) {
-		return new Promise((resolve, reject) => {
-			connect(this.url, (error, db) => {
-				if (error) return reject(error);
-				const collection = db.collection(`documents`);
-				collection.insertMany(objects, (error, result) => {
-					if (error) return reject(error);
-					resolve(result);
-					return true;
-				});
-				return true;
-			});
-		});
-	}
+	// insert(objects) {
+	// 	return new Promise((resolve, reject) => {
+	// 		connect(this.url, (error, db) => {
+	// 			if (error) return reject(error);
+	// 			const collection = db.collection(`documents`);
+	// 			collection.insertMany(objects, (error, result) => {
+	// 				if (error) return reject(error);
+	// 				resolve(result);
+	// 				return true;
+	// 			}).catch(error => reject(error));
+	// 			return true;
+	// 		});
+	// 	});
+	// }
 
 	find(object) {
 		return new Promise((resolve, reject) => {
@@ -29,7 +29,7 @@ class Database {
 					if (error) return reject(error);
 					resolve(result);
 					return true;
-				});
+				}).catch(error => reject(error));
 				return true;
 			});
 		});
@@ -44,26 +44,26 @@ class Database {
 					if (error) return reject(error);
 					resolve(result);
 					return true;
-				});
+				}).catch(error => reject(error));
 				return true;
 			});
 		});
 	}
 
-	remove(object) {
-		return new Promise((resolve, reject) => {
-			connect(this.url, (error, db) => {
-				if (error) return reject(error);
-				const collection = db.collection(`documents`);
-				collection.deleteOne(object, (error, result) => {
-					if (error) return reject(error);
-					resolve(result);
-					return true;
-				});
-				return true;
-			});
-		});
-	}
+	// remove(object) {
+	// 	return new Promise((resolve, reject) => {
+	// 		connect(this.url, (error, db) => {
+	// 			if (error) return reject(error);
+	// 			const collection = db.collection(`documents`);
+	// 			collection.deleteOne(object, (error, result) => {
+	// 				if (error) return reject(error);
+	// 				resolve(result);
+	// 				return true;
+	// 			}).catch(error => reject(error));
+	// 			return true;
+	// 		});
+	// 	});
+	// }
 }
 
 module.exports = Database;

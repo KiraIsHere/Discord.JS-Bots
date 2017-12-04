@@ -172,12 +172,12 @@ class CustomClient extends Client {
 		return input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, `,`);
 	}
 
-	formatBytes(input) {
-		const sizes = [`Bytes`, `KB`, `MB`, `GB`, `TB`];
-		if (input === 0) return `0 Bytes`;
-		const i = parseInt(Math.floor(Math.log(input) / Math.log(1024)));
-		return `${Math.round(input / Math.pow(1024, i), 2)} ${sizes[i]}`;
-	}
+	// formatBytes(input) {
+	// 	const sizes = [`Bytes`, `KB`, `MB`, `GB`, `TB`];
+	// 	if (input === 0) return `0 Bytes`;
+	// 	const i = parseInt(Math.floor(Math.log(input) / Math.log(1024)));
+	// 	return `${Math.round(input / Math.pow(1024, i), 2)} ${sizes[i]}`;
+	// }
 
 	defaultChannel(guild) {
 		return guild.channels
@@ -185,6 +185,10 @@ class CustomClient extends Client {
 					c.permissionsFor(guild.me).has(`SEND_MESSAGES`))
 			.sort()
 			.first();
+	}
+
+	updateActivity() {
+		if (this.user.bot) this.user.setActivity(`${this.botPrefix}help | ${this.guilds.size} ${this.guilds.size > 1 ? `Guilds` : `Guild`} | By Shayne Hartford (ShayBox)`).catch(error => this.error(error));
 	}
 }
 

@@ -72,7 +72,7 @@ class Command extends Commands {
 			code: parsed[2],
 			lang: parsed[1]
 		};
-		this.run(client, message, code, true, updated);
+		this.run(client, message, code, true, updated).catch(error => client.error(error));
 		return true;
 	}
 }

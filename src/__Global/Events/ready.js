@@ -8,7 +8,7 @@ class Event extends Events {
 	run(client) {
 		console.log(client.user.username);
 
-		if (client.user.bot) client.user.setActivity(`${client.botPrefix}help | ${client.guilds.size} ${client.guilds.size > 1 ? `Guilds` : `Guild`}`);
+		client.updateActivity();
 
 		client.database.find({ BLACKLISTED_USERS: { $type: 2 } }).then(data => {
 			client.blacklist = data[0].BLACKLISTED_USERS;
@@ -31,7 +31,7 @@ class Event extends Events {
 		const channel = client.guilds.get(client.servers.MAIN).channels.find(`name`, `statistics`);
 		channel.messages.fetch().then(messages => messages.map(message => message.delete()));
 		channel.send(`Starting...`).then(message => {
-			edit();
+			edit().catch(error => client.error(error));
 			async function edit() {
 				const usedMemory = await memoryUsage();
 				const maxMemory = process.env.LOCAL ? 8096 : 512;

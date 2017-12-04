@@ -10,7 +10,7 @@ class Event extends Events {
 		if (message.author.bot) return false;
 		await message.delete({ timeout: 500 });
 		if (!message.content.toLowerCase().includes(`i agree`)) return message.member.kick();
-		message.member.addRole(message.guild.roles.find(`name`, `Verified`));
+		message.member.addRole(message.guild.roles.find(`name`, `Verified`)).catch(error => client.error(error));
 		return true;
 	}
 }
