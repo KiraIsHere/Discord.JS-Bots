@@ -173,9 +173,9 @@ class CustomClient extends Client {
 	}
 
 	formatBytes(input) {
-		var sizes = [`Bytes`, `KB`, `MB`, `GB`, `TB`];
+		const sizes = [`Bytes`, `KB`, `MB`, `GB`, `TB`];
 		if (input === 0) return `0 Bytes`;
-		var i = parseInt(Math.floor(Math.log(input) / Math.log(1024)));
+		const i = parseInt(Math.floor(Math.log(input) / Math.log(1024)));
 		return `${Math.round(input / Math.pow(1024, i), 2)} ${sizes[i]}`;
 	}
 

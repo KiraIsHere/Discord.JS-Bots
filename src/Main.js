@@ -5,6 +5,7 @@ const { join } = require(`path`);
 isDirectory(join(`.`, `./src/Bots`)).forEach(dir => {
 	if (dir.startsWith(`__`)) return false;
 	start(`src/Bots/${dir}`);
+	return true;
 });
 
 function isDirectory(source) {

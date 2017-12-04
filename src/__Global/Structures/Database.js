@@ -9,7 +9,7 @@ class Database {
 		return new Promise((resolve, reject) => {
 			connect(this.url, (error, db) => {
 				if (error) return reject(error);
-				var collection = db.collection(`documents`);
+				const collection = db.collection(`documents`);
 				collection.insertMany(objects, (error, result) => {
 					if (error) return reject(error);
 					resolve(result);
@@ -24,8 +24,8 @@ class Database {
 		return new Promise((resolve, reject) => {
 			connect(this.url, (error, db) => {
 				if (error) return reject(error);
-				var collection = db.collection(`documents`);
-				collection.find(object).toArray((error, result) => {
+				const collection = db.collection(`documents`);
+				collection.find(object, (error, result) => {
 					if (error) return reject(error);
 					resolve(result);
 					return true;
@@ -39,7 +39,7 @@ class Database {
 		return new Promise((resolve, reject) => {
 			connect(this.url, (error, db) => {
 				if (error) return reject(error);
-				var collection = db.collection(`documents`);
+				const collection = db.collection(`documents`);
 				collection.updateOne(oldObject, { $set: newObject }, (error, result) => {
 					if (error) return reject(error);
 					resolve(result);
@@ -54,7 +54,7 @@ class Database {
 		return new Promise((resolve, reject) => {
 			connect(this.url, (error, db) => {
 				if (error) return reject(error);
-				var collection = db.collection(`documents`);
+				const collection = db.collection(`documents`);
 				collection.deleteOne(object, (error, result) => {
 					if (error) return reject(error);
 					resolve(result);

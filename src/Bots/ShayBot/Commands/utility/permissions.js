@@ -26,7 +26,7 @@ class Command extends Commands {
 		const permissions = role.permissions.serialize();
 
 		let longestString = 0;
-		for (var key in permissions) {
+		for (const key in permissions) {
 			if (key.length > longestString) {
 				longestString = key.length;
 			}

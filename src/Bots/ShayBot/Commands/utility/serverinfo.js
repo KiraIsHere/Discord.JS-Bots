@@ -52,19 +52,19 @@ class Command extends Commands {
 	}
 
 	resolveVerificationLevel(level) {
-		return String(level)
-			.replace(0, `None`)
-			.replace(1, `Low`)
-			.replace(2, `Medium`)
-			.replace(3, `(╯°□°）╯︵ ┻━┻`)
-			.replace(4, `┻━┻ ﾐヽ(ಠ益ಠ)ノ彡┻━┻`);
+		return level
+			.replace(`0`, `None`)
+			.replace(`1`, `Low`)
+			.replace(`2`, `Medium`)
+			.replace(`3`, `(╯°□°）╯︵ ┻━┻`)
+			.replace(`4`, `┻━┻ ﾐヽ(ಠ益ಠ)ノ彡┻━┻`);
 	}
 
 	resolveExplicitLevel(level) {
-		return String(level)
-			.replace(0, `Scan nobody`)
-			.replace(1, `Scan members without role`)
-			.replace(2, `Scan everyone`);
+		return level
+			.replace(`0`, `Scan nobody`)
+			.replace(`1`, `Scan members without role`)
+			.replace(`2`, `Scan everyone`);
 	}
 
 	getChannelTypeSize(channels, type) {

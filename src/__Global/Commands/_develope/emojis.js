@@ -27,12 +27,12 @@ class Command extends Commands {
 	}
 
 	split(input, length) {
-		var strs = [];
+		const strs = [];
 		while (input.length > length) {
-			var pos = input.substring(0, length).lastIndexOf(` `);
+			let pos = input.substring(0, length).lastIndexOf(` `);
 			pos = pos <= 0 ? length : pos;
 			strs.push(input.substring(0, pos));
-			var i = input.indexOf(` `, pos) + 1;
+			let i = input.indexOf(` `, pos) + 1;
 			if (i < pos || i > pos + length) { i = pos; }
 			input = input.substring(i);
 		}
