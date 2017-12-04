@@ -18,6 +18,7 @@ class Command extends Commands {
 	}
 
 	run(client, message, args) {
+		if (!client.ownerIDs.includes(message.author.id)) return client.send(message, `Sorry, you do not have permission for this command`);
 		const pages = this.split(client.emojis.map(e => e).join(` `), 2000);
 
 		if (pages.length < 2) return client.send(message, pages[0]);
