@@ -25,7 +25,7 @@ class Database {
 			connect(this.url, (error, db) => {
 				if (error) return reject(error);
 				const collection = db.collection(`documents`);
-				collection.find(object, (error, result) => {
+				collection.find(object).toArray((error, result) => {
 					if (error) return reject(error);
 					resolve(result);
 					return true;
