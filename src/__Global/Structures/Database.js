@@ -10,11 +10,12 @@ class Database {
 	// 		connect(this.url, (error, db) => {
 	// 			if (error) return reject(error);
 	// 			const collection = db.collection(`documents`);
+	// 			// noinspection JSIgnoredPromiseFromCall
 	// 			collection.insertMany(objects, (error, result) => {
 	// 				if (error) return reject(error);
 	// 				resolve(result);
 	// 				return true;
-	// 			}).catch(error => reject(error));
+	// 			});
 	// 			return true;
 	// 		});
 	// 	});
@@ -25,11 +26,12 @@ class Database {
 			connect(this.url, (error, db) => {
 				if (error) return reject(error);
 				const collection = db.collection(`documents`);
+				// noinspection JSIgnoredPromiseFromCall
 				collection.find(object).toArray((error, result) => {
 					if (error) return reject(error);
 					resolve(result);
 					return true;
-				}).catch(error => reject(error));
+				});
 				return true;
 			});
 		});
@@ -40,11 +42,12 @@ class Database {
 			connect(this.url, (error, db) => {
 				if (error) return reject(error);
 				const collection = db.collection(`documents`);
+				// noinspection JSIgnoredPromiseFromCall
 				collection.updateOne(oldObject, { $set: newObject }, (error, result) => {
 					if (error) return reject(error);
 					resolve(result);
 					return true;
-				}).catch(error => reject(error));
+				});
 				return true;
 			});
 		});
@@ -55,11 +58,12 @@ class Database {
 	// 		connect(this.url, (error, db) => {
 	// 			if (error) return reject(error);
 	// 			const collection = db.collection(`documents`);
+	// 			// noinspection JSIgnoredPromiseFromCall
 	// 			collection.deleteOne(object, (error, result) => {
 	// 				if (error) return reject(error);
 	// 				resolve(result);
 	// 				return true;
-	// 			}).catch(error => reject(error));
+	// 			});
 	// 			return true;
 	// 		});
 	// 	});
