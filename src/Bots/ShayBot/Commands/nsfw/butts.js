@@ -18,9 +18,11 @@ class Command extends Commands {
 		});
 	}
 
-	async run(client, message) {
+	run(client, message) {
 		if (!message.channel.nsfw) return client.send(message, `Must use in a NSFW channel`);
-		client.send(message, { files: [`http://media.obutts.ru/${await get(`http://api.obutts.ru/butts/0/1/random`).body[0].preview}`] });
+		get(`http://api.obutts.ru/butts/0/1/random`).then(data => {
+			client.send(message, { files: [`http://media.obutts.ru/${data.body[0].preview}`] });
+		});
 		return true;
 	}
 }

@@ -18,10 +18,12 @@ class Command extends Commands {
 		});
 	}
 
-	async run(client, message) {
+	run(client, message) {
 		if (process.env.LOCAL_TESTING) return false;
 
-		client.send(message, await get(`https://api.ipify.org/`).text);
+		get(`https://api.ipify.org/`).then(data => {
+			client.send(message, data.text, { code: `` });
+		});
 		return true;
 	}
 }
