@@ -7,7 +7,8 @@ class Database {
 
 	// insert(objects) {
 	// 	return new Promise((resolve, reject) => {
-	// 		connect(this.url, (error, db) => {
+	// 		connect(this.url, (error, client) => {
+	// 		const db = client.db(`heroku_zdrd68l6`);
 	// 			if (error) return reject(error);
 	// 			const collection = db.collection(`documents`);
 	// 			// noinspection JSIgnoredPromiseFromCall
@@ -23,7 +24,8 @@ class Database {
 
 	find(object) {
 		return new Promise((resolve, reject) => {
-			connect(this.url, (error, db) => {
+			connect(this.url, (error, client) => {
+				const db = client.db(`heroku_zdrd68l6`);
 				if (error) return reject(error);
 				const collection = db.collection(`documents`);
 				// noinspection JSIgnoredPromiseFromCall
@@ -39,7 +41,8 @@ class Database {
 
 	update(oldObject, newObject) {
 		return new Promise((resolve, reject) => {
-			connect(this.url, (error, db) => {
+			connect(this.url, (error, client) => {
+				const db = client.db(`heroku_zdrd68l6`);
 				if (error) return reject(error);
 				const collection = db.collection(`documents`);
 				// noinspection JSIgnoredPromiseFromCall
@@ -55,7 +58,8 @@ class Database {
 
 	// remove(object) {
 	// 	return new Promise((resolve, reject) => {
-	// 		connect(this.url, (error, db) => {
+	// 		connect(this.url, (error, client) => {
+	// 		const db = client.db(`heroku_zdrd68l6`);
 	// 			if (error) return reject(error);
 	// 			const collection = db.collection(`documents`);
 	// 			// noinspection JSIgnoredPromiseFromCall
