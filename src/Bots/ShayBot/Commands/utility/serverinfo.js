@@ -52,7 +52,7 @@ class Command extends Commands {
 	}
 
 	resolveVerificationLevel(level) {
-		return level
+		return level.toString()
 			.replace(`0`, `None`)
 			.replace(`1`, `Low`)
 			.replace(`2`, `Medium`)
@@ -61,7 +61,7 @@ class Command extends Commands {
 	}
 
 	resolveExplicitLevel(level) {
-		return level
+		return level.toString()
 			.replace(`0`, `Scan nobody`)
 			.replace(`1`, `Scan members without role`)
 			.replace(`2`, `Scan everyone`);
