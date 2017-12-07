@@ -37,8 +37,12 @@ class Command extends Commands {
 			`• Verification Level :: ${this.resolveVerificationLevel(guild.verificationLevel)}\n` +
 			`• Explicit Level     :: ${this.resolveExplicitLevel(guild.explicitContentFilter)}\n` +
 			`• Voice Region       :: ${guild.region.toUpperCase()}\n` +
-			`• Channels (C|T|V)   :: ${guild.channels.size} (${this.getChannelTypeSize(guild.channels, `category`)}|${this.getChannelTypeSize(guild.channels, `text`)}|${this.getChannelTypeSize(guild.channels, `voice`)})\n` +
-			`• Members (U|B)      :: ${guild.memberCount} (${client.formatNumbers(guild.members.filter(member => !member.user.bot).size)}|${client.formatNumbers(guild.members.filter(member => member.user.bot).size)})\n` +
+			`• Categories         :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `category`).size)}\n` +
+			`• Text Channels      :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `text`).size)}\n` +
+			`• Voice Channels     :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `voice`).size)}\n` +
+			`• Total Members      :: ${guild.memberCount} (|${client.formatNumbers(guild.members.filter(member => member.user.bot).size)})\n` +
+			`• Users              :: ${client.formatNumbers(guild.members.filter(member => !member.user.bot).size)}\n` +
+			`• Bots               :: ${client.formatNumbers(guild.members.filter(member => member.user.bot).size)}\n` +
 			`• Emojis             :: ${guild.emojis.size}\n` +
 			`• Roles              :: ${await client.haste(guild.roles.map(role => `${role.name}`).sort().join(`\n`).replace(/@/g, ``))}\n` +
 			``, { code: `asciidoc` }
