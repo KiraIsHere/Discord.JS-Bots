@@ -23,14 +23,14 @@ class Command extends Commands {
 
 		client.send(message,
 			`= Server Info =\n` +
-
-			`\nOwner\n` +
+			`\n` +
+			`Owner\n` +
 			`• Name               :: ${guild.owner.user.username}\n` +
 			`• Nickname           :: ${guild.owner.nickname ? guild.owner.nickname : `No Nickname`}\n` +
 			`• ID                 :: ${guild.owner.id}\n` +
 			`• Creation Date      :: ${guild.owner.user.createdAt}\n` +
-
-			`\nGuild\n` +
+			`\n` +
+			`Guild\n` +
 			`• Name               :: ${guild.name}\n` +
 			`• ID                 :: ${guild.id}\n` +
 			`• Creation Date      :: ${guild.createdAt}\n` +
@@ -44,8 +44,8 @@ class Command extends Commands {
 			`• Users              :: ${client.formatNumbers(guild.members.filter(member => !member.user.bot).size)}\n` +
 			`• Bots               :: ${client.formatNumbers(guild.members.filter(member => member.user.bot).size)}\n` +
 			`• Emojis             :: ${guild.emojis.size}\n` +
-			`• Roles              :: ${await client.haste(guild.roles.map(role => `${role.name}`).sort().join(`\n`).replace(/@/g, ``))}\n` +
-			``, { code: `asciidoc` }
+			`• Roles              :: ${await client.haste(guild.roles.map(role => `${role.name}`).sort().join(`\n`).replace(/@/g, ``))}`,
+			{ code: `asciidoc` }
 		);
 		return true;
 	}

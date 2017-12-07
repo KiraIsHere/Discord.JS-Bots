@@ -27,16 +27,16 @@ class Command extends Commands {
 
 		client.send(message,
 			`= User Info =\n` +
-
-			`\nUser\n` +
+			`\n` +
+			`User\n` +
 			`• Name               :: ${member.user.username}\n` +
 			`• Nickname           :: ${member.nickname ? member.nickname : `No Nickname`}\n` +
 			`• ID                 :: ${member.id}\n` +
 			`• Status             :: ${this.resolveStatus(message.author)}\n` +
 			`• Creation Date      :: ${member.creationDate}\n` +
 			`• Join Date          :: ${member.joinedTimestamp}\n` +
-			`• Roles              :: ${await client.haste(message.member.roles.map(role => `${role.name}`).sort().join(`\n`).replace(/@/g, ``))}\n` +
-			``, { code: `asciidoc` }
+			`• Roles              :: ${await client.haste(message.member.roles.map(role => `${role.name}`).sort().join(`\n`).replace(/@/g, ``))}`,
+			{ code: `asciidoc` }
 		);
 		return true;
 	}

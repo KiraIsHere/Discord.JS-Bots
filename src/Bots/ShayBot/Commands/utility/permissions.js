@@ -1,5 +1,4 @@
 const Commands = require(`../../../../__Global/Structures/Commands`);
-const { MessageEmbed } = require(`discord.js`);
 
 class Command extends Commands {
 	constructor(client) {
@@ -22,27 +21,19 @@ class Command extends Commands {
 		if (args.length < 1) return client.missingArgs(message, this);
 
 		const role = message.guild.roles.find(`name`, args.join(` `));
-		if (!role) return false;
+		if (!role) return client.send(message, `Role does not exist`);
 		const permissions = role.permissions.serialize();
 
 		let longestString = 0;
 		for (const key in permissions) {
-			if (key.length > longestString) {
-				longestString = key.length;
-			}
+			if (key.length > longestString) longestString = key.length;
 		}
 
-		let content = ``;
-		Object.keys(permissions).forEach(key => {
-			content += `${` `.repeat(longestString - key.length)}${key} ${permissions[key]}\n`;
-		});
-
-		client.send(message, new MessageEmbed()
-			.setTitle(role.name)
-			.setDescription(`\`\`\`${content}\`\`\``)
-			.setColor(role.color)
-			.setFooter(client.botName)
-			.setTimestamp()
+		client.send(message,
+			`= ${role.name} =\n` +
+			`\n` +
+			`${Object.keys(permissions).map(key => `\`• ${key} ${` `.repeat(longestString - key.length)} :: ${permissions[key]}\``).join(`\n`)}`,
+			{ code: `asciidoc` }
 		);
 		return true;
 	}
