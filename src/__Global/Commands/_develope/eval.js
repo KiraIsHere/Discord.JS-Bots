@@ -46,7 +46,7 @@ class Command extends Commands {
 	}
 
 	addToContent(client, input, type) {
-		return `${type === `Input` ? `📥` : type === `Output` ? `📤` : `❌`} ${type}\n${String(input).length < 1024 ? `\`\`\`js\n${input}\n\`\`\`\n` : client.haste(input)}`;
+		return `${type === `Input` ? `📥` : type === `Output` ? `📤` : `❌`} ${type}\n${String(input).length < 1024 ? `\`\`\`js\n${input}\n\`\`\`\n` : `${client.haste(input)}.js`}`;
 	}
 }
 

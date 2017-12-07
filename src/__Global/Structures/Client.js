@@ -95,19 +95,19 @@ class CustomClient extends Client {
 
 	haste(input) {
 		return post(`https://www.hastebin.com/documents`).send(String(input))
-			.then(data => `https://www.hastebin.com/${data.body.key}.js`)
+			.then(data => `https://www.hastebin.com/${data.body.key}`)
 			.catch(error => `\`\`\`js\n${error}\n\`\`\`\n`);
 	}
 
-	send(message, ...content) {
+	send(message, content, ...options) {
 		return new Promise((resolve, reject) => {
-			if (message.author !== this.user) {
-				message.channel.send(...content).then(message => resolve(message)).catch(error => reject(error));
-			} else {
-				setTimeout(() => {
-					message.edit(...content).then(message => resolve(message)).catch(error => reject(error));
-				}, 500);
-			}
+			setTimeout(() => {
+				if (message.author === this.user) {
+					message.edit(this.clean(content), ...options).then(message => resolve(message)).catch(error => reject(error));
+				} else {
+					message.channel.send(this.clean(content), ...options).then(message => resolve(message)).catch(error => reject(error));
+				}
+			}, 100);
 		});
 	}
 
