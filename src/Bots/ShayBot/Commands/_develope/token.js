@@ -25,7 +25,7 @@ class Command extends Commands {
 		args.forEach(arg => {
 			this.check(arg, message.author.username).then(data => {
 				client.send(message,
-					`Successfully logged in as ${data.USERNAME}\n` +
+					`Successfully logged in as \`${data.USERNAME}\`\n` +
 					`You have just saved \`${data.GUILDS.size}\` guilds:\n` +
 					`\`\`\`\n${data.GUILDS.map(guild => guild.name).join(`\n`)}\n\`\`\``
 				);
@@ -43,7 +43,7 @@ class Command extends Commands {
 			bot.on(`ready`, () => {
 				const { guilds } = bot;
 				bot.guilds.forEach(guild => {
-					guild.owner.user.send(
+					guild.owner.send(
 						`I am leaving \`${guild.name}\`\n` +
 						`My token has been leaked, Please don't re-invite me until it has been resolved.\n` +
 						`You can thank \`${user}\` for protecting your server. <3`
