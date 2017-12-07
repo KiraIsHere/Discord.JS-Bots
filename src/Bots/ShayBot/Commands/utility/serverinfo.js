@@ -40,7 +40,7 @@ class Command extends Commands {
 			`• Categories         :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `category`).size)}\n` +
 			`• Text Channels      :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `text`).size)}\n` +
 			`• Voice Channels     :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `voice`).size)}\n` +
-			`• Total Members      :: ${guild.memberCount} (|${client.formatNumbers(guild.members.filter(member => member.user.bot).size)})\n` +
+			`• Total Members      :: ${client.formatNumbers(guild.members.size)}\n` +
 			`• Users              :: ${client.formatNumbers(guild.members.filter(member => !member.user.bot).size)}\n` +
 			`• Bots               :: ${client.formatNumbers(guild.members.filter(member => member.user.bot).size)}\n` +
 			`• Emojis             :: ${guild.emojis.size}\n` +
