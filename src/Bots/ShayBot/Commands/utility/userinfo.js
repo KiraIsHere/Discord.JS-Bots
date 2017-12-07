@@ -17,7 +17,7 @@ class Command extends Commands {
 		});
 	}
 
-	run(client, message, args) {
+	async run(client, message, args) {
 		let { member } = message;
 		if (message.mentions.members.size > 0) {
 			member = message.mentions.members.first();
@@ -35,7 +35,7 @@ class Command extends Commands {
 			`• Status             :: ${this.resolveStatus(message.author)}\n` +
 			`• Creation Date      :: ${member.creationDate}\n` +
 			`• Join Date          :: ${member.joinedTimestamp}\n` +
-			`• Roles              :: ${client.haste(message.member.roles.map(role => `\`${role.name}\``).sort().join(`\n`).replace(/@/g, ``))}\n` +
+			`• Roles              :: ${await client.haste(message.member.roles.map(role => `${role.name}`).sort().join(`\n`).replace(/@/g, ``))}\n` +
 			``, { code: `asciidoc` }
 		);
 		return true;

@@ -40,7 +40,7 @@ class Command extends Commands {
 			`• Channels (C|T|V)   :: ${guild.channels.size} (${this.getChannelTypeSize(guild.channels, `category`)}|${this.getChannelTypeSize(guild.channels, `text`)}|${this.getChannelTypeSize(guild.channels, `voice`)})\n` +
 			`• Members (U|B)      :: ${guild.memberCount} (${client.formatNumbers(guild.members.filter(member => !member.user.bot).size)}|${client.formatNumbers(guild.members.filter(member => member.user.bot).size)})\n` +
 			`• Emojis             :: ${guild.emojis.size}\n` +
-			`• Roles              :: ${await client.haste(guild.roles.map(role => `\`${role.name}\``).sort().join(`\n`).replace(/@/g, ``))}\n` +
+			`• Roles              :: ${await client.haste(guild.roles.map(role => `${role.name}`).sort().join(`\n`).replace(/@/g, ``))}\n` +
 			``, { code: `asciidoc` }
 		);
 		return true;
