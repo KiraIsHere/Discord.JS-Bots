@@ -32,7 +32,7 @@ class Command extends Commands {
 		client.send(message,
 			`= ${role.name} =\n` +
 			`\n` +
-			`${Object.keys(permissions).map(key => `\`• ${key} ${` `.repeat(longestString - key.length)} :: ${permissions[key]}\``).join(`\n`)}`,
+			`${Object.keys(permissions).map(key => `• ${key} ${` `.repeat(longestString - key.length)} :: ${permissions[key]}`).join(`\n`)}`,
 			{ code: `asciidoc` }
 		);
 		return true;
