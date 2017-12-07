@@ -1,5 +1,4 @@
 const Commands = require(`../../../../__Global/Structures/Commands`);
-const { MessageEmbed } = require(`discord.js`);
 
 class Command extends Commands {
 	constructor(client) {
@@ -19,29 +18,25 @@ class Command extends Commands {
 	}
 
 	run(client, message, args) {
-		if (args.length < 1) return client.missingArgs(message, this);
-
+		let { member } = message;
 		if (message.mentions.members.size > 0) {
-			message.member = message.mentions.members.first();
-		} else {
-			message.member = message.guild.members.get(args[0]);
+			member = message.mentions.members.first();
+		} else if (args.length > 1) {
+			member = message.guild.members.get(args[0]);
 		}
 
-		client.send(message, new MessageEmbed()
-			.addField(`User Name`, message.member.user.username, true)
-			.addField(`Guild Nickname`, message.member.nickname ? message.member.nickname : `None`, true)
+		client.send(message,
+			`= User Info =\n` +
 
-			.addField(`Status`, this.resolveStatus(message.author), true)
-			.addField(`Game`, message.member.presence.game ? message.member.presence.game.name : `None`, true)
-
-			.addField(`Server Join Date`, message.member.joinedAt)
-			.addField(`Account Creation Date`, message.member.user.createdAt)
-			.addField(`Roles (A-Z)`, message.member.roles.map(role => `\`${role.name}\``).sort().join(`\n`).replace(/@/g, ``))
-
-			.setThumbnail(message.member.user.displayAvatarURL())
-			.setColor(0x00FF00)
-			.setFooter(client.botName)
-			.setTimestamp()
+			`\nUser\n` +
+			`• Name               :: ${member.user.username}\n` +
+			`• Nickname           :: ${member.nickname ? member.nickname : `No Nickname`}\n` +
+			`• ID                 :: ${member.id}\n` +
+			`• Status             :: ${this.resolveStatus(message.author)}\n` +
+			`• Creation Date      :: ${member.creationDate}\n` +
+			`• Join Date          :: ${member.joinedTimestamp}\n` +
+			`• Roles              :: ${client.haste(message.member.roles.map(role => `\`${role.name}\``).sort().join(`\n`).replace(/@/g, ``))}\n` +
+			``, { code: `asciidoc` }
 		);
 		return true;
 	}

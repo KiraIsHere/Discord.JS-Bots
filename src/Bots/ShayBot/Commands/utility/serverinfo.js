@@ -1,5 +1,4 @@
 const Commands = require(`../../../../__Global/Structures/Commands`);
-const { MessageEmbed } = require(`discord.js`);
 
 class Command extends Commands {
 	constructor(client) {
@@ -19,34 +18,30 @@ class Command extends Commands {
 	}
 
 	async run(client, message) {
-		await message.guild.members.fetch();
+		const { guild } = message;
+		await guild.members.fetch();
 
-		client.send(message, new MessageEmbed()
-			.setAuthor(`Owner: ${message.guild.owner.user.username} (ID: ${message.guild.owner.user.id})`, message.guild.owner.user.displayAvatarURL())
+		client.send(message,
+			`= Server Info =\n` +
 
-			.addField(`Guild Name`, message.guild.name, true)
-			.addField(`Guild ID`, message.guild.id, true)
-			.addBlankField(true)
+			`\nOwner\n` +
+			`• Name               :: ${guild.owner.user.username}\n` +
+			`• Nickname           :: ${guild.owner.nickname ? guild.owner.nickname : `No Nickname`}\n` +
+			`• ID                 :: ${guild.owner.id}\n` +
+			`• Creation Date      :: ${guild.owner.user.createdAt}\n` +
 
-			.addField(`Categories`, this.getChannelTypeSize(message.guild.channels, `category`), true)
-			.addField(`Text Channels`, this.getChannelTypeSize(message.guild.channels, `text`), true)
-			.addField(`Voice Channels`, this.getChannelTypeSize(message.guild.channels, `voice`), true)
-
-			.addField(`Users`, client.formatNumbers(message.guild.members.filter(member => !member.user.bot).size), true)
-			.addField(`Bots`, client.formatNumbers(message.guild.members.filter(member => member.user.bot).size), true)
-			.addField(`Emojis`, message.guild.emojis.size, true)
-
-			.addField(`Verification Level`, this.resolveVerificationLevel(message.guild.verificationLevel), true)
-			.addField(`Explicit Filter Level`, this.resolveExplicitLevel(message.guild.explicitContentFilter), true)
-			.addField(`Voice Region`, message.guild.region.toUpperCase(), true)
-
-			.addField(`Guld Creation Date`, message.guild.createdAt)
-			.addField(`Owner Creation Date`, message.guild.owner.user.createdAt)
-			.addField(`Roles (A-Z)`, message.guild.roles.map(role => `\`${role.name}\``).sort().join(`\n`).replace(/@/g, ``))
-
-			.setColor(0x00FF00)
-			.setFooter(client.botName)
-			.setTimestamp()
+			`\nGuild\n` +
+			`• Name               :: ${guild.name}\n` +
+			`• ID                 :: ${guild.id}\n` +
+			`• Creation Date      :: ${guild.createdAt}\n` +
+			`• Verification Level :: ${this.resolveVerificationLevel(guild.verificationLevel)}\n` +
+			`• Explicit Level     :: ${this.resolveExplicitLevel(guild.explicitContentFilter)}\n` +
+			`• Voice Region       :: ${guild.region.toUpperCase()}\n` +
+			`• Channels (C|T|V)   :: ${guild.channels.size} (${this.getChannelTypeSize(guild.channels, `category`)}|${this.getChannelTypeSize(guild.channels, `text`)}|${this.getChannelTypeSize(guild.channels, `voice`)})\n` +
+			`• Members (U|B)      :: ${guild.memberCount} (${client.formatNumbers(guild.members.filter(member => !member.user.bot).size)}|${client.formatNumbers(guild.members.filter(member => member.user.bot).size)})\n` +
+			`• Emojis             :: ${guild.emojis.size}\n` +
+			`• Roles              :: ${await client.haste(guild.roles.map(role => `\`${role.name}\``).sort().join(`\n`).replace(/@/g, ``))}\n` +
+			``, { code: `asciidoc` }
 		);
 		return true;
 	}

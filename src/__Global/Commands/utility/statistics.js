@@ -50,7 +50,7 @@ class Command extends Commands {
 				`\nBot\n` +
 				`• Uptime           :: ${client.formatTime(process.uptime())}\n` +
 				`• Heartbeat Ping   :: ${Math.round(client.ping)}ms\n` +
-				`${message.author !== client.user ? `• Message Ping     :: ${Math.round(message.createdTimestamp - msg.createdTimestamp)}ms\n` : `\n`}` +
+				`• Message Ping     :: ${Math.round(message.createdTimestamp - msg.createdTimestamp)}ms\n` +
 				`• Bot RAM Usage    :: ${Math.round((process.memoryUsage().heapUsed / 1024 / 1024 * 100) / 100)} MB\n` +
 
 				`\nBot Stats\n` +
@@ -59,8 +59,8 @@ class Command extends Commands {
 				`• Emojis           :: ${client.formatNumbers(client.emojis.size)}\n` +
 				`• Categories       :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `category`).size)}\n` +
 				`• Text Channels    :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `text`).size)}\n` +
-				`• Voice Channels   :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `voice`).size)}\n`,
-				{ code: `asciidoc` }
+				`• Voice Channels   :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `voice`).size)}\n` +
+				``, { code: `asciidoc` }
 			);
 		});
 		return true;

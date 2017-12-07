@@ -1,6 +1,7 @@
 const { Client, MessageEmbed, Collection } = require(`discord.js`);
 const { readdirSync, statSync } = require(`fs`);
 const { sep, resolve } = require(`path`);
+const { post } = require(`snekfetch`);
 const { inspect } = require(`util`);
 const Database = require(`./Database`);
 const moment = require(`moment`);
@@ -90,6 +91,12 @@ class CustomClient extends Client {
 			if (this.cooldown[i].ID === userID && this.cooldown[i].COMMAND === commandName) returnValue = (moment(this.cooldown[i].DATE).add(this.cooldown[i].TIME, `seconds`) - new Date).toString().slice(0, -3);
 		}
 		return returnValue;
+	}
+
+	haste(input) {
+		return post(`https://www.hastebin.com/documents`).send(String(input))
+			.then(data => `https://www.hastebin.com/${data.body.key}.js`)
+			.catch(error => `\`\`\`js\n${error}\n\`\`\`\n`);
 	}
 
 	send(message, ...content) {
