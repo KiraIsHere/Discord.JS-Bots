@@ -22,7 +22,7 @@ class Command extends Commands {
 		if (!client.user.bot) message.delete({ timeout: 500 });
 
 		client.send(message, `Loading...`).then(sent => {
-			sent.edit(new MessageEmbed()
+			sent.edit(``, new MessageEmbed()
 				.addField(`Heartbeat`, `${Math.round(client.ping)}ms`, true)
 				.addField(`Message`, `${Math.round(sent.createdTimestamp - message.createdTimestamp)}ms`, true)
 				.setColor(0x00FFFF)
