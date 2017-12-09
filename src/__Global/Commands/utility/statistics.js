@@ -50,7 +50,7 @@ class Command extends Commands {
 				`Bot\n` +
 				`• Uptime           :: ${client.formatTime(process.uptime())}\n` +
 				`• Heartbeat Ping   :: ${Math.round(client.ping)}ms\n` +
-				`• Message Ping     :: ${Math.round(message.createdTimestamp - msg.createdTimestamp)}ms\n` +
+				`• Message Ping     :: ${Math.round(msg.createdTimestamp - message.createdTimestamp)}ms\n` +
 				`• Bot RAM Usage    :: ${Math.round((process.memoryUsage().heapUsed / 1024 / 1024 * 100) / 100)} MB\n` +
 				`\n` +
 				`Bot Stats\n` +
