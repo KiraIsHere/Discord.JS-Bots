@@ -2,6 +2,8 @@ const Events = require(`../../../__Global/Structures/Events`);
 
 class Event extends Events {
 	async run(client, message) {
+		client.runLint(message, false);
+
 		if (process.env.LOCAL) return false;
 
 		if (message.channel.name !== `welcome`) return false;

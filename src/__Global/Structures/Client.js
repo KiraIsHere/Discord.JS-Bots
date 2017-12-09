@@ -17,6 +17,7 @@ class CustomClient extends Client {
 			commands: new Collection(),
 			usages: new Collection()
 		};
+		this.codeblock = /```(?:(\S+)\n)?\s*([^]+?)\s*```/i;
 		this.cooldown = [];
 		this.database = new Database;
 		this.groups = [];
@@ -179,23 +180,36 @@ class CustomClient extends Client {
 		return input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, `,`);
 	}
 
-	// formatBytes(input) {
-	// 	const sizes = [`Bytes`, `KB`, `MB`, `GB`, `TB`];
-	// 	if (input === 0) return `0 Bytes`;
-	// 	const i = parseInt(Math.floor(Math.log(input) / Math.log(1024)));
-	// 	return `${Math.round(input / Math.pow(1024, i), 2)} ${sizes[i]}`;
-	// }
+	formatBytes(input) {
+		const sizes = [`Bytes`, `KB`, `MB`, `GB`, `TB`];
+		if (input === 0) return `0 Bytes`;
+		const i = parseInt(Math.floor(Math.log(input) / Math.log(1024)));
+		return `${Math.round(input / Math.pow(1024, i), 2)} ${sizes[i]}`;
+	}
 
 	defaultChannel(guild) {
 		return guild.channels
-			.filter(c => c.type === `text` &&
-					c.permissionsFor(guild.me).has(`SEND_MESSAGES`))
+			.filter(c => c.type === `text` && c.permissionsFor(guild.me).has(`SEND_MESSAGES`))
 			.sort()
 			.first();
 	}
 
 	updateActivity() {
 		if (this.user.bot) this.user.setActivity(`${this.botPrefix}help | ${this.guilds.size} ${this.guilds.size > 1 ? `Guilds` : `Guild`} | By Shayne Hartford (ShayBox)`).catch(error => this.error(error));
+	}
+
+	runLint(message, updated = false) {
+		if (message.channel.type !== `text` || message.author.bot) return false;
+		if (!this.codeblock.test(message.content)) return false;
+		if (!message.channel.permissionsFor(this.user).has([`ADD_REACTIONS`, `READ_MESSAGE_HISTORY`])) return false;
+		const parsed = this.codeblock.exec(message.content);
+		const code = {
+			code: parsed[2],
+			lang: parsed[1]
+		};
+		if (code.lang === `json`) this.cmds.commands.get(`json`).run(this, message, { code }, true, updated).catch(error => this.error(error));
+		else this.cmds.commands.get(`javascript`).run(this, message, { code }, true, updated).catch(error => this.error(error));
+		return true;
 	}
 }
 
