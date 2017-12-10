@@ -19,6 +19,7 @@ class Event extends Events {
 		const command = client.cmds.commands.get(commandName) || client.cmds.commands.get(client.cmds.aliases.get(commandName));
 
 		if (!command || !command.enabled) return false;
+		if (message.author === client.user && !message.channel.name.includes(`bot`)) return false;
 		if (client.whitelist.indexOf(message.author.id) > -1) {
 			// Can't just if (!) because it doesn't work that way
 		} else if (client.checkCooldown(message.author.id, commandName)) {
