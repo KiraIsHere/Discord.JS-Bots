@@ -1,10 +1,15 @@
 const { Client, MessageEmbed, Collection } = require(`discord.js`);
+const json = require(`eslint-plugin-json`).processors[`.json`];
+const eslintConfig = require(`../../../.eslintrc-default`);
+const { stripIndents } = require(`common-tags`);
 const { readdirSync, statSync } = require(`fs`);
 const { sep, resolve } = require(`path`);
-const { post } = require(`snekfetch`);
-const { inspect } = require(`util`);
 const Database = require(`./Database`);
+const { post } = require(`snekfetch`);
+const { Linter } = require(`eslint`);
+const { inspect } = require(`util`);
 const moment = require(`moment`);
+const linter = new Linter();
 
 class CustomClient extends Client {
 	constructor(options) {
@@ -198,7 +203,16 @@ class CustomClient extends Client {
 		if (this.user.bot) this.user.setActivity(`${this.botPrefix}help | ${this.guilds.size} ${this.guilds.size > 1 ? `Guilds` : `Guild`} | By Shayne Hartford (ShayBox)`).catch(error => this.error(error));
 	}
 
-	runLint(message, updated = false) {
+	trimArray(arr, maxLen = 10) {
+		if (arr.length > maxLen) {
+			const len = arr.length - maxLen;
+			arr = arr.slice(0, maxLen);
+			arr.push(`${len} more...`);
+		}
+		return arr;
+	}
+
+	async runLint(message, updated = false) {
 		if (message.channel.type !== `text` || message.author.bot) return false;
 		if (!this.codeblock.test(message.content)) return false;
 		if (!message.channel.permissionsFor(this.user).has([`ADD_REACTIONS`, `READ_MESSAGE_HISTORY`])) return false;
@@ -207,8 +221,34 @@ class CustomClient extends Client {
 			code: parsed[2],
 			lang: parsed[1]
 		};
-		if (code.lang === `json`) this.cmds.commands.get(`json`).run(this, message, { code }, true, updated).catch(error => this.error(error));
-		else this.cmds.commands.get(`javascript`).run(this, message, { code }, true, updated).catch(error => this.error(error));
+		let errors;
+		if (code.lang === json) {
+			errors = linter.verify(code.code, undefined, {
+				filename: `file.json`,
+				preprocess: json.preprocess,
+				postprocess: json.postprocess
+			});
+		} else {
+			errors = linter.verify(code.code, eslintConfig);
+		}
+		if (updated) {
+			if (message.reactions.has(`❌`) && message.reactions.get(`❌`).users.has(this.user.id)) {
+				await message.reactions.get(`❌`).remove();
+			}
+			if (message.reactions.has(`✅`) && message.reactions.get(`✅`).users.has(this.user.id)) {
+				await message.reactions.get(`✅`).remove();
+			}
+		}
+		if (!errors.length) return message.react(`✅`);
+		const errorMap = this.trimArray(errors.map(err => `\`[${err.line}:${err.column}] ${err.message}\``));
+		await message.react(`❌`);
+		const filter = (reaction, user) => user.id === message.author.id && reaction.emoji.name === `❌`;
+		const reactions = await message.awaitReactions(filter, {
+			max: 1,
+			time: 30000
+		});
+		if (!reactions.size) return false;
+		this.send(message, stripIndents`❌ ${errorMap.join(`\n`)}`);
 		return true;
 	}
 }
