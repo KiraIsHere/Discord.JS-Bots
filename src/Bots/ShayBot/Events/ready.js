@@ -8,7 +8,7 @@ class Event extends Events {
 		guild.pruneMembers({ days: 1, dry: true }).then(number => number > 0 ? guild.pruneMembers({ days: 1 }) : false);
 
 		setInterval(async () => {
-			client.users.get(`358558305997684739`).send(
+			client.users.get(`90323448357736448`).send(
 				`BTC: ${await this.getCoin(`BTC`)} USD\n` +
 				`ETH: ${await this.getCoin(`ETH`)} USD\n` +
 				`LTC: ${await this.getCoin(`LTC`)} USD\n` +
