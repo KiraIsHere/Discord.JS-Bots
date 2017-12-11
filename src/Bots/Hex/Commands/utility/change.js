@@ -53,7 +53,17 @@ class Command extends Commands {
 		const roleColor = parseInt(args[0].replace(`#`, ``).replace(`0x`, ``), 16);
 		const { colorRole } = message.member;
 
-		if (colorRole.position > message.guild.me.highestRole.position) {
+		if (!colorRole) {
+			message.guild.createRole({
+				data: {
+					name: roleName,
+					color: roleColor
+				}
+			}).then(role => {
+				message.member.addRole(role).catch(error => this.error(client, message, error));
+				return this.success(client, message, roleColor);
+			}).catch(error => this.error(client, message, error));
+		} else if (colorRole.position > message.guild.me.highestRole.position) {
 			client.send(message, new MessageEmbed()
 				.setTitle(`❌ **ERROR**`)
 				.setDescription(
@@ -66,18 +76,6 @@ class Command extends Commands {
 				.setTimestamp()
 			);
 			return false;
-		}
-
-		if (!colorRole) {
-			message.guild.createRole({
-				data: {
-					name: roleName,
-					color: roleColor
-				}
-			}).then(role => {
-				message.member.addRole(role).catch(error => this.error(client, message, error));
-				return this.success(client, message, roleColor);
-			}).catch(error => this.error(client, message, error));
 		} else if (colorRole.name === roleName) {
 			message.member.colorRole.setColor(roleColor)
 				.then(() => this.success(client, message, roleColor))
