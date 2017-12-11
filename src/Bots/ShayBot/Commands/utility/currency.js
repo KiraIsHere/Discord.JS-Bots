@@ -13,17 +13,19 @@ class Command extends Commands {
 			limitAmount: 3,
 			limitTime: 86400,
 			description: `Converts input currency to USD`,
-			usage: `[COIN]`,
+			usage: `[Coin] (Currency)`,
 			aliases: [`coin`]
 		});
 	}
 
 	run(client, message, args) {
 		if (args.length < 1) return client.missingArgs(message, this);
+		if (args.lenght < 2) args[1] = `USD`;
+
 		get(`https://min-api.cryptocompare.com/data/all/coinlist`).then(data => {
 			if (!(args[0].toUpperCase() in data.body.Data)) return client.send(message, `Not a valid currency`);
-			get(`https://min-api.cryptocompare.com/data/price?fsym=${args[0].toUpperCase()}&tsyms=USD`).then(data => {
-				client.send(message, `$${data.body.USD} USD`);
+			get(`https://min-api.cryptocompare.com/data/price?fsym=${args[0].toUpperCase()}&tsyms=${args[1].toUpperCase()}`).then(data => {
+				client.send(message, `$${data.body.args[1].toUpperCase()} ${args[1].toUpperCase()}`);
 			});
 			return true;
 		});
