@@ -13,6 +13,7 @@ class Event extends Events {
 				`ETH: ${await this.getCoin(`ETH`)} USD\n` +
 				`LTC: ${await this.getCoin(`LTC`)} USD\n` +
 				`MONA: ${await this.getCoin(`MONA`)} USD\n` +
+				`ETN: ${await this.getCoin(`ETN`)} USD\n` +
 				`Theese are the most accurate values of worth you can calulate.`
 			);
 		}, 1000 * 10 * 30);
