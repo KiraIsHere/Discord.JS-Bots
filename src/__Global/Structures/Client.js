@@ -28,15 +28,15 @@ class CustomClient extends Client {
 		this.groups = [];
 		this.ownerIDs = [`358558305997684739`];
 		this.servers = {
-			MAIN: this.guilds.get(`361532026354139156`),
-			TEST: this.guilds.get(`382223688118042625`)
+			MAIN: `361532026354139156`,
+			TEST: `382223688118042625`
 		};
 		this.whitelist = [];
 	}
 
 	console(input, type) {
-		this.servers.MAIN.channels.find(`name`, `console`).send(new MessageEmbed()
-			.setTitle(type !== `Log` ? `:<@${this.servers.MAIN.owner.id}>: ${type}` : type)
+		this.guilds.get(this.servers.MAIN).channels.find(`name`, `console`).send(new MessageEmbed()
+			.setTitle(type !== `Log` ? `:<@${this.guilds.get(this.servers.MAIN).owner.id}>: ${type}` : type)
 			.setDescription(`\`\`\`\n${input}\n\`\`\``)
 			.setColor(type === `Log` ? 0x00FF00 : 0xFF0000)
 			.setFooter(`${type} | ${this.botName}`)
