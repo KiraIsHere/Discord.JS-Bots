@@ -35,8 +35,10 @@ class CustomClient extends Client {
 	}
 
 	console(input, type) {
-		this.guilds.get(this.servers.MAIN).channels.find(`name`, `console`).send(new MessageEmbed()
-			.setDescription(input)
+		const guild = this.guilds.get(this.servers.MAIN);
+		guild.channels.find(`name`, `console`).send(new MessageEmbed()
+			.setTitle(type !== `Log` ? `:<@${guild.owner.id}>: ${type}` : type)
+			.setDescription(`\`\`\`\n${input}\n\`\`\``)
 			.setColor(type === `Log` ? 0x00FF00 : 0xFF0000)
 			.setFooter(`${type} | ${this.botName}`)
 			.setTimestamp()
