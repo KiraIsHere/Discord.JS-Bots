@@ -20,7 +20,7 @@ class Command extends Commands {
 
 	run(client, message, args) {
 		if (args.length < 1) return client.missingArgs(message, this);
-		if (args.lenght < 2) args[1] = `USD`;
+		if (args.length < 2) args[1] = `USD`;
 
 		get(`https://min-api.cryptocompare.com/data/all/coinlist`).then(data => {
 			if (!(args[0].toUpperCase() in data.body.Data)) return client.send(message, `Not a valid currency`);
