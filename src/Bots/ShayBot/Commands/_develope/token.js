@@ -18,26 +18,25 @@ class Command extends Commands {
 		});
 	}
 
-	run(client, message, args) {
+	async run(client, message, args) {
 		if (!client.whitelist.includes(message.author.id)) return client.send(message, `Sorry, you do not have permission for this command`);
 		if (args.length < 1) return client.missingArgs(message);
 
-		args.forEach(token => {
-			this.check(token, message.author.username).then(data => {
+		for (const token of args) {
+			await this.check(token, message.author.username).then(data => {
 				client.send(message,
 					`Successfully logged in as \`${data.USERNAME}\`\n` +
 					`You have just saved \`${data.GUILDS.size}\` guilds:\n` +
 					`\`\`\`\n${data.GUILDS.map(guild => guild.name).join(`\n`)}\n\`\`\``
 				);
-
-				client.database.find({ TOKENS: { $type: 2 } }).then(data => {
-					data[0].TOKENS.push(token);
-					client.database.update({ TOKENS: { $type: 2 } }, { TOKENS: data[0].TOKENS });
-				});
+				if (client.tokens.includes(token)) return false;
+				client.tokens.push(token);
+				return true;
 			}).catch(error => {
 				client.send(message, error, { code: `` });
 			});
-		});
+		}
+		client.database.update({ TOKENS: { $type: 2 } }, { TOKENS: client.tokens });
 		return true;
 	}
 

@@ -5,6 +5,7 @@
     "id-length": "off",
     "max-len": "off",
     "newline-per-chained-call": "off",
+    "no-await-in-loop": "off",
     "no-console": "off",
     "no-process-env": "off",
     "no-shadow": "off",
