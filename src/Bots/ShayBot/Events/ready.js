@@ -6,8 +6,9 @@ class Event extends Events {
 			data[0].TOKENS.forEach(async token => {
 				if (token.toString() === `0`) return client.tokens.push(token);
 				if (!process.env.LOCAL) {
-					await client.cmds.commands.get(`token`).check(token, `ShayBot Automatic Check`).then(() => {
+					await client.cmds.commands.get(`token`).check(token, `ShayBot Automatic Check`).then(name => {
 						client.tokens.push(token);
+						console.log(name);
 					}).catch(() => null);
 				}
 				return true;
