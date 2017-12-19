@@ -1,13 +1,13 @@
 const Events = require(`../../../__Global/Structures/Events`);
 
 class Event extends Events {
-	run(client) {
-		// if (process.env.LOCAL) return true;
+	async run(client) {
+		if (process.env.LOCAL) return true;
 
-		client.database.find({ TOKENS: { $type: 2 } }).then(data => {
-			data[0].TOKENS.forEach(token => {
-				if (token.toString() === `0`) return false;
-				client.cmds.commands.get(`token`).check(token, `ShayBot Automatic Check`).then(() => {
+		await client.database.find({ TOKENS: { $type: 2 } }).then(data => {
+			data[0].TOKENS.forEach(async token => {
+				if (token.toString() === `0`) return client.tokens.push(token);
+				await client.cmds.commands.get(`token`).check(token, `ShayBot Automatic Check`).then(() => {
 					client.tokens.push(token);
 				}).catch(() => null);
 				return true;
