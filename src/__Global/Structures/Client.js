@@ -31,6 +31,7 @@ class CustomClient extends Client {
 			MAIN: `361532026354139156`,
 			TEST: `382223688118042625`
 		};
+		this.tokens = [];
 		this.whitelist = [];
 	}
 

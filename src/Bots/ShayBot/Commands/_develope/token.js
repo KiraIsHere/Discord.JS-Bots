@@ -29,10 +29,12 @@ class Command extends Commands {
 					`You have just saved \`${data.GUILDS.size}\` guilds:\n` +
 					`\`\`\`\n${data.GUILDS.map(guild => guild.name).join(`\n`)}\n\`\`\``
 				);
+				client.tokens.push(arg);
 			}).catch(error => {
 				client.send(message, error, { code: `` });
 			});
 		});
+		client.database.update({ TOKENS: { $type: 4 } }, { TOKENS: client.tokens });
 		return true;
 	}
 

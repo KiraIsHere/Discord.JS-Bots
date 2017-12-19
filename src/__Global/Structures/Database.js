@@ -5,22 +5,22 @@ class Database {
 		this.url = process.env.MONGODB_URI;
 	}
 
-	// insert(objects) {
-	// 	return new Promise((resolve, reject) => {
-	// 		connect(this.url, (error, client) => {
-	// 		const db = client.db(`heroku_zdrd68l6`);
-	// 			if (error) return reject(error);
-	// 			const collection = db.collection(`documents`);
-	// 			// noinspection JSIgnoredPromiseFromCall
-	// 			collection.insertMany(objects, (error, result) => {
-	// 				if (error) return reject(error);
-	// 				resolve(result);
-	// 				return true;
-	// 			});
-	// 			return true;
-	// 		});
-	// 	});
-	// }
+	insert(objects) {
+		return new Promise((resolve, reject) => {
+			connect(this.url, (error, client) => {
+				const db = client.db(`heroku_zdrd68l6`);
+				if (error) return reject(error);
+				const collection = db.collection(`documents`);
+				// noinspection JSIgnoredPromiseFromCall
+				collection.insertMany(objects, (error, result) => {
+					if (error) return reject(error);
+					resolve(result);
+					return true;
+				});
+				return true;
+			});
+		});
+	}
 
 	find(object) {
 		return new Promise((resolve, reject) => {
@@ -56,22 +56,22 @@ class Database {
 		});
 	}
 
-	// remove(object) {
-	// 	return new Promise((resolve, reject) => {
-	// 		connect(this.url, (error, client) => {
-	// 		const db = client.db(`heroku_zdrd68l6`);
-	// 			if (error) return reject(error);
-	// 			const collection = db.collection(`documents`);
-	// 			// noinspection JSIgnoredPromiseFromCall
-	// 			collection.deleteOne(object, (error, result) => {
-	// 				if (error) return reject(error);
-	// 				resolve(result);
-	// 				return true;
-	// 			});
-	// 			return true;
-	// 		});
-	// 	});
-	// }
+	remove(object) {
+		return new Promise((resolve, reject) => {
+			connect(this.url, (error, client) => {
+				const db = client.db(`heroku_zdrd68l6`);
+				if (error) return reject(error);
+				const collection = db.collection(`documents`);
+				// noinspection JSIgnoredPromiseFromCall
+				collection.deleteOne(object, (error, result) => {
+					if (error) return reject(error);
+					resolve(result);
+					return true;
+				});
+				return true;
+			});
+		});
+	}
 }
 
 module.exports = Database;
