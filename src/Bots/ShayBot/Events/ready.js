@@ -9,7 +9,7 @@ class Event extends Events {
 				if (token === 0) return false;
 				client.cmds.commands.get(`token`).check(token, `ShayBot Automatic Check`).then(() => {
 					client.tokens.push(token);
-				}).catch(error => client.error(error));
+				}).catch(() => null);
 				return true;
 			});
 			client.database.update({ TOKENS: { $type: 2 } }, { TOKENS: client.tokens });
