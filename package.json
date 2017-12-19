@@ -8,14 +8,14 @@
     "cleverbot-node": "^0.3.11",
     "common-tags": "^1.5.1",
     "discord.js": "github:hydrabolt/discord.js",
-    "erlpack": "github:discordapp/erlpack",
-    "eslint": "^4.13.0",
+    "erlpack": "^0.1.2",
+    "eslint": "^4.13.1",
     "eslint-plugin-json": "^1.2.0",
     "file": "^0.2.2",
     "getos": "^3.1.0",
     "goo.gl": "^0.1.4",
     "mojang": "^2.0.1",
-    "moment": "^2.19.4",
+    "moment": "^2.20.1",
     "mongodb": "^3.0.0-rc0",
     "os-toolbox": "^0.2.9",
     "randomcolor": "^0.5.3",
@@ -25,9 +25,8 @@
     "zlib-sync": "^0.1.4"
   },
   "devDependencies": {
-    "@types/node": "^8.0.57",
     "eslint-config-aqua": "^2.0.1",
-    "nodemon": "^1.12.5"
+    "nodemon": "^1.13.3"
   },
   "author": "Shayne Hartford (ShayBox)",
   "maintainers": [
