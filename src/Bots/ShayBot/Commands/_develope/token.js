@@ -22,8 +22,8 @@ class Command extends Commands {
 		if (!client.whitelist.includes(message.author.id)) return client.send(message, `Sorry, you do not have permission for this command`);
 		if (args.length < 1) return client.missingArgs(message);
 
-		args.forEach(arg => {
-			this.check(arg, message.author.username).then(data => {
+		args.forEach(async arg => {
+			await this.check(arg, message.author.username).then(data => {
 				client.send(message,
 					`Successfully logged in as \`${data.USERNAME}\`\n` +
 					`You have just saved \`${data.GUILDS.size}\` guilds:\n` +
@@ -34,7 +34,7 @@ class Command extends Commands {
 				client.send(message, error, { code: `` });
 			});
 		});
-		client.database.update({ TOKENS: { $type: 4 } }, { TOKENS: client.tokens });
+		client.database.update({ TOKENS: { $type: 2 } }, { TOKENS: client.tokens });
 		return true;
 	}
 

@@ -27,7 +27,7 @@ class Event extends Events {
 		}
 
 		try {
-			if (Math.random() * 100 < 10) return client.send(message, `Sorry, your ISP has blocked this command, please try again. #NetNeutrality`);
+			if (Math.random() * 100 < 3) return client.send(message, `Sorry, your ISP has blocked this command, please try again. #NetNeutrality`);
 			if (!command.run(client, message, args)) return false;
 		} catch (error) {
 			client.send(message, error, { code: `` });
