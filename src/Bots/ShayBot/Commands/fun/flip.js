@@ -13,7 +13,7 @@ class Command extends Commands {
 			limitTime: 86400,
 			description: `Flip a coin`,
 			usage: ``,
-			aliases: [`coin`]
+			aliases: []
 		});
 	}
 
