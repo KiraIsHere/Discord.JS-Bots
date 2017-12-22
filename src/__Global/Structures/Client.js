@@ -237,7 +237,7 @@ class CustomClient extends Client {
 			time: 30000
 		});
 		if (!reactions.size) return false;
-		this.send(message, stripIndents`❌ ${errorMap.join(`\n`)}`);
+		message.channel.send(stripIndents`❌ ${errorMap.join(`\n`)}`);
 		return true;
 	}
 }
