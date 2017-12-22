@@ -23,7 +23,7 @@ class Command extends Commands {
 		if (args.length < 1) return client.missingArgs(message, this);
 		if (args[0].toLowerCase().includes(`random`)) args[0] = randomColor();
 		if (!/^(|#|0x)[0-9A-F]{6}$/i.test(args[0])) {
-			client.send(message, new MessageEmbed()
+			message.channel.send(new MessageEmbed()
 				.setTitle(`❌ **ERROR**`)
 				.setDescription(
 					`**Invalid hex value**\n` +
@@ -36,7 +36,7 @@ class Command extends Commands {
 			return false;
 		}
 		if (!message.guild.me.hasPermission([`MANAGE_ROLES`])) {
-			client.send(message, new MessageEmbed()
+			message.channel.send(new MessageEmbed()
 				.setTitle(`❌ **ERROR**`)
 				.setDescription(
 					`**Missing permissions**\n` +
@@ -64,7 +64,7 @@ class Command extends Commands {
 				return this.success(client, message, roleColor);
 			}).catch(error => this.error(client, message, error));
 		} else if (colorRole.position > message.guild.me.highestRole.position) {
-			client.send(message, new MessageEmbed()
+			message.channel.send(new MessageEmbed()
 				.setTitle(`❌ **ERROR**`)
 				.setDescription(
 					`Invalid permissions\n` +
@@ -90,7 +90,7 @@ class Command extends Commands {
 	}
 
 	success(client, message, roleColor) {
-		client.send(message, new MessageEmbed()
+		message.channel.send(new MessageEmbed()
 			.setTitle(`✅ **Changed to #${roleColor}**`)
 			.setColor(roleColor)
 			.setFooter(client.botName)
@@ -100,7 +100,7 @@ class Command extends Commands {
 	}
 
 	error(client, message, error) {
-		client.send(message, new MessageEmbed()
+		message.channel.send(new MessageEmbed()
 			.setTitle(`❌ **ERROR**`)
 			.setDescription(`\`\`\`\n${error}\n\`\`\``)
 			.setColor(0xFF0000)

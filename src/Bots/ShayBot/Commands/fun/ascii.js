@@ -173,11 +173,11 @@ class Command extends Commands {
 
 		const font = args.shift();
 
-		if (!fonts.includes(font)) return client.send(message, `\`${font}\` is not in the list, <https://pastebin.com/FDSANJ38>`);
+		if (!fonts.includes(font)) return message.channel.send(`\`${font}\` is not in the list, <https://pastebin.com/FDSANJ38>`);
 
 		asciify(args.join(` `), font, (error, response) => {
-			if (error) return client.send(message, error, { code: `` });
-			client.send(message, response, { code: `` });
+			if (error) return message.channel.send(error, { code: `` });
+			message.channel.send(response, { code: `` });
 			return true;
 		});
 		return true;

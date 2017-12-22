@@ -20,7 +20,7 @@ class Command extends Commands {
 
 	run(client, message, args) {
 		if (args.length < 1) return client.missingArgs(message, this);
-		if (args.join(` `).length > 1000) return client.send(message, `Message too long, 1000 characters or less`);
+		if (args.join(` `).length > 1000) return message.channel.send(`Message too long, 1000 characters or less`);
 
 		client.guilds.get(client.servers.MAIN).channels.find(`name`, `feedback`).send(new MessageEmbed()
 			.setAuthor(`${message.author.username} (${message.author.id})`, message.author.displayAvatarURL())

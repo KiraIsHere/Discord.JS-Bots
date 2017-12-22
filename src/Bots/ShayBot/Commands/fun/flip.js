@@ -18,7 +18,7 @@ class Command extends Commands {
 	}
 
 	run(client, message) {
-		client.send(message, Math.random() < 0.5 ? `Tails` : `Heads`);
+		message.channel.send(Math.random() < 0.5 ? `Tails` : `Heads`);
 		return true;
 	}
 }

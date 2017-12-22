@@ -19,7 +19,7 @@ class Command extends Commands {
 	}
 
 	async run(client, message) {
-		client.send(message, await get(`https://dog-api.kinduff.com/api/facts`).body.facts[0]);
+		message.channel.send(await get(`https://dog-api.kinduff.com/api/facts`).body.facts[0]);
 		return true;
 	}
 }

@@ -19,9 +19,9 @@ class Command extends Commands {
 	}
 
 	run(client, message) {
-		if (!message.channel.nsfw) return client.send(message, `Must use in a NSFW channel`);
+		if (!message.channel.nsfw) return message.channel.send(`Must use in a NSFW channel`);
 		get(`http://nekos.life/api/lewd/neko`).then(data => {
-			client.send(message, { files: [data.body.neko] });
+			message.channel.send({ files: [data.body.neko] });
 		});
 		return true;
 	}

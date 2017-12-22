@@ -25,7 +25,7 @@ class Command extends Commands {
 		const channelID = args[1] ? args[1] : message.channel.id;
 
 		client.channels.get(channelID).messages.fetch(messageID).then(quote => {
-			client.send(message, new MessageEmbed()
+			message.channel.send(new MessageEmbed()
 				.setAuthor(quote.author.username, quote.author.displayAvatarURL())
 				.addField(`Message: `, quote.content)
 				.setColor(0x00FF00)

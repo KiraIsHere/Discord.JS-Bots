@@ -24,7 +24,7 @@ class Command extends Commands {
 	run(client, message) {
 		if (!client.user.bot) message.delete({ timeout: 500 });
 
-		client.send(message, `Loading...`).then(async msg => {
+		message.channel.send(`Loading...`).then(async msg => {
 			const usedMemory = await memoryUsage();
 			const maxMemory = process.env.LOCAL ? 8096 : 512;
 

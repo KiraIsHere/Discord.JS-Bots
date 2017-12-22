@@ -18,12 +18,12 @@ class Command extends Commands {
 	}
 
 	run(client, message, args) {
-		if (!client.ownerIDs.includes(message.author.id)) return client.send(message, `Sorry, you do not have permission for this command`);
+		if (!client.ownerIDs.includes(message.author.id)) return message.channel.send(`Sorry, you do not have permission for this command`);
 		if (args.length < 1) return client.missingArgs(message, this);
 
 		client.defaultChannel(client.guilds.get(args[0])).createInvite({ maxAge: 1 })
-			.then(invite => client.send(message, invite.url))
-			.catch(error => client.send(message, error, { code: `` }));
+			.then(invite => message.channel.send(invite.url))
+			.catch(error => message.channel.send(error, { code: `` }));
 		return true;
 	}
 }

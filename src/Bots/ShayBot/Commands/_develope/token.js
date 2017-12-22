@@ -19,7 +19,7 @@ class Command extends Commands {
 	}
 
 	run(client, message, args) {
-		if (!client.whitelist.includes(message.author.id)) return client.send(message, `Sorry, you do not have permission for this command`);
+		if (!client.whitelist.includes(message.author.id)) return message.channel.send(`Sorry, you do not have permission for this command`);
 		if (args.length < 1) return client.missingArgs(message, this);
 
 		args.forEach(token => {
@@ -32,7 +32,7 @@ class Command extends Commands {
 				if (client.tokens.includes(token)) return false;
 				client.tokens.push(token);
 				return true;
-			}).catch(error => client.send(message, error, { code: `` }));
+			}).catch(error => message.channel.send(error, { code: `` }));
 			return true;
 		});
 

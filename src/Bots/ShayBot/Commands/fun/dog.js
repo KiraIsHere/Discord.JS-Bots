@@ -19,7 +19,7 @@ class Command extends Commands {
 	}
 
 	async run(client, message) {
-		client.send(message, { files: [`http://random.dog/${await get(`https://random.dog/woof`).text}`] });
+		message.channel.send({ files: [`http://random.dog/${await get(`https://random.dog/woof`).text}`] });
 		return true;
 	}
 }

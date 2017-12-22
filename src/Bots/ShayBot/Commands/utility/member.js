@@ -18,7 +18,7 @@ class Command extends Commands {
 	}
 
 	run(client, message) {
-		client.send(message, this.pickMember(message).user.username);
+		message.channel.send(this.pickMember(message).user.username);
 		return true;
 	}
 

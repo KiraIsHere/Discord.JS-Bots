@@ -19,7 +19,7 @@ class Command extends Commands {
 	}
 
 	run(client, message) {
-		client.send(message, new MessageEmbed()
+		message.channel.send(new MessageEmbed()
 			.setTitle(`Thank you for inviting me to your server!`)
 			.setDescription(`` +
 				`**Note:**\n` +

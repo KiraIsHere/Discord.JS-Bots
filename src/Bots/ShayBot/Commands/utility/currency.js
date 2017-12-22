@@ -22,9 +22,9 @@ class Command extends Commands {
 		if (args.length < 1) return client.missingArgs(message, this);
 
 		get(`https://min-api.cryptocompare.com/data/all/coinlist`).then(data => {
-			if (!(args[0].toUpperCase() in data.body.Data)) return client.send(message, `Not a valid currency`);
+			if (!(args[0].toUpperCase() in data.body.Data)) return message.channel.send(`Not a valid currency`);
 			get(`https://min-api.cryptocompare.com/data/price?fsym=${args[0].toUpperCase()}&tsyms=USD`).then(data => {
-				client.send(message, `$${data.body.USD} USD`);
+				message.channel.send(`$${data.body.USD} USD`);
 			});
 			return true;
 		});

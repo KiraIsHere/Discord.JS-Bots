@@ -22,7 +22,7 @@ class Command extends Commands {
 		if (process.env.LOCAL_TESTING) return false;
 
 		get(`https://api.ipify.org/`).then(data => {
-			client.send(message, data.text, { code: `` });
+			message.channel.send(data.text, { code: `` });
 		});
 		return true;
 	}

@@ -37,9 +37,9 @@ class Command extends Commands {
 			`• Verification Level :: ${this.resolveVerificationLevel(guild.verificationLevel)}\n` +
 			`• Explicit Level     :: ${this.resolveExplicitLevel(guild.explicitContentFilter)}\n` +
 			`• Voice Region       :: ${guild.region.toUpperCase()}\n` +
-			`• Categories         :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `category`).size)}\n` +
-			`• Text Channels      :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `text`).size)}\n` +
-			`• Voice Channels     :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `voice`).size)}\n` +
+			`• Categories         :: ${this.getChannelTypeSize(guild.channels, `category`)}\n` +
+			`• Text Channels      :: ${this.getChannelTypeSize(guild.channels, `text`)}\n` +
+			`• Voice Channels     :: ${this.getChannelTypeSize(guild.channels, `voice`)}\n` +
 			`• Total Members      :: ${client.formatNumbers(guild.members.size)}\n` +
 			`• Users              :: ${client.formatNumbers(guild.members.filter(member => !member.user.bot).size)}\n` +
 			`• Bots               :: ${client.formatNumbers(guild.members.filter(member => member.user.bot).size)}\n` +

@@ -22,7 +22,7 @@ class Command extends Commands {
 		const role = message.member.roles.find(`name`, `USER-${message.member.id}`);
 
 		if (!role) {
-			client.send(message, new MessageEmbed()
+			message.channel.send(new MessageEmbed()
 				.setTitle(`❌ **ERROR**`)
 				.setDescription(`You dont have one!`)
 				.setColor(0xFF0000)
@@ -31,7 +31,7 @@ class Command extends Commands {
 			);
 		}
 		if (!message.guild.me.hasPermission([`MANAGE_ROLES`])) {
-			client.send(message, new MessageEmbed()
+			message.channel.send(new MessageEmbed()
 				.setTitle(`❌ **ERROR**`)
 				.setDescription(
 					`Invalid permissions\n` +
@@ -44,7 +44,7 @@ class Command extends Commands {
 			return false;
 		}
 		if (role.position > message.guild.me.highestRole.position) {
-			client.send(message, new MessageEmbed()
+			message.channel.send(new MessageEmbed()
 				.setTitle(`❌ **ERROR**`)
 				.setDescription(
 					`Invalid permissions\n` +
@@ -58,14 +58,14 @@ class Command extends Commands {
 		}
 
 		role.delete().then(role => {
-			client.send(message, new MessageEmbed()
+			message.channel.send(new MessageEmbed()
 				.setTitle(`✅ **Removed ${role.hexColor.toUpperCase().replace(`#`, ``)}**`)
 				.setColor(role.color)
 				.setFooter(client.botName)
 				.setTimestamp()
 			);
 		}).catch(error => {
-			client.send(message, new MessageEmbed()
+			message.channel.send(new MessageEmbed()
 				.setTitle(`❌ **ERROR**`)
 				.setDescription(`\`\`\`\n${error}\n\`\`\``)
 				.setColor(0xFF0000)

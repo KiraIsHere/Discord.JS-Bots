@@ -18,7 +18,7 @@ class Command extends Commands {
 	}
 
 	run(client, message) {
-		client.database.find({}).then(data => client.send(message, `${data[0].USED_API_CALLS} / ${data[0].TOTAL_API_CALLS}\n`));
+		client.database.find({}).then(data => message.channel.send(`${data[0].USED_API_CALLS} / ${data[0].TOTAL_API_CALLS}\n`));
 		return true;
 	}
 }

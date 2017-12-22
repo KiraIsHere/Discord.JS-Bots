@@ -19,7 +19,7 @@ class Command extends Commands {
 	}
 
 	run(client, message) {
-		client.send(message, `<${homepage}>`);
+		message.channel.send(`<${homepage}>`);
 		return true;
 	}
 }

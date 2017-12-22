@@ -8,12 +8,12 @@ class Event extends Events {
 		if (!message.channel.name.includes(`cleverbot`)) return false;
 		if (message.author.bot) return false;
 		if (!message.content.match(/[A-Z0-9]/i)) return false;
-		if (client.checkCooldown(message.author.id)) return client.send(message, `Cooldown, please wait!`).then(m => m.delete({ timeout: 1000 }));
+		if (client.checkCooldown(message.author.id)) return message.channel.send(`Cooldown, please wait!`).then(m => m.delete({ timeout: 1000 }));
 		client.addCooldown(message.author.id, `2`);
 
 		message.channel.startTyping();
 		cleverbot.write(message.content, response => {
-			client.send(message, response.output);
+			message.channel.send(response.output);
 			message.channel.stopTyping();
 			client.database.find({ USED_API_CALLS: { $type: 16 } }).then(data => {
 				client.database.update({ USED_API_CALLS: { $type: 16 } }, { USED_API_CALLS: data[0].USED_API_CALLS + 1 });

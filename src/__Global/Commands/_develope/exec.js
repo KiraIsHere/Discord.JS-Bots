@@ -19,7 +19,7 @@ class Command extends Commands {
 	}
 
 	async run(client, message, args) {
-		if (!client.ownerIDs.includes(message.author.id)) return client.send(message, `Sorry, you do not have permission for this command`);
+		if (!client.ownerIDs.includes(message.author.id)) return message.channel.send(`Sorry, you do not have permission for this command`);
 		if (args.length < 1) return client.missingArgs(message, this);
 
 		let content = await this.addToContent(client, args.join(` `), `Input`);
@@ -31,7 +31,7 @@ class Command extends Commands {
 			} else {
 				content += await this.addToContent(client, stdout, `Output`);
 			}
-			client.send(message, content);
+			message.channel.send(content);
 		});
 		return true;
 	}

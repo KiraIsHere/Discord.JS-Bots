@@ -18,7 +18,7 @@ class Command extends Commands {
 	}
 
 	run(client, message) {
-		client.send(message, `If you are seeing this the bot fucked up.`);
+		message.channel.send(`If you are seeing this the bot fucked up.`);
 		return true;
 	}
 }

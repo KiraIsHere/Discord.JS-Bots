@@ -9,6 +9,7 @@
     "no-console": "off",
     "no-process-env": "off",
     "no-shadow": "off",
+    "no-warning-comments": ["off"],
     "operator-linebreak": ["error", "after"],
     "prefer-const": "error",
     "quotes": ["error", "backtick"]

@@ -20,7 +20,7 @@ class Command extends Commands {
 	run(client, message, args) {
 		if (args.length < 1) return client.missingArgs(message, this);
 
-		client.send(message, `<http://lmgtfy.com/?q=${args.join(`+`)}>`);
+		message.channel.send(`<http://lmgtfy.com/?q=${args.join(`+`)}>`);
 		return true;
 	}
 }

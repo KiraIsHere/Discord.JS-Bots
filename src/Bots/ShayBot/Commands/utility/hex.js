@@ -22,7 +22,7 @@ class Command extends Commands {
 		if (args.length < 1) return client.missingArgs(message, this);
 
 		if (/[0-9A-F]{6}/i.test(args)) {
-			client.send(message, new MessageEmbed()
+			message.channel.send(new MessageEmbed()
 				.setTitle(`#${args.join(` `).replace(`#`, ``)}`)
 				.setColor(parseInt(args.join(` `).replace(`#`, ``), 16))
 			);

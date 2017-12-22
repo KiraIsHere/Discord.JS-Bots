@@ -22,12 +22,12 @@ class Command extends Commands {
 
 		if (message.member.roles.has(NSFW.id)) {
 			message.member.removeRole(NSFW)
-				.then(() => client.send(message, `Successfully Hidden NSFW Channels`))
-				.catch(error => client.send(message, error, { codeblock: `` }));
+				.then(() => message.channel.send(`Successfully Hidden NSFW Channels`))
+				.catch(error => message.channel.send(error, { codeblock: `` }));
 		} else {
 			message.member.addRole(NSFW)
-				.then(() => client.send(message, `Successfully Shown NSFW Channels`))
-				.catch(error => client.send(message, error, { codeblock: `` }));
+				.then(() => message.channel.send(`Successfully Shown NSFW Channels`))
+				.catch(error => message.channel.send(error, { codeblock: `` }));
 		}
 		return true;
 	}

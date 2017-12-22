@@ -21,17 +21,17 @@ class Command extends Commands {
 
 	run(client, message, args) {
 		if (args.length < 1) return client.missingArgs(message, this);
-		if (args[0] < 3 || args[0] > 32) return client.send(message, `Please input valid name`);
+		if (args[0] < 3 || args[0] > 32) return message.channel.send(`Please input valid name`);
 
 		username(args[0]).then(data => {
-			client.send(message, new MessageEmbed()
+			message.channel.send(new MessageEmbed()
 				.setAuthor(`${data.name} (UUID: ${data.id})`, `https://visage.surgeplay.com/face/${data.id}`)
 				.setImage(`https://visage.surgeplay.com/full/512/${data.id}`)
 				.setColor(0x00FF00)
 				.setFooter(client.botName)
 				.setTimestamp()
 			);
-		}).catch(() => client.send(message, `Invalid name, Please input valid name`));
+		}).catch(() => message.channel.send(`Invalid name, Please input valid name`));
 		return true;
 	}
 }

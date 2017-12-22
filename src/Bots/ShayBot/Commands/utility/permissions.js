@@ -21,7 +21,7 @@ class Command extends Commands {
 		if (args.length < 1) return client.missingArgs(message, this);
 
 		const role = message.guild.roles.find(`name`, args.join(` `));
-		if (!role) return client.send(message, `Role does not exist`);
+		if (!role) return message.channel.send(`Role does not exist`);
 		const permissions = role.permissions.serialize();
 
 		let longestString = 0;

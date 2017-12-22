@@ -20,7 +20,7 @@ class Command extends Commands {
 	}
 
 	async run(client, message, args) {
-		if (!client.ownerIDs.includes(message.author.id) && client.whitelist.includes(message.author.id)) return client.send(message, `Sorry, you do not have permission for this command`);
+		if (!client.ownerIDs.includes(message.author.id) && client.whitelist.includes(message.author.id)) return message.channel.send(`Sorry, you do not have permission for this command`);
 		if (args.length < 1) return client.missingArgs(message, this);
 		let content = await this.addToContent(client, args.join(` `), `Input`);
 		try {
@@ -31,7 +31,7 @@ class Command extends Commands {
 			} else if ((client.user.id === `361541917672210433` || client.user.id === `361542082080407553`) && client.whitelist.includes(message.author.id)) {
 				evaled = new VM().run(args.join(` `));
 			} else {
-				client.send(message, `Sorry, you do not have permission for this command`);
+				message.channel.send(`Sorry, you do not have permission for this command`);
 			}
 
 			if (evaled instanceof Promise) evaled = await evaled;
@@ -41,7 +41,7 @@ class Command extends Commands {
 		} catch (error) {
 			content += await this.addToContent(client, error, `Error`);
 		}
-		client.send(message, content);
+		message.channel.send(content);
 		return true;
 	}
 

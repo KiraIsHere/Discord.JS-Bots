@@ -18,7 +18,7 @@ class Command extends Commands {
 	}
 
 	async run(client, message, args) {
-		if (!client.ownerIDs.includes(message.author.id)) return client.send(message, `Sorry, you do not have permission for this command`);
+		if (!client.ownerIDs.includes(message.author.id)) return message.channel.send(`Sorry, you do not have permission for this command`);
 		if (args[0] === `list`) {
 			if (args.length < 1) return client.missingArgs(message, this);
 		} else if (args.length < 2) { return client.missingArgs(message, this); }
@@ -51,7 +51,7 @@ class Command extends Commands {
 				output = `Sorry, you didn't enter a valid option, add, remove, list, or check`;
 				break;
 		}
-		client.send(message, output);
+		message.channel.send(output);
 		return true;
 	}
 

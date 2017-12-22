@@ -22,7 +22,7 @@ class Command extends Commands {
 	async run(client, message, args) {
 		if (args.length < 1) return client.missingArgs(message, this);
 
-		client.send(message, await googl.shorten(args[0]));
+		message.channel.send(await googl.shorten(args[0]));
 		return true;
 	}
 }

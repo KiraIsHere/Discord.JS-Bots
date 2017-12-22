@@ -106,18 +106,6 @@ class CustomClient extends Client {
 			.catch(error => `\`\`\`js\n${error}\n\`\`\`\n`);
 	}
 
-	send(message, content, ...options) {
-		return new Promise((resolve, reject) => {
-			setTimeout(() => {
-				if (message.author === this.user) {
-					message.edit(content, ...options).then(message => resolve(message)).catch(error => reject(error));
-				} else {
-					message.channel.send(content, ...options).then(message => resolve(message)).catch(error => reject(error));
-				}
-			}, 100);
-		});
-	}
-
 	missingArgs(message, command, customMessage) {
 		this.send(message,
 			`❌ Invalid Arguments\n` +
