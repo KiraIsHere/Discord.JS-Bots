@@ -34,7 +34,7 @@ class Event extends Events {
 			edit().catch(error => client.error(error));
 			async function edit() {
 				const usedMemory = await memoryUsage();
-				const maxMemory = process.env.LOCAL ? 8096 : 512;
+				const maxMemory = process.env.DEV ? 8096 : 512;
 
 				message.edit(
 					`= STATISTICS =\n` +
@@ -45,10 +45,10 @@ class Event extends Events {
 					`• NPM              :: ${String(execSync(`npm -v`)).replace(`\n`, ``)}\n` +
 
 					`\nSystem\n` +
-					`• Uptime           :: ${client.formatTime(process.env.LOCAL ? uptime : process.uptime())}\n` +
+					`• Uptime           :: ${client.formatTime(process.env.DEV ? uptime : process.uptime())}\n` +
 					`• OS Type          :: ${String(type).replace(`_`, ` `)} v${release}\n` +
 					`• System CPU Usage :: ${await cpuLoad()}%\n` +
-					`• System RAM Usage :: ${usedMemory}% (${Math.round((usedMemory / 100) * maxMemory)} MB / ${process.env.LOCAL ? `8 GB` : `512 MB`})\n`,
+					`• System RAM Usage :: ${usedMemory}% (${Math.round((usedMemory / 100) * maxMemory)} MB / ${process.env.DEV ? `8 GB` : `512 MB`})\n`,
 					{ code: `asciidoc` }
 				);
 

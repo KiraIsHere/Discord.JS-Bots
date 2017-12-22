@@ -3,7 +3,7 @@ const { MessageEmbed } = require(`discord.js`);
 
 class Event extends Events {
 	run(client, guild) {
-		if (process.env.LOCAL) return false;
+		if (process.env.DEV) return false;
 
 		client.updateActivity();
 

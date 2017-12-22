@@ -4,7 +4,7 @@ class Event extends Events {
 	async run(client, message) {
 		await client.runLint(message, false);
 
-		if (process.env.LOCAL) return false;
+		if (process.env.DEV) return false;
 
 		if (message.channel.name !== `welcome`) return false;
 		if (message.author.bot) return false;

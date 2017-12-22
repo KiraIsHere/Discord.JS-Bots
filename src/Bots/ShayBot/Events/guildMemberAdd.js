@@ -3,7 +3,7 @@ const { MessageEmbed } = require(`discord.js`);
 
 class Event extends Events {
 	run(client, member) {
-		if (process.env.LOCAL) return false;
+		if (process.env.DEV) return false;
 		if (member.guild.id !== `361532026354139156`) return false;
 
 		client.guilds.get(client.servers.MAIN).channels.find(`name`, `member-log`).send(new MessageEmbed()

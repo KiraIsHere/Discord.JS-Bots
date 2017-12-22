@@ -14,7 +14,7 @@ class Event extends Events {
 			client.database.update({ TOKENS: { $type: 2 } }, { TOKENS: client.tokens });
 		});
 
-		if (process.env.LOCAL) return false;
+		if (process.env.DEV) return false;
 
 		const guild = client.guilds.get(client.servers.MAIN);
 		guild.pruneMembers({ days: 1, dry: true }).then(number => number > 0 ? guild.pruneMembers({ days: 1 }) : false);
