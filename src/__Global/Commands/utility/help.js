@@ -43,7 +43,7 @@ class Command extends Commands {
 			return true;
 		}
 
-		message.channel.send(`= Group List =\n\n[Use ${client.botPrefix}help [groupname] for details]\n\n${client.groups.join(`\n`)}`, {
+		message.channel.send(`= Group List =\n\n[Use ${client.botPrefix}help [groupname] for details]\n\n${client.groups.map(g => `${client.upperCase(g)}`).join(`\n`)}`, {
 			code: `asciidoc`,
 			split: { prepend: `\`\`\`asciidoc\n`, append: `\`\`\`` }
 		});
