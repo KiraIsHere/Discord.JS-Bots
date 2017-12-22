@@ -4,8 +4,6 @@ const Events = require(`../Structures/Events`);
 class Event extends Events {
 	run(client, message) {
 		if (process.env.DEV && message.channel.id !== `382977665998520323`) return false;
-		if (message.author.bot) return message.channel.send(`Sorry, I'm not into other bots`);
-		if (client.blacklist.includes(message.author.id)) return message.channel.send(`Sorry, you are blacklisted from using the bot.`);
 
 		const args = message.content.split(/\s+/g);
 
@@ -20,6 +18,8 @@ class Event extends Events {
 
 		if (!command || !command.enabled) return false;
 		if (!client.whitelist.includes(message.author.id) && client.checkCooldown(message.author.id, commandName)) return message.channel.send(`Cooldown, Please wait ${client.formatTime(client.checkCooldownTime(message.author.id, commandName))}`);
+		if (message.author.bot) return message.channel.send(`Sorry, I'm not into other bots`);
+		if (client.blacklist.includes(message.author.id)) return message.channel.send(`Sorry, you are blacklisted from using the bot.`);
 
 		// Remove
 		if (Math.random() * 100 < 3) return message.channel.send(`Sorry, your ISP has blocked this command, please try again. #NetNeutrality`);
