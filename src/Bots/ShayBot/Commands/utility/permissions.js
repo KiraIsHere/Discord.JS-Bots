@@ -29,7 +29,7 @@ class Command extends Commands {
 			if (key.length > longestString) longestString = key.length;
 		}
 
-		client.send(message,
+		message.channel.send(
 			`= ${role.name} =\n` +
 			`\n` +
 			`${Object.keys(permissions).map(key => `• ${key} ${` `.repeat(longestString - key.length)} :: ${permissions[key]}`).join(`\n`)}`,

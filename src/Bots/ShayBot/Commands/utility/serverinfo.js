@@ -21,7 +21,7 @@ class Command extends Commands {
 		const { guild } = message;
 		await guild.members.fetch();
 
-		client.send(message,
+		message.channel.send(
 			`= Server Info =\n` +
 			`\n` +
 			`Owner\n` +

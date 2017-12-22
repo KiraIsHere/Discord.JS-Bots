@@ -25,7 +25,7 @@ class Command extends Commands {
 			member = message.guild.members.get(args[0]);
 		}
 
-		client.send(message,
+		message.channel.send(
 			`= User Info =\n` +
 			`\n` +
 			`User\n` +

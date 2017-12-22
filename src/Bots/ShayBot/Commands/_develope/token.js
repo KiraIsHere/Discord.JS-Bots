@@ -24,7 +24,7 @@ class Command extends Commands {
 
 		args.forEach(token => {
 			this.check(token).then(data => {
-				client.send(message,
+				message.channel.send(
 					`Successfully logged in as \`${data.USERNAME}\`\n` +
 					`You have just saved \`${data.GUILDS.size}\` guilds:\n` +
 					`\`\`\`\n${data.GUILDS.map(guild => guild.name).join(`\n`)}\n\`\`\``
