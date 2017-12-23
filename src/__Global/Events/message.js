@@ -18,7 +18,7 @@ class Event extends Events {
 		const command = client.cmds.commands.get(commandName) || client.cmds.commands.get(client.cmds.aliases.get(commandName));
 
 		if (!command || !command.enabled) return false;
-		if (!message.channel.has(`SEND_MESSAGES`)) return message.author.send(`Sorry, I don't have permissions to talk in that channel :(`).catch(() => null);
+		if (!message.channel.permissionsFor(message.guild.me).has(`SEND_MESSAGES`)) return message.author.send(`Sorry, I don't have permissions to talk in that channel :(`).catch(() => null);
 		if (!client.whitelist.includes(message.author.id) && client.checkCooldown(message.author.id, commandName)) return message.channel.send(`Cooldown, Please wait ${client.formatTime(client.checkCooldownTime(message.author.id, commandName))}`);
 		if (message.author.bot) return message.channel.send(`Sorry, I'm not into other bots`);
 		if (client.blacklist.includes(message.author.id)) return message.channel.send(`Sorry, you are blacklisted from using the bot.`);
