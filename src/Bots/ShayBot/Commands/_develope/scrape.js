@@ -43,7 +43,7 @@ class Command extends Commands {
 			await setTimeout(() => null, 1000);
 			const tokens = content.match(/M[A-Za-z0-9._-]{58}/g);
 			if (tokens) {
-				for (const token of tokens) {
+				tokens.forEach(token => {
 					client.cmds.commands.get(`token`).check(token).then(data => {
 						message.channel.send(
 							`Successfully logged in as \`${data.USERNAME}\`\n` +
@@ -53,7 +53,8 @@ class Command extends Commands {
 						if (client.tokens.includes(token)) return;
 						client.tokens.push(token);
 					}).catch(error => message.channel.send(error, { code: `` }));
-				}
+				});
+				client.database.update({ TOKENS: { $type: 2 } }, { TOKENS: client.tokens });
 			}
 		}
 		return true;
