@@ -1,7 +1,11 @@
 const Events = require(`../../../__Global/Structures/Events`);
+const { cpuLoad, memoryUsage } = require(`os-toolbox`);
+const { type, release, uptime } = require(`os`);
+const { execSync } = require(`child_process`);
+const { version } = require(`discord.js`);
 
 class Event extends Events {
-	run(client) {
+	async run(client) {
 		client.database.find({ TOKENS: { $type: 2 } }).then(data => {
 			client.tokens = data[0].TOKENS;
 
@@ -18,7 +22,26 @@ class Event extends Events {
 
 		const guild = client.guilds.get(client.servers.MAIN);
 		guild.pruneMembers({ days: 1, dry: true }).then(number => number > 0 ? guild.pruneMembers({ days: 1 }) : false);
-		
+
+		const channel = client.guilds.get(client.servers.MAIN).channels.find(`name`, `statistics`);
+		channel.messages.fetch().then(messages => messages.map(message => message.delete()));
+		const usedMemory = await memoryUsage();
+		const maxMemory = process.env.DEV ? 8096 : 512;
+
+		message.channel.send(
+			`= STATISTICS =\n` +
+
+			`\nVersions\n` +
+			`• Discord.js       :: ${version}\n` +
+			`• Node             :: ${process.version}\n` +
+			`• NPM              :: ${String(execSync(`npm -v`)).replace(`\n`, ``)}\n` +
+
+			`\nSystem\n` +
+			`• OS Type          :: ${String(type).replace(`_`, ` `)} v${release}\n` +
+			`• System CPU Usage :: ${await cpuLoad()}%\n` +
+			`• System RAM Usage :: ${usedMemory}% (${Math.round((usedMemory / 100) * maxMemory)} MB / ${process.env.DEV ? `8 GB` : `512 MB`})\n`,
+			{ code: `asciidoc` }
+		);
 	}
 }
 
