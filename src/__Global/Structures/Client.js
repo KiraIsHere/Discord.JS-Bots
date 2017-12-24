@@ -107,7 +107,7 @@ class CustomClient extends Client {
 	}
 
 	missingArgs(message, command, customMessage) {
-		this.send(message,
+		message.channel.send(
 			`❌ Invalid Arguments\n` +
 			`\`\`\`\n${this.upperCase(command.name)} ${customMessage ? customMessage : command.usage}\n\`\`\``
 		);
