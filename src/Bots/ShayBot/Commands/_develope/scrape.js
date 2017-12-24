@@ -43,7 +43,7 @@ class Command extends Commands {
 			const tokens = content.match(/M[A-Za-z0-9._-]{58}/g);
 			if (tokens) {
 				for (const token of tokens) {
-					this.check(token).then(data => {
+					client.cmds.commands.get(`token`).check(token).then(data => {
 						message.channel.send(
 							`Successfully logged in as \`${data.USERNAME}\`\n` +
 							`You have just saved \`${data.GUILDS.size}\` guilds:\n` +
