@@ -4,6 +4,7 @@ const Events = require(`../Structures/Events`);
 class Event extends Events {
 	run(client, message) {
 		if (process.env.DEV && message.channel.id !== `382977665998520323`) return;
+		if (!process.env.DEV && message.channel.id === `382977665998520323`) return;
 		if (client.user === message.author) return;
 
 		const args = message.content.split(/\s+/g);
