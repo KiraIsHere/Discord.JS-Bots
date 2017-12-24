@@ -185,7 +185,7 @@ class CustomClient extends Client {
 	}
 
 	updateActivity() {
-		if (this.user.bot) this.user.setActivity(`${this.botPrefix}help | ${this.guilds.size} ${this.guilds.size > 1 ? `Guilds` : `Guild`} | By Shayne Hartford (ShayBox)`).catch(error => this.error(error));
+		if (this.user.bot) this.user.setActivity(`${this.botPrefix}help | ${this.guilds.size} ${this.guilds.size > 1 ? `Guilds` : `Guild`}`).catch(error => this.error(error));
 	}
 
 	trimArray(arr, maxLen = 10) {
