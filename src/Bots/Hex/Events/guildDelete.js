@@ -13,7 +13,6 @@ class Event extends Events {
 			.set(`Authorization`, process.env.DISCORDBOTS_PW_API)
 			.send({ server_count: client.guilds.size	}) // eslint-disable-line camelcase
 			.end();
-		
 	}
 }
 

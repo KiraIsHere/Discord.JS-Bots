@@ -12,7 +12,6 @@ class Event extends Events {
 			client.tokens.forEach((token, index) => {
 				if (token.toString() === `0`) return;
 				client.cmds.commands.get(`token`).check(token).then(data => console.log(data.USERNAME)).catch(() => client.tokens.splice(index, 1));
-				
 			});
 
 			client.database.update({ TOKENS: { $type: 2 } }, { TOKENS: client.tokens });

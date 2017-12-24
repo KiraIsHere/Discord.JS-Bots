@@ -13,7 +13,6 @@ class Event extends Events {
 			.setFooter(`Joined`)
 			.setTimestamp()
 		);
-
 	}
 }
 

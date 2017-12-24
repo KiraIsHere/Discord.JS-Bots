@@ -21,7 +21,6 @@ class Event extends Events {
 
 			console.log(`${message.author.username} (${message.author.id}) Used Cleverbot at ${new Date}`);
 		});
-		
 	}
 }
 

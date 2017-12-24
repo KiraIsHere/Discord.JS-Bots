@@ -30,7 +30,6 @@ class Util {
 								client.cmds.aliases.set(alias, Name);
 							});
 							if (!client.groups.includes(Group) && !Group.startsWith(`_`)) client.groups.push(Group);
-							
 						});
 					});
 				});
@@ -59,7 +58,6 @@ class Util {
 								client.cmds.aliases.set(alias, Name);
 							});
 							if (!client.groups.includes(Group) && !Group.startsWith(`_`)) client.groups.push(Group);
-							
 						});
 					});
 				});

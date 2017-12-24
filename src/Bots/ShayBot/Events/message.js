@@ -11,7 +11,6 @@ class Event extends Events {
 		await message.delete({ timeout: 500 });
 		if (!message.content.toLowerCase().includes(`i agree`)) return message.member.kick();
 		message.member.addRole(message.guild.roles.find(`name`, `Verified`)).catch(error => client.error(error));
-
 	}
 }
 

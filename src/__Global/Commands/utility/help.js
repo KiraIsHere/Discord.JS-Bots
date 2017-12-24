@@ -27,7 +27,6 @@ class Command extends Commands {
 					code: `asciidoc`,
 					split: { prepend: `\`\`\`asciidoc\n`, append: `\`\`\`` }
 				});
-				
 			}
 
 			const groupCommands = client.cmds.commands.filter(c => c.group === args[0] && c.show === true).sort();
@@ -39,8 +38,6 @@ class Command extends Commands {
 				code: `asciidoc`,
 				split: { prepend: `\`\`\`asciidoc\n`, append: `\`\`\`` }
 			});
-
-			
 		}
 
 		message.channel.send(`= Group List =\n\n[Use ${client.botPrefix}help [groupname] for details]\n\n${client.groups.map(g => `${client.upperCase(g)}`).join(`\n`)}`, {

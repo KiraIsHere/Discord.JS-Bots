@@ -48,21 +48,18 @@ class CustomClient extends Client {
 		console.log(input);
 		if (process.env.DEV) return;
 		this.console(input, `Log`);
-		
 	}
 
 	error(input) {
 		console.error(input);
 		if (process.env.DEV) return;
 		this.console(input, `Error`);
-		
 	}
 
 	warn(input) {
 		console.warn(input);
 		if (process.env.DEV) return;
 		this.console(input, `Warn`);
-		
 	}
 
 	addCooldown(userID, commandName, time, date) {
@@ -132,7 +129,6 @@ class CustomClient extends Client {
 		isDirectory(resolve(`../../Bots`)).forEach(dir => {
 			if (dir.startsWith(`_`)) return;
 			input = input.replace(process.env[dir], SECRET);
-			
 		});
 
 		function isDirectory(source) {
@@ -238,7 +234,6 @@ class CustomClient extends Client {
 		});
 		if (!reactions.size) return;
 		message.channel.send(stripIndents`❌ ${errorMap.join(`\n`)}`);
-		
 	}
 }
 

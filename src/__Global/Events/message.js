@@ -83,7 +83,6 @@ class Event extends Events {
 		}
 
 		if (message.author === client.user) client.addCooldown(message.author.id, commandName, 1, new Date);
-		
 	}
 }
 

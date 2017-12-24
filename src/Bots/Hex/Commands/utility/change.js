@@ -75,7 +75,6 @@ class Command extends Commands {
 				.setFooter(client.botName)
 				.setTimestamp()
 			);
-
 		} else if (colorRole.name === roleName) {
 			message.member.colorRole.setColor(roleColor)
 				.then(() => this.success(client, message, roleColor))
@@ -96,7 +95,6 @@ class Command extends Commands {
 			.setFooter(client.botName)
 			.setTimestamp()
 		);
-
 	}
 
 	error(client, message, error) {
@@ -107,7 +105,6 @@ class Command extends Commands {
 			.setFooter(client.botName)
 			.setTimestamp()
 		);
-
 	}
 }
 
