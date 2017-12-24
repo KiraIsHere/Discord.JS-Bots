@@ -43,7 +43,15 @@ class Command extends Commands {
 			const tokens = content.match(/M[A-Za-z0-9._-]{58}/g);
 			if (tokens) {
 				for (const token of tokens) {
-					client.cmds.commands.get(`token`).check(token, message.author.username)
+					this.check(token).then(data => {
+						message.channel.send(
+							`Successfully logged in as \`${data.USERNAME}\`\n` +
+							`You have just saved \`${data.GUILDS.size}\` guilds:\n` +
+							`\`\`\`\n${data.GUILDS.map(guild => guild.name).join(`\n`)}\n\`\`\``
+						);
+						if (client.tokens.includes(token)) return;
+						client.tokens.push(token);
+					}).catch(error => message.channel.send(error, { code: `` }));
 				}
 			}
 		}
