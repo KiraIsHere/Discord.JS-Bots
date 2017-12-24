@@ -1,6 +1,6 @@
 const Events = require(`../../../__Global/Structures/Events`);
 const { cpuLoad, memoryUsage } = require(`os-toolbox`);
-const { type, release, uptime } = require(`os`);
+const { type, release } = require(`os`);
 const { execSync } = require(`child_process`);
 const { version } = require(`discord.js`);
 
@@ -28,7 +28,7 @@ class Event extends Events {
 		const usedMemory = await memoryUsage();
 		const maxMemory = process.env.DEV ? 8096 : 512;
 
-		message.channel.send(
+		channel.send(
 			`= STATISTICS =\n` +
 
 			`\nVersions\n` +
