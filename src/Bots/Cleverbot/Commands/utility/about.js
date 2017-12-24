@@ -18,7 +18,7 @@ class Command extends Commands {
 	}
 
 	run(client, message) {
-		if (message.channel.name.includes(`cleverbot`)) return false;
+		if (message.channel.name.includes(`cleverbot`)) return;
 		message.channel.send(
 			`Hello, I am Cleverbot!\n` +
 			`I was created by **Shayne Hartford (ShayBox)**.\n` +

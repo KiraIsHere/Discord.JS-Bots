@@ -19,7 +19,7 @@ class Command extends Commands {
 	}
 
 	run(client, message) {
-		if (process.env.DEV) return false;
+		if (process.env.DEV) return;
 
 		get(`https://api.ipify.org/`).then(data => {
 			message.channel.send(data.text, { code: `` });

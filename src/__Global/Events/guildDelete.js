@@ -3,7 +3,7 @@ const { MessageEmbed } = require(`discord.js`);
 
 class Event extends Events {
 	run(client, guild) {
-		if (process.env.DEV) return false;
+		if (process.env.DEV) return;
 
 		client.updateActivity();
 
@@ -13,7 +13,7 @@ class Event extends Events {
 			.setFooter(`Left`)
 			.setTimestamp()
 		);
-		return true;
+
 	}
 }
 

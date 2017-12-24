@@ -20,18 +20,18 @@ class Command extends Commands {
 	run(client, message, args) {
 		if (args[0]) {
 			if (args[0] === `command`) {
-				if (!client.cmds.commands.has(args[1])) return false;
+				if (!client.cmds.commands.has(args[1])) return;
 
 				const command = client.cmds.commands.get(args[1]);
 				message.channel.send(`= ${client.upperCase(command.name)} = \ndescription :: ${command.description}\nusage       :: ${client.botPrefix}${client.upperCase(command.name)} ${command.usage}`, {
 					code: `asciidoc`,
 					split: { prepend: `\`\`\`asciidoc\n`, append: `\`\`\`` }
 				});
-				return true;
+				
 			}
 
 			const groupCommands = client.cmds.commands.filter(c => c.group === args[0] && c.show === true).sort();
-			if (groupCommands.size === 0) return false;
+			if (groupCommands.size === 0) return;
 			const commandNames = groupCommands.keyArray();
 			const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
 
@@ -40,7 +40,7 @@ class Command extends Commands {
 				split: { prepend: `\`\`\`asciidoc\n`, append: `\`\`\`` }
 			});
 
-			return true;
+			
 		}
 
 		message.channel.send(`= Group List =\n\n[Use ${client.botPrefix}help [groupname] for details]\n\n${client.groups.map(g => `${client.upperCase(g)}`).join(`\n`)}`, {

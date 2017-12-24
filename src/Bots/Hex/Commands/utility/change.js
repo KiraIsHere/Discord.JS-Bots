@@ -33,7 +33,7 @@ class Command extends Commands {
 				.setFooter(client.botName)
 				.setTimestamp()
 			);
-			return false;
+			return;
 		}
 		if (!message.guild.me.hasPermission([`MANAGE_ROLES`])) {
 			message.channel.send(new MessageEmbed()
@@ -46,7 +46,7 @@ class Command extends Commands {
 				.setFooter(client.botName)
 				.setTimestamp()
 			);
-			return false;
+			return;
 		}
 
 		const roleName = `USER-${message.author.id}`;
@@ -75,7 +75,7 @@ class Command extends Commands {
 				.setFooter(client.botName)
 				.setTimestamp()
 			);
-			return false;
+
 		} else if (colorRole.name === roleName) {
 			message.member.colorRole.setColor(roleColor)
 				.then(() => this.success(client, message, roleColor))
@@ -96,7 +96,7 @@ class Command extends Commands {
 			.setFooter(client.botName)
 			.setTimestamp()
 		);
-		return true;
+
 	}
 
 	error(client, message, error) {
@@ -107,7 +107,7 @@ class Command extends Commands {
 			.setFooter(client.botName)
 			.setTimestamp()
 		);
-		return false;
+
 	}
 }
 

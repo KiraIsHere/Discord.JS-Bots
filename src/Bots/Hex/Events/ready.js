@@ -3,7 +3,7 @@ const { post } = require(`snekfetch`);
 
 class Event extends Events {
 	run(client) {
-		if (process.env.DEV) return false;
+		if (process.env.DEV) return;
 		post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
 			.set(`Authorization`, process.env.HEX_DISCORDBOTS_ORG_API)
 			.send({ server_count: client.guilds.size }) // eslint-disable-line camelcase
@@ -13,7 +13,7 @@ class Event extends Events {
 			.set(`Authorization`, process.env.DISCORDBOTS_PW_API)
 			.send({ server_count: client.guilds.size	}) // eslint-disable-line camelcase
 			.end();
-		return true;
+		
 	}
 }
 

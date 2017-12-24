@@ -15,9 +15,9 @@ class Database {
 				collection.insertMany(objects, (error, result) => {
 					if (error) return reject(error);
 					resolve(result);
-					return true;
+					
 				});
-				return true;
+				
 			});
 		});
 	}
@@ -32,9 +32,9 @@ class Database {
 				collection.find(object).toArray((error, result) => {
 					if (error) return reject(error);
 					resolve(result);
-					return true;
+					
 				});
-				return true;
+				
 			});
 		});
 	}
@@ -49,9 +49,9 @@ class Database {
 				collection.updateOne(oldObject, { $set: newObject }, (error, result) => {
 					if (error) return reject(error);
 					resolve(result);
-					return true;
+					
 				});
-				return true;
+				
 			});
 		});
 	}
@@ -66,9 +66,9 @@ class Database {
 				collection.deleteOne(object, (error, result) => {
 					if (error) return reject(error);
 					resolve(result);
-					return true;
+					
 				});
-				return true;
+				
 			});
 		});
 	}

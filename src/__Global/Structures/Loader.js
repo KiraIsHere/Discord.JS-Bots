@@ -18,7 +18,7 @@ class Util {
 					readdir(dir, (error, files) => {
 						if (error) rej(error);
 						files.forEach(file => {
-							if (file.split(`.`).slice(-1)[0] !== `js`) return false;
+							if (file.split(`.`).slice(-1)[0] !== `js`) return;
 							const Name = file.split(`.`)[0];
 							const Group = dir.replace(dirPath, ``);
 							const CommandClass = require(join(resolve(`.`), `/Commands/${Group}/${file}`));
@@ -30,7 +30,7 @@ class Util {
 								client.cmds.aliases.set(alias, Name);
 							});
 							if (!client.groups.includes(Group) && !Group.startsWith(`_`)) client.groups.push(Group);
-							return true;
+							
 						});
 					});
 				});
@@ -47,7 +47,7 @@ class Util {
 					readdir(dir, (error, files) => {
 						if (error) rej(error);
 						files.forEach(file => {
-							if (file.split(`.`).slice(-1)[0] !== `js`) return false;
+							if (file.split(`.`).slice(-1)[0] !== `js`) return;
 							const Name = file.split(`.`)[0];
 							const Group = dir.replace(dirPath, ``);
 							const CommandClass = require(join(__dirname, `../Commands/${Group}/${file}`));
@@ -59,7 +59,7 @@ class Util {
 								client.cmds.aliases.set(alias, Name);
 							});
 							if (!client.groups.includes(Group) && !Group.startsWith(`_`)) client.groups.push(Group);
-							return true;
+							
 						});
 					});
 				});

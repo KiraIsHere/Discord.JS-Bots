@@ -26,7 +26,6 @@ class Command extends Commands {
 			get(`https://min-api.cryptocompare.com/data/price?fsym=${args[0].toUpperCase()}&tsyms=USD`).then(data => {
 				message.channel.send(`$${data.body.USD} USD`);
 			});
-			return true;
 		});
 		return true;
 	}

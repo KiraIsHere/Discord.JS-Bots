@@ -178,7 +178,6 @@ class Command extends Commands {
 		asciify(args.join(` `), font, (error, response) => {
 			if (error) return message.channel.send(error, { code: `` });
 			message.channel.send(response, { code: `` });
-			return true;
 		});
 		return true;
 	}

@@ -41,7 +41,7 @@ class Command extends Commands {
 				.setFooter(client.botName)
 				.setTimestamp()
 			);
-			return false;
+			return;
 		}
 		if (role.position > message.guild.me.highestRole.position) {
 			message.channel.send(new MessageEmbed()
@@ -54,7 +54,7 @@ class Command extends Commands {
 				.setFooter(client.botName)
 				.setTimestamp()
 			);
-			return false;
+			return;
 		}
 
 		role.delete().then(role => {
@@ -72,7 +72,6 @@ class Command extends Commands {
 				.setFooter(client.botName)
 				.setTimestamp()
 			);
-			return false;
 		});
 		return true;
 	}

@@ -46,23 +46,23 @@ class CustomClient extends Client {
 
 	log(input) {
 		console.log(input);
-		if (process.env.DEV) return false;
+		if (process.env.DEV) return;
 		this.console(input, `Log`);
-		return true;
+		
 	}
 
 	error(input) {
 		console.error(input);
-		if (process.env.DEV) return false;
+		if (process.env.DEV) return;
 		this.console(input, `Error`);
-		return true;
+		
 	}
 
 	warn(input) {
 		console.warn(input);
-		if (process.env.DEV) return false;
+		if (process.env.DEV) return;
 		this.console(input, `Warn`);
-		return true;
+		
 	}
 
 	addCooldown(userID, commandName, time, date) {
@@ -130,9 +130,9 @@ class CustomClient extends Client {
 		}
 
 		isDirectory(resolve(`../../Bots`)).forEach(dir => {
-			if (dir.startsWith(`_`)) return false;
+			if (dir.startsWith(`_`)) return;
 			input = input.replace(process.env[dir], SECRET);
-			return true;
+			
 		});
 
 		function isDirectory(source) {
@@ -202,9 +202,9 @@ class CustomClient extends Client {
 	}
 
 	async runLint(message, updated = false) {
-		if (message.channel.type !== `text` || message.author.bot) return false;
-		if (!this.codeblock.test(message.content)) return false;
-		if (!message.channel.permissionsFor(this.user).has([`ADD_REACTIONS`, `READ_MESSAGE_HISTORY`])) return false;
+		if (message.channel.type !== `text` || message.author.bot) return;
+		if (!this.codeblock.test(message.content)) return;
+		if (!message.channel.permissionsFor(this.user).has([`ADD_REACTIONS`, `READ_MESSAGE_HISTORY`])) return;
 		const parsed = this.codeblock.exec(message.content);
 		const code = {
 			code: parsed[2],
@@ -236,9 +236,9 @@ class CustomClient extends Client {
 			max: 1,
 			time: 30000
 		});
-		if (!reactions.size) return false;
+		if (!reactions.size) return;
 		message.channel.send(stripIndents`❌ ${errorMap.join(`\n`)}`);
-		return true;
+		
 	}
 }
 

@@ -3,8 +3,8 @@ const Events = require(`../Structures/Events`);
 
 class Event extends Events {
 	run(client, message) {
-		if (process.env.DEV && message.channel.id !== `382977665998520323`) return false;
-		if (client.user === message.author) return false;
+		if (process.env.DEV && message.channel.id !== `382977665998520323`) return;
+		if (client.user === message.author) return;
 
 		const args = message.content.split(/\s+/g);
 
@@ -17,7 +17,7 @@ class Event extends Events {
 
 		const command = client.cmds.commands.get(commandName) || client.cmds.commands.get(client.cmds.aliases.get(commandName));
 
-		if (!command || !command.enabled) return false;
+		if (!command || !command.enabled) return;
 		if (!message.channel.permissionsFor(message.guild.me).has(`SEND_MESSAGES`)) return message.author.send(`Sorry, I don't have permissions to talk in that channel :(`).catch(() => null);
 		if (!client.whitelist.includes(message.author.id) && client.checkCooldown(message.author.id, commandName)) return message.channel.send(`Cooldown, Please wait ${client.formatTime(client.checkCooldownTime(message.author.id, commandName))}`);
 		if (message.author.bot) return message.channel.send(`Sorry, I'm not into other bots`);
@@ -27,7 +27,7 @@ class Event extends Events {
 		if (Math.random() * 100 < 3) return message.channel.send(`Sorry, your ISP has blocked this command, please try again. #NetNeutrality`);
 
 		try {
-			if (!command.run(client, message, args)) return false;
+			if (!command.run(client, message, args)) return;
 
 			if (command.cooldown) {
 				const userLimits = client.cmds.usages.get(message.author.id);
@@ -82,7 +82,7 @@ class Event extends Events {
 		}
 
 		if (message.author === client.user) client.addCooldown(message.author.id, commandName, 1, new Date);
-		return true;
+		
 	}
 }
 

@@ -26,7 +26,7 @@ class Event extends Events {
 			console.log(`You must run node with --expose-gc`);
 		}
 
-		if (client.user.id !== `361541917672210433`) return true;
+		if (client.user.id !== `361541917672210433`) return;
 
 		const channel = client.guilds.get(client.servers.MAIN).channels.find(`name`, `statistics`);
 		channel.messages.fetch().then(messages => messages.map(message => message.delete()));
@@ -54,9 +54,9 @@ class Event extends Events {
 
 				setTimeout(() => edit(), 1000 * 60 * 10);
 			}
-			return true;
+
 		});
-		return true;
+
 	}
 }
 
