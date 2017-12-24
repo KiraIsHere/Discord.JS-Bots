@@ -19,6 +19,7 @@ class Command extends Commands {
 	}
 
 	async run(client, message, args) {
+		if (!client.whitelist.includes(message.author.id)) return message.channel.send(`Sorry, you do not have permission for this command`);
 		const queries = [
 			'require(\'discord.js\')',
 			'discord "bot.run"',
