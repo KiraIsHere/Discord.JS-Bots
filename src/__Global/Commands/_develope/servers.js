@@ -22,7 +22,7 @@ class Command extends Commands {
 
 		const longestCount = client.guilds.map(g => g.memberCount.toString().length).reduce((long, str) => Math.max(long, str), 0);
 		const longestID = client.guilds.map(g => g.id.toString().length).reduce((long, str) => Math.max(long, str), 0);
-		message.channel.send(client.guilds.sort().map(g => `${g.memberCount}${` `.repeat(longestCount - g.memberCount.toString().length)} | ${g.memberCount}${` `.repeat(longestID - g.id.toString().length)} | ${g.name}`).join(`\n`), { code: ``, split: true });
+		message.channel.send(client.guilds.sort().map(g => `${g.memberCount}${` `.repeat(longestCount - g.memberCount.toString().length)} | ${g.id}${` `.repeat(longestID - g.id.toString().length)} | ${g.name}`).join(`\n`), { code: ``, split: true });
 		return true;
 	}
 }
