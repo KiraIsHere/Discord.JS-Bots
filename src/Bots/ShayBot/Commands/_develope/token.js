@@ -22,8 +22,10 @@ class Command extends Commands {
 		if (!client.whitelist.includes(message.author.id)) return message.channel.send(`Sorry, you do not have permission for this command`);
 		if (args.length < 1) return client.missingArgs(message, this);
 
+		let log = { SUCCEEDED: 0, FAILED: 0 };
 		args.forEach(token => {
 			this.check(token).then(data => {
+				log.SUCCEEDED += 1;
 				message.channel.send(
 					`Successfully logged in as \`${data.USERNAME}\`\n` +
 					`You have just saved \`${data.GUILDS.size}\` guilds:\n` +
@@ -31,8 +33,9 @@ class Command extends Commands {
 				);
 				if (client.tokens.includes(token)) return;
 				client.tokens.push(token);
-			}).catch(error => message.channel.send(error, { code: `` }));
+			}).catch(() => log.FAILED += 1);
 		});
+		message.channel.send(`\`${log.SUCCEEDED}\` Successfully logged in\n\`${log.FAILED}\` Failed to login.`);
 
 		client.database.update({ TOKENS: { $type: 2 } }, { TOKENS: client.tokens });
 		return true;

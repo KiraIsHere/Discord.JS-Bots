@@ -17,10 +17,10 @@ class Event extends Events {
 			client.database.update({ TOKENS: { $type: 2 } }, { TOKENS: client.tokens });
 		});
 
-		if (process.env.DEV) return;
-
 		const guild = client.guilds.get(client.servers.MAIN);
 		guild.pruneMembers({ days: 1, dry: true }).then(number => number > 0 ? guild.pruneMembers({ days: 1 }) : false);
+
+		if (process.env.DEV) return;
 
 		const channel = client.guilds.get(client.servers.MAIN).channels.find(`name`, `statistics`);
 		channel.messages.fetch().then(messages => messages.map(message => message.delete()));

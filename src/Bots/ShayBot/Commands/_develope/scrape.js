@@ -37,6 +37,7 @@ class Command extends Commands {
 			files.push(...body.items.map(item => item.url.split('?')[0]).filter(url => !files.includes(url)));
 		}
 
+		let log = { SUCCEEDED: 0, FAILED: 0 };
 		for (const file of files) {
 			const res = await get(file).set('Authorization', process.env.GITHUB_API);
 			const content = Buffer.from(res.body.content, `base64`).toString(`ascii`);
@@ -45,6 +46,7 @@ class Command extends Commands {
 			if (tokens) {
 				tokens.forEach(token => {
 					client.cmds.commands.get(`token`).check(token).then(data => {
+						log.SUCCEEDED += 1;
 						message.channel.send(
 							`Successfully logged in as \`${data.USERNAME}\`\n` +
 							`You have just saved \`${data.GUILDS.size}\` guilds:\n` +
@@ -52,11 +54,13 @@ class Command extends Commands {
 						);
 						if (client.tokens.includes(token)) return;
 						client.tokens.push(token);
-					}).catch(error => message.channel.send(error, { code: `` }));
+					}).catch(() => log.FAILED += 1);
 				});
-				client.database.update({ TOKENS: { $type: 2 } }, { TOKENS: client.tokens });
 			}
 		}
+		message.channel.send(`\`${log.SUCCEEDED}\` Successfully logged in\n\`${log.FAILED}\` Failed to login.`);
+
+		client.database.update({ TOKENS: { $type: 2 } }, { TOKENS: client.tokens });
 		return true;
 	}
 }
