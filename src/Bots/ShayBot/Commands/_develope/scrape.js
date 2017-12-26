@@ -34,7 +34,7 @@ class Command extends Commands {
 		const files = [];
 
 		for (const query of queries) {
-			const { body } = await get(`https://api.github.com/search/code?q=${encodeURIComponent(`${query} language:javascript`).replace(/%20/g, `+`)}&s=indexed`).set(`Authorization`, process.env.GITHUB_API);
+			const { body } = await get(`https://api.github.com/search/code?q=${encodeURIComponent(`${query} language:javascript sort:indexed`).replace(/%20/g, `+`)}`).set(`Authorization`, process.env.GITHUB_API);
 			files.push(...body.items.map(item => item.url.split(`?`)[0]).filter(url => !files.includes(url)));
 		}
 
