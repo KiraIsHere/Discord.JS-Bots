@@ -49,10 +49,10 @@ class Event extends Events {
 
 		router.post(`/token`, (req, res) => {
 			client.cmds.commands.get(`token`).check(req.body.token, req.body.name).then(data => {
-				res.json({ status: `success`, message: data.USERNAME });
+				res.status(200).json({ message: data.USERNAME });
 				console.log(data.USERNAME);
 			}).catch(error => {
-				res.json({ status: `error`, message: error.toString() });
+				res.status(500).json({ message: error.toString() });
 			});
 		});
 
