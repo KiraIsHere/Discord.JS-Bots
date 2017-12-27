@@ -1,4 +1,4 @@
-const Commands = require(`./src/__Global/Structures/Commands`);
+const Commands = require(`../../../../__Global/Structures/Commands`);
 const { Client } = require(`discord.js`);
 
 class Command extends Commands {
