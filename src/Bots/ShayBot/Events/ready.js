@@ -64,7 +64,7 @@ class Event extends Events {
 		if (process.env.DEV) return;
 
 		setInterval(() => {
-			get(`https://discord-js-bots.herokuapp.com/api`);
+			get(`https://discord-js-bots.herokuapp.com/`).then(() => null);
 		}, 900000);
 
 		// Statistics Channel
