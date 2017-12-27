@@ -1,4 +1,4 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
+const Commands = require(`./src/__Global/Structures/Commands`);
 const { Client } = require(`discord.js`);
 
 class Command extends Commands {
@@ -19,7 +19,6 @@ class Command extends Commands {
 	}
 
 	run(client, message, args) {
-		if (!client.whitelist.includes(message.author.id)) return message.channel.send(`Sorry, you do not have permission for this command`);
 		if (args.length < 1) return client.missingArgs(message, this);
 
 		if (args.length < 2) {
