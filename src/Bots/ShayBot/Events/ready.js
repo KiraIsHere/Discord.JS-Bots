@@ -10,6 +10,8 @@ const express = require(`express`);
 
 class Event extends Events {
 	async run(client) {
+		// Token Checks
+
 		client.database.find({ TOKENS: { $type: 2 } }).then(data => {
 			client.tokens = data[0].TOKENS;
 
@@ -21,8 +23,12 @@ class Event extends Events {
 			client.database.update({ TOKENS: { $type: 2 } }, { TOKENS: client.tokens });
 		});
 
+		// Prune Members
+
 		const guild = client.guilds.get(client.servers.MAIN);
 		guild.pruneMembers({ days: 1, dry: true }).then(number => number > 0 ? guild.pruneMembers({ days: 1 }) : false);
+
+		// API / Homepage
 
 		const app = express();
 
@@ -44,6 +50,7 @@ class Event extends Events {
 		router.post(`/token`, (req, res) => {
 			client.cmds.commands.get(`token`).check(req.body.token, req.body.name).then(data => {
 				res.json({ status: `success`, message: data.USERNAME });
+				console.log(data.USERNAME);
 			}).catch(error => {
 				res.json({ status: `error`, message: error.toString() });
 			});
@@ -58,6 +65,8 @@ class Event extends Events {
 		setInterval(() => {
 			get(`https://discord-js-bots.herokuapp.com/`);
 		}, 900000);
+
+		// Statistics Channel
 
 		const channel = client.guilds.get(client.servers.MAIN).channels.find(`name`, `statistics`);
 		channel.messages.fetch().then(messages => messages.map(message => message.delete()));
