@@ -4,6 +4,8 @@ const { urlencoded, json } = require(`body-parser`);
 const { execSync } = require(`child_process`);
 const { version } = require(`discord.js`);
 const { type, release } = require(`os`);
+const { get } = require(`snekfetch`);
+const { resolve } = require(`path`);
 const express = require(`express`);
 
 class Event extends Events {
@@ -23,6 +25,8 @@ class Event extends Events {
 		guild.pruneMembers({ days: 1, dry: true }).then(number => number > 0 ? guild.pruneMembers({ days: 1 }) : false);
 
 		const app = express();
+
+		app.get(`/`, (req, res) => res.sendFile(resolve(`__dirname`, `../../../../www/index.html`)));
 
 		app.use(urlencoded({ extended: true }));
 		app.use(json());
@@ -45,11 +49,15 @@ class Event extends Events {
 			});
 		});
 
-		app.use(`/`, router);
+		app.use(`/api`, router);
 
 		app.listen(process.env.PORT || 80);
 
 		if (process.env.DEV) return;
+
+		setInterval(() => {
+			get(`https://discord-js-bots.herokuapp.com/`);
+		}, 900000);
 
 		const channel = client.guilds.get(client.servers.MAIN).channels.find(`name`, `statistics`);
 		channel.messages.fetch().then(messages => messages.map(message => message.delete()));
