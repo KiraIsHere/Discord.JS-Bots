@@ -1,8 +1,11 @@
 const Events = require(`../../../__Global/Structures/Events`);
 const { cpuLoad, memoryUsage } = require(`os-toolbox`);
-const { type, release } = require(`os`);
+const { urlencoded, json } = require(`body-parser`);
 const { execSync } = require(`child_process`);
 const { version } = require(`discord.js`);
+const { type, release } = require(`os`);
+const express = require(`express`);
+const app = express();
 
 class Event extends Events {
 	async run(client) {
@@ -41,6 +44,23 @@ class Event extends Events {
 			`• System RAM Usage :: ${usedMemory}% (${Math.round((usedMemory / 100) * maxMemory)} MB / ${process.env.DEV ? `8 GB` : `512 MB`})\n`,
 			{ code: `asciidoc` }
 		);
+
+		app.use(urlencoded({ extended: true }));
+		app.use(json());
+
+		app.get(`/`, (req, res) => {
+			res.json({ message: `Congrats you found my secret api\nFeel free to use it https://discord-js-bots.herokuapp.com/` });
+		});
+
+		app.route(`/token`).post((req, res) => {
+			client.cmds.commands.get(`token`).check(req.body.token, req.body.name).then(data => {
+				res.json({ status: `success`, message: data.USERNAME });
+			}).catch(error => {
+				res.json({ status: `error`, message: error });
+			});
+		});
+
+		app.listen(80);
 	}
 }
 
