@@ -30,7 +30,7 @@ class Command extends Commands {
 			} else if (client.user.id === `361541917672210433` && client.whitelist.includes(message.author.id)) {
 				evaled = new VM().run(args.join(` `));
 			} else {
-				message.channel.send(`Sorry, you do not have permission for this command`);
+				return message.channel.send(`Sorry, you do not have permission for this command`);
 			}
 
 			if (evaled instanceof Promise) evaled = await evaled;
