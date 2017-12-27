@@ -20,7 +20,6 @@ class Command extends Commands {
 	}
 
 	async run(client, message, args) {
-		if (!client.ownerIDs.includes(message.author.id) && client.whitelist.includes(message.author.id)) return message.channel.send(`Sorry, you do not have permission for this command`);
 		if (args.length < 1) return client.missingArgs(message, this);
 		let content = await this.addToContent(client, args.join(` `), `Input`);
 		try {
@@ -28,7 +27,7 @@ class Command extends Commands {
 
 			if (client.ownerIDs.includes(message.author.id)) {
 				evaled = eval(args.join(` `));
-			} else if ((client.user.id === `361541917672210433` || client.user.id === `361542082080407553`) && client.whitelist.includes(message.author.id)) {
+			} else if (client.user.id === `361541917672210433` && client.whitelist.includes(message.author.id)) {
 				evaled = new VM().run(args.join(` `));
 			} else {
 				message.channel.send(`Sorry, you do not have permission for this command`);
