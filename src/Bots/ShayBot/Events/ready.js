@@ -45,7 +45,7 @@ class Event extends Events {
 			});
 		});
 
-		app.use(`/api`, router);
+		app.use(`/`, router);
 
 		app.listen(process.env.PORT || 80);
 
