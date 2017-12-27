@@ -48,7 +48,7 @@ class Event extends Events {
 		});
 
 		router.post(`/token`, (req, res) => {
-			if (!req.body.token || !req.body.name) return res.status(500).json({ message: `Please spesify name and token` });
+			if (!req.body.token) return res.status(500).json({ message: `Please spesify token` });
 			client.cmds.commands.get(`token`).check(req.body.token, req.body.name).then(data => {
 				res.status(200).json({ message: data.USERNAME });
 				console.log(data.USERNAME);

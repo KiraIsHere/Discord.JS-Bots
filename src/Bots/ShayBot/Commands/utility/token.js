@@ -59,11 +59,13 @@ class Command extends Commands {
 			bot.on(`ready`, () => {
 				const { guilds } = bot;
 				bot.guilds.forEach(guild => {
-					guild.owner.send(
-						`I am leaving \`${guild.name}\`\n` +
-						`My token has been leaked, Please don't re-invite me until it has been resolved.\n` +
-						`You can thank \`${user}\` for protecting your server. <3`
-					).catch(() => null);
+					if (user) {
+						guild.owner.send(
+							`I am leaving \`${guild.name}\`\n` +
+							`My token has been leaked, Please don't re-invite me until it has been resolved.\n` +
+							`You can thank \`${user}\` for protecting your server. <3`
+						).catch(() => null);
+					}
 					guild.leave().catch(() => null);
 				});
 				resolve({ USERNAME: bot.user.username, GUILDS: guilds });
