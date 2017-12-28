@@ -50,8 +50,7 @@ class Command extends Commands {
 						log.SUCCEEDED += 1;
 						message.channel.send(
 							`Successfully logged in as \`${data.USERNAME}\`\n` +
-							`You have just saved \`${data.GUILDS.size}\` guilds:\n` +
-							`\`\`\`\n${data.GUILDS.map(guild => guild.name).join(`\n`)}\n\`\`\``
+							`${data.GUILDS.size > 0 ? `You have just saved \`${data.GUILDS.size}\` guilds:\n\`\`\`\n${data.GUILDS.map(guild => guild.name).join(`\n`)}\n\`\`\`` : ``}`
 						);
 						if (client.tokens.includes(token)) return;
 						client.tokens.push(token);
