@@ -36,8 +36,8 @@ class Command extends Commands {
 		return true;
 	}
 
-	addToContent(client, input, type) {
-		return `${type === `Input` ? `📥` : type === `Output` ? `📤` : `❌`} ${type}\n${String(input).length < 1024 ? `\`\`\`js\n${client.clean(input)}\n\`\`\`\n` : client.haste(client.clean(input))}`;
+	async addToContent(client, input, type) {
+		return `${type === `Input` ? `📥` : type === `Output` ? `📤` : `❌`} ${type}\n${String(input).length < 1024 ? `\`\`\`js\n${client.clean(input)}\n\`\`\`\n` : await client.haste(client.clean(input))}`;
 	}
 }
 
