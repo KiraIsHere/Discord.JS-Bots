@@ -1,4 +1,4 @@
-const Commands = require(`./src/__Global/Structures/Commands`);
+const Commands = require(`../../../../__Global/Structures/Commands`);
 
 class Command extends Commands {
 	constructor(client) {
