@@ -45,8 +45,8 @@ class Command extends Commands {
 			await setTimeout(() => null, 1000);
 			const tokens = content.match(/M[A-Za-z0-9._-]{58}/g);
 			if (tokens) {
-				tokens.forEach(token => {
-					client.cmds.commands.get(`token`).check(token).then(data => {
+				tokens.forEach(async token => {
+					await client.cmds.commands.get(`token`).check(token).then(data => {
 						log.SUCCEEDED += 1;
 						message.channel.send(
 							`Successfully logged in as \`${data.USERNAME}\`\n` +
