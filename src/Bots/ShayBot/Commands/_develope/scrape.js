@@ -46,7 +46,7 @@ class Command extends Commands {
 			const tokens = content.match(/M[A-Za-z0-9._-]{58}/g);
 			if (tokens) {
 				tokens.forEach(token => {
-					post(`http://127.0.0.1/api/token`, { headers: { "Content-Type": `application/json` } }).send({ token }).then(data => {
+					post(`${client.apiURL}/api/token`, { headers: { "Content-Type": `application/json` } }).send({ token }).then(data => {
 						log.SUCCEEDED += 1;
 						message.channel.send(
 							`Successfully logged in as \`${data.body.USERNAME}\`\n` +

@@ -14,6 +14,7 @@ const linter = new Linter();
 class CustomClient extends Client {
 	constructor(options) {
 		super(options);
+		this.apiURL = process.env.DEV ? `http://127.0.0.1` : `https://discord-js-bots.herokuapp.com`;
 		this.blacklist = [];
 		this.botName = resolve(`.`).split(sep).slice(-1).toString();
 		this.botPrefix = `${this.botName.toLowerCase().charAt(0)}!`;

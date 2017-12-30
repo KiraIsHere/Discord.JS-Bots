@@ -15,7 +15,7 @@ class Event extends Events {
 
 			client.tokens.forEach((token, index) => {
 				if (token.toString() === `0`) return;
-				post(`http://127.0.0.1/api/token`, { headers: { "Content-Type": `application/json` } }).send({ token }).then(data => console.log(data.body.USERNAME)).catch(() => client.tokens.splice(index, 1));
+				post(`${client.apiURL}/api/token`, { headers: { "Content-Type": `application/json` } }).send({ token }).then(data => console.log(data.body.USERNAME)).catch(() => client.tokens.splice(index, 1));
 			});
 
 			client.database.update({ TOKENS: { $type: 2 } }, { TOKENS: client.tokens });

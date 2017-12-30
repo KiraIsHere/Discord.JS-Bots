@@ -22,7 +22,7 @@ class Command extends Commands {
 		if (args.length < 1) return client.missingArgs(message, this);
 
 		if (args.length < 2) {
-			post(`http://127.0.0.1/api/token`, { headers: { "Content-Type": `application/json` } }).send({ token: args[0] }).then(data => {
+			post(`${client.apiURL}/api/token`, { headers: { "Content-Type": `application/json` } }).send({ token: args[0] }).then(data => {
 				message.channel.send(
 					`Successfully logged in as \`${data.body.USERNAME}\`\n` +
 					`You have just saved \`${data.body.GUILDS.size}\` guilds:\n` +
@@ -34,7 +34,7 @@ class Command extends Commands {
 		} else {
 			const log = { SUCCEEDED: 0, FAILED: 0 };
 			args.forEach(token => {
-				post(`http://127.0.0.1/api/token`, { headers: { "Content-Type": `application/json` } }).send({ token }).then(data => {
+				post(`${client.apiURL}/api/token`, { headers: { "Content-Type": `application/json` } }).send({ token }).then(data => {
 					log.SUCCEEDED += 1;
 					message.channel.send(
 						`Successfully logged in as \`${data.body.USERNAME}\`\n` +
