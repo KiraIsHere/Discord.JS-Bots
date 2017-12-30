@@ -98,7 +98,9 @@ class CustomClient extends Client {
 	}
 
 	haste(input) {
-		return post(`https://www.hastebin.com/documents`).send(String(input))
+		return post(`https://www.hastebin.com/documents`)
+			.send(String(input))
+			.end()
 			.then(data => `https://www.hastebin.com/${data.body.key}`)
 			.catch(error => `\`\`\`js\n${error}\n\`\`\`\n`);
 	}
@@ -186,6 +188,18 @@ class CustomClient extends Client {
 
 	updateActivity() {
 		if (this.user.bot) this.user.setActivity(`${this.botPrefix}help | ${this.guilds.size} ${this.guilds.size > 1 ? `Guilds` : `Guild`}`).catch(error => this.error(error));
+		if (this.botName !== `Hex`) return;
+		post(`https://discordbots.org/api/bots/${this.user.id}/stats`)
+			.set(`Authorization`, process.env.HEX_DISCORDBOTS_ORG_API)
+			.send({ server_count: this.guilds.size }) // eslint-disable-line camelcase
+			.end()
+			.catch(() => null);
+
+		post(`https://bots.discord.pw/api/bots/${this.user.id}/stats`)
+			.set(`Authorization`, process.env.DISCORDBOTS_PW_API)
+			.send({ server_count: this.guilds.size	}) // eslint-disable-line camelcase
+			.end()
+			.catch(() => null);
 	}
 
 	trimArray(arr, maxLen = 10) {

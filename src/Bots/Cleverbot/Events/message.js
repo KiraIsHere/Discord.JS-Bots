@@ -18,8 +18,6 @@ class Event extends Events {
 			client.database.find({ USED_API_CALLS: { $type: 16 } }).then(data => {
 				client.database.update({ USED_API_CALLS: { $type: 16 } }, { USED_API_CALLS: data[0].USED_API_CALLS + 1 });
 			});
-
-			console.log(`${message.author.username} (${message.author.id}) Used Cleverbot at ${new Date}`);
 		});
 	}
 }
