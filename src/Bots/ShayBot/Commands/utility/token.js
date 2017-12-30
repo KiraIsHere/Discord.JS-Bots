@@ -1,5 +1,5 @@
 const Commands = require(`../../../../__Global/Structures/Commands`);
-const { Client } = require(`discord.js`);
+const { post } = require(`snekfetch`);
 
 class Command extends Commands {
 	constructor(client) {
@@ -22,11 +22,11 @@ class Command extends Commands {
 		if (args.length < 1) return client.missingArgs(message, this);
 
 		if (args.length < 2) {
-			this.check(args[0]).then(data => {
+			post(`http://127.0.0.1/api/token`, { headers: { "Content-Type": `application/json` } }).send({ token: args[0] }).then(data => {
 				message.channel.send(
-					`Successfully logged in as \`${data.USERNAME}\`\n` +
-					`You have just saved \`${data.GUILDS.size}\` guilds:\n` +
-					`\`\`\`\n${data.GUILDS.map(guild => guild.name).join(`\n`)}\n\`\`\``
+					`Successfully logged in as \`${data.body.USERNAME}\`\n` +
+					`You have just saved \`${data.body.GUILDS.size}\` guilds:\n` +
+					`\`\`\`\n${data.body.GUILDS.map(guild => guild.name).join(`\n`)}\n\`\`\``
 				);
 				if (client.tokens.includes(args[0])) return;
 				client.tokens.push(args[0]);
@@ -34,12 +34,12 @@ class Command extends Commands {
 		} else {
 			const log = { SUCCEEDED: 0, FAILED: 0 };
 			args.forEach(token => {
-				this.check(token).then(data => {
+				post(`http://127.0.0.1/api/token`, { headers: { "Content-Type": `application/json` } }).send({ token }).then(data => {
 					log.SUCCEEDED += 1;
 					message.channel.send(
-						`Successfully logged in as \`${data.USERNAME}\`\n` +
-						`You have just saved \`${data.GUILDS.size}\` guilds:\n` +
-						`\`\`\`\n${data.GUILDS.map(guild => guild.name).join(`\n`)}\n\`\`\``
+						`Successfully logged in as \`${data.body.USERNAME}\`\n` +
+						`You have just saved \`${data.body.GUILDS.size}\` guilds:\n` +
+						`\`\`\`\n${data.body.GUILDS.map(guild => guild.name).join(`\n`)}\n\`\`\``
 					);
 					if (client.tokens.includes(token)) return;
 					client.tokens.push(token);
@@ -50,29 +50,6 @@ class Command extends Commands {
 
 		client.database.update({ TOKENS: { $type: 2 } }, { TOKENS: client.tokens });
 		return true;
-	}
-
-	check(botToken, user) {
-		return new Promise((resolve, reject) => {
-			const bot = new Client();
-
-			bot.on(`ready`, () => {
-				const { guilds } = bot;
-				bot.guilds.forEach(guild => {
-					if (user) {
-						guild.owner.send(
-							`I am leaving \`${guild.name}\`\n` +
-							`My token has been leaked, Please don't re-invite me until it has been resolved.\n` +
-							`You can thank \`${user}\` for protecting your server. <3`
-						).catch(() => null);
-					}
-					guild.leave().catch(() => null);
-				});
-				resolve({ USERNAME: bot.user.username, GUILDS: guilds });
-			});
-
-			bot.login(botToken).catch(error => reject(error));
-		});
 	}
 }
 

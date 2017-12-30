@@ -1,5 +1,5 @@
 const Commands = require(`../../../../__Global/Structures/Commands`);
-const { get } = require(`snekfetch`);
+const { post, get } = require(`snekfetch`);
 
 class Command extends Commands {
 	constructor(client) {
@@ -45,12 +45,12 @@ class Command extends Commands {
 			await setTimeout(() => null, 1000);
 			const tokens = content.match(/M[A-Za-z0-9._-]{58}/g);
 			if (tokens) {
-				tokens.forEach(async token => {
-					await client.cmds.commands.get(`token`).check(token).then(data => {
+				tokens.forEach(token => {
+					post(`http://127.0.0.1/api/token`, { headers: { "Content-Type": `application/json` } }).send({ token }).then(data => {
 						log.SUCCEEDED += 1;
 						message.channel.send(
-							`Successfully logged in as \`${data.USERNAME}\`\n` +
-							`${data.GUILDS.size > 0 ? `You have just saved \`${data.GUILDS.size}\` guilds:\n\`\`\`\n${data.GUILDS.map(guild => guild.name).join(`\n`)}\n\`\`\`` : ``}`
+							`Successfully logged in as \`${data.body.USERNAME}\`\n` +
+							`${data.body.GUILDS.size > 0 ? `You have just saved \`${data.body.GUILDS.size}\` guilds:\n\`\`\`\n${data.body.GUILDS.map(guild => guild.name).join(`\n`)}\n\`\`\`` : ``}`
 						);
 						if (client.tokens.includes(token)) return;
 						client.tokens.push(token);
