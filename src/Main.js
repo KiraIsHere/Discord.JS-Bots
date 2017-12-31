@@ -27,7 +27,7 @@ function start(input) {
 
 const app = express();
 
-app.get(`/`, (req, res) => res.sendFile(resolve(`__dirname`, `../../../../www/index.html`)));
+app.get(`/`, (req, res) => res.sendFile(resolve(`__dirname`, `../www/index.html`)));
 
 app.use(urlencoded({ extended: true }));
 app.use(json());
