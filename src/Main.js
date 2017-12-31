@@ -5,6 +5,7 @@ const { Client } = require(`discord.js`);
 const { resolve } = require(`path`);
 const express = require(`express`);
 const { join } = require(`path`);
+const { get } = require(`snekfetch`);
 
 // Bots
 
@@ -63,3 +64,7 @@ router.post(`/token`, (req, res) => {
 app.use(`/api`, router);
 
 app.listen(process.env.PORT || 80);
+
+setInterval(() => {
+	get(`https://discord-js-bots.herokuapp.com/`).then(() => null);
+}, 900000);
