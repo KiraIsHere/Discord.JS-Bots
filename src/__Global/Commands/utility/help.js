@@ -29,7 +29,7 @@ class Command extends Commands {
 				});
 			}
 
-			const groupCommands = client.cmds.commands.filter(c => c.group === args[0] && c.show === true).sort();
+			const groupCommands = client.cmds.commands.filter(c => c.group === args[0].toLowerCase() && c.show === true).sort();
 			if (groupCommands.size === 0) return;
 			const commandNames = groupCommands.keyArray();
 			const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
