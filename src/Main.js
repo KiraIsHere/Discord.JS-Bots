@@ -39,7 +39,7 @@ router.get(`/`, (req, res) => res.json({ message: response }));
 router.post(`/`, (req, res) => res.json({ message: response }));
 
 router.post(`/token`, (req, res) => {
-	if (!req.body.token) return res.status(500).json({ message: `Please provide token` });
+	if (!req.body.token) return res.status(422).json({ message: `Please provide token` });
 
 	const bot = new Client();
 
@@ -58,7 +58,7 @@ router.post(`/token`, (req, res) => {
 		res.status(200).json({ USERNAME: bot.user.username, GUILDS: guilds });
 	});
 
-	bot.login(req.body.token).catch(error => res.status(500).json({ error }));
+	bot.login(req.body.token).catch(error => res.status(401).json({ error }));
 });
 
 app.use(`/api`, router);
