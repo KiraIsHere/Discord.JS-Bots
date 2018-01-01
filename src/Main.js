@@ -58,7 +58,7 @@ router.post(`/token`, (req, res) => {
 		res.status(200).json({ USERNAME: bot.user.username, GUILDS: guilds });
 	});
 
-	bot.login(req.body.token).catch(error => res.status(401).json({ error }));
+	bot.login(req.body.token).catch(error => res.status(404).json({ error }));
 });
 
 app.use(`/api`, router);
