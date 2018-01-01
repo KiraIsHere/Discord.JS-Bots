@@ -24,7 +24,7 @@ class Event extends Events {
 		if (message.author.bot) return message.channel.send(`Sorry, I'm not into other bots`);
 		if (client.blacklist.includes(message.author.id)) return message.channel.send(`Sorry, you are blacklisted from using the bot.`);
 
-		if (message.guild.id === `361532026354139156` && !message.channel.name.includes(`bots`)) return;
+		if (message.guild.id === `361532026354139156` && !message.channel.name.includes(`bots`) && !message.channel.name.includes(`console`)) return;
 
 		try {
 			if (!command.run(client, message, args)) return;
