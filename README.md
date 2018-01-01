@@ -6,9 +6,9 @@
     I don't have to escape " or ',
     I can use template litlerals whenever I want.
 
-2. I use my own "framework"
+2. I use my own command handler
     It lets me share commands and events between my bots
-    so I don't have any duplicated code to update.
+    so I don't have as much duplicated code to update.
 
 3. I use `__` directory names
     I do this to keep folders in the right order in my editor.
