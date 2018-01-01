@@ -1,4 +1,4 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
+const Commands = require(`../../../../__Global/Structures/Commands`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -14,7 +14,7 @@ class Command extends Commands {
 			description: `Generates an invite to the TestServer`,
 			usage: ``,
 			aliases: []
-		});
+		})
 	}
 
 	run(client, message) {
@@ -23,10 +23,10 @@ class Command extends Commands {
 				`If you would like to join the TestServer, heres the link ${invite.url}\n` +
 				`This server has no rules besides don't ping people for no reason.\n` +
 				`Change any setting, invite any bot, anything.`
-			);
-		});
-		return true;
+			)
+		})
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

@@ -1,4 +1,4 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
+const Commands = require(`../../../../__Global/Structures/Commands`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -14,15 +14,15 @@ class Command extends Commands {
 			description: `Converts the text into a lmgtfu URL`,
 			usage: `[Text]`,
 			aliases: [`lmgtfu`]
-		});
+		})
 	}
 
 	run(client, message, args) {
-		if (args.length < 1) return client.missingArgs(message, this);
+		if (args.length < 1) return client.missingArgs(message, this)
 
-		message.channel.send(`<http://lmgtfy.com/?q=${args.join(`+`)}>`);
-		return true;
+		message.channel.send(`<http://lmgtfy.com/?q=${args.join(`+`)}>`)
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

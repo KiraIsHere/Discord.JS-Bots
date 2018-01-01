@@ -1,4 +1,4 @@
-const Events = require(`../../../__Global/Structures/Events`);
+const Events = require(`../../../__Global/Structures/Events`)
 
 class Event extends Events {
 	run() {
@@ -6,4 +6,4 @@ class Event extends Events {
 	}
 }
 
-module.exports = Event;
+module.exports = Event

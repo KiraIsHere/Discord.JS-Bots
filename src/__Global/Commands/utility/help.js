@@ -1,4 +1,4 @@
-const Commands = require(`../../Structures/Commands`);
+const Commands = require(`../../Structures/Commands`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -14,38 +14,38 @@ class Command extends Commands {
 			description: `Displays all the commands`,
 			usage: `(Command)`,
 			aliases: [`?`]
-		});
+		})
 	}
 
 	run(client, message, args) {
 		if (args[0]) {
 			if (args[0] === `command`) {
-				if (!client.cmds.commands.has(args[1])) return;
+				if (!client.cmds.commands.has(args[1])) return
 
-				const command = client.cmds.commands.get(args[1].toLowerCase());
+				const command = client.cmds.commands.get(args[1].toLowerCase())
 				return message.channel.send(`= ${client.upperCase(command.name)} = \ndescription :: ${command.description}\nusage       :: ${client.botPrefix}${client.upperCase(command.name)} ${command.usage}`, {
 					code: `asciidoc`,
 					split: { prepend: `\`\`\`asciidoc\n`, append: `\`\`\`` }
-				});
+				})
 			}
 
-			const groupCommands = client.cmds.commands.filter(c => c.group === args[0].toLowerCase() && c.show === true).sort();
-			if (groupCommands.size === 0) return;
-			const commandNames = groupCommands.keyArray();
-			const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
+			const groupCommands = client.cmds.commands.filter(c => c.group === args[0].toLowerCase() && c.show === true).sort()
+			if (groupCommands.size === 0) return
+			const commandNames = groupCommands.keyArray()
+			const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0)
 
 			return message.channel.send(`= Command List =\n\n[Use ${client.botPrefix}help command [commandname] for details]\n\n${groupCommands.map(c => `${client.upperCase(c.name)}${` `.repeat(longest - c.name.length)} :: ${c.description}`).join(`\n`)}`, {
 				code: `asciidoc`,
 				split: { prepend: `\`\`\`asciidoc\n`, append: `\`\`\`` }
-			});
+			})
 		}
 
 		message.channel.send(`= Group List =\n\n[Use ${client.botPrefix}help [groupname] for details]\n\n${client.groups.map(g => `${client.upperCase(g)}`).join(`\n`)}`, {
 			code: `asciidoc`,
 			split: { prepend: `\`\`\`asciidoc\n`, append: `\`\`\`` }
-		});
-		return true;
+		})
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

@@ -1,4 +1,4 @@
-const Commands = require(`../../Structures/Commands`);
+const Commands = require(`../../Structures/Commands`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -14,14 +14,14 @@ class Command extends Commands {
 			description: `Runs process.exit()`,
 			usage: ``,
 			aliases: [`process.exit()`, `exit`, `restart`]
-		});
+		})
 	}
 
 	run(client, message) {
-		if (!client.ownerIDs.includes(message.author.id)) return message.channel.send(`Sorry, you do not have permission for this command`);
-		process.exit();
-		return true;
+		if (!client.ownerIDs.includes(message.author.id)) return message.channel.send(`Sorry, you do not have permission for this command`)
+		process.exit()
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

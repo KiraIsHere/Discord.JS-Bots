@@ -1,5 +1,5 @@
-const Commands = require(`../../Structures/Commands`);
-const { MessageEmbed } = require(`discord.js`);
+const Commands = require(`../../Structures/Commands`)
+const { MessageEmbed } = require(`discord.js`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -15,28 +15,28 @@ class Command extends Commands {
 			description: `Submits feedback ideas to be voted on`,
 			usage: `[Idea]`,
 			aliases: [`idea`]
-		});
+		})
 	}
 
 	run(client, message, args) {
-		if (args.length < 1) return client.missingArgs(message, this);
-		if (args.join(` `).length > 1000) return message.channel.send(`Message too long, 1000 characters or less`);
+		if (args.length < 1) return client.missingArgs(message, this)
+		if (args.join(` `).length > 1000) return message.channel.send(`Message too long, 1000 characters or less`)
 
 		client.guilds.get(client.servers.MAIN).channels.find(`name`, `feedback`).send(new MessageEmbed()
 			.setAuthor(`${message.author.username} (${message.author.id})`, message.author.displayAvatarURL())
 			.setDescription(args.join(` `))
 			.setFooter(`From ${message.channel.name} In ${message.guild.name} (${message.guild.id})`)
 		).then(async m => {
-			await m.react(`👍`);
-			await m.react(`👎`);
-		});
+			await m.react(`👍`)
+			await m.react(`👎`)
+		})
 
 		message.channel.send(
 			`Thank you for your feedback!\n` +
 			`Please note: If you requested anything stupid or spam this, you will be blacklisted from using the bot.`
-		);
-		return true;
+		)
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

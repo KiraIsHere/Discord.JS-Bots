@@ -1,4 +1,4 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
+const Commands = require(`../../../../__Global/Structures/Commands`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -14,15 +14,15 @@ class Command extends Commands {
 			description: `Shows guild information on the mentioned user`,
 			usage: `[Mention/ID]`,
 			aliases: [`user`]
-		});
+		})
 	}
 
 	async run(client, message, args) {
-		let { member } = message;
+		let { member } = message
 		if (message.mentions.members.size > 0) {
-			member = message.mentions.members.first();
+			member = message.mentions.members.first()
 		} else if (args.length > 1) {
-			member = message.guild.members.get(args[0]);
+			member = message.guild.members.get(args[0])
 		}
 
 		message.channel.send(
@@ -37,8 +37,8 @@ class Command extends Commands {
 			`• Join Date          :: ${member.joinedTimestamp}\n` +
 			`• Roles              :: ${await client.haste(message.member.roles.map(role => `${role.name}`).sort().join(`\n`).replace(/@/g, ``))}`,
 			{ code: `asciidoc` }
-		);
-		return true;
+		)
+		return true
 	}
 
 	resolveStatus(user) {
@@ -46,8 +46,8 @@ class Command extends Commands {
 			.replace(`online`, `Online`)
 			.replace(`offline`, `Offline`)
 			.replace(`idle`, `Away`)
-			.replace(`dnd`, `Do Not Disturb`);
+			.replace(`dnd`, `Do Not Disturb`)
 	}
 }
 
-module.exports = Command;
+module.exports = Command

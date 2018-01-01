@@ -1,5 +1,5 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
-const { get } = require(`snekfetch`);
+const Commands = require(`../../../../__Global/Structures/Commands`)
+const { get } = require(`snekfetch`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -15,16 +15,16 @@ class Command extends Commands {
 			description: `Random lewd neko picture`,
 			usage: ``,
 			aliases: []
-		});
+		})
 	}
 
 	run(client, message) {
-		if (!message.channel.nsfw) return message.channel.send(`Must use in a NSFW channel`);
+		if (!message.channel.nsfw) return message.channel.send(`Must use in a NSFW channel`)
 		get(`http://nekos.life/api/lewd/neko`).then(data => {
-			message.channel.send({ files: [data.body.neko] });
-		});
-		return true;
+			message.channel.send({ files: [data.body.neko] })
+		})
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

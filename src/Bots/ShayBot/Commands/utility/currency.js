@@ -1,5 +1,5 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
-const { get } = require(`snekfetch`);
+const Commands = require(`../../../../__Global/Structures/Commands`)
+const { get } = require(`snekfetch`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -15,20 +15,20 @@ class Command extends Commands {
 			description: `Converts input currency to USD`,
 			usage: `[Coin]`,
 			aliases: [`coin`]
-		});
+		})
 	}
 
 	run(client, message, args) {
-		if (args.length < 1) return client.missingArgs(message, this);
+		if (args.length < 1) return client.missingArgs(message, this)
 
 		get(`https://min-api.cryptocompare.com/data/all/coinlist`).then(data => {
-			if (!(args[0].toUpperCase() in data.body.Data)) return message.channel.send(`Not a valid currency`);
+			if (!(args[0].toUpperCase() in data.body.Data)) return message.channel.send(`Not a valid currency`)
 			get(`https://min-api.cryptocompare.com/data/price?fsym=${args[0].toUpperCase()}&tsyms=USD`).then(data => {
-				message.channel.send(`$${data.body.USD} USD`);
-			});
-		});
-		return true;
+				message.channel.send(`$${data.body.USD} USD`)
+			})
+		})
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

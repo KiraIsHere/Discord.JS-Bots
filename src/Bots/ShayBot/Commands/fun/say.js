@@ -1,4 +1,4 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
+const Commands = require(`../../../../__Global/Structures/Commands`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -14,13 +14,13 @@ class Command extends Commands {
 			description: `Converts text into emojis`,
 			usage: `[Text]`,
 			aliases: []
-		});
+		})
 	}
 
 	run(client, message, args) {
-		if (args.length < 1) return client.missingArgs(message, this);
+		if (args.length < 1) return client.missingArgs(message, this)
 
-		const numbers = [`zero`, `one`, `two`, `three`, `four`, `five`, `six`, `seven`, `eight`, `nine`];
+		const numbers = [`zero`, `one`, `two`, `three`, `four`, `five`, `six`, `seven`, `eight`, `nine`]
 
 		setTimeout(() => {
 			message.channel.send(args.join(` `)
@@ -36,10 +36,10 @@ class Command extends Commands {
 				.replace(`>`, `:arrow_forward:`)
 				.replace(`*`, `:asterisk:`)
 				.replace(`.`, ``)
-			);
-		}, 500);
-		return true;
+			)
+		}, 500)
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

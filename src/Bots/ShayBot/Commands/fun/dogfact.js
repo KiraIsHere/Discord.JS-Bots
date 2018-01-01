@@ -1,5 +1,5 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
-const { get } = require(`snekfetch`);
+const Commands = require(`../../../../__Global/Structures/Commands`)
+const { get } = require(`snekfetch`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -15,13 +15,13 @@ class Command extends Commands {
 			description: `Dog facts`,
 			usage: ``,
 			aliases: [`dogfacts`]
-		});
+		})
 	}
 
 	async run(client, message) {
-		message.channel.send(await get(`https://dog-api.kinduff.com/api/facts`).body.facts[0]);
-		return true;
+		message.channel.send(await get(`https://dog-api.kinduff.com/api/facts`).body.facts[0])
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

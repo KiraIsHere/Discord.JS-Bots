@@ -1,4 +1,4 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
+const Commands = require(`../../../../__Global/Structures/Commands`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -14,19 +14,19 @@ class Command extends Commands {
 			description: `Picks a random guild member`,
 			usage: ``,
 			aliases: []
-		});
+		})
 	}
 
 	run(client, message) {
-		message.channel.send(this.pickMember(message).user.username);
-		return true;
+		message.channel.send(this.pickMember(message).user.username)
+		return true
 	}
 
 	pickMember(message) {
-		const member = message.guild.members.random();
-		if (member.user.bot) return this.pickMember();
-		return member;
+		const member = message.guild.members.random()
+		if (member.user.bot) return this.pickMember()
+		return member
 	}
 }
 
-module.exports = Command;
+module.exports = Command

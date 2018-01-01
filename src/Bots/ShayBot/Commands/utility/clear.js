@@ -1,4 +1,4 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
+const Commands = require(`../../../../__Global/Structures/Commands`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -14,16 +14,16 @@ class Command extends Commands {
 			description: `Clears 1-100 messages`,
 			usage: `[1-100]`,
 			aliases: [`prune`, `purge`]
-		});
+		})
 	}
 
 	run(client, message, args) {
-		if (args.length < 1 || Number.isInteger(args[0]) || args[0] < 1 || args[0] > 100) return client.missingArgs(message, this);
-		if (!message.guild.me.hasPermission(`MANAGE_MESSAGES`) || !message.member.hasPermission(`MANAGE_MESSAGES`)) return message.channel.send(`Missing Permissions "MANAGE_MESSAGES"`);
+		if (args.length < 1 || Number.isInteger(args[0]) || args[0] < 1 || args[0] > 100) return client.missingArgs(message, this)
+		if (!message.guild.me.hasPermission(`MANAGE_MESSAGES`) || !message.member.hasPermission(`MANAGE_MESSAGES`)) return message.channel.send(`Missing Permissions "MANAGE_MESSAGES"`)
 
-		message.channel.bulkDelete(args[0], { filterOld: true });
-		return true;
+		message.channel.bulkDelete(args[0], { filterOld: true })
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

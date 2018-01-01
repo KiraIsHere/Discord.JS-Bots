@@ -1,5 +1,5 @@
-const Commands = require(`../../Structures/Commands`);
-const { exec } = require(`child_process`);
+const Commands = require(`../../Structures/Commands`)
+const { exec } = require(`child_process`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -15,30 +15,30 @@ class Command extends Commands {
 			description: `Executes bash/batch commands`,
 			usage: `[Command]`,
 			aliases: []
-		});
+		})
 	}
 
 	async run(client, message, args) {
-		if (!client.ownerIDs.includes(message.author.id)) return message.channel.send(`Sorry, you do not have permission for this command`);
-		if (args.length < 1) return client.missingArgs(message, this);
+		if (!client.ownerIDs.includes(message.author.id)) return message.channel.send(`Sorry, you do not have permission for this command`)
+		if (args.length < 1) return client.missingArgs(message, this)
 
-		let content = await this.addToContent(client, args.join(` `), `Input`);
+		let content = await this.addToContent(client, args.join(` `), `Input`)
 		exec(args.join(` `), { cwd: `../../` }, async (error, stdout, stderr) => {
 			if (stderr) {
-				content += await this.addToContent(client, stderr, `Error`);
+				content += await this.addToContent(client, stderr, `Error`)
 			} else if (error) {
-				content += await this.addToContent(client, error, `Error`);
+				content += await this.addToContent(client, error, `Error`)
 			} else {
-				content += await this.addToContent(client, stdout, `Output`);
+				content += await this.addToContent(client, stdout, `Output`)
 			}
-			message.channel.send(content);
-		});
-		return true;
+			message.channel.send(content)
+		})
+		return true
 	}
 
 	async addToContent(client, input, type) {
-		return `${type === `Input` ? `📥` : type === `Output` ? `📤` : `❌`} ${type}\n${String(input).length < 1024 ? `\`\`\`js\n${client.clean(input)}\n\`\`\`\n` : await client.haste(client.clean(input))}`;
+		return `${type === `Input` ? `📥` : type === `Output` ? `📤` : `❌`} ${type}\n${String(input).length < 1024 ? `\`\`\`js\n${client.clean(input)}\n\`\`\`\n` : await client.haste(client.clean(input))}`
 	}
 }
 
-module.exports = Command;
+module.exports = Command

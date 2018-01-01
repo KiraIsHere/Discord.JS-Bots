@@ -1,5 +1,5 @@
-const Commands = require(`../../Structures/Commands`);
-const { MessageEmbed } = require(`discord.js`);
+const Commands = require(`../../Structures/Commands`)
+const { MessageEmbed } = require(`discord.js`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -15,11 +15,11 @@ class Command extends Commands {
 			description: `Responds message and heartbeat ping`,
 			usage: ``,
 			aliases: []
-		});
+		})
 	}
 
 	run(client, message) {
-		if (!client.user.bot) message.delete({ timeout: 500 });
+		if (!client.user.bot) message.delete({ timeout: 500 })
 
 		message.channel.send(`Loading...`).then(sent => {
 			sent.edit(``, new MessageEmbed()
@@ -28,10 +28,10 @@ class Command extends Commands {
 				.setColor(0x00FFFF)
 				.setFooter(client.botName)
 				.setTimestamp()
-			);
-		});
-		return true;
+			)
+		})
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

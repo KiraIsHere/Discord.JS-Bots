@@ -1,4 +1,4 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
+const Commands = require(`../../../../__Global/Structures/Commands`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -14,12 +14,12 @@ class Command extends Commands {
 			description: `Shows server info`,
 			usage: ``,
 			aliases: [`server`]
-		});
+		})
 	}
 
 	async run(client, message) {
-		const { guild } = message;
-		await guild.members.fetch();
+		const { guild } = message
+		await guild.members.fetch()
 
 		message.channel.send(
 			`= Server Info =\n` +
@@ -46,8 +46,8 @@ class Command extends Commands {
 			`• Emojis             :: ${guild.emojis.size}\n` +
 			`• Roles              :: ${await client.haste(guild.roles.map(role => `${role.name}`).sort().join(`\n`).replace(/@/g, ``))}`,
 			{ code: `asciidoc` }
-		);
-		return true;
+		)
+		return true
 	}
 
 	resolveVerificationLevel(level) {
@@ -56,19 +56,19 @@ class Command extends Commands {
 			.replace(`1`, `Low`)
 			.replace(`2`, `Medium`)
 			.replace(`3`, `(╯°□°）╯︵ ┻━┻`)
-			.replace(`4`, `┻━┻ ﾐヽ(ಠ益ಠ)ノ彡┻━┻`);
+			.replace(`4`, `┻━┻ ﾐヽ(ಠ益ಠ)ノ彡┻━┻`)
 	}
 
 	resolveExplicitLevel(level) {
 		return level.toString()
 			.replace(`0`, `Scan nobody`)
 			.replace(`1`, `Scan members without role`)
-			.replace(`2`, `Scan everyone`);
+			.replace(`2`, `Scan everyone`)
 	}
 
 	getChannelTypeSize(channels, type) {
-		return channels.filter(channel => channel.type === type).size;
+		return channels.filter(channel => channel.type === type).size
 	}
 }
 
-module.exports = Command;
+module.exports = Command

@@ -1,5 +1,5 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
-const asciify = require(`asciify`);
+const Commands = require(`../../../../__Global/Structures/Commands`)
+const asciify = require(`asciify`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -15,11 +15,11 @@ class Command extends Commands {
 			description: `Converts the text to an ascii`,
 			usage: `[Font] [Text]`,
 			aliases: []
-		});
+		})
 	}
 
 	run(client, message, args) {
-		if (args.length < 1) return client.missingArgs(message, this);
+		if (args.length < 1) return client.missingArgs(message, this)
 
 		const fonts = [
 			`3-d`,
@@ -169,18 +169,18 @@ class Command extends Commands {
 			`usaflag`,
 			`wavy`,
 			`weird`
-		];
+		]
 
-		const font = args.shift();
+		const font = args.shift()
 
-		if (!fonts.includes(font)) return message.channel.send(`\`${font}\` is not in the list, <https://pastebin.com/FDSANJ38>`);
+		if (!fonts.includes(font)) return message.channel.send(`\`${font}\` is not in the list, <https://pastebin.com/FDSANJ38>`)
 
 		asciify(args.join(` `), font, (error, response) => {
-			if (error) return message.channel.send(error, { code: `` });
-			message.channel.send(response, { code: `` });
-		});
-		return true;
+			if (error) return message.channel.send(error, { code: `` })
+			message.channel.send(response, { code: `` })
+		})
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

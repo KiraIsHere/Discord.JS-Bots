@@ -1,4 +1,4 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
+const Commands = require(`../../../../__Global/Structures/Commands`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -14,13 +14,13 @@ class Command extends Commands {
 			description: `Lists Used API Calls vs Total API Calls`,
 			usage: ``,
 			aliases: []
-		});
+		})
 	}
 
 	run(client, message) {
-		client.database.find({}).then(data => message.channel.send(`${data[0].USED_API_CALLS} / ${data[0].TOTAL_API_CALLS}\n`));
-		return true;
+		client.database.find({}).then(data => message.channel.send(`${data[0].USED_API_CALLS} / ${data[0].TOTAL_API_CALLS}\n`))
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

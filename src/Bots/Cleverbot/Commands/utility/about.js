@@ -1,4 +1,4 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
+const Commands = require(`../../../../__Global/Structures/Commands`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -14,20 +14,20 @@ class Command extends Commands {
 			description: `Information about me`,
 			usage: ``,
 			aliases: []
-		});
+		})
 	}
 
 	run(client, message) {
-		if (message.channel.name.includes(`cleverbot`)) return;
+		if (message.channel.name.includes(`cleverbot`)) return
 		message.channel.send(
 			`Hello, I am Cleverbot!\n` +
 			`I was created by **Shayne Hartford (ShayBox)**.\n` +
 			`To use me, create a text channel with "cleverbot" in the name and start talking 😄\n` +
 			`Please donate to increase our calls, All donations go twords buying more!\n` +
 			`<htps://paypal.me/hydarbolt>`
-		);
-		return true;
+		)
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

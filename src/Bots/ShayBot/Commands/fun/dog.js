@@ -1,5 +1,5 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
-const { get } = require(`snekfetch`);
+const Commands = require(`../../../../__Global/Structures/Commands`)
+const { get } = require(`snekfetch`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -15,13 +15,13 @@ class Command extends Commands {
 			description: `Random dog picture`,
 			usage: ``,
 			aliases: []
-		});
+		})
 	}
 
 	async run(client, message) {
-		message.channel.send({ files: [`http://random.dog/${await get(`https://random.dog/woof`).text}`] });
-		return true;
+		message.channel.send({ files: [`http://random.dog/${await get(`https://random.dog/woof`).text}`] })
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

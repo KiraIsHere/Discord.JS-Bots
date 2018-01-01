@@ -1,4 +1,4 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
+const Commands = require(`../../../../__Global/Structures/Commands`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -14,11 +14,11 @@ class Command extends Commands {
 			description: `Ask the 8 ball a question`,
 			usage: ``,
 			aliases: []
-		});
+		})
 	}
 
 	run(client, message, args) {
-		if (args.length < 1) return message.channel.send(`Please input a question`);
+		if (args.length < 1) return message.channel.send(`Please input a question`)
 
 		const responses = [
 			`Nope`,
@@ -34,11 +34,11 @@ class Command extends Commands {
 			`You already know the answer to that...`,
 			`Oh god, no.`,
 			`If that's what you want...`
-		];
+		]
 
-		message.channel.send(responses[Math.floor(Math.random() * responses.length)]);
-		return true;
+		message.channel.send(responses[Math.floor(Math.random() * responses.length)])
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

@@ -1,5 +1,5 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
-const { MessageEmbed } = require(`discord.js`);
+const Commands = require(`../../../../__Global/Structures/Commands`)
+const { MessageEmbed } = require(`discord.js`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -15,11 +15,11 @@ class Command extends Commands {
 			description: `Deletes color role`,
 			usage: ``,
 			aliases: []
-		});
+		})
 	}
 
 	run(client, message) {
-		const role = message.member.roles.find(`name`, `USER-${message.member.id}`);
+		const role = message.member.roles.find(`name`, `USER-${message.member.id}`)
 
 		if (!role) {
 			message.channel.send(new MessageEmbed()
@@ -28,7 +28,7 @@ class Command extends Commands {
 				.setColor(0xFF0000)
 				.setFooter(client.botName)
 				.setTimestamp()
-			);
+			)
 		}
 		if (!message.guild.me.hasPermission([`MANAGE_ROLES`])) {
 			message.channel.send(new MessageEmbed()
@@ -40,8 +40,8 @@ class Command extends Commands {
 				.setColor(0xFF0000)
 				.setFooter(client.botName)
 				.setTimestamp()
-			);
-			return;
+			)
+			return
 		}
 		if (role.position > message.guild.me.highestRole.position) {
 			message.channel.send(new MessageEmbed()
@@ -53,8 +53,8 @@ class Command extends Commands {
 				.setColor(0xFF0000)
 				.setFooter(client.botName)
 				.setTimestamp()
-			);
-			return;
+			)
+			return
 		}
 
 		role.delete().then(role => {
@@ -63,7 +63,7 @@ class Command extends Commands {
 				.setColor(role.color)
 				.setFooter(client.botName)
 				.setTimestamp()
-			);
+			)
 		}).catch(error => {
 			message.channel.send(new MessageEmbed()
 				.setTitle(`❌ **ERROR**`)
@@ -71,10 +71,10 @@ class Command extends Commands {
 				.setColor(0xFF0000)
 				.setFooter(client.botName)
 				.setTimestamp()
-			);
-		});
-		return true;
+			)
+		})
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

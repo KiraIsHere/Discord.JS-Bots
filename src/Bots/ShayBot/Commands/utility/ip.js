@@ -1,5 +1,5 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
-const { get } = require(`snekfetch`);
+const Commands = require(`../../../../__Global/Structures/Commands`)
+const { get } = require(`snekfetch`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -15,17 +15,17 @@ class Command extends Commands {
 			description: `Gives the server's ip address`,
 			usage: ``,
 			aliases: []
-		});
+		})
 	}
 
 	run(client, message) {
-		if (process.env.DEV) return;
+		if (process.env.DEV) return
 
 		get(`https://api.ipify.org/`).then(data => {
-			message.channel.send(data.text, { code: `` });
-		});
-		return true;
+			message.channel.send(data.text, { code: `` })
+		})
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

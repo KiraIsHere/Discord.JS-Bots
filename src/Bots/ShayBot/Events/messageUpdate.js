@@ -1,9 +1,9 @@
-const Events = require(`../../../__Global/Structures/Events`);
+const Events = require(`../../../__Global/Structures/Events`)
 
 class Event extends Events {
 	async run(client, oldMessage, newMessage) {
-		await client.runLint(newMessage, true);
+		await client.runLint(newMessage, true)
 	}
 }
 
-module.exports = Event;
+module.exports = Event

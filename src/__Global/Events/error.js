@@ -1,9 +1,9 @@
-const Events = require(`../Structures/Events`);
+const Events = require(`../Structures/Events`)
 
 class Event extends Events {
 	run(client, info) {
-		client.error(info);
+		client.error(info)
 	}
 }
 
-module.exports = Event;
+module.exports = Event

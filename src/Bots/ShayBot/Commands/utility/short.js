@@ -1,6 +1,6 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
-const googl = require(`goo.gl`);
-googl.setKey(process.env.GOOGLE_URL_API);
+const Commands = require(`../../../../__Global/Structures/Commands`)
+const googl = require(`goo.gl`)
+googl.setKey(process.env.GOOGLE_URL_API)
 
 class Command extends Commands {
 	constructor(client) {
@@ -16,15 +16,15 @@ class Command extends Commands {
 			description: `Shortens the URL`,
 			usage: `[URL]`,
 			aliases: []
-		});
+		})
 	}
 
 	async run(client, message, args) {
-		if (args.length < 1) return client.missingArgs(message, this);
+		if (args.length < 1) return client.missingArgs(message, this)
 
-		message.channel.send(await googl.shorten(args[0]));
-		return true;
+		message.channel.send(await googl.shorten(args[0]))
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

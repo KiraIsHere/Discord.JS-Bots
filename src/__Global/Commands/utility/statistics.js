@@ -1,8 +1,8 @@
-const Commands = require(`../../Structures/Commands`);
-const { cpuLoad, memoryUsage } = require(`os-toolbox`);
-const { type, release, uptime } = require(`os`);
-const { execSync } = require(`child_process`);
-const { version } = require(`discord.js`);
+const Commands = require(`../../Structures/Commands`)
+const { cpuLoad, memoryUsage } = require(`os-toolbox`)
+const { type, release, uptime } = require(`os`)
+const { execSync } = require(`child_process`)
+const { version } = require(`discord.js`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -18,20 +18,20 @@ class Command extends Commands {
 			description: `Shows bot & OS info`,
 			usage: ``,
 			aliases: [`bot`, `stats`, `info`]
-		});
+		})
 	}
 
 	run(client, message) {
-		if (!client.user.bot) message.delete({ timeout: 500 });
+		if (!client.user.bot) message.delete({ timeout: 500 })
 
 		message.channel.send(`Loading...`).then(async msg => {
-			const usedMemory = await memoryUsage();
-			const maxMemory = process.env.DEV ? 8096 : 512;
+			const usedMemory = await memoryUsage()
+			const maxMemory = process.env.DEV ? 8096 : 512
 
-			let memberCount = 0;
+			let memberCount = 0
 			client.guilds.forEach(guild => {
-				memberCount += guild.memberCount;
-			});
+				memberCount += guild.memberCount
+			})
 
 			msg.edit(
 				`= STATISTICS =\n` +
@@ -61,10 +61,10 @@ class Command extends Commands {
 				`• Text Channels    :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `text`).size)}\n` +
 				`• Voice Channels   :: ${client.formatNumbers(client.channels.filter(channel => channel.type === `voice`).size)}`,
 				{ code: `asciidoc` }
-			);
-		});
-		return true;
+			)
+		})
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

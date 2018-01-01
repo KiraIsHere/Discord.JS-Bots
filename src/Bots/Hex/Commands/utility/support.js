@@ -1,5 +1,5 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
-const { MessageEmbed } = require(`discord.js`);
+const Commands = require(`../../../../__Global/Structures/Commands`)
+const { MessageEmbed } = require(`discord.js`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -15,7 +15,7 @@ class Command extends Commands {
 			description: `Shows support message`,
 			usage: ``,
 			aliases: []
-		});
+		})
 	}
 
 	run(client, message) {
@@ -26,9 +26,9 @@ class Command extends Commands {
 				`\`You must set the color of every role to "Default" for me to work!\`\n` +
 				`\`If you would like more support join my discord\` https://discord.io/shaybox`
 			)
-		);
-		return true;
+		)
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

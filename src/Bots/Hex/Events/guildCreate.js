@@ -1,10 +1,10 @@
-const Events = require(`../../../__Global/Structures/Events`);
+const Events = require(`../../../__Global/Structures/Events`)
 
 class Event extends Events {
 	run(client) {
-		if (process.env.DEV) return;
-		client.updateActivity();
+		if (process.env.DEV) return
+		client.updateActivity()
 	}
 }
 
-module.exports = Event;
+module.exports = Event

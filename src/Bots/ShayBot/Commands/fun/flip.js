@@ -1,4 +1,4 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
+const Commands = require(`../../../../__Global/Structures/Commands`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -14,13 +14,13 @@ class Command extends Commands {
 			description: `Flip a coin`,
 			usage: ``,
 			aliases: []
-		});
+		})
 	}
 
 	run(client, message) {
-		message.channel.send(Math.random() < 0.5 ? `Tails` : `Heads`);
-		return true;
+		message.channel.send(Math.random() < 0.5 ? `Tails` : `Heads`)
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

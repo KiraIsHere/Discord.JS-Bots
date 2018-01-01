@@ -1,5 +1,5 @@
-const Commands = require(`../../Structures/Commands`);
-const { MessageEmbed } = require(`discord.js`);
+const Commands = require(`../../Structures/Commands`)
+const { MessageEmbed } = require(`discord.js`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -15,7 +15,7 @@ class Command extends Commands {
 			description: `Gives bot invite link`,
 			usage: ``,
 			aliases: []
-		});
+		})
 	}
 
 	run(client, message) {
@@ -25,9 +25,9 @@ class Command extends Commands {
 			.setURL(client.user.bot ? `https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=8` : `http://lmgtfy.com/?q=Didn%27t+you+read+the+damn+text`)
 			.setFooter(`Note: I may be a private bot`)
 			.setColor(0x00FFFF)
-		);
-		return true;
+		)
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

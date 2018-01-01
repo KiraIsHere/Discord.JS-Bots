@@ -1,5 +1,5 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
-const { get } = require(`snekfetch`);
+const Commands = require(`../../../../__Global/Structures/Commands`)
+const { get } = require(`snekfetch`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -15,13 +15,13 @@ class Command extends Commands {
 			description: `Cat facts`,
 			usage: ``,
 			aliases: [`catfacts`]
-		});
+		})
 	}
 
 	async run(client, message) {
-		message.channel.send(await get(`https://catfact.ninja/fact`).body.fact);
-		return true;
+		message.channel.send(await get(`https://catfact.ninja/fact`).body.fact)
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

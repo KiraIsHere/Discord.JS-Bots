@@ -1,4 +1,4 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
+const Commands = require(`../../../../__Global/Structures/Commands`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -14,15 +14,15 @@ class Command extends Commands {
 			description: `Random number between min and max`,
 			usage: `[Min] [Max]`,
 			aliases: []
-		});
+		})
 	}
 
 	run(client, message, args) {
-		if (args.length < 2) return client.missingArgs(message, this);
+		if (args.length < 2) return client.missingArgs(message, this)
 
-		message.channel.send(Math.round((Math.random() * args[1]) + args[0]), { code: `` });
-		return true;
+		message.channel.send(Math.round((Math.random() * args[1]) + args[0]), { code: `` })
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

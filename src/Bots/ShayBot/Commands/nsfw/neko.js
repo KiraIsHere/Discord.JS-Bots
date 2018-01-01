@@ -1,5 +1,5 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
-const { get } = require(`snekfetch`);
+const Commands = require(`../../../../__Global/Structures/Commands`)
+const { get } = require(`snekfetch`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -15,15 +15,15 @@ class Command extends Commands {
 			description: `Random neko picture`,
 			usage: ``,
 			aliases: []
-		});
+		})
 	}
 
 	run(client, message) {
 		get(`http://nekos.life/api/neko`).then(data => {
-			message.channel.send({ files: [data.body.neko] });
-		});
-		return true;
+			message.channel.send({ files: [data.body.neko] })
+		})
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

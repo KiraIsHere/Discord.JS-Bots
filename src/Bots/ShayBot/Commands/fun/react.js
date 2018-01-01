@@ -1,4 +1,4 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
+const Commands = require(`../../../../__Global/Structures/Commands`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -14,20 +14,20 @@ class Command extends Commands {
 			description: `Reacts to a message with emojis`,
 			usage: `[Text] (MessageID) (ChannelID)`,
 			aliases: [`r`]
-		});
+		})
 	}
 
 	async run(client, message, args) {
-		if (args.length < 1) return client.missingArgs(message, this);
-		if (!message.guild.me.hasPermission(`ADD_REACTIONS`) || !message.member.hasPermission(`ADD_REACTIONS`)) return message.channel.send(`Missing Permissions`);
+		if (args.length < 1) return client.missingArgs(message, this)
+		if (!message.guild.me.hasPermission(`ADD_REACTIONS`) || !message.member.hasPermission(`ADD_REACTIONS`)) return message.channel.send(`Missing Permissions`)
 
-		const emojis = { a: `🇦`, b: `🇧`, c: `🇨`, d: `🇩`, e: `🇪`, f: `🇫`, g: `🇬`, h: `🇭`, i: `🇮`, j: `🇯`, k: `🇰`, l: `🇱`, m: `🇲`, n: `🇳`, o: `🇴`, p: `🇵`, q: `🇶`, r: `🇷`, s: `🇸`, t: `🇹`, u: `🇺`, v: `🇻`, w: `🇼`, x: `🇽`, y: `🇾`, z: `🇿` };
+		const emojis = { a: `🇦`, b: `🇧`, c: `🇨`, d: `🇩`, e: `🇪`, f: `🇫`, g: `🇬`, h: `🇭`, i: `🇮`, j: `🇯`, k: `🇰`, l: `🇱`, m: `🇲`, n: `🇳`, o: `🇴`, p: `🇵`, q: `🇶`, r: `🇷`, s: `🇸`, t: `🇹`, u: `🇺`, v: `🇻`, w: `🇼`, x: `🇽`, y: `🇾`, z: `🇿` }
 
 		for (const char of args.join(` `)) {
-			if (emojis[char]) await message.react(emojis[char]); // eslint-disable-line no-await-in-loop
+			if (emojis[char]) await message.react(emojis[char]) // eslint-disable-line no-await-in-loop
 		}
-		return true;
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

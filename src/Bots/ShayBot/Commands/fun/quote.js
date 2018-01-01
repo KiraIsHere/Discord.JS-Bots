@@ -1,5 +1,5 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
-const { MessageEmbed } = require(`discord.js`);
+const Commands = require(`../../../../__Global/Structures/Commands`)
+const { MessageEmbed } = require(`discord.js`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -15,14 +15,14 @@ class Command extends Commands {
 			description: `Quotes a message`,
 			usage: `[MessageID] [ChannelID]`,
 			aliases: [`q`]
-		});
+		})
 	}
 
 	run(client, message, args) {
-		if (args.length < 1) return client.missingArgs(message, this);
+		if (args.length < 1) return client.missingArgs(message, this)
 
-		const messageID = args[0];
-		const channelID = args[1] ? args[1] : message.channel.id;
+		const messageID = args[0]
+		const channelID = args[1] ? args[1] : message.channel.id
 
 		client.channels.get(channelID).messages.fetch(messageID).then(quote => {
 			message.channel.send(new MessageEmbed()
@@ -31,10 +31,10 @@ class Command extends Commands {
 				.setColor(0x00FF00)
 				.setFooter(client.botName)
 				.setTimestamp()
-			);
-		});
-		return true;
+			)
+		})
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

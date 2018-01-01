@@ -1,4 +1,4 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
+const Commands = require(`../../../../__Global/Structures/Commands`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -14,13 +14,13 @@ class Command extends Commands {
 			description: `What the bot does`,
 			usage: ``,
 			aliases: []
-		});
+		})
 	}
 
 	run(client, message) {
-		message.channel.send(`I re-send any deleted messages I have read & send permissions in.`);
-		return true;
+		message.channel.send(`I re-send any deleted messages I have read & send permissions in.`)
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

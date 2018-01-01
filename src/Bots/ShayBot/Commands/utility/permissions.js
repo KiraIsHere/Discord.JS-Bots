@@ -1,4 +1,4 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
+const Commands = require(`../../../../__Global/Structures/Commands`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -14,19 +14,19 @@ class Command extends Commands {
 			description: `Shows role permissions`,
 			usage: `[Role Name]`,
 			aliases: [`perms`]
-		});
+		})
 	}
 
 	run(client, message, args) {
-		if (args.length < 1) return client.missingArgs(message, this);
+		if (args.length < 1) return client.missingArgs(message, this)
 
-		const role = message.guild.roles.find(`name`, args.join(` `));
-		if (!role) return message.channel.send(`Role does not exist`);
-		const permissions = role.permissions.serialize();
+		const role = message.guild.roles.find(`name`, args.join(` `))
+		if (!role) return message.channel.send(`Role does not exist`)
+		const permissions = role.permissions.serialize()
 
-		let longestString = 0;
+		let longestString = 0
 		for (const key in permissions) {
-			if (key.length > longestString) longestString = key.length;
+			if (key.length > longestString) longestString = key.length
 		}
 
 		message.channel.send(
@@ -34,9 +34,9 @@ class Command extends Commands {
 			`\n` +
 			`${Object.keys(permissions).map(key => `• ${key} ${` `.repeat(longestString - key.length)} :: ${permissions[key]}`).join(`\n`)}`,
 			{ code: `asciidoc` }
-		);
-		return true;
+		)
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command

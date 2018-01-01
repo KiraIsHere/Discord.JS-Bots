@@ -1,6 +1,6 @@
-const Commands = require(`../../../../__Global/Structures/Commands`);
-const { username } = require(`mojang`);
-const { MessageEmbed } = require(`discord.js`);
+const Commands = require(`../../../../__Global/Structures/Commands`)
+const { username } = require(`mojang`)
+const { MessageEmbed } = require(`discord.js`)
 
 class Command extends Commands {
 	constructor(client) {
@@ -16,12 +16,12 @@ class Command extends Commands {
 			description: `Player info`,
 			usage: `[Name]`,
 			aliases: [`mc`]
-		});
+		})
 	}
 
 	run(client, message, args) {
-		if (args.length < 1) return client.missingArgs(message, this);
-		if (args[0] < 3 || args[0] > 32) return message.channel.send(`Please input valid name`);
+		if (args.length < 1) return client.missingArgs(message, this)
+		if (args[0] < 3 || args[0] > 32) return message.channel.send(`Please input valid name`)
 
 		username(args[0]).then(data => {
 			message.channel.send(new MessageEmbed()
@@ -30,10 +30,10 @@ class Command extends Commands {
 				.setColor(0x00FF00)
 				.setFooter(client.botName)
 				.setTimestamp()
-			);
-		}).catch(() => message.channel.send(`Invalid name, Please input valid name`));
-		return true;
+			)
+		}).catch(() => message.channel.send(`Invalid name, Please input valid name`))
+		return true
 	}
 }
 
-module.exports = Command;
+module.exports = Command
