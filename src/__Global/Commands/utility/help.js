@@ -23,7 +23,7 @@ class Command extends Commands {
 				if (!client.cmds.commands.has(args[1])) return;
 
 				const command = client.cmds.commands.get(args[1]);
-				message.channel.send(`= ${client.upperCase(command.name)} = \ndescription :: ${command.description}\nusage       :: ${client.botPrefix}${client.upperCase(command.name)} ${command.usage}`, {
+				return message.channel.send(`= ${client.upperCase(command.name)} = \ndescription :: ${command.description}\nusage       :: ${client.botPrefix}${client.upperCase(command.name)} ${command.usage}`, {
 					code: `asciidoc`,
 					split: { prepend: `\`\`\`asciidoc\n`, append: `\`\`\`` }
 				});
@@ -34,7 +34,7 @@ class Command extends Commands {
 			const commandNames = groupCommands.keyArray();
 			const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
 
-			message.channel.send(`= Command List =\n\n[Use ${client.botPrefix}help command [commandname] for details]\n\n${groupCommands.map(c => `${client.upperCase(c.name)}${` `.repeat(longest - c.name.length)} :: ${c.description}`).join(`\n`)}`, {
+			return message.channel.send(`= Command List =\n\n[Use ${client.botPrefix}help command [commandname] for details]\n\n${groupCommands.map(c => `${client.upperCase(c.name)}${` `.repeat(longest - c.name.length)} :: ${c.description}`).join(`\n`)}`, {
 				code: `asciidoc`,
 				split: { prepend: `\`\`\`asciidoc\n`, append: `\`\`\`` }
 			});
