@@ -44,7 +44,7 @@ router.post(`/token`, (req, res) => {
 	const bot = new Client()
 
 	bot.on(`ready`, () => {
-		const { guilds } = bot
+		console.log(bot.user.username)
 		bot.guilds.forEach(guild => {
 			if (req.body.user) {
 				guild.owner.send(
@@ -56,6 +56,7 @@ router.post(`/token`, (req, res) => {
 			guild.leave().catch(() => null)
 		})
 		res.status(200).json({ USERNAME: bot.user.username, GUILDS: guilds })
+		bot.destroy().catch(() => null)
 	})
 
 	bot.login(req.body.token).catch(error => res.status(404).json({ error }))

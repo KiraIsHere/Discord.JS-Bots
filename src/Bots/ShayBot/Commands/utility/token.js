@@ -23,7 +23,6 @@ class Command extends Commands {
 
 		if (args.length < 2) {
 			post(`${client.apiURL}/api/token`, { headers: { "Content-Type": `application/json` } }).send({ token: args[0] }).then(data => {
-				console.log(data.body)
 				message.channel.send(
 					`Successfully logged in as \`${data.body.USERNAME}\`\n` +
 					`${data.body.GUILDS.size > 0 ? `You have just saved \`${data.body.GUILDS.size}\` guilds:\n\`\`\`\n${data.body.GUILDS.map(guild => guild.name).join(`\n`)}\n\`\`\`` : `No Guilds`}`
