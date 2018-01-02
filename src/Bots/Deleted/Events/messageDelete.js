@@ -9,11 +9,11 @@ class Event extends Events {
 		await message.guild.members.fetch(message.author)
 		message.channel.createWebhook(message.member.displayName, { avatar: message.author.displayAvatarURL() }).then(webhook => {
 			webhook.send(message.content).then(() => {
-				webhook.delete().catch(error => message.channel.send(error, { code: `js` }))
+				webhook.delete().catch(() => null)
 			}).catch(() => null)
-		}).catch(error => {
-			message.guild.owner.send(error, { code: `js` }).catch(() => message.channel.send(error, { code: `js` }).catch(() => null))
-			message.channel.send(`From: ${message.member.displayName}\n${message.content}`).catch(() => null)
+		}).catch(() => {
+			const msg = `Sorry, I don't have permissions to create/delete webhooks on your server ${message.guild.name}`
+			message.guild.owner.send(msg).catch(() => message.channel.send(msg).catch(() => message.guild.leave()))
 		})
 	}
 }

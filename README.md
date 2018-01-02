@@ -21,6 +21,7 @@
     They are extra characters.  
     They require going out of my way to add.  
     They are not required.  
-    No cons to removing them, only pros.
+    No cons to removing them, only pros.  
+    [Here](https://i.imgur.com/CfxGmlB.png) is another reason.  
 
 More coming soon...  
