@@ -2,6 +2,7 @@
 	"messageCacheMaxSize": 100,
 	"messageCacheLifetime": 300,
 	"messageSweepInterval": 60,
+	"disableEveryone": true,
 	"disabledEvents": [
 		"GUILD_SYNC",
 		"GUILD_UPDATE",
