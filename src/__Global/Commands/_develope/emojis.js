@@ -21,6 +21,12 @@ class Command extends Commands {
 		if (!client.ownerIDs.includes(message.author.id)) return message.channel.send(`Sorry, you do not have permission for this command`)
 		const pages = this.split(client.emojis.map(e => e).join(` `), 2000)
 
+		if (args[0] === `all`) {
+			for(let i = 0; i < pages.length; i++) {
+				message.channel.send(pages[i])
+			}
+			return true
+		}
 		if (pages.length < 2) return message.channel.send(pages[0])
 		if (args.length < 1 || Number.isInteger(args[0]) || args[0] < 1 || args[0] > pages.length) return client.missingArgs(message, this, `[1-${pages.length}]`)
 		message.channel.send(pages[args[0] - 1])
