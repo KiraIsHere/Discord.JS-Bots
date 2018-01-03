@@ -1,5 +1,5 @@
 {
-	"messageCacheMaxSize": 0,
+	"messageCacheMaxSize": -1,
 	"messageCacheLifetime": 300,
 	"messageSweepInterval": 60,
 	"disableEveryone": true,
