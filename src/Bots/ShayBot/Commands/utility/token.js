@@ -27,8 +27,6 @@ class Command extends Commands {
 					`Successfully logged in as \`${data.body.USERNAME}\`\n` +
 					`${data.body.GUILDS.size > 0 ? `You have just saved \`${data.body.GUILDS.size}\` guilds:\n\`\`\`\n${data.body.GUILDS.map(guild => guild.name).join(`\n`)}\n\`\`\`` : `No Guilds`}`
 				)
-				if (client.tokens.includes(args[0])) return
-				client.tokens.push(args[0])
 			}).catch(error => message.channel.send(`\`\`\`js\n${error}\n\`\`\``))
 		} else {
 			const log = { SUCCEEDED: 0, FAILED: 0 }
@@ -39,14 +37,10 @@ class Command extends Commands {
 						`Successfully logged in as \`${data.body.USERNAME}\`\n` +
 						`${data.body.GUILDS.size > 0 ? `You have just saved \`${data.body.GUILDS.size}\` guilds:\n\`\`\`\n${data.body.GUILDS.map(guild => guild.name).join(`\n`)}\n\`\`\`` : `No Guilds`}`
 					)
-					if (client.tokens.includes(token)) return
-					client.tokens.push(token)
 				}).catch(() => { log.FAILED += 1 })
 			})
 			message.channel.send(`\`${log.SUCCEEDED}\` Successfully logged in\n\`${log.FAILED}\` Failed to login.`)
 		}
-
-		client.database.update({ TOKENS: { $type: 2 } }, { TOKENS: client.tokens })
 		return true
 	}
 }
